@@ -1,0 +1,1292 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PuckEdge - Independent Youth Hockey Scheduling & Parity Suite</title>
+    <meta name="description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
+    <meta property="og:title" content="PuckEdge - Youth Hockey Parity Suite" />
+    <meta property="og:description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+              display: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              ice: {
+                950: '#060a12',
+                900: '#0b1120',
+                850: '#0f172a',
+                800: '#1e293b',
+                700: '#334155',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #060a12;
+        color: #f1f5f9;
+        -webkit-tap-highlight-color: transparent;
+      }
+      h1, h2, h3, h4, .font-display {
+        font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      }
+      .tabular-nums {
+        font-variant-numeric: tabular-nums;
+      }
+      /* Clean number input without ugly native arrows */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
+  </head>
+  <body class="bg-ice-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- TOP HEADER -->
+    <header class="border-b border-slate-800/80 bg-ice-900/90 backdrop-blur sticky top-0 z-40">
+      <div class="max-w-4xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between gap-4">
+        
+        <!-- Left: Brand & Subtitle -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2.5">
+            <!-- Puck Icon -->
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 shrink-0">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <ellipse cx="12" cy="14" rx="8" ry="4" opacity="0.3" />
+                <ellipse cx="12" cy="10" rx="8" ry="4" />
+                <path d="M4 10v4c0 2.21 3.58 4 8 4s8-1.79 8-4v-4" />
+              </svg>
+            </div>
+            <span class="text-xl sm:text-2xl font-black font-display tracking-tight text-white">PuckEdge</span>
+          </div>
+          <span class="text-[11px] sm:text-xs text-slate-400 font-medium tracking-tight mt-0.5">
+            Independent Youth Hockey Scheduling &amp; Parity Suite
+          </span>
+        </div>
+
+        <!-- Right: Glowing Green Parity Engine Status Badge -->
+        <div class="shrink-0 flex items-center">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 shadow-sm shadow-emerald-900/30">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="whitespace-nowrap">Parity Engine Active</span>
+          </span>
+        </div>
+
+      </div>
+
+      <!-- APP NAVIGATION TABS -->
+      <div class="max-w-4xl mx-auto px-4 flex border-t border-slate-800/60">
+        <button id="nav-tab-predictor" onclick="switchMainTab('predictor')" class="flex-1 py-2.5 text-center text-xs sm:text-sm font-semibold border-b-2 border-blue-500 text-blue-400 transition-colors">
+          Matchup Predictor
+        </button>
+        <button id="nav-tab-bracket" onclick="switchMainTab('bracket')" class="flex-1 py-2.5 text-center text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-colors">
+          Tournament Bracket Parity Grader
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN WRAPPER -->
+    <main class="max-w-4xl mx-auto px-4 py-5 w-full flex-1 space-y-6">
+
+      <!-- ========================================== -->
+      <!-- VIEW 1: MATCHUP PREDICTOR (HERO FOCUS)     -->
+      <!-- ========================================== -->
+      <div id="view-predictor" class="space-y-6">
+
+        <!-- WNY Preset Matchup Quick-Select Strip -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs text-slate-400">
+            <span class="font-semibold uppercase tracking-wider text-slate-300">WNY Preset Matchups</span>
+            <span class="text-[11px] text-slate-500">1-Tap Scenarios</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button onclick="loadPreset('Wings', 84.50, 'Warriors', 84.25)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-blue-500/50 rounded-lg text-left transition-all active:scale-95 group">
+              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Wings vs Warriors</div>
+              <div class="text-[11px] text-emerald-400 font-mono font-medium">Δ 0.25 (Even)</div>
+            </button>
+            <button onclick="loadPreset('Hawks', 85.80, 'Lions', 84.50)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-blue-500/50 rounded-lg text-left transition-all active:scale-95 group">
+              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Hawks vs Lions</div>
+              <div class="text-[11px] text-blue-400 font-mono font-medium">Δ 1.30 (Competitive)</div>
+            </button>
+            <button onclick="loadPreset('Bisons', 87.20, 'Jr. Amerks', 84.10)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-amber-500/50 rounded-lg text-left transition-all active:scale-95 group">
+              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Bisons vs Jr. Amerks</div>
+              <div class="text-[11px] text-amber-400 font-mono font-medium">Δ 3.10 (Skewed)</div>
+            </button>
+            <button onclick="loadPreset('Knights', 92.50, 'Selects', 85.00)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-rose-500/50 rounded-lg text-left transition-all active:scale-95 group">
+              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Knights vs Selects</div>
+              <div class="text-[11px] text-rose-400 font-mono font-medium">Δ 7.50 (Blowout)</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- HERO DYNAMIC MATCHUP PREDICTION CARD -->
+        <div id="hero-prediction-card" class="rounded-2xl p-6 sm:p-7 border border-slate-800 bg-ice-900 shadow-xl space-y-6 transition-all">
+          
+          <!-- Spread & Dynamic Verdict -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+            <div>
+              <span class="text-xs uppercase tracking-wider font-semibold text-slate-400 block">
+                Projected Goal Spread (Δ)
+              </span>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-4xl sm:text-5xl font-extrabold font-mono tracking-tight text-white tabular-nums" id="hero-spread-val">
+                  Δ 0.25
+                </span>
+                <span class="text-xs font-medium text-slate-400" id="hero-favored-label">Even parity matchup</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Verdict Badge -->
+            <div id="hero-verdict-badge" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center">
+              <span class="w-2 h-2 rounded-full bg-current"></span>
+              <span id="hero-verdict-text">Even Battle</span>
+            </div>
+          </div>
+
+          <!-- Score & Win Probability Bar -->
+          <div class="space-y-4">
+            <div class="grid grid-cols-3 items-center text-center">
+              <div class="text-left sm:text-center space-y-0.5">
+                <span id="label-team-a" class="text-xs sm:text-sm font-bold text-blue-400 truncate block">Wings</span>
+                <div id="score-team-a" class="text-3xl sm:text-4xl font-extrabold font-mono text-white tabular-nums">3.2</div>
+                <span class="text-[10px] text-slate-400 block">Expected Goals</span>
+              </div>
+
+              <div class="space-y-1">
+                <span class="text-[10px] uppercase font-mono tracking-widest text-slate-500">PROJECTION</span>
+                <div class="text-lg sm:text-xl font-bold font-mono text-slate-500">VS</div>
+                <span id="total-goals-label" class="text-[11px] font-mono text-slate-400 tabular-nums">6.3 Tot Goals</span>
+              </div>
+
+              <div class="text-right sm:text-center space-y-0.5">
+                <span id="label-team-b" class="text-xs sm:text-sm font-bold text-amber-400 truncate block">Warriors</span>
+                <div id="score-team-b" class="text-3xl sm:text-4xl font-extrabold font-mono text-white tabular-nums">3.1</div>
+                <span class="text-[10px] text-slate-400 block">Expected Goals</span>
+              </div>
+            </div>
+
+            <!-- Win Probability Meter -->
+            <div class="space-y-1.5 pt-1">
+              <div class="flex justify-between text-xs font-semibold">
+                <span class="text-blue-400 tabular-nums" id="prob-a-label">Wings 48%</span>
+                <span class="text-slate-400 tabular-nums" id="prob-tie-label">OT/Tie 18%</span>
+                <span class="text-amber-400 tabular-nums" id="prob-b-label">Warriors 34%</span>
+              </div>
+              <div class="h-3 w-full bg-ice-950 rounded-full overflow-hidden flex p-0.5 border border-slate-800">
+                <div id="prob-bar-a" class="h-full bg-blue-600 rounded-l-full transition-all duration-300" style="width: 48%"></div>
+                <div id="prob-bar-tie" class="h-full bg-slate-600 transition-all duration-300" style="width: 18%"></div>
+                <div id="prob-bar-b" class="h-full bg-amber-600 rounded-r-full transition-all duration-300" style="width: 34%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tactical Coaching Summary Card -->
+          <div id="tactical-summary-box" class="p-4 rounded-xl bg-ice-950/80 border border-slate-800/80 space-y-2 text-xs">
+            <div class="flex items-center justify-between text-slate-300 font-semibold">
+              <span class="flex items-center gap-1.5 text-blue-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Tactical Coaching &amp; Developmental Assessment
+              </span>
+              <span id="tactical-verdict-tag" class="text-[10px] font-mono text-emerald-400">Peak Parity</span>
+            </div>
+            <p id="tactical-summary-text" class="text-slate-300 leading-relaxed">
+              This matchup represents ideal competitive balance. Both teams can execute neutral-zone forechecks and test special teams without blowout demoralization.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- STREAMLINED MOBILE INPUTS (NO SLIDERS) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- TEAM A INPUT CARD -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-blue-400 uppercase tracking-wider">TEAM A (HOME / VISITOR)</label>
+              <span class="text-[11px] text-slate-400 tabular-nums" id="eff-rating-a-badge">Effective: 84.50</span>
+            </div>
+
+            <!-- Team Name -->
+            <input
+              type="text"
+              id="team-a-name"
+              value="Wings"
+              oninput="onTeamInputsChanged()"
+              placeholder="Team A Name"
+              class="w-full bg-ice-950 border border-slate-700 focus:border-blue-500 rounded-lg px-3.5 py-2 text-sm font-semibold text-white focus:outline-none"
+            />
+
+            <!-- Direct Decimal Numeric Input with Flanking Steppers -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center text-xs text-slate-400">
+                <span class="font-medium">Base Team Rating</span>
+                <span class="text-[10px] text-slate-500">Standard rating index</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  onclick="stepRating('a', -0.25)"
+                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-blue-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                >
+                  -0.25
+                </button>
+                <input
+                  type="number"
+                  step="0.01"
+                  inputmode="decimal"
+                  id="team-a-rating"
+                  value="84.50"
+                  onfocus="this.select()"
+                  oninput="onTeamInputsChanged()"
+                  class="w-full h-11 bg-ice-950 border border-slate-700 focus:border-blue-500 rounded-lg px-3 text-center text-lg font-bold font-mono text-white focus:outline-none tabular-nums"
+                />
+                <button
+                  type="button"
+                  onclick="stepRating('a', 0.25)"
+                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-blue-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                >
+                  +0.25
+                </button>
+              </div>
+            </div>
+
+            <!-- Situational Modifier Chips -->
+            <div class="space-y-2 pt-1">
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                Situational Modifiers
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                <button
+                  type="button"
+                  id="mod-a-goalie"
+                  onclick="toggleModifier('a', 'goalie')"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  Backup Goalie (-0.75)
+                </button>
+                <button
+                  type="button"
+                  id="mod-a-bench"
+                  onclick="toggleModifier('a', 'bench')"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  Short Bench (-0.50)
+                </button>
+                <button
+                  type="button"
+                  id="mod-a-fatigue"
+                  onclick="toggleModifier('a', 'fatigue')"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  3rd Game in 24h (-0.50)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEAM B INPUT CARD -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-amber-400 uppercase tracking-wider">TEAM B (OPPONENT)</label>
+              <span class="text-[11px] text-slate-400 tabular-nums" id="eff-rating-b-badge">Effective: 84.25</span>
+            </div>
+
+            <!-- Team Name -->
+            <input
+              type="text"
+              id="team-b-name"
+              value="Warriors"
+              oninput="onTeamInputsChanged()"
+              placeholder="Team B Name"
+              class="w-full bg-ice-950 border border-slate-700 focus:border-amber-500 rounded-lg px-3.5 py-2 text-sm font-semibold text-white focus:outline-none"
+            />
+
+            <!-- Direct Decimal Numeric Input with Flanking Steppers -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center text-xs text-slate-400">
+                <span class="font-medium">Base Team Rating</span>
+                <span class="text-[10px] text-slate-500">Standard rating index</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  onclick="stepRating('b', -0.25)"
+                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-amber-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                >
+                  -0.25
+                </button>
+                <input
+                  type="number"
+                  step="0.01"
+                  inputmode="decimal"
+                  id="team-b-rating"
+                  value="84.25"
+                  onfocus="this.select()"
+                  oninput="onTeamInputsChanged()"
+                  class="w-full h-11 bg-ice-950 border border-slate-700 focus:border-amber-500 rounded-lg px-3 text-center text-lg font-bold font-mono text-white focus:outline-none tabular-nums"
+                />
+                <button
+                  type="button"
+                  onclick="stepRating('b', 0.25)"
+                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-amber-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                >
+                  +0.25
+                </button>
+              </div>
+            </div>
+
+            <!-- Situational Modifier Chips -->
+            <div class="space-y-2 pt-1">
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                Situational Modifiers
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                <button
+                  type="button"
+                  id="mod-b-goalie"
+                  onclick="toggleModifier('b', 'goalie')"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  Backup Goalie (-0.75)
+                </button>
+                <button
+                  type="button"
+                  id="mod-b-bench"
+                  onclick="toggleModifier('b', 'bench')"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  Short Bench (-0.50)
+                </button>
+                <button
+                  type="button"
+                  id="mod-b-fatigue"
+                  onclick="toggleModifier('b', 'fatigue')"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  3rd Game in 24h (-0.50)
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COLLAPSIBLE ACCORDION DRAWERS (SECONDARY TOOLS) -->
+        <div class="space-y-3">
+
+          <!-- ACCORDION 1: COST CALCULATOR -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl overflow-hidden transition-all">
+            <button
+              type="button"
+              onclick="toggleAccordion('cost')"
+              class="w-full px-5 py-3.5 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white hover:bg-slate-800/40 transition-colors"
+            >
+              <span class="flex items-center gap-2">
+                <span id="accordion-cost-icon" class="text-blue-400 font-mono text-sm">+</span>
+                <span>Cost Calculator &amp; Financial Parity</span>
+              </span>
+              <span id="accordion-cost-summary" class="text-slate-400 font-mono font-semibold tabular-nums">$235.00 / team</span>
+            </button>
+
+            <div id="accordion-cost-content" class="hidden px-5 pb-5 pt-2 border-t border-slate-800/80 space-y-4">
+              <!-- Drive Time Chips -->
+              <div class="space-y-1.5">
+                <label class="text-xs font-semibold text-slate-300 block">Drive Time / Distance Bracket</label>
+                <div class="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onclick="setDriveTime('<30m')"
+                    id="drive-opt-1"
+                    class="py-2 px-3 text-xs font-medium rounded-lg border border-blue-500 bg-blue-600/20 text-blue-300 text-center"
+                  >
+                    &lt; 30m (Local)
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setDriveTime('30-90m')"
+                    id="drive-opt-2"
+                    class="py-2 px-3 text-xs font-medium rounded-lg border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 text-center"
+                  >
+                    30–90m (Regional)
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setDriveTime('2-4h')"
+                    id="drive-opt-3"
+                    class="py-2 px-3 text-xs font-medium rounded-lg border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 text-center"
+                  >
+                    2–4h (Travel Hub)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fees & Split -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="space-y-1">
+                  <label class="text-xs text-slate-400">Ice Slot Fee ($)</label>
+                  <input
+                    type="number"
+                    id="cost-ice-fee"
+                    value="350"
+                    onfocus="this.select()"
+                    oninput="recalculateCosts()"
+                    class="w-full bg-ice-950 border border-slate-700 rounded-lg px-3 py-2 text-sm font-mono text-white tabular-nums"
+                  />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-xs text-slate-400">Ref / Officials Fee ($)</label>
+                  <input
+                    type="number"
+                    id="cost-ref-fee"
+                    value="120"
+                    onfocus="this.select()"
+                    oninput="recalculateCosts()"
+                    class="w-full bg-ice-950 border border-slate-700 rounded-lg px-3 py-2 text-sm font-mono text-white tabular-nums"
+                  />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-xs text-slate-400">Cost Sharing Split</label>
+                  <button
+                    type="button"
+                    id="cost-split-btn"
+                    onclick="toggleCostSplit()"
+                    class="w-full h-[38px] bg-ice-850 hover:bg-slate-800 border border-slate-700 rounded-lg px-3 text-xs font-semibold text-slate-200 text-center flex items-center justify-center gap-1.5"
+                  >
+                    <span id="cost-split-label">50/50 Split</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cost Summary Results -->
+              <div class="p-3 bg-ice-950 rounded-lg border border-slate-800 flex items-center justify-between text-xs">
+                <div>
+                  <span class="text-slate-400">Total Fixture Cost: </span>
+                  <strong id="cost-total-display" class="text-white font-mono">$470.00</strong>
+                </div>
+                <div>
+                  <span class="text-blue-400 font-semibold">Net Cost Per Team: </span>
+                  <strong id="cost-net-display" class="text-emerald-400 font-mono text-sm font-bold tabular-nums">$235.00</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCORDION 2: DRAFT COACH PITCH EMAIL / TEXT -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl overflow-hidden transition-all">
+            <button
+              type="button"
+              onclick="toggleAccordion('pitch')"
+              class="w-full px-5 py-3.5 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white hover:bg-slate-800/40 transition-colors"
+            >
+              <span class="flex items-center gap-2">
+                <span id="accordion-pitch-icon" class="text-blue-400 font-mono text-sm">+</span>
+                <span>Draft Coach Pitch Email / Text</span>
+              </span>
+              <span class="text-blue-400 font-mono text-xs">Pre-filled Proposal</span>
+            </button>
+
+            <div id="accordion-pitch-content" class="hidden px-5 pb-5 pt-2 border-t border-slate-800/80 space-y-3">
+              <p class="text-[11px] text-slate-400">
+                Pre-formatted booking proposal ready to send to the opposing coach or scheduler via text or email.
+              </p>
+
+              <!-- Pitch Text Area -->
+              <textarea
+                id="pitch-textarea"
+                rows="7"
+                class="w-full bg-ice-950 border border-slate-700 rounded-lg p-3 text-xs font-mono text-slate-200 leading-relaxed focus:outline-none focus:border-blue-500"
+              ></textarea>
+
+              <!-- Action Buttons -->
+              <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <div class="flex items-center gap-2">
+                  <a
+                    id="btn-sms-pitch"
+                    href="#"
+                    class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
+                  >
+                    Open in Messages
+                  </a>
+                  <a
+                    id="btn-email-pitch"
+                    href="#"
+                    class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
+                  >
+                    Open in Mail
+                  </a>
+                </div>
+
+                <button
+                  type="button"
+                  id="btn-copy-pitch"
+                  onclick="copyPitchToClipboard()"
+                  class="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 active:scale-95 rounded-lg transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
+                >
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                  <span id="copy-btn-text">Copy Pitch</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- VIEW 2: TOURNAMENT BRACKET PARITY GRADER   -->
+      <!-- ========================================== -->
+      <div id="view-bracket" class="hidden space-y-6">
+
+        <!-- Division Setup & Preset Presets -->
+        <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="text-base font-bold text-white">Tournament Bracket Parity Grader</h2>
+              <p class="text-xs text-slate-400">
+                Evaluate 4-to-8 team divisions for competitive equity, blowout frequency, and round-robin health.
+              </p>
+            </div>
+
+            <!-- Team Count Selector -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-400 font-medium">Teams:</span>
+              <div class="inline-flex rounded-lg bg-ice-950 p-1 border border-slate-800">
+                <button onclick="setBracketTeamCount(4)" id="btn-count-4" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">4</button>
+                <button onclick="setBracketTeamCount(5)" id="btn-count-5" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">5</button>
+                <button onclick="setBracketTeamCount(6)" id="btn-count-6" class="px-2.5 py-1 text-xs font-semibold rounded bg-blue-600 text-white">6</button>
+                <button onclick="setBracketTeamCount(7)" id="btn-count-7" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">7</button>
+                <button onclick="setBracketTeamCount(8)" id="btn-count-8" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">8</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Presets -->
+          <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-800/80 text-xs">
+            <span class="text-slate-400 font-medium">Presets:</span>
+            <button onclick="loadBracketPreset('balanced')" class="px-2.5 py-1 rounded bg-ice-850 hover:bg-slate-800 border border-slate-700 text-slate-300 text-xs">
+              WNY 12U Peewee AA (Balanced)
+            </button>
+            <button onclick="loadBracketPreset('elite')" class="px-2.5 py-1 rounded bg-ice-850 hover:bg-slate-800 border border-slate-700 text-slate-300 text-xs">
+              Tier 1 AAA Invitational
+            </button>
+            <button onclick="loadBracketPreset('unbalanced')" class="px-2.5 py-1 rounded bg-ice-850 hover:bg-slate-800 border border-slate-700 text-rose-300 text-xs">
+              Unbalanced Mix (Blowout Hazard)
+            </button>
+          </div>
+        </div>
+
+        <!-- Division Parity Metric Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <!-- Grade Card -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Round-Robin Grade</span>
+            <div id="bracket-grade-val" class="text-3xl sm:text-4xl font-black font-display text-emerald-400">A</div>
+            <span id="bracket-grade-label" class="text-[10px] text-slate-400 block">Competitive Division</span>
+          </div>
+
+          <!-- Division Mean -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Division Mean (x̄)</span>
+            <div id="bracket-mean-val" class="text-2xl sm:text-3xl font-bold font-mono text-white tabular-nums">84.15</div>
+            <span class="text-[10px] text-slate-400 block">Average Rating</span>
+          </div>
+
+          <!-- Rating Spread -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Rating Spread</span>
+            <div id="bracket-spread-val" class="text-2xl sm:text-3xl font-bold font-mono text-blue-400 tabular-nums">Δ 3.40</div>
+            <span class="text-[10px] text-slate-400 block">Max – Min Rating</span>
+          </div>
+
+          <!-- Std Dev -->
+          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Standard Deviation (σ)</span>
+            <div id="bracket-stddev-val" class="text-2xl sm:text-3xl font-bold font-mono text-slate-200 tabular-nums">1.24</div>
+            <span class="text-[10px] text-slate-400 block">Dispersion Index</span>
+          </div>
+        </div>
+
+        <!-- Editable Team List Table -->
+        <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-200">Division Teams &amp; Ratings</h3>
+            <span class="text-xs text-slate-400 font-mono" id="bracket-team-count-text">6 Teams</span>
+          </div>
+
+          <div id="bracket-teams-container" class="space-y-2.5">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+
+        <!-- Pairwise Round-Robin Matchup Parity Grid -->
+        <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <h3 class="text-sm font-bold text-slate-200">Round-Robin Matchup Parity Breakdown</h3>
+              <p class="text-xs text-slate-400" id="bracket-fixtures-summary">
+                15 total matchups simulated.
+              </p>
+            </div>
+            <div class="flex items-center gap-3 text-[11px]">
+              <span class="text-emerald-400 font-semibold" id="bracket-count-even">Even (0)</span>
+              <span class="text-blue-400 font-semibold" id="bracket-count-comp">Comp (0)</span>
+              <span class="text-amber-400 font-semibold" id="bracket-count-skewed">Skew (0)</span>
+              <span class="text-rose-400 font-semibold" id="bracket-count-blowout">Blowout (0)</span>
+            </div>
+          </div>
+
+          <div id="bracket-matchups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- TRADEMARK DISCLAIMER FOOTER (10PX AS REQUIRED) -->
+    <footer class="mt-auto border-t border-slate-900 bg-ice-950 px-4 py-4 text-center">
+      <p class="text-[10px] text-slate-500 max-w-xl mx-auto leading-relaxed">
+        PuckEdge is an independent scheduling utility. Not affiliated, sponsored, or endorsed by MYHockey Rankings, LLC.
+      </p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+      // ==========================================
+      // STATE MANAGEMENT
+      // ==========================================
+      const state = {
+        activeTab: 'predictor',
+        teamA: {
+          name: 'Wings',
+          baseRating: 84.50,
+          modifiers: {
+            goalie: false, // -0.75
+            bench: false,  // -0.50
+            fatigue: false // -0.50
+          }
+        },
+        teamB: {
+          name: 'Warriors',
+          baseRating: 84.25,
+          modifiers: {
+            goalie: false,
+            bench: false,
+            fatigue: false
+          }
+        },
+        cost: {
+          driveTime: '<30m',
+          iceFee: 350,
+          refFee: 120,
+          isSplit5050: true,
+          isOpen: false
+        },
+        pitch: {
+          isOpen: false
+        },
+        bracket: {
+          teamCount: 6,
+          teams: [
+            { name: 'Buffalo Bisons', rating: 86.80 },
+            { name: 'Rochester Monarchs', rating: 85.50 },
+            { name: 'Wheatfield Blades', rating: 84.90 },
+            { name: 'Hamburg Hawks', rating: 84.20 },
+            { name: 'Syracuse Blazers', rating: 83.50 },
+            { name: 'Batavia Ramparts', rating: 82.80 }
+          ]
+        }
+      };
+
+      // ==========================================
+      // TAB SWITCHING
+      // ==========================================
+      function switchMainTab(tabId) {
+        state.activeTab = tabId;
+        const viewPredictor = document.getElementById('view-predictor');
+        const viewBracket = document.getElementById('view-bracket');
+        const btnPredictor = document.getElementById('nav-tab-predictor');
+        const btnBracket = document.getElementById('nav-tab-bracket');
+
+        if (tabId === 'predictor') {
+          viewPredictor.classList.remove('hidden');
+          viewBracket.classList.add('hidden');
+          btnPredictor.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-semibold border-b-2 border-blue-500 text-blue-400 transition-colors';
+          btnBracket.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-colors';
+          updatePredictor();
+        } else {
+          viewPredictor.classList.add('hidden');
+          viewBracket.classList.remove('hidden');
+          btnPredictor.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-colors';
+          btnBracket.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-semibold border-b-2 border-blue-500 text-blue-400 transition-colors';
+          renderBracketView();
+        }
+      }
+
+      // ==========================================
+      // PREDICTOR ENGINE
+      // ==========================================
+      function getEffectiveRating(teamObj) {
+        let eff = teamObj.baseRating;
+        if (teamObj.modifiers.goalie) eff -= 0.75;
+        if (teamObj.modifiers.bench) eff -= 0.50;
+        if (teamObj.modifiers.fatigue) eff -= 0.50;
+        return parseFloat(eff.toFixed(2));
+      }
+
+      function stepRating(teamKey, delta) {
+        const teamObj = teamKey === 'a' ? state.teamA : state.teamB;
+        const input = document.getElementById(`team-${teamKey}-rating`);
+        let current = parseFloat(input.value) || teamObj.baseRating;
+        current = parseFloat((current + delta).toFixed(2));
+        input.value = current.toFixed(2);
+        teamObj.baseRating = current;
+        updatePredictor();
+      }
+
+      function toggleModifier(teamKey, modKey) {
+        const teamObj = teamKey === 'a' ? state.teamA : state.teamB;
+        teamObj.modifiers[modKey] = !teamObj.modifiers[modKey];
+        updateModifierChips();
+        updatePredictor();
+      }
+
+      function updateModifierChips() {
+        ['a', 'b'].forEach(k => {
+          const team = k === 'a' ? state.teamA : state.teamB;
+          const goalieBtn = document.getElementById(`mod-${k}-goalie`);
+          const benchBtn = document.getElementById(`mod-${k}-bench`);
+          const fatigueBtn = document.getElementById(`mod-${k}-fatigue`);
+
+          setChipActive(goalieBtn, team.modifiers.goalie);
+          setChipActive(benchBtn, team.modifiers.bench);
+          setChipActive(fatigueBtn, team.modifiers.fatigue);
+        });
+      }
+
+      function setChipActive(el, active) {
+        if (!el) return;
+        if (active) {
+          el.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-blue-500 bg-blue-600/30 text-blue-300 transition-colors shadow-sm';
+        } else {
+          el.className = 'px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors';
+        }
+      }
+
+      function loadPreset(nameA, ratingA, nameB, ratingB) {
+        state.teamA.name = nameA;
+        state.teamA.baseRating = ratingA;
+        state.teamA.modifiers = { goalie: false, bench: false, fatigue: false };
+
+        state.teamB.name = nameB;
+        state.teamB.baseRating = ratingB;
+        state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
+
+        document.getElementById('team-a-name').value = nameA;
+        document.getElementById('team-a-rating').value = ratingA.toFixed(2);
+        document.getElementById('team-b-name').value = nameB;
+        document.getElementById('team-b-rating').value = ratingB.toFixed(2);
+
+        updateModifierChips();
+        updatePredictor();
+      }
+
+      function onTeamInputsChanged() {
+        state.teamA.name = document.getElementById('team-a-name').value || 'Team A';
+        state.teamA.baseRating = parseFloat(document.getElementById('team-a-rating').value) || 80.00;
+
+        state.teamB.name = document.getElementById('team-b-name').value || 'Team B';
+        state.teamB.baseRating = parseFloat(document.getElementById('team-b-rating').value) || 80.00;
+
+        updatePredictor();
+      }
+
+      function updatePredictor() {
+        const effA = getEffectiveRating(state.teamA);
+        const effB = getEffectiveRating(state.teamB);
+
+        document.getElementById('eff-rating-a-badge').textContent = `Effective: ${effA.toFixed(2)}`;
+        document.getElementById('eff-rating-b-badge').textContent = `Effective: ${effB.toFixed(2)}`;
+
+        document.getElementById('label-team-a').textContent = state.teamA.name;
+        document.getElementById('label-team-b').textContent = state.teamB.name;
+
+        // Differential calculation
+        const spread = parseFloat(Math.abs(effA - effB).toFixed(2));
+        document.getElementById('hero-spread-val').textContent = `Δ ${spread.toFixed(2)}`;
+
+        // Favored Team Label
+        const favoredEl = document.getElementById('hero-favored-label');
+        if (spread === 0) {
+          favoredEl.textContent = 'Even baseline rating';
+        } else if (effA > effB) {
+          favoredEl.textContent = `${state.teamA.name} projected +${spread.toFixed(2)} goals`;
+        } else {
+          favoredEl.textContent = `${state.teamB.name} projected +${spread.toFixed(2)} goals`;
+        }
+
+        // Expected Scores & Probabilities
+        const baseGoals = 3.2;
+        let expectedA = baseGoals + (effA - effB) * 0.45;
+        let expectedB = baseGoals - (effA - effB) * 0.45;
+        expectedA = Math.max(0.6, expectedA);
+        expectedB = Math.max(0.6, expectedB);
+
+        document.getElementById('score-team-a').textContent = expectedA.toFixed(1);
+        document.getElementById('score-team-b').textContent = expectedB.toFixed(1);
+        document.getElementById('total-goals-label').textContent = `${(expectedA + expectedB).toFixed(1)} Tot Goals`;
+
+        // Win Probabilities
+        let winProbA = 50 + (effA - effB) * 11.5;
+        winProbA = Math.max(5, Math.min(92, winProbA));
+        let winProbB = 100 - winProbA;
+        let tieProb = Math.max(8, 22 - spread * 2.8);
+        winProbA = (winProbA * (100 - tieProb)) / 100;
+        winProbB = (winProbB * (100 - tieProb)) / 100;
+
+        const roundA = Math.round(winProbA);
+        const roundB = Math.round(winProbB);
+        const roundTie = 100 - roundA - roundB;
+
+        document.getElementById('prob-a-label').textContent = `${state.teamA.name} ${roundA}%`;
+        document.getElementById('prob-tie-label').textContent = `OT/Tie ${roundTie}%`;
+        document.getElementById('prob-b-label').textContent = `${state.teamB.name} ${roundB}%`;
+
+        document.getElementById('prob-bar-a').style.width = `${roundA}%`;
+        document.getElementById('prob-bar-tie').style.width = `${roundTie}%`;
+        document.getElementById('prob-bar-b').style.width = `${roundB}%`;
+
+        // DYNAMIC VERDICT & TACTICAL SUMMARY
+        // Criteria:
+        // Even Battle (Green, Δ <= 1.00)
+        // Competitive Game (Blue, 1.01 - 2.25)
+        // Skewed (Amber, 2.26 - 3.50)
+        // Blowout Risk (Red, > 3.50)
+        const verdictBadge = document.getElementById('hero-verdict-badge');
+        const verdictText = document.getElementById('hero-verdict-text');
+        const tacticalBox = document.getElementById('tactical-summary-box');
+        const tacticalTag = document.getElementById('tactical-verdict-tag');
+        const tacticalSummary = document.getElementById('tactical-summary-text');
+
+        if (spread <= 1.00) {
+          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-emerald-600 bg-emerald-950/80 text-emerald-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-emerald-950';
+          verdictText.textContent = 'Even Battle';
+          tacticalTag.textContent = 'Peak Parity';
+          tacticalTag.className = 'text-[10px] font-mono text-emerald-400';
+          tacticalSummary.textContent = 'Ideal developmental parity. High intensity one-goal contest anticipated where puck luck, discipline, and net-front scrambles will decide the outcome.';
+        } else if (spread <= 2.25) {
+          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-blue-600 bg-blue-950/80 text-blue-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-blue-950';
+          verdictText.textContent = 'Competitive Game';
+          tacticalTag.textContent = 'Competitive Parity';
+          tacticalTag.className = 'text-[10px] font-mono text-blue-400';
+          tacticalSummary.textContent = 'Strong developmental game. The trailing squad will face sustained neutral-zone pressure but remains within a reachable two-goal striking distance.';
+        } else if (spread <= 3.50) {
+          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-amber-600 bg-amber-950/80 text-amber-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-amber-950';
+          verdictText.textContent = 'Skewed';
+          tacticalTag.textContent = 'Caution / Mismatch';
+          tacticalTag.className = 'text-[10px] font-mono text-amber-400';
+          tacticalSummary.textContent = 'Moderate disparity. Favored team likely controls zone time. Trailing team must avoid extended defensive-zone shifts and rely on counter-attack rushes.';
+        } else {
+          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-rose-600 bg-rose-950/80 text-rose-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-rose-950';
+          verdictText.textContent = 'Blowout Risk';
+          tacticalTag.textContent = 'Severe Blowout Alert';
+          tacticalTag.className = 'text-[10px] font-mono text-rose-400 font-bold';
+          tacticalSummary.textContent = 'High blowout risk. High probability of running-clock / mercy rule conditions (5+ goal spread). Rebalancing schedule or pairing alternate opponents strongly recommended.';
+        }
+
+        // Update accordion pre-filled draft pitch email
+        updatePitchDraft();
+      }
+
+      // ==========================================
+      // ACCORDION DRAWER 1: COST CALCULATOR
+      // ==========================================
+      function toggleAccordion(drawer) {
+        if (drawer === 'cost') {
+          state.cost.isOpen = !state.cost.isOpen;
+          const content = document.getElementById('accordion-cost-content');
+          const icon = document.getElementById('accordion-cost-icon');
+          if (state.cost.isOpen) {
+            content.classList.remove('hidden');
+            icon.textContent = '−';
+          } else {
+            content.classList.add('hidden');
+            icon.textContent = '+';
+          }
+        } else if (drawer === 'pitch') {
+          state.pitch.isOpen = !state.pitch.isOpen;
+          const content = document.getElementById('accordion-pitch-content');
+          const icon = document.getElementById('accordion-pitch-icon');
+          if (state.pitch.isOpen) {
+            content.classList.remove('hidden');
+            icon.textContent = '−';
+            updatePitchDraft();
+          } else {
+            content.classList.add('hidden');
+            icon.textContent = '+';
+          }
+        }
+      }
+
+      function setDriveTime(timeStr) {
+        state.cost.driveTime = timeStr;
+        const opts = ['<30m', '30-90m', '2-4h'];
+        opts.forEach((opt, idx) => {
+          const btn = document.getElementById(`drive-opt-${idx + 1}`);
+          if (opt === timeStr) {
+            btn.className = 'py-2 px-3 text-xs font-semibold rounded-lg border border-blue-500 bg-blue-600/20 text-blue-300 text-center shadow-sm';
+          } else {
+            btn.className = 'py-2 px-3 text-xs font-medium rounded-lg border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 text-center';
+          }
+        });
+        recalculateCosts();
+      }
+
+      function toggleCostSplit() {
+        state.cost.isSplit5050 = !state.cost.isSplit5050;
+        document.getElementById('cost-split-label').textContent = state.cost.isSplit5050 ? '50/50 Split' : 'Host Pays All';
+        recalculateCosts();
+      }
+
+      function recalculateCosts() {
+        const ice = parseFloat(document.getElementById('cost-ice-fee').value) || 0;
+        const ref = parseFloat(document.getElementById('cost-ref-fee').value) || 0;
+        const total = ice + ref;
+        const netPerTeam = state.cost.isSplit5050 ? total / 2 : total;
+
+        document.getElementById('cost-total-display').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('cost-net-display').textContent = `$${netPerTeam.toFixed(2)}`;
+        document.getElementById('accordion-cost-summary').textContent = `$${netPerTeam.toFixed(2)} / team`;
+
+        updatePitchDraft();
+      }
+
+      // ==========================================
+      // ACCORDION DRAWER 2: COACH PITCH DRAFT
+      // ==========================================
+      function updatePitchDraft() {
+        const effA = getEffectiveRating(state.teamA);
+        const effB = getEffectiveRating(state.teamB);
+        const spread = Math.abs(effA - effB).toFixed(2);
+        const ice = parseFloat(document.getElementById('cost-ice-fee')?.value || 350);
+        const ref = parseFloat(document.getElementById('cost-ref-fee')?.value || 120);
+        const total = ice + ref;
+        const netCost = state.cost.isSplit5050 ? (total / 2).toFixed(2) : total.toFixed(2);
+        const splitText = state.cost.isSplit5050 ? '50/50 split' : 'Host covers ice';
+
+        // Requirement: Email text must say: "Based on current rating differential analytics, our clubs project to a tight goal spread of Δ [spread]..."
+        const pitchText = `Hi Coach,
+
+I hope your season is going well. Based on current rating differential analytics, our clubs project to a tight goal spread of Δ ${spread} (${state.teamA.name} vs ${state.teamB.name}), which makes this an ideal high-parity developmental matchup for both squads.
+
+Proposed Details:
+- Teams: ${state.teamA.name} vs ${state.teamB.name}
+- Drive Bracket: ${state.cost.driveTime}
+- Cost: $${netCost}/team (${splitText})
+- Suggested Ice Slot: Upcoming Saturday / Sunday showcase
+
+Let me know if this weekend works for your schedule!
+
+Best,
+Coach / Scheduler (${state.teamA.name})`;
+
+        const textarea = document.getElementById('pitch-textarea');
+        if (textarea) {
+          textarea.value = pitchText;
+        }
+
+        // SMS & Mailto links
+        const smsBtn = document.getElementById('btn-sms-pitch');
+        if (smsBtn) {
+          smsBtn.href = `sms:?body=${encodeURIComponent(pitchText)}`;
+        }
+        const emailBtn = document.getElementById('btn-email-pitch');
+        if (emailBtn) {
+          emailBtn.href = `mailto:?subject=${encodeURIComponent(`Scrimmage Proposal: ${state.teamA.name} vs ${state.teamB.name}`)}&body=${encodeURIComponent(pitchText)}`;
+        }
+      }
+
+      function copyPitchToClipboard() {
+        const textarea = document.getElementById('pitch-textarea');
+        if (!textarea) return;
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          const btnText = document.getElementById('copy-btn-text');
+          btnText.textContent = 'Copied to Clipboard!';
+          setTimeout(() => {
+            btnText.textContent = 'Copy Pitch';
+          }, 2000);
+        });
+      }
+
+      // ==========================================
+      // TAB 2: TOURNAMENT BRACKET PARITY GRADER
+      // ==========================================
+      const bracketPresets = {
+        balanced: [
+          { name: 'Buffalo Bisons AA', rating: 86.80 },
+          { name: 'Rochester Monarchs AA', rating: 85.50 },
+          { name: 'Wheatfield Blades AA', rating: 84.90 },
+          { name: 'Hamburg Hawks AA', rating: 84.20 },
+          { name: 'Syracuse Blazers AA', rating: 83.50 },
+          { name: 'Batavia Ramparts AA', rating: 82.80 }
+        ],
+        elite: [
+          { name: 'Shattuck St. Mary’s', rating: 96.20 },
+          { name: 'Chicago Mission AAA', rating: 95.80 },
+          { name: 'Detroit Honeybaked', rating: 94.60 },
+          { name: 'Boston Jr. Eagles', rating: 93.90 },
+          { name: 'Pittsburgh Pens Elite', rating: 92.40 },
+          { name: 'Minnetonka Skippers', rating: 91.50 }
+        ],
+        unbalanced: [
+          { name: 'Top Tier Selects', rating: 94.50 },
+          { name: 'Regional Flyers AA', rating: 88.00 },
+          { name: 'Metro Blades A', rating: 83.20 },
+          { name: 'Lakeside Stars A', rating: 79.50 },
+          { name: 'Valley Rangers B', rating: 75.00 },
+          { name: 'Pond Cyclones B', rating: 71.00 }
+        ]
+      };
+
+      function setBracketTeamCount(count) {
+        state.bracket.teamCount = count;
+        // Adjust teams array length
+        while (state.bracket.teams.length < count) {
+          const idx = state.bracket.teams.length + 1;
+          state.bracket.teams.push({ name: `Team ${idx}`, rating: parseFloat((84.00 - idx * 0.5).toFixed(2)) });
+        }
+        if (state.bracket.teams.length > count) {
+          state.bracket.teams = state.bracket.teams.slice(0, count);
+        }
+
+        // Update count buttons
+        [4, 5, 6, 7, 8].forEach(c => {
+          const btn = document.getElementById(`btn-count-${c}`);
+          if (c === count) {
+            btn.className = 'px-2.5 py-1 text-xs font-semibold rounded bg-blue-600 text-white';
+          } else {
+            btn.className = 'px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white';
+          }
+        });
+
+        renderBracketView();
+      }
+
+      function loadBracketPreset(presetKey) {
+        const raw = bracketPresets[presetKey] || bracketPresets.balanced;
+        state.bracket.teams = JSON.parse(JSON.stringify(raw));
+        state.bracket.teamCount = state.bracket.teams.length;
+        setBracketTeamCount(state.bracket.teamCount);
+      }
+
+      function onBracketTeamChange(index, field, value) {
+        if (field === 'rating') {
+          state.bracket.teams[index].rating = parseFloat(value) || 0;
+        } else {
+          state.bracket.teams[index].name = value;
+        }
+        calculateBracketParity();
+      }
+
+      function stepBracketTeamRating(index, delta) {
+        const current = state.bracket.teams[index].rating;
+        const next = parseFloat((current + delta).toFixed(2));
+        state.bracket.teams[index].rating = next;
+        const input = document.getElementById(`bracket-team-rating-${index}`);
+        if (input) input.value = next.toFixed(2);
+        calculateBracketParity();
+      }
+
+      function renderBracketView() {
+        const container = document.getElementById('bracket-teams-container');
+        if (!container) return;
+        document.getElementById('bracket-team-count-text').textContent = `${state.bracket.teams.length} Teams`;
+
+        container.innerHTML = state.bracket.teams.map((team, idx) => `
+          <div class="flex items-center gap-2 p-2 bg-ice-950 rounded-lg border border-slate-800">
+            <span class="w-6 text-center font-mono text-xs font-semibold text-slate-500">${idx + 1}</span>
+            <input
+              type="text"
+              value="${team.name}"
+              placeholder="Team Name"
+              oninput="onBracketTeamChange(${idx}, 'name', this.value)"
+              class="flex-1 bg-transparent border-b border-slate-800 focus:border-blue-500 px-2 py-1 text-xs font-semibold text-white focus:outline-none"
+            />
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onclick="stepBracketTeamRating(${idx}, -0.25)"
+                class="w-8 h-8 rounded bg-ice-850 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold border border-slate-700"
+              >-0.25</button>
+              <input
+                type="number"
+                step="0.01"
+                inputmode="decimal"
+                id="bracket-team-rating-${idx}"
+                value="${team.rating.toFixed(2)}"
+                onfocus="this.select()"
+                oninput="onBracketTeamChange(${idx}, 'rating', this.value)"
+                class="w-20 h-8 bg-ice-900 border border-slate-700 rounded text-center text-xs font-mono font-bold text-white tabular-nums"
+              />
+              <button
+                type="button"
+                onclick="stepBracketTeamRating(${idx}, 0.25)"
+                class="w-8 h-8 rounded bg-ice-850 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold border border-slate-700"
+              >+0.25</button>
+            </div>
+          </div>
+        `).join('');
+
+        calculateBracketParity();
+      }
+
+      function calculateBracketParity() {
+        const teams = state.bracket.teams;
+        const n = teams.length;
+        if (n < 2) return;
+
+        const ratings = teams.map(t => t.rating);
+        const sum = ratings.reduce((a, b) => a + b, 0);
+        const mean = sum / n;
+        const max = Math.max(...ratings);
+        const min = Math.min(...ratings);
+        const spread = max - min;
+
+        // Variance & Standard Deviation
+        const variance = ratings.reduce((acc, r) => acc + Math.pow(r - mean, 2), 0) / n;
+        const stdDev = Math.sqrt(variance);
+
+        document.getElementById('bracket-mean-val').textContent = mean.toFixed(2);
+        document.getElementById('bracket-spread-val').textContent = `Δ ${spread.toFixed(2)}`;
+        document.getElementById('bracket-stddev-val').textContent = stdDev.toFixed(2);
+
+        // Grade calculation
+        // Grade A+ (Exceptional Parity, stdDev <= 1.00, Spread <= 2.50)
+        // Grade A  (High Parity, stdDev <= 1.80, Spread <= 4.00)
+        // Grade B  (Moderate Parity, stdDev <= 2.60, Spread <= 6.00)
+        // Grade C  (Uneven Bracket, stdDev <= 3.60, Spread <= 8.00)
+        // Grade F  (Severe Blowout Hazard, stdDev > 3.60 or Spread > 8.00)
+        let grade = 'B';
+        let gradeLabel = 'Moderate Parity';
+        let gradeColor = 'text-amber-400';
+
+        if (stdDev <= 1.00 && spread <= 2.50) {
+          grade = 'A+';
+          gradeLabel = 'Exceptional Parity';
+          gradeColor = 'text-emerald-400';
+        } else if (stdDev <= 1.80 && spread <= 4.00) {
+          grade = 'A';
+          gradeLabel = 'High Parity Division';
+          gradeColor = 'text-emerald-400';
+        } else if (stdDev <= 2.60 && spread <= 6.00) {
+          grade = 'B';
+          gradeLabel = 'Moderate Parity';
+          gradeColor = 'text-blue-400';
+        } else if (stdDev <= 3.60 && spread <= 8.00) {
+          grade = 'C';
+          gradeLabel = 'Uneven Division (High Variance)';
+          gradeColor = 'text-amber-400';
+        } else {
+          grade = 'F';
+          gradeLabel = 'Blowout Hazard (Running Clock Expected)';
+          gradeColor = 'text-rose-400';
+        }
+
+        const gradeValEl = document.getElementById('bracket-grade-val');
+        gradeValEl.textContent = grade;
+        gradeValEl.className = `text-3xl sm:text-4xl font-black font-display ${gradeColor}`;
+        document.getElementById('bracket-grade-label').textContent = gradeLabel;
+
+        // Generate round-robin matchups
+        const matchups = [];
+        let countEven = 0;
+        let countComp = 0;
+        let countSkewed = 0;
+        let countBlowout = 0;
+
+        for (let i = 0; i < n; i++) {
+          for (let j = i + 1; j < n; j++) {
+            const diff = parseFloat(Math.abs(teams[i].rating - teams[j].rating).toFixed(2));
+            let status = 'Even';
+            let pillClass = 'bg-emerald-950/80 text-emerald-400 border-emerald-800/60';
+            if (diff <= 1.00) {
+              countEven++;
+            } else if (diff <= 2.25) {
+              status = 'Competitive';
+              pillClass = 'bg-blue-950/80 text-blue-400 border-blue-800/60';
+              countComp++;
+            } else if (diff <= 3.50) {
+              status = 'Skewed';
+              pillClass = 'bg-amber-950/80 text-amber-400 border-amber-800/60';
+              countSkewed++;
+            } else {
+              status = 'Blowout';
+              pillClass = 'bg-rose-950/80 text-rose-400 border-rose-800/60';
+              countBlowout++;
+            }
+
+            matchups.push({
+              team1: teams[i].name,
+              team2: teams[j].name,
+              diff,
+              status,
+              pillClass
+            });
+          }
+        }
+
+        // Summary counts
+        document.getElementById('bracket-fixtures-summary').textContent = `${matchups.length} round-robin matchups evaluated.`;
+        document.getElementById('bracket-count-even').textContent = `Even (${countEven})`;
+        document.getElementById('bracket-count-comp').textContent = `Comp (${countComp})`;
+        document.getElementById('bracket-count-skewed').textContent = `Skew (${countSkewed})`;
+        document.getElementById('bracket-count-blowout').textContent = `Blowout (${countBlowout})`;
+
+        // Render Matchup Grid
+        const grid = document.getElementById('bracket-matchups-grid');
+        grid.innerHTML = matchups.map(m => `
+          <div class="p-3 bg-ice-950 rounded-lg border border-slate-800/90 flex items-center justify-between gap-2">
+            <div class="truncate text-xs font-semibold text-slate-200">
+              ${m.team1} <span class="text-slate-500 font-normal">vs</span> ${m.team2}
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="font-mono text-xs font-bold text-white tabular-nums">Δ ${m.diff.toFixed(2)}</span>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded border ${m.pillClass}">${m.status}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Initialize on load
+      window.addEventListener('DOMContentLoaded', () => {
+        updatePredictor();
+        recalculateCosts();
+      });
+    </script>
+  </body>
+</html>
