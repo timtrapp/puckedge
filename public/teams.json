@@ -1,510 +1,13 @@
 [
   {
-    "name": "Buffalo Jr Sabres 10U AAA (NY)",
-    "rating": 97.7,
-    "record": "14-7-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Gulls 10U AAA (NY)",
-    "rating": 94.7,
-    "record": "15-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Royals 10U AAA (NY)",
-    "rating": 92.4,
-    "record": "12-7-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Amherst Knights 10U AAA (NY)",
-    "rating": 91.7,
-    "record": "10-10-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rochester Saints 10U AAA (NY)",
-    "rating": 91.4,
-    "record": "9-11-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "PAL Jr Islanders 10U AAA (NY)",
-    "rating": 90.8,
-    "record": "11-5-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Syracuse Nationals 10U AAA (NY)",
-    "rating": 89.3,
-    "record": "6-8-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Peconic Wildcats (Major) 10U A (NY)",
-    "rating": 88.9,
-    "record": "21-2-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rochester Jr Americans 10U AAA (NY)",
-    "rating": 88.6,
-    "record": "5-8-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Buffalo Jr Sabres (OConnell) 9U AAA (NY)",
-    "rating": 88.4,
-    "record": "11-10-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Buffalo Regals (Lines) 10U AAA (NY)",
-    "rating": 88.2,
-    "record": "7-8-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Utica Jr Comets 10U AAA (NY)",
-    "rating": 87.6,
-    "record": "7-7-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "assau County Lions 10U AA (NY)",
-    "rating": 87.5,
-    "record": "16-4-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Buffalo Regals (Leber) 9U AAA (NY)",
-    "rating": 87.2,
-    "record": "22-3-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Beach Lightning 10U AA (NY)",
-    "rating": 87.2,
-    "record": "14-2-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Hamburg Hawks (Militello) 10U AA (NY)",
-    "rating": 87.1,
-    "record": "7-4-5",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Kings (Wakie) 10U A (NY)",
-    "rating": 86.7,
-    "record": "13-5-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Y Dynamo 10U AAA (NY)",
-    "rating": 86.2,
-    "record": "7-15-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "ew York Aviators 10U AA (NY)",
-    "rating": 85.6,
-    "record": "14-4-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Clarence Mustangs 10U AA (NY)",
-    "rating": 85.5,
-    "record": "12-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Buffalo Regals (Lindell) 10U AAA (NY)",
-    "rating": 85.3,
-    "record": "7-3-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "ew York City Hockey Club 10U AAA (NY)",
-    "rating": 85.2,
-    "record": "4-13-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "est Seneca Wings 10U AA (NY)",
-    "rating": 85.2,
-    "record": "9-3-4",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rochester Saints 9U AAA (NY)",
-    "rating": 85.1,
-    "record": "9-9-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Gulls 10U AA (NY)",
-    "rating": 84.9,
-    "record": "10-12-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "ew Hartford Spartans 10U AA (NY)",
-    "rating": 84.9,
-    "record": "6-2-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rochester Aces (Rice) 10U AA (NY)",
-    "rating": 84.8,
-    "record": "7-7-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Cheektowaga Warriors 10U AA (NY)",
-    "rating": 84.7,
-    "record": "6-5-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "PAL Jr Islanders 9U AAA (NY)",
-    "rating": 84.7,
-    "record": "5-10-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Southtowns Stars (Gold) 10U AA (NY)",
-    "rating": 84.5,
-    "record": "4-9-3",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Royals 9U AAA (NY)",
-    "rating": 84.2,
-    "record": "10-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Camillus Cougars 10U AA (NY)",
-    "rating": 83.8,
-    "record": "7-0-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "PAL Sound Tigers 10U AA (NY)",
-    "rating": 83.7,
-    "record": "9-12-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Canton Steel 9U AA (NY)",
-    "rating": 83.7,
-    "record": "1-4-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rye Rangers 10U AA (NY)",
-    "rating": 83.7,
-    "record": "11-4-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Mid-Hudson Polar Bears 10U AA (NY)",
-    "rating": 83.5,
-    "record": "8-5-4",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "heatfield Blades 10U AA (NY)",
-    "rating": 83.4,
-    "record": "6-8-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "ew York City Hockey Club 9U AAA (NY)",
-    "rating": 82.7,
-    "record": "7-6-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Rebels 10U AA (NY)",
-    "rating": 82.5,
-    "record": "7-10-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Troy Albany Titans 10U AA (NY)",
-    "rating": 82.5,
-    "record": "16-3-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rochester Jr Americans 9U AAA (NY)",
-    "rating": 82.4,
-    "record": "3-8-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Southtowns Stars (Gold) 9U AA (NY)",
-    "rating": 82,
-    "record": "11-5-3",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Utica Jr Comets 10U AA (NY)",
-    "rating": 82,
-    "record": "2-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Syracuse Valley Eagles 10U AA (NY)",
-    "rating": 82,
-    "record": "4-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "ew York City Cyclones 10U AA (NY)",
-    "rating": 81.8,
-    "record": "6-9-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "iagara Jr Purple Eagles 10U AA (NY)",
-    "rating": 81.6,
-    "record": "7-4-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Central Outlaws (Colbert) 10U A (NY)",
-    "rating": 81.6,
-    "record": "5-5-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Batavia Ramparts (Briggs) 10U AA (NY)",
-    "rating": 81.6,
-    "record": "4-2-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "est Seneca Wings (Gold) 9U AA (NY)",
-    "rating": 81.5,
-    "record": "9-5-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Amherst Knights 9U AAA (NY)",
-    "rating": 81.2,
-    "record": "11-9-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Y Dynamo 9U AAA (NY)",
-    "rating": 81.2,
-    "record": "8-11-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Gulls 9U AAA (NY)",
-    "rating": 81.1,
-    "record": "6-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Rinx 10U A (NY)",
-    "rating": 81,
-    "record": "11-0-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Mamaroneck Tigers 10U AA (NY)",
-    "rating": 80.9,
-    "record": "5-4-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Syracuse Nationals 9U AAA (NY)",
-    "rating": 80.9,
-    "record": "3-9-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "estchester Express 9U AA (NY)",
-    "rating": 80.8,
-    "record": "10-4-3",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Oswego Buccaneers 10U A (NY)",
-    "rating": 80.8,
-    "record": "7-4-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "assau County Lions 10U A (NY)",
-    "rating": 80.7,
-    "record": "18-2-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Rochester Jr Americans (Tweedle) 10U AA (NY)",
-    "rating": 80.5,
-    "record": "6-7-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Adirondack Thunder 10U AA (NY)",
-    "rating": 80.3,
-    "record": "5-7-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "estchester Express 10U AA (NY)",
-    "rating": 80.3,
-    "record": "10-11-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Edge 10U AA (NY)",
-    "rating": 79.5,
-    "record": "8-13-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Hamburg Hawks 9U AA (NY)",
-    "rating": 79.4,
-    "record": "12-4-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Hamburg Hawks (Izzo) 10U AA (NY)",
-    "rating": 79.1,
-    "record": "5-8-3",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Syracuse Valley Eagles 10U Girls (NY)",
-    "rating": 79,
-    "record": "5-0-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Utica Jr Comets 9U AAA (NY)",
-    "rating": 79,
-    "record": "3-6-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Lockport Lock Monsters 10U AA (NY)",
-    "rating": 78.9,
-    "record": "5-4-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Tonawanda Whalers 10U AA (NY)",
-    "rating": 78.5,
-    "record": "4-10-2",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Long Island Arrows 9U AAA (NY)",
-    "rating": 78.5,
-    "record": "5-8-0",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "estchester Vipers 10U AA (NY)",
-    "rating": 78.4,
-    "record": "1-12-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "Schenectady Chargers 10U A (NY)",
-    "rating": 78.2,
-    "record": "8-2-1",
-    "division": "10U",
-    "state": "NY"
-  },
-  {
-    "name": "ew York City Cyclones 9U A (NY)",
+    "name": "York City Cyclones 9U A (NY)",
     "rating": 78,
     "record": "8-4-1",
     "division": "10U",
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast 10U AA (NY)",
+    "name": "East Aurora Beast 10U AA (NY)",
     "rating": 78,
     "record": "4-7-0",
     "division": "10U",
@@ -574,7 +77,7 @@
     "state": "NY"
   },
   {
-    "name": "hitestown Wolfpack 10U A (NY)",
+    "name": "Whitestown Wolfpack 10U A (NY)",
     "rating": 76.9,
     "record": "6-3-0",
     "division": "10U",
@@ -595,7 +98,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Saints 9U AAA (NY)",
+    "name": "York Saints 9U AAA (NY)",
     "rating": 76.8,
     "record": "2-14-0",
     "division": "10U",
@@ -665,7 +168,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Mendolia) 10U AA (NY)",
+    "name": "North Park (Mendolia) 10U AA (NY)",
     "rating": 76.5,
     "record": "5-10-1",
     "division": "10U",
@@ -686,14 +189,14 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles 9U AA (NY)",
+    "name": "Niagara Jr Purple Eagles 9U AA (NY)",
     "rating": 76.2,
     "record": "7-6-0",
     "division": "10U",
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 10U A (NY)",
+    "name": "York Aviators 10U A (NY)",
     "rating": 76.1,
     "record": "5-6-0",
     "division": "10U",
@@ -714,7 +217,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Blue) 9U AA (NY)",
+    "name": "West Seneca Wings (Blue) 9U AA (NY)",
     "rating": 76,
     "record": "3-4-1",
     "division": "10U",
@@ -742,7 +245,7 @@
     "state": "NY"
   },
   {
-    "name": "ebster Cyclones 10U AA (NY)",
+    "name": "Webster Cyclones 10U AA (NY)",
     "rating": 75.4,
     "record": "4-2-1",
     "division": "10U",
@@ -819,7 +322,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings 10U Girls (NY)",
+    "name": "West Seneca Wings 10U Girls (NY)",
     "rating": 74,
     "record": "3-2-2",
     "division": "10U",
@@ -868,7 +371,7 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 10U A (NY)",
+    "name": "White Plains Plainsmen 10U A (NY)",
     "rating": 73.2,
     "record": "2-5-1",
     "division": "10U",
@@ -896,7 +399,7 @@
     "state": "NY"
   },
   {
-    "name": "ew Rochelle Lightning 10U A1 (NY)",
+    "name": "Rochelle Lightning 10U A1 (NY)",
     "rating": 72.2,
     "record": "11-6-0",
     "division": "10U",
@@ -924,7 +427,7 @@
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast 9U AA (NY)",
+    "name": "East Aurora Beast 9U AA (NY)",
     "rating": 72.1,
     "record": "2-3-0",
     "division": "10U",
@@ -952,7 +455,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 10U A1 (NY)",
+    "name": "Westchester Vipers 10U A1 (NY)",
     "rating": 71.7,
     "record": "3-9-2",
     "division": "10U",
@@ -980,14 +483,14 @@
     "state": "NY"
   },
   {
-    "name": "ew Hartford Spartans (Knight) 10U B (NY)",
+    "name": "Hartford Spartans (Knight) 10U B (NY)",
     "rating": 71.5,
     "record": "6-1-0",
     "division": "10U",
     "state": "NY"
   },
   {
-    "name": "iagara Jr Cataracts 10U AA (NY)",
+    "name": "Niagara Jr Cataracts 10U AA (NY)",
     "rating": 71.3,
     "record": "2-4-0",
     "division": "10U",
@@ -1015,7 +518,7 @@
     "state": "NY"
   },
   {
-    "name": "est Point Jr Black Knights 10U A1 (NY)",
+    "name": "West Point Jr Black Knights 10U A1 (NY)",
     "rating": 71,
     "record": "4-4-1",
     "division": "10U",
@@ -1064,7 +567,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 10U B (NY)",
+    "name": "York Aviators 10U B (NY)",
     "rating": 70.3,
     "record": "3-1-1",
     "division": "10U",
@@ -1078,7 +581,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Hockey Club 10U Girls (NY)",
+    "name": "York City Hockey Club 10U Girls (NY)",
     "rating": 70.1,
     "record": "4-2-0",
     "division": "10U",
@@ -1134,14 +637,14 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Mauro) 10U B (NY)",
+    "name": "North Park (Mauro) 10U B (NY)",
     "rating": 69.4,
     "record": "2-10-1",
     "division": "10U",
     "state": "NY"
   },
   {
-    "name": "heatfield Blades 9U AA (NY)",
+    "name": "Wheatfield Blades 9U AA (NY)",
     "rating": 69.2,
     "record": "2-8-0",
     "division": "10U",
@@ -1155,7 +658,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Lewis) 9U A1 (NY)",
+    "name": "North Park (Lewis) 9U A1 (NY)",
     "rating": 69,
     "record": "0-13-1",
     "division": "10U",
@@ -1169,7 +672,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 10U B (NY)",
+    "name": "Westchester Vipers 10U B (NY)",
     "rating": 68.9,
     "record": "10-5-0",
     "division": "10U",
@@ -1183,7 +686,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Palonis) 10U B (NY)",
+    "name": "North Park (Palonis) 10U B (NY)",
     "rating": 68.4,
     "record": "7-7-1",
     "division": "10U",
@@ -1211,7 +714,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Islanders 10U Girls (NY)",
+    "name": "York Islanders 10U Girls (NY)",
     "rating": 67.9,
     "record": "6-11-1",
     "division": "10U",
@@ -1288,7 +791,7 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 10U B (NY)",
+    "name": "White Plains Plainsmen 10U B (NY)",
     "rating": 64.8,
     "record": "0-7-0",
     "division": "10U",
@@ -1358,7 +861,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Blue) 10U B1 (NY)",
+    "name": "North Park (Blue) 10U B1 (NY)",
     "rating": 59.3,
     "record": "0-7-0",
     "division": "10U",
@@ -1393,14 +896,14 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Hockey Club 12U AAA (NY)",
+    "name": "York City Hockey Club 12U AAA (NY)",
     "rating": 92.71,
     "record": "11-8-1",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 12U AAA (NY)",
+    "name": "NY Dynamo 12U AAA (NY)",
     "rating": 92.06,
     "record": "14-10-1",
     "division": "12U",
@@ -1477,14 +980,14 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Gold) 11U AA (NY)",
+    "name": "West Seneca Wings (Gold) 11U AA (NY)",
     "rating": 88.52,
     "record": "12-9-2",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "assau County Lions 12U AA (NY)",
+    "name": "Nassau County Lions 12U AA (NY)",
     "rating": 88.22,
     "record": "11-3-1",
     "division": "12U",
@@ -1498,7 +1001,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (TB) 12U AA (NY)",
+    "name": "West Seneca Wings (TB) 12U AA (NY)",
     "rating": 87.83,
     "record": "10-7-4",
     "division": "12U",
@@ -1526,14 +1029,14 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 12U AA (NY)",
+    "name": "York City Cyclones 12U AA (NY)",
     "rating": 86.95,
     "record": "8-6-0",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 11U AAA (NY)",
+    "name": "NY Dynamo 11U AAA (NY)",
     "rating": 86.83,
     "record": "16-10-0",
     "division": "12U",
@@ -1589,7 +1092,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Hockey Club 11U AAA (NY)",
+    "name": "York City Hockey Club 11U AAA (NY)",
     "rating": 86.02,
     "record": "12-5-3",
     "division": "12U",
@@ -1610,14 +1113,14 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 12U AA (NY)",
+    "name": "Westchester Vipers 12U AA (NY)",
     "rating": 85.82,
     "record": "12-3-1",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "estchester Express 12U AAA (NY)",
+    "name": "Westchester Express 12U AAA (NY)",
     "rating": 85.3,
     "record": "7-12-1",
     "division": "12U",
@@ -1652,7 +1155,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 12U AA (NY)",
+    "name": "York Aviators 12U AA (NY)",
     "rating": 84.87,
     "record": "11-6-0",
     "division": "12U",
@@ -1666,7 +1169,7 @@
     "state": "NY"
   },
   {
-    "name": "heatfield Blades 11U AA (NY)",
+    "name": "Wheatfield Blades 11U AA (NY)",
     "rating": 84.81,
     "record": "7-7-3",
     "division": "12U",
@@ -1680,7 +1183,7 @@
     "state": "NY"
   },
   {
-    "name": "ew Hartford Spartans 12U AA (NY)",
+    "name": "Hartford Spartans 12U AA (NY)",
     "rating": 84.53,
     "record": "11-2-0",
     "division": "12U",
@@ -1736,7 +1239,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express (Elite) 12U AA (NY)",
+    "name": "Westchester Express (Elite) 12U AA (NY)",
     "rating": 83.86,
     "record": "14-13-2",
     "division": "12U",
@@ -1757,7 +1260,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Cataracts (TB) 12U AA (NY)",
+    "name": "Niagara Jr Cataracts (TB) 12U AA (NY)",
     "rating": 83.84,
     "record": "9-11-2",
     "division": "12U",
@@ -1785,7 +1288,7 @@
     "state": "NY"
   },
   {
-    "name": "heatfield Blades 12U AA (NY)",
+    "name": "Wheatfield Blades 12U AA (NY)",
     "rating": 83.2,
     "record": "7-6-2",
     "division": "12U",
@@ -1820,7 +1323,7 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 12U A (NY)",
+    "name": "NY Dynamo 12U A (NY)",
     "rating": 82.55,
     "record": "4-8-2",
     "division": "12U",
@@ -1904,7 +1407,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 12U A (NY)",
+    "name": "York City Cyclones 12U A (NY)",
     "rating": 81.33,
     "record": "10-4-1",
     "division": "12U",
@@ -1932,7 +1435,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Herzog) 12U AA (NY)",
+    "name": "North Park (Herzog) 12U AA (NY)",
     "rating": 80.93,
     "record": "5-11-0",
     "division": "12U",
@@ -1946,7 +1449,7 @@
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast (TB) 12U A (NY)",
+    "name": "East Aurora Beast (TB) 12U A (NY)",
     "rating": 80.88,
     "record": "3-5-0",
     "division": "12U",
@@ -1995,7 +1498,7 @@
     "state": "NY"
   },
   {
-    "name": "hitestown Wolfpack 12U A (NY)",
+    "name": "Whitestown Wolfpack 12U A (NY)",
     "rating": 80.09,
     "record": "5-1-1",
     "division": "12U",
@@ -2030,7 +1533,7 @@
     "state": "NY"
   },
   {
-    "name": "assau County Lions 11U A (NY)",
+    "name": "Nassau County Lions 11U A (NY)",
     "rating": 79.29,
     "record": "13-5-0",
     "division": "12U",
@@ -2079,7 +1582,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express (Select) 11U A (NY)",
+    "name": "Westchester Express (Select) 11U A (NY)",
     "rating": 78.43,
     "record": "11-7-0",
     "division": "12U",
@@ -2093,7 +1596,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Blue) 11U AA (NY)",
+    "name": "West Seneca Wings (Blue) 11U AA (NY)",
     "rating": 78.34,
     "record": "7-7-5",
     "division": "12U",
@@ -2142,7 +1645,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 12U A (NY)",
+    "name": "York Aviators 12U A (NY)",
     "rating": 77.33,
     "record": "5-3-1",
     "division": "12U",
@@ -2156,7 +1659,7 @@
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast 11U AA (NY)",
+    "name": "East Aurora Beast 11U AA (NY)",
     "rating": 77.03,
     "record": "4-5-1",
     "division": "12U",
@@ -2177,7 +1680,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (NTB) 12U AA (NY)",
+    "name": "West Seneca Wings (NTB) 12U AA (NY)",
     "rating": 76.94,
     "record": "3-12-0",
     "division": "12U",
@@ -2205,7 +1708,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles (Maslona) 11U AA (NY)",
+    "name": "Niagara Jr Purple Eagles (Maslona) 11U AA (NY)",
     "rating": 76.74,
     "record": "4-6-1",
     "division": "12U",
@@ -2226,14 +1729,14 @@
     "state": "NY"
   },
   {
-    "name": "hitestown Wolfpack 12U B (NY)",
+    "name": "Whitestown Wolfpack 12U B (NY)",
     "rating": 76.65,
     "record": "5-3-1",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "orth Park (Kucera) 11U A (NY)",
+    "name": "North Park (Kucera) 11U A (NY)",
     "rating": 76.39,
     "record": "7-6-1",
     "division": "12U",
@@ -2247,7 +1750,7 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 11U AA (NY)",
+    "name": "NY Dynamo 11U AA (NY)",
     "rating": 76.21,
     "record": "0-8-0",
     "division": "12U",
@@ -2268,7 +1771,7 @@
     "state": "NY"
   },
   {
-    "name": "ebster Cyclones 11U AA (NY)",
+    "name": "Webster Cyclones 11U AA (NY)",
     "rating": 76,
     "record": "5-5-1",
     "division": "12U",
@@ -2317,7 +1820,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Pala) 12U A1 (NY)",
+    "name": "North Park (Pala) 12U A1 (NY)",
     "rating": 75.36,
     "record": "7-8-2",
     "division": "12U",
@@ -2331,7 +1834,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles 12U AA (NY)",
+    "name": "Niagara Jr Purple Eagles 12U AA (NY)",
     "rating": 75.3,
     "record": "4-4-0",
     "division": "12U",
@@ -2345,7 +1848,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Cataracts (NTB) 12U AA (NY)",
+    "name": "Niagara Jr Cataracts (NTB) 12U AA (NY)",
     "rating": 75.27,
     "record": "6-5-0",
     "division": "12U",
@@ -2366,7 +1869,7 @@
     "state": "NY"
   },
   {
-    "name": "est Point Jr Black Knights 12U A1 (NY)",
+    "name": "West Point Jr Black Knights 12U A1 (NY)",
     "rating": 75.08,
     "record": "8-2-0",
     "division": "12U",
@@ -2401,14 +1904,14 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 12U A (NY)",
+    "name": "White Plains Plainsmen 12U A (NY)",
     "rating": 74.43,
     "record": "5-4-0",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 12U A1 (NY)",
+    "name": "York City Cyclones 12U A1 (NY)",
     "rating": 74.36,
     "record": "4-5-2",
     "division": "12U",
@@ -2464,7 +1967,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles (Guzzetta) 11U AA (NY)",
+    "name": "Niagara Jr Purple Eagles (Guzzetta) 11U AA (NY)",
     "rating": 73.37,
     "record": "6-6-0",
     "division": "12U",
@@ -2590,7 +2093,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 12U B (NY)",
+    "name": "York Aviators 12U B (NY)",
     "rating": 71.27,
     "record": "7-4-0",
     "division": "12U",
@@ -2604,7 +2107,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (Green) 12U A1 (NY)",
+    "name": "North Park (Green) 12U A1 (NY)",
     "rating": 71.09,
     "record": "7-7-1",
     "division": "12U",
@@ -2639,7 +2142,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 12U A1 (NY)",
+    "name": "Westchester Vipers 12U A1 (NY)",
     "rating": 70.3,
     "record": "6-9-0",
     "division": "12U",
@@ -2695,7 +2198,7 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 12U B (NY)",
+    "name": "White Plains Plainsmen 12U B (NY)",
     "rating": 68.82,
     "record": "4-2-0",
     "division": "12U",
@@ -2709,14 +2212,14 @@
     "state": "NY"
   },
   {
-    "name": "orth Park (White) 12U B (NY)",
+    "name": "North Park (White) 12U B (NY)",
     "rating": 68.49,
     "record": "6-5-1",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "ew Rochelle Lightning 12U B (NY)",
+    "name": "Rochelle Lightning 12U B (NY)",
     "rating": 68.14,
     "record": "2-11-1",
     "division": "12U",
@@ -2758,14 +2261,14 @@
     "state": "NY"
   },
   {
-    "name": "ew Hartford Spartans 12U C (NY)",
+    "name": "Hartford Spartans 12U C (NY)",
     "rating": 66.58,
     "record": "3-6-1",
     "division": "12U",
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 12U B (NY)",
+    "name": "Westchester Vipers 12U B (NY)",
     "rating": 65.83,
     "record": "0-9-0",
     "division": "12U",
@@ -2821,7 +2324,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Hockey Club 14U AAA (NY)",
+    "name": "York City Hockey Club 14U AAA (NY)",
     "rating": 90.28,
     "record": "20-8-0",
     "division": "14U",
@@ -2842,7 +2345,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings 14U AA (NY)",
+    "name": "West Seneca Wings 14U AA (NY)",
     "rating": 89.16,
     "record": "16-3-2",
     "division": "14U",
@@ -2870,14 +2373,14 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 14U AAA (NY)",
+    "name": "NY Dynamo 14U AAA (NY)",
     "rating": 88.52,
     "record": "7-10-0",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "assau County Lions 14U AA (NY)",
+    "name": "Nassau County Lions 14U AA (NY)",
     "rating": 88.49,
     "record": "20-1-2",
     "division": "14U",
@@ -2940,7 +2443,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express (South) 14U AAA (NY)",
+    "name": "Westchester Express (South) 14U AAA (NY)",
     "rating": 86.9,
     "record": "7-7-5",
     "division": "14U",
@@ -2996,14 +2499,14 @@
     "state": "NY"
   },
   {
-    "name": "heatfield Blades (Gold) 14U AA (NY)",
+    "name": "Wheatfield Blades (Gold) 14U AA (NY)",
     "rating": 85.61,
     "record": "8-6-1",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "estchester Express (Elite) 13U AAA (NY)",
+    "name": "Westchester Express (Elite) 13U AAA (NY)",
     "rating": 85.17,
     "record": "8-15-6",
     "division": "14U",
@@ -3052,7 +2555,7 @@
     "state": "NY"
   },
   {
-    "name": "ew Hartford Spartans 14U AA (NY)",
+    "name": "Hartford Spartans 14U AA (NY)",
     "rating": 83.85,
     "record": "12-3-2",
     "division": "14U",
@@ -3101,7 +2604,7 @@
     "state": "NY"
   },
   {
-    "name": "ebster Cyclones 14U AA (NY)",
+    "name": "Webster Cyclones 14U AA (NY)",
     "rating": 83.28,
     "record": "8-6-1",
     "division": "14U",
@@ -3129,28 +2632,28 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 13U AAA (NY)",
+    "name": "NY Dynamo 13U AAA (NY)",
     "rating": 82.94,
     "record": "8-8-3",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "ew York City Hockey Club 13U AAA (NY)",
+    "name": "York City Hockey Club 13U AAA (NY)",
     "rating": 82.89,
     "record": "9-11-3",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "ebster Cyclones 13U AA (NY)",
+    "name": "Webster Cyclones 13U AA (NY)",
     "rating": 82.7,
     "record": "14-10-1",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles 13U AA (NY)",
+    "name": "Niagara Jr Purple Eagles 13U AA (NY)",
     "rating": 82.69,
     "record": "8-10-1",
     "division": "14U",
@@ -3171,7 +2674,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 14U AA (NY)",
+    "name": "York Aviators 14U AA (NY)",
     "rating": 82.45,
     "record": "11-6-2",
     "division": "14U",
@@ -3192,7 +2695,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express 14U AA (NY)",
+    "name": "Westchester Express 14U AA (NY)",
     "rating": 82.11,
     "record": "9-18-2",
     "division": "14U",
@@ -3234,7 +2737,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express (Select) 13U AA (NY)",
+    "name": "Westchester Express (Select) 13U AA (NY)",
     "rating": 81.49,
     "record": "8-3-1",
     "division": "14U",
@@ -3255,21 +2758,21 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 14U A (NY)",
+    "name": "White Plains Plainsmen 14U A (NY)",
     "rating": 81.24,
     "record": "8-1-0",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles (TB) 14U AA (NY)",
+    "name": "Niagara Jr Purple Eagles (TB) 14U AA (NY)",
     "rating": 81.02,
     "record": "3-11-0",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast (TB) 14U A (NY)",
+    "name": "East Aurora Beast (TB) 14U A (NY)",
     "rating": 80.98,
     "record": "2-2-1",
     "division": "14U",
@@ -3290,7 +2793,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Gold) 13U AA (NY)",
+    "name": "West Seneca Wings (Gold) 13U AA (NY)",
     "rating": 80.77,
     "record": "7-5-2",
     "division": "14U",
@@ -3318,7 +2821,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 14U AA (NY)",
+    "name": "York City Cyclones 14U AA (NY)",
     "rating": 80.26,
     "record": "6-6-0",
     "division": "14U",
@@ -3430,7 +2933,7 @@
     "state": "NY"
   },
   {
-    "name": "assau County Lions 13U AA (NY)",
+    "name": "Nassau County Lions 13U AA (NY)",
     "rating": 78.55,
     "record": "6-9-0",
     "division": "14U",
@@ -3479,7 +2982,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park 14U AA (NY)",
+    "name": "North Park 14U AA (NY)",
     "rating": 78.11,
     "record": "1-13-2",
     "division": "14U",
@@ -3535,7 +3038,7 @@
     "state": "NY"
   },
   {
-    "name": "heatfield Blades (Blue) 14U AA (NY)",
+    "name": "Wheatfield Blades (Blue) 14U AA (NY)",
     "rating": 77.66,
     "record": "1-7-1",
     "division": "14U",
@@ -3549,7 +3052,7 @@
     "state": "NY"
   },
   {
-    "name": "heatfield Blades 13U AA (NY)",
+    "name": "Wheatfield Blades 13U AA (NY)",
     "rating": 77.43,
     "record": "3-2-0",
     "division": "14U",
@@ -3577,7 +3080,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 14U AA (NY)",
+    "name": "Westchester Vipers 14U AA (NY)",
     "rating": 77.21,
     "record": "2-8-0",
     "division": "14U",
@@ -3626,7 +3129,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 14U A (NY)",
+    "name": "York Aviators 14U A (NY)",
     "rating": 76.02,
     "record": "4-7-0",
     "division": "14U",
@@ -3661,7 +3164,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Blue) 13U AA (NY)",
+    "name": "West Seneca Wings (Blue) 13U AA (NY)",
     "rating": 75.77,
     "record": "6-7-0",
     "division": "14U",
@@ -3689,7 +3192,7 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 14U A (NY)",
+    "name": "NY Dynamo 14U A (NY)",
     "rating": 75.27,
     "record": "4-7-0",
     "division": "14U",
@@ -3703,7 +3206,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles (NTB) 14U AA (NY)",
+    "name": "Niagara Jr Purple Eagles (NTB) 14U AA (NY)",
     "rating": 74.52,
     "record": "9-6-0",
     "division": "14U",
@@ -3724,7 +3227,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park 13U A (NY)",
+    "name": "North Park 13U A (NY)",
     "rating": 73.87,
     "record": "5-9-0",
     "division": "14U",
@@ -3738,7 +3241,7 @@
     "state": "NY"
   },
   {
-    "name": "hitestown Wolfpack 14U A (NY)",
+    "name": "Whitestown Wolfpack 14U A (NY)",
     "rating": 73.8,
     "record": "7-11-0",
     "division": "14U",
@@ -3766,7 +3269,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Cataracts 14U AA (NY)",
+    "name": "Niagara Jr Cataracts 14U AA (NY)",
     "rating": 73.37,
     "record": "6-11-0",
     "division": "14U",
@@ -3829,7 +3332,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park 14U A1 (NY)",
+    "name": "North Park 14U A1 (NY)",
     "rating": 71.79,
     "record": "5-8-1",
     "division": "14U",
@@ -3857,14 +3360,14 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 14U A1 (NY)",
+    "name": "White Plains Plainsmen 14U A1 (NY)",
     "rating": 71.44,
     "record": "5-6-1",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 14U A (NY)",
+    "name": "York City Cyclones 14U A (NY)",
     "rating": 71.2,
     "record": "0-10-0",
     "division": "14U",
@@ -3948,7 +3451,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Aviators 14U B (NY)",
+    "name": "York Aviators 14U B (NY)",
     "rating": 69.52,
     "record": "2-2-1",
     "division": "14U",
@@ -3976,7 +3479,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 14U B (NY)",
+    "name": "Westchester Vipers 14U B (NY)",
     "rating": 66.74,
     "record": "1-8-0",
     "division": "14U",
@@ -3990,14 +3493,14 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 14U B (NY)",
+    "name": "White Plains Plainsmen 14U B (NY)",
     "rating": 65.39,
     "record": "2-6-1",
     "division": "14U",
     "state": "NY"
   },
   {
-    "name": "orth Park 14U B (NY)",
+    "name": "North Park 14U B (NY)",
     "rating": 64.45,
     "record": "0-7-0",
     "division": "14U",
@@ -4025,14 +3528,14 @@
     "state": "NY"
   },
   {
-    "name": "otre Dame Hockey Academy 16U AAA (NY)",
+    "name": "Notre Dame Hockey Academy 16U AAA (NY)",
     "rating": 92.36,
     "record": "13-10-1",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "estchester Express 16U AAA (NY)",
+    "name": "Westchester Express 16U AAA (NY)",
     "rating": 92.27,
     "record": "12-11-1",
     "division": "16U",
@@ -4046,7 +3549,7 @@
     "state": "NY"
   },
   {
-    "name": "otre Dame Hockey Academy 15U AAA (NY)",
+    "name": "Notre Dame Hockey Academy 15U AAA (NY)",
     "rating": 91.58,
     "record": "16-7-2",
     "division": "16U",
@@ -4074,7 +3577,7 @@
     "state": "NY"
   },
   {
-    "name": "orthwood School 16U AAA (NY)",
+    "name": "Northwood School 16U AAA (NY)",
     "rating": 89.84,
     "record": "6-7-0",
     "division": "16U",
@@ -4109,7 +3612,7 @@
     "state": "NY"
   },
   {
-    "name": "ichols School 16U AAA (NY)",
+    "name": "Nichols School 16U AAA (NY)",
     "rating": 88.53,
     "record": "13-11-0",
     "division": "16U",
@@ -4123,7 +3626,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (TB) 16U AA (NY)",
+    "name": "West Seneca Wings (TB) 16U AA (NY)",
     "rating": 87.85,
     "record": "18-6-0",
     "division": "16U",
@@ -4172,14 +3675,14 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 15U AAA (NY)",
+    "name": "NY Dynamo 15U AAA (NY)",
     "rating": 86.73,
     "record": "9-8-2",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "lmira Jr Aviators Academy 16U AAA (NY)",
+    "name": "Elmira Jr Aviators Academy 16U AAA (NY)",
     "rating": 86.45,
     "record": "7-16-0",
     "division": "16U",
@@ -4207,21 +3710,21 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express (South) 16U AAA (NY)",
+    "name": "Westchester Express (South) 16U AAA (NY)",
     "rating": 85.72,
     "record": "4-8-1",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "estchester Express 15U AAA (NY)",
+    "name": "Westchester Express 15U AAA (NY)",
     "rating": 85.69,
     "record": "14-10-3",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "ew Hartford Spartans 16U AA (NY)",
+    "name": "Hartford Spartans 16U AA (NY)",
     "rating": 85.64,
     "record": "17-1-0",
     "division": "16U",
@@ -4249,7 +3752,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Gold) 15U AA (NY)",
+    "name": "West Seneca Wings (Gold) 15U AA (NY)",
     "rating": 85.01,
     "record": "9-9-1",
     "division": "16U",
@@ -4305,14 +3808,14 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Hockey Club 15U AAA (NY)",
+    "name": "York City Hockey Club 15U AAA (NY)",
     "rating": 84.03,
     "record": "7-11-0",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "heatfield Blades (Gold) 16U AA (NY)",
+    "name": "Wheatfield Blades (Gold) 16U AA (NY)",
     "rating": 83.97,
     "record": "14-10-3",
     "division": "16U",
@@ -4347,7 +3850,7 @@
     "state": "NY"
   },
   {
-    "name": "assau County Lions 16U AA (NY)",
+    "name": "Nassau County Lions 16U AA (NY)",
     "rating": 82.94,
     "record": "9-11-1",
     "division": "16U",
@@ -4389,7 +3892,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (NTB) 16U AA (NY)",
+    "name": "West Seneca Wings (NTB) 16U AA (NY)",
     "rating": 82.36,
     "record": "15-3-1",
     "division": "16U",
@@ -4438,7 +3941,7 @@
     "state": "NY"
   },
   {
-    "name": "assau County Lions 15U AA (NY)",
+    "name": "Nassau County Lions 15U AA (NY)",
     "rating": 81.57,
     "record": "8-7-1",
     "division": "16U",
@@ -4459,7 +3962,7 @@
     "state": "NY"
   },
   {
-    "name": "ebster Cyclones (Monks) 16U AA (NY)",
+    "name": "Webster Cyclones (Monks) 16U AA (NY)",
     "rating": 81.39,
     "record": "8-6-2",
     "division": "16U",
@@ -4508,7 +4011,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 15U AA (NY)",
+    "name": "Westchester Vipers 15U AA (NY)",
     "rating": 80.75,
     "record": "7-7-2",
     "division": "16U",
@@ -4543,7 +4046,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Express (South) 15U AA (NY)",
+    "name": "Westchester Express (South) 15U AA (NY)",
     "rating": 80.51,
     "record": "2-16-1",
     "division": "16U",
@@ -4585,7 +4088,7 @@
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast 16U A (NY)",
+    "name": "East Aurora Beast 16U A (NY)",
     "rating": 79.79,
     "record": "5-9-0",
     "division": "16U",
@@ -4599,7 +4102,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 16U AA (NY)",
+    "name": "York City Cyclones 16U AA (NY)",
     "rating": 79.51,
     "record": "8-4-2",
     "division": "16U",
@@ -4641,14 +4144,14 @@
     "state": "NY"
   },
   {
-    "name": "ew York Rams 16U AA (NY)",
+    "name": "York Rams 16U AA (NY)",
     "rating": 79.17,
     "record": "1-12-0",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings (Blue) 15U AA (NY)",
+    "name": "West Seneca Wings (Blue) 15U AA (NY)",
     "rating": 79.07,
     "record": "6-10-2",
     "division": "16U",
@@ -4662,7 +4165,7 @@
     "state": "NY"
   },
   {
-    "name": "est Point Jr Black Knights (Major) 16U A (NY)",
+    "name": "West Point Jr Black Knights (Major) 16U A (NY)",
     "rating": 78.99,
     "record": "10-0-1",
     "division": "16U",
@@ -4690,14 +4193,14 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 16U A (NY)",
+    "name": "White Plains Plainsmen 16U A (NY)",
     "rating": 78.72,
     "record": "6-9-4",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "heatfield Blades 15U AA (NY)",
+    "name": "Wheatfield Blades 15U AA (NY)",
     "rating": 78.7,
     "record": "1-16-0",
     "division": "16U",
@@ -4781,7 +4284,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park 16U AA (NY)",
+    "name": "North Park 16U AA (NY)",
     "rating": 76.7,
     "record": "6-9-1",
     "division": "16U",
@@ -4865,7 +4368,7 @@
     "state": "NY"
   },
   {
-    "name": "ebster Cyclones (Mixed) 16U A (NY)",
+    "name": "Webster Cyclones (Mixed) 16U A (NY)",
     "rating": 75.34,
     "record": "5-5-0",
     "division": "16U",
@@ -4914,7 +4417,7 @@
     "state": "NY"
   },
   {
-    "name": "ew York Rams (Blue) 16U A (NY)",
+    "name": "York Rams (Blue) 16U A (NY)",
     "rating": 74.07,
     "record": "5-8-2",
     "division": "16U",
@@ -4935,7 +4438,7 @@
     "state": "NY"
   },
   {
-    "name": "hitestown Wolfpack 16U A (NY)",
+    "name": "Whitestown Wolfpack 16U A (NY)",
     "rating": 73.15,
     "record": "1-5-0",
     "division": "16U",
@@ -4970,21 +4473,21 @@
     "state": "NY"
   },
   {
-    "name": "est Point Jr Black Knights (Minor) 16U A (NY)",
+    "name": "West Point Jr Black Knights (Minor) 16U A (NY)",
     "rating": 71.72,
     "record": "1-5-1",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "ew York Rams (Orange) 16U A (NY)",
+    "name": "York Rams (Orange) 16U A (NY)",
     "rating": 71.59,
     "record": "1-7-0",
     "division": "16U",
     "state": "NY"
   },
   {
-    "name": "heatfield Blades (Blue) 16U AA (NY)",
+    "name": "Wheatfield Blades (Blue) 16U AA (NY)",
     "rating": 71.12,
     "record": "0-12-0",
     "division": "16U",
@@ -4998,7 +4501,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park 16U A (NY)",
+    "name": "North Park 16U A (NY)",
     "rating": 70.9,
     "record": "0-13-0",
     "division": "16U",
@@ -5012,7 +4515,7 @@
     "state": "NY"
   },
   {
-    "name": "orthwood School 18U Prep (NY)",
+    "name": "Northwood School 18U Prep (NY)",
     "rating": 95.86,
     "record": "9-5-0",
     "division": "18U",
@@ -5033,7 +4536,7 @@
     "state": "NY"
   },
   {
-    "name": "lmira Jr Aviators Academy 18U AAA (NY)",
+    "name": "Elmira Jr Aviators Academy 18U AAA (NY)",
     "rating": 93.44,
     "record": "14-9-0",
     "division": "18U",
@@ -5089,14 +4592,14 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Purple Eagles 18U AA (NY)",
+    "name": "Niagara Jr Purple Eagles 18U AA (NY)",
     "rating": 90.76,
     "record": "9-6-5",
     "division": "18U",
     "state": "NY"
   },
   {
-    "name": "orthwood School (Varsity) 18U AAA (NY)",
+    "name": "Northwood School (Varsity) 18U AAA (NY)",
     "rating": 89.76,
     "record": "4-2-0",
     "division": "18U",
@@ -5110,7 +4613,7 @@
     "state": "NY"
   },
   {
-    "name": "Y Dynamo 18U AAA (NY)",
+    "name": "NY Dynamo 18U AAA (NY)",
     "rating": 89.62,
     "record": "5-12-1",
     "division": "18U",
@@ -5124,7 +4627,7 @@
     "state": "NY"
   },
   {
-    "name": "assau County Lions 18U AA (NY)",
+    "name": "Nassau County Lions 18U AA (NY)",
     "rating": 88.82,
     "record": "12-4-2",
     "division": "18U",
@@ -5215,7 +4718,7 @@
     "state": "NY"
   },
   {
-    "name": "orth Park 18U AA (NY)",
+    "name": "North Park 18U AA (NY)",
     "rating": 84.73,
     "record": "6-9-1",
     "division": "18U",
@@ -5292,14 +4795,14 @@
     "state": "NY"
   },
   {
-    "name": "heatfield Blades 18U AA (NY)",
+    "name": "Wheatfield Blades 18U AA (NY)",
     "rating": 83,
     "record": "8-9-4",
     "division": "18U",
     "state": "NY"
   },
   {
-    "name": "ast Aurora Beast 18U A (NY)",
+    "name": "East Aurora Beast 18U A (NY)",
     "rating": 82.99,
     "record": "16-3-2",
     "division": "18U",
@@ -5320,14 +4823,14 @@
     "state": "NY"
   },
   {
-    "name": "hite Plains Plainsmen 18U A (NY)",
+    "name": "White Plains Plainsmen 18U A (NY)",
     "rating": 82.72,
     "record": "10-4-0",
     "division": "18U",
     "state": "NY"
   },
   {
-    "name": "ew York City Cyclones 18U A (NY)",
+    "name": "York City Cyclones 18U A (NY)",
     "rating": 82.67,
     "record": "6-4-0",
     "division": "18U",
@@ -5404,7 +4907,7 @@
     "state": "NY"
   },
   {
-    "name": "est Seneca Wings 18U AA (NY)",
+    "name": "West Seneca Wings 18U AA (NY)",
     "rating": 79.41,
     "record": "3-14-0",
     "division": "18U",
@@ -5432,7 +4935,7 @@
     "state": "NY"
   },
   {
-    "name": "iagara Jr Cataracts 18U AA (NY)",
+    "name": "Niagara Jr Cataracts 18U AA (NY)",
     "rating": 79.01,
     "record": "6-9-3",
     "division": "18U",
@@ -5474,7 +4977,7 @@
     "state": "NY"
   },
   {
-    "name": "estchester Vipers 18U A (NY)",
+    "name": "Westchester Vipers 18U A (NY)",
     "rating": 75.16,
     "record": "1-5-0",
     "division": "18U",
