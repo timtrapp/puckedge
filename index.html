@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>PuckEdge.app - Independent Youth Hockey Scheduling & Parity Suite</title>
+    <title>PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/timtrapp/puckedge/main/public/puckedge-logo.png" />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/timtrapp/puckedge/main/public/puckedge-logo.png" />
     <meta name="description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
-    <meta property="og:title" content="PuckEdge.app - Youth Hockey Parity Suite" />
+    <meta property="og:title" content="PuckEdge.app - Youth Hockey Parity Tool" />
     <meta property="og:description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
     
     <!-- FontAwesome Icons CDN -->
@@ -62,21 +64,16 @@
         
         <!-- Left: Brand & Subtitle -->
         <div class="flex flex-col">
-          <div class="flex items-center gap-2.5">
-            <!-- Puck Icon in Apple Blue -->
-            <div class="w-8 h-8 rounded-xl bg-[#007AFF] flex items-center justify-center text-white shadow-sm shrink-0">
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                <ellipse cx="12" cy="14" rx="8" ry="4" opacity="0.3" />
-                <ellipse cx="12" cy="10" rx="8" ry="4" />
-                <path d="M4 10v4c0 2.21 3.58 4 8 4s8-1.79 8-4v-4" />
-              </svg>
-            </div>
-            <span class="text-xl sm:text-2xl font-bold tracking-tight text-[#1C1C1E]">
-              PuckEdge<span class="text-[#007AFF]">.app</span>
-            </span>
+          <div class="flex items-center gap-2 mb-1">
+            <img 
+              src="https://raw.githubusercontent.com/timtrapp/puckedge/main/public/puckedge-logo.png" 
+              alt="PuckEdge.app" 
+              loading="eager"
+              class="h-10 md:h-11 w-auto object-contain"
+            />
           </div>
-          <span class="text-[11px] text-[#8E8E93] font-normal tracking-tight mt-0.5">
-            Independent Youth Hockey Scheduling &amp; Parity Suite
+          <span class="text-sm text-gray-500 font-medium tracking-tight">
+            Independent Youth Hockey Scheduling &amp; Parity Tool
           </span>
         </div>
 
@@ -119,25 +116,125 @@
       <!-- ========================================== -->
       <div id="view-predictor" class="space-y-6">
 
+        <!-- DIVISION FILTER SELECTOR -->
+        <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-blue-50 text-[#007AFF] flex items-center justify-center text-sm font-bold shrink-0">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-[#1C1C1E] block">Age Division Filter</span>
+              <span class="text-[11px] text-[#8E8E93] block" id="teams-dataset-count">Loading master team directory...</span>
+            </div>
+          </div>
+          <!-- Division Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 sm:pb-0" id="division-filter-pills">
+            <button
+              type="button"
+              onclick="setDivisionFilter('ALL')"
+              id="div-filter-ALL"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap"
+            >
+              All Divisions
+            </button>
+            <button
+              type="button"
+              onclick="setDivisionFilter('10U')"
+              id="div-filter-10U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              10U
+            </button>
+            <button
+              type="button"
+              onclick="setDivisionFilter('12U')"
+              id="div-filter-12U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              12U
+            </button>
+            <button
+              type="button"
+              onclick="setDivisionFilter('14U')"
+              id="div-filter-14U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              14U
+            </button>
+            <button
+              type="button"
+              onclick="setDivisionFilter('16U')"
+              id="div-filter-16U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              16U
+            </button>
+            <button
+              type="button"
+              onclick="setDivisionFilter('18U')"
+              id="div-filter-18U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              18U
+            </button>
+          </div>
+        </div>
+
         <!-- 1ST (TOP): TEAM PROFILES & INPUTS (TEAM A & TEAM B CARDS) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <!-- TEAM A INPUT CARD -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4 relative">
             <div class="flex items-center justify-between">
               <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider">TEAM A (HOME / VISITOR)</label>
               <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-a-badge">Effective: 84.50</span>
             </div>
 
-            <!-- Team Name -->
-            <input
-              type="text"
-              id="team-a-name"
-              value="Wings"
-              oninput="onTeamInputsChanged()"
-              placeholder="Team A Name"
-              class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
-            />
+            <!-- Team Name Autocomplete / Typeahead -->
+            <div class="relative space-y-1">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="team-a-name"
+                  value="Buffalo Bisons 12U AA"
+                  oninput="handleTeamSearchInput('a')"
+                  onfocus="showTeamDropdown('a')"
+                  onclick="showTeamDropdown('a')"
+                  placeholder="Search team or type custom name..."
+                  autocomplete="off"
+                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-3.5 pr-8 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                />
+                <button
+                  type="button"
+                  id="btn-toggle-dropdown-a"
+                  onclick="toggleTeamDropdown('a')"
+                  class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs p-1 cursor-pointer"
+                  tabindex="-1"
+                >
+                  <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </button>
+              </div>
+
+              <!-- Record / Division Helper text -->
+              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[16px]">
+                <div id="team-a-record-badge" class="flex items-center gap-1.5 truncate">
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
+                    <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
+                    Ranked (NY MHR)
+                  </span>
+                  <span class="font-medium text-slate-600 truncate">18-7-3 • 12U (NY)</span>
+                </div>
+                <span class="text-slate-400 text-[10px] shrink-0">Editable rating</span>
+              </div>
+
+              <!-- Dropdown Menu -->
+              <div
+                id="team-a-dropdown"
+                class="hidden absolute left-0 right-0 top-[48px] bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-56 overflow-y-auto divide-y divide-slate-100 transition-all"
+              >
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
 
             <!-- Direct Decimal Numeric Input with Flanking Steppers -->
             <div class="space-y-1.5">
@@ -158,7 +255,7 @@
                   step="0.01"
                   inputmode="decimal"
                   id="team-a-rating"
-                  value="84.50"
+                  value="86.50"
                   onfocus="this.select(); handleRatingInputTap(this)"
                   onclick="this.select(); handleRatingInputTap(this)"
                   ontouchstart="this.select(); handleRatingInputTap(this)"
@@ -175,8 +272,56 @@
               </div>
             </div>
 
+            <!-- "Estimate by Tier" Helper Pill Buttons -->
+            <div class="space-y-1.5 pt-1 border-t border-slate-100/90">
+              <div class="flex items-center justify-between text-xs text-[#8E8E93]">
+                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fa-solid fa-chart-line text-[#007AFF] text-[10px]"></i>
+                  Estimate by Tier
+                </span>
+                <span class="text-[10px] text-slate-400">1-Tap benchmark</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <button
+                  type="button"
+                  onclick="setTierRating('a', 92.50, 'AAA / Elite')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('a', 85.00, 'Tier 2 AA')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('a', 78.50, 'Tier 2 A')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('a', 71.00, 'Tier 3 B')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('a', 64.00, 'House / Rec')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  House / Rec <span class="text-slate-400 font-normal">64.0</span>
+                </button>
+              </div>
+            </div>
+
             <!-- Situational Modifier Chips (iOS Toggle Style) -->
-            <div class="space-y-2 pt-1">
+            <div class="space-y-2 pt-1 border-t border-slate-100/90">
               <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">
                 Situational Modifiers
               </span>
@@ -210,21 +355,57 @@
           </div>
 
           <!-- TEAM B INPUT CARD -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4 relative">
             <div class="flex items-center justify-between">
               <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider">TEAM B (OPPONENT)</label>
               <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-b-badge">Effective: 84.25</span>
             </div>
 
-            <!-- Team Name -->
-            <input
-              type="text"
-              id="team-b-name"
-              value="Warriors"
-              oninput="onTeamInputsChanged()"
-              placeholder="Team B Name"
-              class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
-            />
+            <!-- Team Name Autocomplete / Typeahead -->
+            <div class="relative space-y-1">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="team-b-name"
+                  value="Warriors Hockey 12U AA"
+                  oninput="handleTeamSearchInput('b')"
+                  onfocus="showTeamDropdown('b')"
+                  onclick="showTeamDropdown('b')"
+                  placeholder="Search team or type custom name..."
+                  autocomplete="off"
+                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl pl-3.5 pr-8 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                />
+                <button
+                  type="button"
+                  id="btn-toggle-dropdown-b"
+                  onclick="toggleTeamDropdown('b')"
+                  class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs p-1 cursor-pointer"
+                  tabindex="-1"
+                >
+                  <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </button>
+              </div>
+
+              <!-- Record / Division Helper text -->
+              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[16px]">
+                <div id="team-b-record-badge" class="flex items-center gap-1.5 truncate">
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
+                    <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
+                    Ranked (NY MHR)
+                  </span>
+                  <span class="font-medium text-slate-600 truncate">14-10-3 • 12U (NY)</span>
+                </div>
+                <span class="text-slate-400 text-[10px] shrink-0">Editable rating</span>
+              </div>
+
+              <!-- Dropdown Menu -->
+              <div
+                id="team-b-dropdown"
+                class="hidden absolute left-0 right-0 top-[48px] bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-56 overflow-y-auto divide-y divide-slate-100 transition-all"
+              >
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
 
             <!-- Direct Decimal Numeric Input with Flanking Steppers -->
             <div class="space-y-1.5">
@@ -262,8 +443,56 @@
               </div>
             </div>
 
+            <!-- "Estimate by Tier" Helper Pill Buttons -->
+            <div class="space-y-1.5 pt-1 border-t border-slate-100/90">
+              <div class="flex items-center justify-between text-xs text-[#8E8E93]">
+                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fa-solid fa-chart-line text-[#FF9500] text-[10px]"></i>
+                  Estimate by Tier
+                </span>
+                <span class="text-[10px] text-slate-400">1-Tap benchmark</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <button
+                  type="button"
+                  onclick="setTierRating('b', 92.50, 'AAA / Elite')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('b', 85.00, 'Tier 2 AA')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('b', 78.50, 'Tier 2 A')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('b', 71.00, 'Tier 3 B')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="setTierRating('b', 64.00, 'House / Rec')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                >
+                  House / Rec <span class="text-slate-400 font-normal">64.0</span>
+                </button>
+              </div>
+            </div>
+
             <!-- Situational Modifier Chips (iOS Toggle Style) -->
-            <div class="space-y-2 pt-1">
+            <div class="space-y-2 pt-1 border-t border-slate-100/90">
               <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">
                 Situational Modifiers
               </span>
@@ -377,7 +606,7 @@
 
         <!-- 3RD: MATCHMAKER (DYNAMIC OPPONENT GENERATOR) -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-3.5 transition-all">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
             <div>
               <div class="flex items-center gap-2">
                 <span class="w-6 h-6 rounded-lg bg-blue-50 text-[#007AFF] flex items-center justify-center text-xs font-bold shrink-0">
@@ -386,13 +615,36 @@
                 <h3 class="text-sm font-bold text-[#1C1C1E]">Matchmaker</h3>
               </div>
               <p class="text-xs text-[#8E8E93] mt-0.5">
-                Find a realistic opponent calibrated to Team A's rating
+                Calibrated opponent scouting and tournament bracket parity guidance
               </p>
             </div>
-            <!-- Opponent Found Badge -->
-            <div id="matchmaker-status-badge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/90 self-start sm:self-center transition-all">
-              <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
-              <span id="matchmaker-status-text">Opponent Found</span>
+
+            <!-- Right: Search Mode Segmented Switcher & Opponent Found Badge -->
+            <div class="flex items-center gap-2 flex-wrap self-start sm:self-center">
+              <div class="flex items-center bg-[#F2F2F7] p-0.5 rounded-xl border border-slate-200/80 text-xs">
+                <button
+                  type="button"
+                  id="mm-mode-ny"
+                  onclick="setMatchmakerMode('ny')"
+                  class="px-2.5 py-1 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs transition-all cursor-pointer"
+                >
+                  NY Master Directory
+                </button>
+                <button
+                  type="button"
+                  id="mm-mode-oos"
+                  onclick="setMatchmakerMode('oos')"
+                  class="px-2.5 py-1 rounded-lg font-medium text-slate-500 hover:text-slate-800 transition-all cursor-pointer"
+                >
+                  Out-of-State / Tournament Target
+                </button>
+              </div>
+
+              <!-- Opponent Found Badge -->
+              <div id="matchmaker-status-badge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/90 transition-all">
+                <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
+                <span id="matchmaker-status-text">Opponent Found</span>
+              </div>
             </div>
           </div>
 
@@ -409,11 +661,11 @@
                   Confidence Booster
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-                  Target: -1.75
+                  Target: -1.5 to -2.5
                 </span>
               </div>
               <div class="text-[11px] text-emerald-700 font-medium mt-1">
-                Scouts clubs ~1.75 below Team A
+                Scouts division rivals -1.5 to -2.5 below Team A
               </div>
             </button>
 
@@ -429,11 +681,11 @@
                   Even Battle
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
-                  Target: ±0.25
+                  Target: ±0.5
                 </span>
               </div>
               <div class="text-[11px] text-[#007AFF] font-medium mt-1">
-                Scouts true parity twin clubs
+                Scouts true parity twin clubs in same division
               </div>
             </button>
 
@@ -449,13 +701,18 @@
                   Challenge My Team
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
-                  Target: +1.75
+                  Target: +1.5 to +2.5
                 </span>
               </div>
               <div class="text-[11px] text-[#FF9500] font-medium mt-1">
-                Scouts tier-up stretch opponents
+                Scouts tier-up stretch opponents in same division
               </div>
             </button>
+          </div>
+
+          <!-- DYNAMIC PLANNING CARD / TARGET GUIDANCE CONTAINER -->
+          <div id="matchmaker-planning-card" class="hidden rounded-xl border border-blue-200/80 bg-[#F2F2F7]/70 p-4 space-y-3 transition-all duration-300">
+            <!-- Rendered dynamically by findMatchmakerOpponent() -->
           </div>
         </div>
 
@@ -801,27 +1058,95 @@
     <!-- JAVASCRIPT LOGIC ENGINE (100% PRESERVED MATH & STATE) -->
     <script>
       // ==========================================
+      // MASTER TEAMS DATASET (EMBEDDED FALLBACK)
+      // ==========================================
+      const FALLBACK_TEAMS = [
+        { name: "Buffalo Bisons 10U AA", rating: 86.40, record: "19-3-2", division: "10U", state: "NY" },
+        { name: "Rochester Jr. Amerks 10U AAA", rating: 88.50, record: "21-2-1", division: "10U", state: "NY" },
+        { name: "Syracuse Nationals 10U AAA", rating: 90.20, record: "24-1-0", division: "10U", state: "NY" },
+        { name: "Wheatfield Blades 10U AA", rating: 84.80, record: "15-7-2", division: "10U", state: "NY" },
+        { name: "Hamburg Hawks 10U AA", rating: 84.10, record: "14-8-3", division: "10U", state: "NY" },
+        { name: "Webster Cyclones 10U AA", rating: 83.50, record: "12-10-2", division: "10U", state: "NY" },
+        { name: "Perinton Blades 10U A", rating: 82.20, record: "11-12-1", division: "10U", state: "NY" },
+        { name: "Batavia Ramparts 10U A", rating: 80.75, record: "9-14-3", division: "10U", state: "NY" },
+        { name: "Tri-County Eagles 10U A", rating: 79.10, record: "7-16-2", division: "10U", state: "NY" },
+        { name: "Jamestown Lakers 10U B", rating: 77.30, record: "5-18-1", division: "10U", state: "NY" },
+
+        { name: "Buffalo Jr. Sabres 12U AAA", rating: 91.80, record: "22-4-1", division: "12U", state: "NY" },
+        { name: "Syracuse Nationals 12U AAA", rating: 89.90, record: "20-5-2", division: "12U", state: "NY" },
+        { name: "Rochester Jr. Amerks 12U AAA", rating: 88.20, record: "19-6-1", division: "12U", state: "NY" },
+        { name: "Buffalo Bisons 12U AA", rating: 86.50, record: "18-7-3", division: "12U", state: "NY" },
+        { name: "Rochester Monarchs 12U AA", rating: 85.20, record: "16-8-2", division: "12U", state: "NY" },
+        { name: "Wheatfield Blades 12U AA", rating: 84.50, record: "15-9-2", division: "12U", state: "NY" },
+        { name: "Warriors Hockey 12U AA", rating: 84.25, record: "14-10-3", division: "12U", state: "NY" },
+        { name: "Hamburg Hawks 12U AA", rating: 83.60, record: "13-11-2", division: "12U", state: "NY" },
+        { name: "Webster Cyclones 12U A", rating: 82.50, record: "11-13-2", division: "12U", state: "NY" },
+        { name: "Perinton Blades 12U A", rating: 81.70, record: "10-14-1", division: "12U", state: "NY" },
+        { name: "Batavia Ramparts 12U A", rating: 80.40, record: "8-16-2", division: "12U", state: "NY" },
+        { name: "Ithaca Outlaws 12U B", rating: 78.80, record: "6-17-1", division: "12U", state: "NY" },
+
+        { name: "Shattuck-St. Mary's 14U AAA", rating: 96.20, record: "28-2-1", division: "14U", state: "MN" },
+        { name: "Chicago Mission 14U AAA", rating: 95.80, record: "26-4-2", division: "14U", state: "IL" },
+        { name: "Detroit Honeybaked 14U AAA", rating: 94.60, record: "24-5-3", division: "14U", state: "MI" },
+        { name: "Boston Jr. Eagles 14U AAA", rating: 93.90, record: "23-6-2", division: "14U", state: "MA" },
+        { name: "Pittsburgh Pens Elite 14U AAA", rating: 92.40, record: "21-8-3", division: "14U", state: "PA" },
+        { name: "Buffalo Jr. Sabres 14U AAA", rating: 90.75, record: "19-7-4", division: "14U", state: "NY" },
+        { name: "Syracuse Nationals 14U AAA", rating: 89.20, record: "18-9-3", division: "14U", state: "NY" },
+        { name: "Rochester Jr. Amerks 14U AAA", rating: 87.80, record: "17-10-2", division: "14U", state: "NY" },
+        { name: "Buffalo Bisons 14U AA", rating: 86.80, record: "16-11-3", division: "14U", state: "NY" },
+        { name: "Wheatfield Blades 14U AA", rating: 84.90, record: "15-12-2", division: "14U", state: "NY" },
+        { name: "Hamburg Hawks 14U AA", rating: 83.80, record: "13-13-3", division: "14U", state: "NY" },
+        { name: "Perinton Blades 14U AA", rating: 83.25, record: "12-14-2", division: "14U", state: "NY" },
+        { name: "Batavia Ramparts 14U A", rating: 81.50, record: "10-16-1", division: "14U", state: "NY" },
+        { name: "Tri-County Eagles 14U A", rating: 79.90, record: "8-18-2", division: "14U", state: "NY" },
+        { name: "Binghamton Jr. Devils 14U B", rating: 78.40, record: "6-19-1", division: "14U", state: "NY" },
+
+        { name: "Chicago Mission 16U AAA", rating: 96.50, record: "27-3-2", division: "16U", state: "IL" },
+        { name: "Detroit Honeybaked 16U AAA", rating: 95.20, record: "25-5-2", division: "16U", state: "MI" },
+        { name: "Buffalo Jr. Sabres 16U AAA", rating: 92.10, record: "21-7-3", division: "16U", state: "NY" },
+        { name: "Rochester Jr. Amerks 16U AAA", rating: 89.60, record: "19-8-2", division: "16U", state: "NY" },
+        { name: "Syracuse Nationals 16U AAA", rating: 88.70, record: "18-9-3", division: "16U", state: "NY" },
+        { name: "Buffalo Bisons 16U AA", rating: 87.20, record: "17-10-3", division: "16U", state: "NY" },
+        { name: "Rochester Monarchs 16U AA", rating: 85.90, record: "15-11-2", division: "16U", state: "NY" },
+        { name: "Wheatfield Blades 16U AA", rating: 84.70, record: "14-12-2", division: "16U", state: "NY" },
+        { name: "Hamburg Hawks 16U AA", rating: 83.40, record: "12-14-3", division: "16U", state: "NY" },
+        { name: "Webster Cyclones 16U A", rating: 81.80, record: "10-15-2", division: "16U", state: "NY" },
+        { name: "Ithaca Outlaws 16U A", rating: 80.10, record: "8-17-1", division: "16U", state: "NY" },
+
+        { name: "Shattuck-St. Mary's 18U Prep", rating: 97.40, record: "31-2-0", division: "18U", state: "MN" },
+        { name: "Chicago Mission 18U AAA", rating: 96.10, record: "26-5-3", division: "18U", state: "IL" },
+        { name: "Buffalo Jr. Sabres 18U AAA", rating: 92.80, record: "22-8-2", division: "18U", state: "NY" },
+        { name: "Rochester Jr. Amerks 18U AAA", rating: 90.10, record: "20-9-3", division: "18U", state: "NY" },
+        { name: "Buffalo Bisons 18U AA", rating: 87.80, record: "18-11-2", division: "18U", state: "NY" },
+        { name: "Wheatfield Blades 18U AA", rating: 85.50, record: "16-12-3", division: "18U", state: "NY" },
+        { name: "Rochester Monarchs 18U AA", rating: 84.90, record: "14-13-2", division: "18U", state: "NY" },
+        { name: "Hamburg Hawks 18U AA", rating: 83.60, record: "12-15-2", division: "18U", state: "NY" },
+        { name: "Batavia Ramparts 18U A", rating: 81.20, record: "9-17-1", division: "18U", state: "NY" }
+      ];
+
+      // ==========================================
       // STATE MANAGEMENT
       // ==========================================
       const state = {
         activeTab: 'predictor',
+        selectedDivision: 'ALL',
+        matchmakerMode: 'ny',
+        teams: [...FALLBACK_TEAMS],
         teamA: {
-          name: 'Wings',
-          baseRating: 84.50,
-          modifiers: {
-            goalie: false, // -0.75
-            bench: false,  // -0.50
-            fatigue: false // -0.50
-          }
+          name: 'Buffalo Bisons 12U AA',
+          baseRating: 86.50,
+          record: '18-7-3',
+          division: '12U',
+          state: 'NY',
+          modifiers: { goalie: false, bench: false, fatigue: false }
         },
         teamB: {
-          name: 'Warriors',
+          name: 'Warriors Hockey 12U AA',
           baseRating: 84.25,
-          modifiers: {
-            goalie: false,
-            bench: false,
-            fatigue: false
-          }
+          record: '14-10-3',
+          division: '12U',
+          state: 'NY',
+          modifiers: { goalie: false, bench: false, fatigue: false }
         },
         cost: {
           driveTime: '<30m',
@@ -847,124 +1172,284 @@
       };
 
       // ==========================================
-      // TAB SWITCHING (iOS SEGMENTED CONTROL)
+      // DATA INGESTION & DIVISION FILTER
       // ==========================================
-      function switchMainTab(tabId) {
-        state.activeTab = tabId;
-        const viewPredictor = document.getElementById('view-predictor');
-        const viewBracket = document.getElementById('view-bracket');
-        const btnPredictor = document.getElementById('nav-tab-predictor');
-        const btnBracket = document.getElementById('nav-tab-bracket');
+      async function initTeamsData() {
+        state.teams = [...FALLBACK_TEAMS];
+        updateTeamsCountBadge();
+        updateTeamRecordBadges();
 
-        if (tabId === 'predictor') {
-          viewPredictor.classList.remove('hidden');
-          viewBracket.classList.add('hidden');
-          btnPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all';
-          btnBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all';
-          updatePredictor();
-        } else {
-          viewPredictor.classList.add('hidden');
-          viewBracket.classList.remove('hidden');
-          btnPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all';
-          btnBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all';
-          renderBracketView();
+        try {
+          const res = await fetch('/teams.json');
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              state.teams = data;
+              updateTeamsCountBadge();
+              updateTeamRecordBadges();
+            }
+          }
+        } catch (err) {
+          console.warn('Fallback to embedded teams directory:', err);
         }
       }
 
-      // ==========================================
-      // PREDICTOR ENGINE
-      // ==========================================
-      function getEffectiveRating(teamObj) {
-        let eff = teamObj.baseRating;
-        if (teamObj.modifiers.goalie) eff -= 0.75;
-        if (teamObj.modifiers.bench) eff -= 0.50;
-        if (teamObj.modifiers.fatigue) eff -= 0.50;
-        return parseFloat(eff.toFixed(2));
+      function updateTeamsCountBadge() {
+        const badge = document.getElementById('teams-dataset-count');
+        if (!badge) return;
+        const total = state.teams.length;
+        if (state.selectedDivision === 'ALL') {
+          badge.textContent = `${total} clubs loaded across 10U–18U divisions`;
+        } else {
+          const inDiv = state.teams.filter(t => t.division === state.selectedDivision).length;
+          badge.textContent = `${inDiv} clubs in ${state.selectedDivision} (${total} total)`;
+        }
       }
 
-      function stepRating(teamKey, delta) {
-        const teamObj = teamKey === 'a' ? state.teamA : state.teamB;
-        const input = document.getElementById(`team-${teamKey}-rating`);
-        let current = parseFloat(input.value) || teamObj.baseRating;
-        current = parseFloat((current + delta).toFixed(2));
-        input.value = current.toFixed(2);
-        teamObj.baseRating = current;
-        updatePredictor();
+      function setDivisionFilter(div) {
+        state.selectedDivision = div;
+        const divs = ['ALL', '10U', '12U', '14U', '16U', '18U'];
+        divs.forEach(d => {
+          const btn = document.getElementById(`div-filter-${d}`);
+          if (btn) {
+            if (d === div) {
+              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap';
+            } else {
+              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap';
+            }
+          }
+        });
+
+        updateTeamsCountBadge();
+
+        // Refresh dropdowns if active
+        if (!document.getElementById('team-a-dropdown')?.classList.contains('hidden')) {
+          renderTeamDropdown('a', document.getElementById('team-a-name')?.value || '');
+        }
+        if (!document.getElementById('team-b-dropdown')?.classList.contains('hidden')) {
+          renderTeamDropdown('b', document.getElementById('team-b-name')?.value || '');
+        }
       }
 
-      function toggleModifier(teamKey, modKey) {
-        const teamObj = teamKey === 'a' ? state.teamA : state.teamB;
-        teamObj.modifiers[modKey] = !teamObj.modifiers[modKey];
-        updateModifierChips();
-        updatePredictor();
+      function detectDivision(teamName) {
+        const str = (teamName || '').toUpperCase();
+        if (str.includes('10U')) return '10U';
+        if (str.includes('12U')) return '12U';
+        if (str.includes('14U')) return '14U';
+        if (str.includes('16U')) return '16U';
+        if (str.includes('18U')) return '18U';
+        return null;
       }
 
-      function updateModifierChips() {
+      function updateTeamRecordBadges() {
         ['a', 'b'].forEach(k => {
-          const team = k === 'a' ? state.teamA : state.teamB;
-          const goalieBtn = document.getElementById(`mod-${k}-goalie`);
-          const benchBtn = document.getElementById(`mod-${k}-bench`);
-          const fatigueBtn = document.getElementById(`mod-${k}-fatigue`);
+          const name = document.getElementById(`team-${k}-name`)?.value || state[`team${k.toUpperCase()}`].name;
+          const badge = document.getElementById(`team-${k}-record-badge`);
+          if (!badge) return;
 
-          setChipActive(goalieBtn, team.modifiers.goalie);
-          setChipActive(benchBtn, team.modifiers.bench);
-          setChipActive(fatigueBtn, team.modifiers.fatigue);
+          const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+          const matched = pool.find(t => t.name.toLowerCase() === name.toLowerCase())
+            || pool.find(t => t.name.toLowerCase().includes(name.toLowerCase()));
+
+          if (matched) {
+            badge.textContent = `Record: ${matched.record} • ${matched.division} (${matched.state})`;
+            badge.className = 'font-semibold text-slate-700 truncate';
+            state[`team${k.toUpperCase()}`].division = matched.division;
+            state[`team${k.toUpperCase()}`].record = matched.record;
+            state[`team${k.toUpperCase()}`].state = matched.state;
+          } else {
+            const storedRec = state[`team${k.toUpperCase()}`].record;
+            if (storedRec) {
+              badge.textContent = `Record: ${storedRec} • ${state[`team${k.toUpperCase()}`].division || 'Custom'}`;
+              badge.className = 'font-medium text-slate-600 truncate';
+            } else {
+              badge.textContent = 'Custom club • Rating index active';
+              badge.className = 'text-slate-400 truncate';
+            }
+          }
         });
       }
 
-      function setChipActive(el, active) {
-        if (!el) return;
-        if (active) {
-          el.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold border border-[#007AFF] bg-[#007AFF] text-white shadow-sm transition-all cursor-pointer';
-        } else {
-          el.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-all cursor-pointer';
+      // ==========================================
+      // SEARCHABLE AUTOCOMPLETE DROPDOWNS
+      // ==========================================
+      function showTeamDropdown(teamKey) {
+        const val = document.getElementById(`team-${teamKey}-name`)?.value || '';
+        renderTeamDropdown(teamKey, val);
+        document.getElementById(`team-${teamKey}-dropdown`)?.classList.remove('hidden');
+      }
+
+      function hideTeamDropdown(teamKey) {
+        document.getElementById(`team-${teamKey}-dropdown`)?.classList.add('hidden');
+      }
+
+      function toggleTeamDropdown(teamKey) {
+        const dd = document.getElementById(`team-${teamKey}-dropdown`);
+        if (dd) {
+          if (dd.classList.contains('hidden')) {
+            showTeamDropdown(teamKey);
+          } else {
+            hideTeamDropdown(teamKey);
+          }
         }
       }
 
-      // ==========================================
-      // MATCHMAKER OPPONENT LOOKUP DATABASE
-      // ==========================================
-      const matchmakerDatabase = [
-        { name: "Syracuse Nationals", rating: 91.20 },
-        { name: "Rochester Jr. Amerks", rating: 89.50 },
-        { name: "Buffalo Jr. Sabres", rating: 88.75 },
-        { name: "Buffalo Bisons", rating: 86.80 },
-        { name: "Rochester Monarchs", rating: 85.50 },
-        { name: "Wheatfield Blades", rating: 84.90 },
-        { name: "Warriors Hockey", rating: 84.25 },
-        { name: "Webster Cyclones", rating: 84.10 },
-        { name: "Hamburg Hawks", rating: 83.80 },
-        { name: "Perinton Blades", rating: 83.25 },
-        { name: "Batavia Ramparts", rating: 82.80 },
-        { name: "Tri-County Eagles", rating: 81.90 },
-        { name: "Ithaca Outlaws", rating: 81.10 },
-        { name: "Binghamton Jr. Devils", rating: 80.20 },
-        { name: "Jamestown Lakers", rating: 78.30 }
-      ];
+      function handleTeamSearchInput(teamKey) {
+        const val = document.getElementById(`team-${teamKey}-name`)?.value || '';
+        state[`team${teamKey.toUpperCase()}`].name = val;
+        renderTeamDropdown(teamKey, val);
+        document.getElementById(`team-${teamKey}-dropdown`)?.classList.remove('hidden');
+        updateTeamRecordBadges();
+        updatePredictor();
+      }
 
+      function renderTeamDropdown(teamKey, query) {
+        const container = document.getElementById(`team-${teamKey}-dropdown`);
+        if (!container) return;
+
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        const q = (query || '').toLowerCase().trim();
+        const activeDiv = state.selectedDivision;
+
+        let filtered = pool.filter(t => {
+          const matchDiv = (activeDiv === 'ALL' || t.division === activeDiv);
+          const matchQuery = !q || t.name.toLowerCase().includes(q) || t.state.toLowerCase().includes(q) || t.division.toLowerCase().includes(q);
+          return matchDiv && matchQuery;
+        });
+
+        // Fallback to all divisions if user typed query but zero results in current division
+        if (filtered.length === 0 && q) {
+          filtered = pool.filter(t => t.name.toLowerCase().includes(q) || t.state.toLowerCase().includes(q));
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="px-3.5 py-3 text-xs text-slate-400 text-center">
+              No matching clubs found in directory. Keep typing to use custom name.
+            </div>
+          `;
+          return;
+        }
+
+        const displayItems = filtered.slice(0, 14);
+        container.innerHTML = displayItems.map(team => {
+          const rawIdx = pool.indexOf(team);
+          return `
+            <div
+              onmousedown="selectTeamFromDropdown('${teamKey}', ${rawIdx})"
+              class="px-3.5 py-2.5 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-3 group"
+            >
+              <div class="min-w-0 flex-1">
+                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">
+                  ${team.name}
+                </div>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1.5 mt-0.5">
+                  <span class="font-medium text-slate-600">Rec: ${team.record}</span>
+                  <span class="text-slate-300">•</span>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-[10px] font-semibold text-slate-700">${team.division}</span>
+                  <span class="text-slate-400 text-[10px]">${team.state}</span>
+                </div>
+              </div>
+              <div class="shrink-0 flex items-center gap-1 text-right">
+                <span class="text-xs font-bold text-[#1C1C1E]">${team.rating.toFixed(2)}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function selectTeamFromDropdown(teamKey, teamIndex) {
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        const team = pool[teamIndex];
+        if (!team) return;
+
+        state[`team${teamKey.toUpperCase()}`].name = team.name;
+        state[`team${teamKey.toUpperCase()}`].baseRating = team.rating;
+        state[`team${teamKey.toUpperCase()}`].record = team.record;
+        state[`team${teamKey.toUpperCase()}`].division = team.division;
+        state[`team${teamKey.toUpperCase()}`].state = team.state;
+
+        const nameEl = document.getElementById(`team-${teamKey}-name`);
+        if (nameEl) nameEl.value = team.name;
+
+        const ratingEl = document.getElementById(`team-${teamKey}-rating`);
+        if (ratingEl) ratingEl.value = team.rating.toFixed(2);
+
+        hideTeamDropdown(teamKey);
+        updateTeamRecordBadges();
+        updatePredictor();
+
+        const card = nameEl?.closest('.rounded-2xl');
+        if (card) {
+          card.classList.add('ring-2', teamKey === 'a' ? 'ring-blue-300' : 'ring-amber-300');
+          setTimeout(() => {
+            card.classList.remove('ring-2', 'ring-blue-300', 'ring-amber-300');
+          }, 350);
+        }
+      }
+
+      // Close dropdowns on outside click
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#team-a-name') && !e.target.closest('#btn-toggle-dropdown-a') && !e.target.closest('#team-a-dropdown')) {
+          hideTeamDropdown('a');
+        }
+        if (!e.target.closest('#team-b-name') && !e.target.closest('#btn-toggle-dropdown-b') && !e.target.closest('#team-b-dropdown')) {
+          hideTeamDropdown('b');
+        }
+      });
+
+      // ==========================================
+      // MATCHMAKER INTEGRATION (SAME DIVISION)
+      // ==========================================
       function findMatchmakerOpponent(type) {
         const teamAName = (document.getElementById('team-a-name')?.value || state.teamA.name || '').trim().toLowerCase();
         const teamARating = parseFloat(document.getElementById('team-a-rating')?.value) || state.teamA.baseRating || 84.50;
 
-        let targetRating = teamARating;
+        // Determine target age division (from filter, Team A record, or name detection)
+        let targetDivision = (state.selectedDivision && state.selectedDivision !== 'ALL')
+          ? state.selectedDivision
+          : (state.teamA.division || detectDivision(state.teamA.name) || '12U');
+
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+
+        // Filter pool by division, matchmakerMode (NY vs Out-of-State), & exclude Team A
+        let candidates = pool.filter(t => {
+          const matchDiv = (!targetDivision || targetDivision === 'ALL' || t.division === targetDivision);
+          const notSelf = t.name.toLowerCase() !== teamAName;
+          const matchState = (state.matchmakerMode === 'oos') ? (t.state !== 'NY') : (state.matchmakerMode === 'ny' ? (t.state === 'NY') : true);
+          return matchDiv && notSelf && matchState;
+        });
+
+        // Fallback to division rivals without state filter if no specific matches found
+        if (candidates.length === 0) {
+          candidates = pool.filter(t => {
+            const matchDiv = (!targetDivision || targetDivision === 'ALL' || t.division === targetDivision);
+            return matchDiv && t.name.toLowerCase() !== teamAName;
+          });
+        }
+        if (candidates.length === 0) {
+          candidates = pool.filter(t => t.name.toLowerCase() !== teamAName);
+        }
+        if (candidates.length === 0) candidates = pool;
+
+        let idealTarget = teamARating;
         if (type === 'confidence') {
-          targetRating = teamARating - 1.75;
+          // Target: Team A rating - 1.5 to - 2.5 (center: -2.0)
+          idealTarget = teamARating - 2.00;
         } else if (type === 'even') {
-          targetRating = teamARating;
+          // Target: Team A rating ± 0.5
+          idealTarget = teamARating;
         } else if (type === 'challenge') {
-          targetRating = teamARating + 1.75;
+          // Target: Team A rating + 1.5 to + 2.5 (center: +2.0)
+          idealTarget = teamARating + 2.00;
         }
 
-        // Exclude exact name match with Team A
-        const candidates = matchmakerDatabase.filter(t => t.name.toLowerCase() !== teamAName);
-        if (candidates.length === 0) return;
-
-        // Find candidate in database closest to targetRating
+        // Find candidate in pool with rating closest to idealTarget
         let bestCandidate = candidates[0];
-        let minDiff = Math.abs(bestCandidate.rating - targetRating);
+        let minDiff = Math.abs(bestCandidate.rating - idealTarget);
 
         for (let i = 1; i < candidates.length; i++) {
-          const diff = Math.abs(candidates[i].rating - targetRating);
+          const diff = Math.abs(candidates[i].rating - idealTarget);
           if (diff < minDiff) {
             minDiff = diff;
             bestCandidate = candidates[i];
@@ -974,6 +1459,9 @@
         // Populate Team B inputs & state
         state.teamB.name = bestCandidate.name;
         state.teamB.baseRating = bestCandidate.rating;
+        state.teamB.record = bestCandidate.record;
+        state.teamB.division = bestCandidate.division;
+        state.teamB.state = bestCandidate.state;
         state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
 
         const nameEl = document.getElementById('team-b-name');
@@ -982,14 +1470,15 @@
         const ratingEl = document.getElementById('team-b-rating');
         if (ratingEl) ratingEl.value = bestCandidate.rating.toFixed(2);
 
+        updateTeamRecordBadges();
         updateModifierChips();
         updatePredictor();
 
-        // Update Opponent Found badge inside the Matchmaker card
+        // Update Matchmaker status badge inside card
         const badge = document.getElementById('matchmaker-status-badge');
         const badgeText = document.getElementById('matchmaker-status-text');
         if (badge && badgeText) {
-          badgeText.textContent = `Opponent Found: ${bestCandidate.name} (${bestCandidate.rating.toFixed(2)})`;
+          badgeText.textContent = `Opponent Found: ${bestCandidate.name} (${bestCandidate.rating.toFixed(2)}) • Rec: ${bestCandidate.record}`;
           badge.classList.remove('hidden');
           badge.classList.add('inline-flex', 'ring-2', 'ring-emerald-300');
           setTimeout(() => {
@@ -997,7 +1486,7 @@
           }, 600);
         }
 
-        // Smooth visual highlight on the Matchup Predictor card immediately above
+        // Smooth visual highlight on Matchup Predictor card
         const heroCard = document.getElementById('hero-prediction-card');
         if (heroCard) {
           heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
@@ -1021,10 +1510,10 @@
         document.getElementById('team-b-name').value = nameB;
         document.getElementById('team-b-rating').value = ratingB.toFixed(2);
 
+        updateTeamRecordBadges();
         updateModifierChips();
         updatePredictor();
 
-        // Smooth visual feedback on the Matchup Predictor card immediately above
         const heroCard = document.getElementById('hero-prediction-card');
         if (heroCard) {
           heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
@@ -1041,6 +1530,7 @@
         state.teamB.name = document.getElementById('team-b-name').value || 'Team B';
         state.teamB.baseRating = parseFloat(document.getElementById('team-b-rating').value) || 80.00;
 
+        updateTeamRecordBadges();
         updatePredictor();
       }
 
@@ -1056,6 +1546,116 @@
             }
           } catch(e) {}
         }, 40);
+      }
+
+      // ==========================================
+      // MAIN TAB NAVIGATION
+      // ==========================================
+      function switchMainTab(tab) {
+        state.activeTab = tab;
+        const viewPredictor = document.getElementById('view-predictor');
+        const viewBracket = document.getElementById('view-bracket');
+        const navPredictor = document.getElementById('nav-tab-predictor');
+        const navBracket = document.getElementById('nav-tab-bracket');
+
+        if (tab === 'predictor') {
+          viewPredictor?.classList.remove('hidden');
+          viewBracket?.classList.add('hidden');
+          if (navPredictor) {
+            navPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all cursor-pointer';
+          }
+          if (navBracket) {
+            navBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all cursor-pointer';
+          }
+        } else {
+          viewPredictor?.classList.add('hidden');
+          viewBracket?.classList.remove('hidden');
+          if (navPredictor) {
+            navPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all cursor-pointer';
+          }
+          if (navBracket) {
+            navBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all cursor-pointer';
+          }
+          calculateBracketParity();
+        }
+      }
+
+      // ==========================================
+      // MATCHMAKER MODE SWITCHER
+      // ==========================================
+      function setMatchmakerMode(mode) {
+        state.matchmakerMode = mode;
+        const btnNy = document.getElementById('mm-mode-ny');
+        const btnOos = document.getElementById('mm-mode-oos');
+        if (btnNy && btnOos) {
+          if (mode === 'ny') {
+            btnNy.className = 'px-2.5 py-1 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs transition-all cursor-pointer';
+            btnOos.className = 'px-2.5 py-1 rounded-lg font-medium text-slate-500 hover:text-slate-800 transition-all cursor-pointer';
+          } else {
+            btnNy.className = 'px-2.5 py-1 rounded-lg font-medium text-slate-500 hover:text-slate-800 transition-all cursor-pointer';
+            btnOos.className = 'px-2.5 py-1 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs transition-all cursor-pointer';
+          }
+        }
+      }
+
+      // ==========================================
+      // RATING CONTROLS & MODIFIERS
+      // ==========================================
+      function stepRating(teamKey, delta) {
+        const team = state[`team${teamKey.toUpperCase()}`];
+        if (!team) return;
+        const input = document.getElementById(`team-${teamKey}-rating`);
+        const current = parseFloat(input?.value) || team.baseRating || 80.00;
+        const next = parseFloat((current + delta).toFixed(2));
+        team.baseRating = next;
+        if (input) input.value = next.toFixed(2);
+        updatePredictor();
+      }
+
+      function setTierRating(teamKey, rating, tierLabel) {
+        const team = state[`team${teamKey.toUpperCase()}`];
+        if (!team) return;
+        team.baseRating = rating;
+        const input = document.getElementById(`team-${teamKey}-rating`);
+        if (input) input.value = rating.toFixed(2);
+        updatePredictor();
+      }
+
+      function toggleModifier(teamKey, modKey) {
+        const team = state[`team${teamKey.toUpperCase()}`];
+        if (!team) return;
+        if (!team.modifiers) team.modifiers = { goalie: false, bench: false, fatigue: false };
+        team.modifiers[modKey] = !team.modifiers[modKey];
+        updateModifierChips();
+        updatePredictor();
+      }
+
+      function updateModifierChips() {
+        ['a', 'b'].forEach(teamKey => {
+          const team = state[`team${teamKey.toUpperCase()}`];
+          if (!team || !team.modifiers) return;
+          ['goalie', 'bench', 'fatigue'].forEach(modKey => {
+            const btn = document.getElementById(`mod-${teamKey}-${modKey}`);
+            if (!btn) return;
+            const isActive = !!team.modifiers[modKey];
+            if (isActive) {
+              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold border border-rose-300 bg-rose-50 text-[#FF3B30] shadow-xs transition-colors cursor-pointer ring-1 ring-rose-200';
+            } else {
+              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer';
+            }
+          });
+        });
+      }
+
+      function getEffectiveRating(team) {
+        if (!team) return 80.00;
+        let rating = parseFloat(team.baseRating) || 80.00;
+        if (team.modifiers) {
+          if (team.modifiers.goalie) rating -= 0.75;
+          if (team.modifiers.bench) rating -= 0.50;
+          if (team.modifiers.fatigue) rating -= 0.50;
+        }
+        return parseFloat(rating.toFixed(2));
       }
 
       function updatePredictor() {
@@ -1543,8 +2143,11 @@ Coach / Scheduler (${state.teamA.name})`;
 
       // Initialize on load
       window.addEventListener('DOMContentLoaded', () => {
+        initTeamsData();
+        updateModifierChips();
         updatePredictor();
         recalculateCosts();
+        renderBracketView();
       });
     </script>
   </body>

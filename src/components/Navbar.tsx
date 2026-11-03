@@ -27,23 +27,14 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-30">
       {/* Top Bar Contract: 3 zones separated by gap-8 (Brand Wordmark, Single-line Nav Links, Primary CTA) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
-        {/* Zone 1: Brand Wordmark (Single text element wordmark, no compound pill badges) */}
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/20">
-            <svg
-              className="w-5 h-5 fill-current"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              {/* Stylized hockey puck & ice blades */}
-              <ellipse cx="12" cy="14" rx="8" ry="4" opacity="0.4" />
-              <ellipse cx="12" cy="10" rx="8" ry="4" />
-              <path d="M4 10v4c0 2.21 3.58 4 8 4s8-1.79 8-4v-4" />
-            </svg>
-          </div>
-          <span className="text-xl font-bold font-display tracking-tight text-white whitespace-nowrap">
-            PuckParity
-          </span>
+        {/* Zone 1: Brand Logo */}
+        <div className="flex items-center gap-2 shrink-0">
+          <img 
+            src="https://raw.githubusercontent.com/timtrapp/puckedge/main/public/puckedge-logo.png" 
+            alt="PuckEdge.app" 
+            loading="eager"
+            className="h-10 md:h-11 w-auto object-contain"
+          />
         </div>
 
         {/* Zone 2: 4-5 concise single-line text navigation links */}
