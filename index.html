@@ -37,12 +37,13 @@
     </script>
     <style>
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-variant-numeric: normal;
         background-color: #F2F2F7;
         color: #1C1C1E;
         -webkit-tap-highlight-color: transparent;
       }
-      /* Clean number input without ugly native arrows */
+      /* Clean number input without native arrows */
       input[type="number"]::-webkit-inner-spin-button,
       input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -374,7 +375,91 @@
 
         </div>
 
-        <!-- 3RD: MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) -->
+        <!-- 3RD: MATCHMAKER (DYNAMIC OPPONENT GENERATOR) -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-3.5 transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-blue-50 text-[#007AFF] flex items-center justify-center text-xs font-bold shrink-0">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <h3 class="text-sm font-bold text-[#1C1C1E]">Matchmaker</h3>
+              </div>
+              <p class="text-xs text-[#8E8E93] mt-0.5">
+                Find a realistic opponent calibrated to Team A's rating
+              </p>
+            </div>
+            <!-- Opponent Found Badge -->
+            <div id="matchmaker-status-badge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/90 self-start sm:self-center transition-all">
+              <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
+              <span id="matchmaker-status-text">Opponent Found</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <!-- 1. Confidence Booster: Soft Green -->
+            <button
+              type="button"
+              onclick="findMatchmakerOpponent('confidence')"
+              class="p-3.5 bg-emerald-50/70 hover:bg-emerald-100/70 active:scale-98 border border-emerald-200/80 rounded-xl text-left transition-all shadow-xs group cursor-pointer"
+            >
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-900 group-hover:text-emerald-700 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#34C759]"></span>
+                  Confidence Booster
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                  Target: -1.75
+                </span>
+              </div>
+              <div class="text-[11px] text-emerald-700 font-medium mt-1">
+                Scouts clubs ~1.75 below Team A
+              </div>
+            </button>
+
+            <!-- 2. Even Battle: Soft Blue -->
+            <button
+              type="button"
+              onclick="findMatchmakerOpponent('even')"
+              class="p-3.5 bg-blue-50/70 hover:bg-blue-100/70 active:scale-98 border border-blue-200/80 rounded-xl text-left transition-all shadow-xs group cursor-pointer"
+            >
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-blue-900 group-hover:text-[#007AFF] flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#007AFF]"></span>
+                  Even Battle
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+                  Target: ±0.25
+                </span>
+              </div>
+              <div class="text-[11px] text-[#007AFF] font-medium mt-1">
+                Scouts true parity twin clubs
+              </div>
+            </button>
+
+            <!-- 3. Challenge My Team: Soft Amber -->
+            <button
+              type="button"
+              onclick="findMatchmakerOpponent('challenge')"
+              class="p-3.5 bg-amber-50/70 hover:bg-amber-100/70 active:scale-98 border border-amber-200/80 rounded-xl text-left transition-all shadow-xs group cursor-pointer"
+            >
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-amber-900 group-hover:text-[#FF9500] flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#FF9500]"></span>
+                  Challenge My Team
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
+                  Target: +1.75
+                </span>
+              </div>
+              <div class="text-[11px] text-[#FF9500] font-medium mt-1">
+                Scouts tier-up stretch opponents
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4TH: MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs text-[#8E8E93] px-1">
             <span class="font-semibold uppercase tracking-wider text-[#1C1C1E]">Matchup Suggestions</span>
@@ -412,7 +497,7 @@
           </div>
         </div>
 
-        <!-- COLLAPSIBLE ACCORDION DRAWERS (iOS DISCLOSURE GROUPS) -->
+        <!-- 5TH: COLLAPSIBLE ACCORDION DRAWERS (iOS DISCLOSURE GROUPS) -->
         <div class="space-y-3">
 
           <!-- ACCORDION 1: COST CALCULATOR -->
@@ -833,6 +918,92 @@
           el.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold border border-[#007AFF] bg-[#007AFF] text-white shadow-sm transition-all cursor-pointer';
         } else {
           el.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-all cursor-pointer';
+        }
+      }
+
+      // ==========================================
+      // MATCHMAKER OPPONENT LOOKUP DATABASE
+      // ==========================================
+      const matchmakerDatabase = [
+        { name: "Syracuse Nationals", rating: 91.20 },
+        { name: "Rochester Jr. Amerks", rating: 89.50 },
+        { name: "Buffalo Jr. Sabres", rating: 88.75 },
+        { name: "Buffalo Bisons", rating: 86.80 },
+        { name: "Rochester Monarchs", rating: 85.50 },
+        { name: "Wheatfield Blades", rating: 84.90 },
+        { name: "Warriors Hockey", rating: 84.25 },
+        { name: "Webster Cyclones", rating: 84.10 },
+        { name: "Hamburg Hawks", rating: 83.80 },
+        { name: "Perinton Blades", rating: 83.25 },
+        { name: "Batavia Ramparts", rating: 82.80 },
+        { name: "Tri-County Eagles", rating: 81.90 },
+        { name: "Ithaca Outlaws", rating: 81.10 },
+        { name: "Binghamton Jr. Devils", rating: 80.20 },
+        { name: "Jamestown Lakers", rating: 78.30 }
+      ];
+
+      function findMatchmakerOpponent(type) {
+        const teamAName = (document.getElementById('team-a-name')?.value || state.teamA.name || '').trim().toLowerCase();
+        const teamARating = parseFloat(document.getElementById('team-a-rating')?.value) || state.teamA.baseRating || 84.50;
+
+        let targetRating = teamARating;
+        if (type === 'confidence') {
+          targetRating = teamARating - 1.75;
+        } else if (type === 'even') {
+          targetRating = teamARating;
+        } else if (type === 'challenge') {
+          targetRating = teamARating + 1.75;
+        }
+
+        // Exclude exact name match with Team A
+        const candidates = matchmakerDatabase.filter(t => t.name.toLowerCase() !== teamAName);
+        if (candidates.length === 0) return;
+
+        // Find candidate in database closest to targetRating
+        let bestCandidate = candidates[0];
+        let minDiff = Math.abs(bestCandidate.rating - targetRating);
+
+        for (let i = 1; i < candidates.length; i++) {
+          const diff = Math.abs(candidates[i].rating - targetRating);
+          if (diff < minDiff) {
+            minDiff = diff;
+            bestCandidate = candidates[i];
+          }
+        }
+
+        // Populate Team B inputs & state
+        state.teamB.name = bestCandidate.name;
+        state.teamB.baseRating = bestCandidate.rating;
+        state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
+
+        const nameEl = document.getElementById('team-b-name');
+        if (nameEl) nameEl.value = bestCandidate.name;
+
+        const ratingEl = document.getElementById('team-b-rating');
+        if (ratingEl) ratingEl.value = bestCandidate.rating.toFixed(2);
+
+        updateModifierChips();
+        updatePredictor();
+
+        // Update Opponent Found badge inside the Matchmaker card
+        const badge = document.getElementById('matchmaker-status-badge');
+        const badgeText = document.getElementById('matchmaker-status-text');
+        if (badge && badgeText) {
+          badgeText.textContent = `Opponent Found: ${bestCandidate.name} (${bestCandidate.rating.toFixed(2)})`;
+          badge.classList.remove('hidden');
+          badge.classList.add('inline-flex', 'ring-2', 'ring-emerald-300');
+          setTimeout(() => {
+            badge.classList.remove('ring-2', 'ring-emerald-300');
+          }, 600);
+        }
+
+        // Smooth visual highlight on the Matchup Predictor card immediately above
+        const heroCard = document.getElementById('hero-prediction-card');
+        if (heroCard) {
+          heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
+          setTimeout(() => {
+            heroCard.classList.remove('ring-2', 'ring-[#007AFF]/40');
+          }, 350);
         }
       }
 
