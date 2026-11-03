@@ -1,5 +1,5 @@
 {
-  "name": "PuckEdge - Youth Hockey Scheduling & Parity Suite",
+  "name": "PuckEdge.app - Youth Hockey Scheduling & Parity Suite",
   "description": "Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

@@ -1,37 +1,34 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>PuckEdge - Independent Youth Hockey Scheduling & Parity Suite</title>
+    <title>PuckEdge.app - Independent Youth Hockey Scheduling & Parity Suite</title>
     <meta name="description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
-    <meta property="og:title" content="PuckEdge - Youth Hockey Parity Suite" />
+    <meta property="og:title" content="PuckEdge.app - Youth Hockey Parity Suite" />
     <meta property="og:description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: 'class',
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
-              display: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
-              mono: ['"JetBrains Mono"', 'monospace'],
-            },
             colors: {
-              ice: {
-                950: '#060a12',
-                900: '#0b1120',
-                850: '#0f172a',
-                800: '#1e293b',
-                700: '#334155',
+              ios: {
+                bg: '#F2F2F7',
+                card: '#FFFFFF',
+                label: '#1C1C1E',
+                secondary: '#8E8E93',
+                tertiary: '#C7C7CC',
+                fill: '#E5E5EA',
+                blue: '#007AFF',
+                green: '#34C759',
+                orange: '#FF9500',
+                red: '#FF3B30',
               }
             }
           }
@@ -40,16 +37,10 @@
     </script>
     <style>
       body {
-        font-family: 'DM Sans', sans-serif;
-        background-color: #060a12;
-        color: #f1f5f9;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background-color: #F2F2F7;
+        color: #1C1C1E;
         -webkit-tap-highlight-color: transparent;
-      }
-      h1, h2, h3, h4, .font-display {
-        font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-      }
-      .tabular-nums {
-        font-variant-numeric: tabular-nums;
       }
       /* Clean number input without ugly native arrows */
       input[type="number"]::-webkit-inner-spin-button,
@@ -62,52 +53,64 @@
       }
     </style>
   </head>
-  <body class="bg-ice-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+  <body class="bg-[#F2F2F7] text-[#1C1C1E] min-h-screen flex flex-col antialiased selection:bg-[#007AFF] selection:text-white">
 
-    <!-- TOP HEADER -->
-    <header class="border-b border-slate-800/80 bg-ice-900/90 backdrop-blur sticky top-0 z-40">
-      <div class="max-w-4xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between gap-4">
+    <!-- TOP HEADER (APPLE iOS CLEAN FROSTED BAR) -->
+    <header class="border-b border-slate-200/80 bg-white/80 backdrop-blur-md sticky top-0 z-40 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 py-3 sm:py-3.5 flex items-center justify-between gap-4">
         
         <!-- Left: Brand & Subtitle -->
         <div class="flex flex-col">
           <div class="flex items-center gap-2.5">
-            <!-- Puck Icon -->
-            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 shrink-0">
+            <!-- Puck Icon in Apple Blue -->
+            <div class="w-8 h-8 rounded-xl bg-[#007AFF] flex items-center justify-center text-white shadow-sm shrink-0">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                 <ellipse cx="12" cy="14" rx="8" ry="4" opacity="0.3" />
                 <ellipse cx="12" cy="10" rx="8" ry="4" />
                 <path d="M4 10v4c0 2.21 3.58 4 8 4s8-1.79 8-4v-4" />
               </svg>
             </div>
-            <span class="text-xl sm:text-2xl font-black font-display tracking-tight text-white">PuckEdge</span>
+            <span class="text-xl sm:text-2xl font-bold tracking-tight text-[#1C1C1E]">
+              PuckEdge<span class="text-[#007AFF]">.app</span>
+            </span>
           </div>
-          <span class="text-[11px] sm:text-xs text-slate-400 font-medium tracking-tight mt-0.5">
+          <span class="text-[11px] text-[#8E8E93] font-normal tracking-tight mt-0.5">
             Independent Youth Hockey Scheduling &amp; Parity Suite
           </span>
         </div>
 
-        <!-- Right: Glowing Green Parity Engine Status Badge -->
+        <!-- Right: Apple Style Engine Status Pill Badge -->
         <div class="shrink-0 flex items-center">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 shadow-sm shadow-emerald-900/30">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-[#34C759] animate-pulse"></span>
             <span class="whitespace-nowrap">Parity Engine Active</span>
           </span>
         </div>
 
       </div>
 
-      <!-- APP NAVIGATION TABS -->
-      <div class="max-w-4xl mx-auto px-4 flex border-t border-slate-800/60">
-        <button id="nav-tab-predictor" onclick="switchMainTab('predictor')" class="flex-1 py-2.5 text-center text-xs sm:text-sm font-semibold border-b-2 border-blue-500 text-blue-400 transition-colors">
-          Matchup Predictor
-        </button>
-        <button id="nav-tab-bracket" onclick="switchMainTab('bracket')" class="flex-1 py-2.5 text-center text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-colors">
-          Tournament Bracket Parity Grader
-        </button>
+      <!-- iOS SEGMENTED CONTROL TABS -->
+      <div class="max-w-md mx-auto px-4 pb-2.5 pt-1">
+        <div class="bg-[#E5E5EA] p-1 rounded-xl flex items-center gap-1 shadow-inner">
+          <button
+            id="nav-tab-predictor"
+            onclick="switchMainTab('predictor')"
+            class="flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all"
+          >
+            Matchup Predictor
+          </button>
+          <button
+            id="nav-tab-bracket"
+            onclick="switchMainTab('bracket')"
+            class="flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all"
+          >
+            Tournament Bracket Parity
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- MAIN WRAPPER -->
+    <!-- MAIN VIEWPORT WRAPPER -->
     <main class="max-w-4xl mx-auto px-4 py-5 w-full flex-1 space-y-6">
 
       <!-- ========================================== -->
@@ -115,117 +118,14 @@
       <!-- ========================================== -->
       <div id="view-predictor" class="space-y-6">
 
-        <!-- WNY Preset Matchup Quick-Select Strip -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between text-xs text-slate-400">
-            <span class="font-semibold uppercase tracking-wider text-slate-300">WNY Preset Matchups</span>
-            <span class="text-[11px] text-slate-500">1-Tap Scenarios</span>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <button onclick="loadPreset('Wings', 84.50, 'Warriors', 84.25)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-blue-500/50 rounded-lg text-left transition-all active:scale-95 group">
-              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Wings vs Warriors</div>
-              <div class="text-[11px] text-emerald-400 font-mono font-medium">Δ 0.25 (Even)</div>
-            </button>
-            <button onclick="loadPreset('Hawks', 85.80, 'Lions', 84.50)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-blue-500/50 rounded-lg text-left transition-all active:scale-95 group">
-              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Hawks vs Lions</div>
-              <div class="text-[11px] text-blue-400 font-mono font-medium">Δ 1.30 (Competitive)</div>
-            </button>
-            <button onclick="loadPreset('Bisons', 87.20, 'Jr. Amerks', 84.10)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-amber-500/50 rounded-lg text-left transition-all active:scale-95 group">
-              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Bisons vs Jr. Amerks</div>
-              <div class="text-[11px] text-amber-400 font-mono font-medium">Δ 3.10 (Skewed)</div>
-            </button>
-            <button onclick="loadPreset('Knights', 92.50, 'Selects', 85.00)" class="p-2 bg-ice-900 hover:bg-ice-850 border border-slate-800 hover:border-rose-500/50 rounded-lg text-left transition-all active:scale-95 group">
-              <div class="text-xs font-bold text-slate-200 group-hover:text-white truncate">Knights vs Selects</div>
-              <div class="text-[11px] text-rose-400 font-mono font-medium">Δ 7.50 (Blowout)</div>
-            </button>
-          </div>
-        </div>
-
-        <!-- HERO DYNAMIC MATCHUP PREDICTION CARD -->
-        <div id="hero-prediction-card" class="rounded-2xl p-6 sm:p-7 border border-slate-800 bg-ice-900 shadow-xl space-y-6 transition-all">
-          
-          <!-- Spread & Dynamic Verdict -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
-            <div>
-              <span class="text-xs uppercase tracking-wider font-semibold text-slate-400 block">
-                Projected Goal Spread (Δ)
-              </span>
-              <div class="flex items-baseline gap-2 mt-1">
-                <span class="text-4xl sm:text-5xl font-extrabold font-mono tracking-tight text-white tabular-nums" id="hero-spread-val">
-                  Δ 0.25
-                </span>
-                <span class="text-xs font-medium text-slate-400" id="hero-favored-label">Even parity matchup</span>
-              </div>
-            </div>
-
-            <!-- Dynamic Verdict Badge -->
-            <div id="hero-verdict-badge" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center">
-              <span class="w-2 h-2 rounded-full bg-current"></span>
-              <span id="hero-verdict-text">Even Battle</span>
-            </div>
-          </div>
-
-          <!-- Score & Win Probability Bar -->
-          <div class="space-y-4">
-            <div class="grid grid-cols-3 items-center text-center">
-              <div class="text-left sm:text-center space-y-0.5">
-                <span id="label-team-a" class="text-xs sm:text-sm font-bold text-blue-400 truncate block">Wings</span>
-                <div id="score-team-a" class="text-3xl sm:text-4xl font-extrabold font-mono text-white tabular-nums">3.2</div>
-                <span class="text-[10px] text-slate-400 block">Expected Goals</span>
-              </div>
-
-              <div class="space-y-1">
-                <span class="text-[10px] uppercase font-mono tracking-widest text-slate-500">PROJECTION</span>
-                <div class="text-lg sm:text-xl font-bold font-mono text-slate-500">VS</div>
-                <span id="total-goals-label" class="text-[11px] font-mono text-slate-400 tabular-nums">6.3 Tot Goals</span>
-              </div>
-
-              <div class="text-right sm:text-center space-y-0.5">
-                <span id="label-team-b" class="text-xs sm:text-sm font-bold text-amber-400 truncate block">Warriors</span>
-                <div id="score-team-b" class="text-3xl sm:text-4xl font-extrabold font-mono text-white tabular-nums">3.1</div>
-                <span class="text-[10px] text-slate-400 block">Expected Goals</span>
-              </div>
-            </div>
-
-            <!-- Win Probability Meter -->
-            <div class="space-y-1.5 pt-1">
-              <div class="flex justify-between text-xs font-semibold">
-                <span class="text-blue-400 tabular-nums" id="prob-a-label">Wings 48%</span>
-                <span class="text-slate-400 tabular-nums" id="prob-tie-label">OT/Tie 18%</span>
-                <span class="text-amber-400 tabular-nums" id="prob-b-label">Warriors 34%</span>
-              </div>
-              <div class="h-3 w-full bg-ice-950 rounded-full overflow-hidden flex p-0.5 border border-slate-800">
-                <div id="prob-bar-a" class="h-full bg-blue-600 rounded-l-full transition-all duration-300" style="width: 48%"></div>
-                <div id="prob-bar-tie" class="h-full bg-slate-600 transition-all duration-300" style="width: 18%"></div>
-                <div id="prob-bar-b" class="h-full bg-amber-600 rounded-r-full transition-all duration-300" style="width: 34%"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tactical Coaching Summary Card -->
-          <div id="tactical-summary-box" class="p-4 rounded-xl bg-ice-950/80 border border-slate-800/80 space-y-2 text-xs">
-            <div class="flex items-center justify-between text-slate-300 font-semibold">
-              <span class="flex items-center gap-1.5 text-blue-400">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Tactical Coaching &amp; Developmental Assessment
-              </span>
-              <span id="tactical-verdict-tag" class="text-[10px] font-mono text-emerald-400">Peak Parity</span>
-            </div>
-            <p id="tactical-summary-text" class="text-slate-300 leading-relaxed">
-              This matchup represents ideal competitive balance. Both teams can execute neutral-zone forechecks and test special teams without blowout demoralization.
-            </p>
-          </div>
-
-        </div>
-
-        <!-- STREAMLINED MOBILE INPUTS (NO SLIDERS) -->
+        <!-- 1ST (TOP): TEAM PROFILES & INPUTS (TEAM A & TEAM B CARDS) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <!-- TEAM A INPUT CARD -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-blue-400 uppercase tracking-wider">TEAM A (HOME / VISITOR)</label>
-              <span class="text-[11px] text-slate-400 tabular-nums" id="eff-rating-a-badge">Effective: 84.50</span>
+              <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider">TEAM A (HOME / VISITOR)</label>
+              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-a-badge">Effective: 84.50</span>
             </div>
 
             <!-- Team Name -->
@@ -235,20 +135,20 @@
               value="Wings"
               oninput="onTeamInputsChanged()"
               placeholder="Team A Name"
-              class="w-full bg-ice-950 border border-slate-700 focus:border-blue-500 rounded-lg px-3.5 py-2 text-sm font-semibold text-white focus:outline-none"
+              class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
             />
 
             <!-- Direct Decimal Numeric Input with Flanking Steppers -->
             <div class="space-y-1.5">
-              <div class="flex justify-between items-center text-xs text-slate-400">
-                <span class="font-medium">Base Team Rating</span>
-                <span class="text-[10px] text-slate-500">Standard rating index</span>
+              <div class="flex justify-between items-center text-xs text-[#8E8E93]">
+                <span class="font-medium text-[#1C1C1E]">Base Team Rating</span>
+                <span class="text-[11px]">Standard rating index</span>
               </div>
               <div class="flex items-center gap-2">
                 <button
                   type="button"
                   onclick="stepRating('a', -0.25)"
-                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-blue-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                 >
                   -0.25
                 </button>
@@ -258,23 +158,25 @@
                   inputmode="decimal"
                   id="team-a-rating"
                   value="84.50"
-                  onfocus="this.select()"
+                  onfocus="this.select(); handleRatingInputTap(this)"
+                  onclick="this.select(); handleRatingInputTap(this)"
+                  ontouchstart="this.select(); handleRatingInputTap(this)"
                   oninput="onTeamInputsChanged()"
-                  class="w-full h-11 bg-ice-950 border border-slate-700 focus:border-blue-500 rounded-lg px-3 text-center text-lg font-bold font-mono text-white focus:outline-none tabular-nums"
+                  class="w-full h-11 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3 text-center text-xl font-bold text-[#1C1C1E] focus:outline-none transition-all"
                 />
                 <button
                   type="button"
                   onclick="stepRating('a', 0.25)"
-                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-blue-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                 >
                   +0.25
                 </button>
               </div>
             </div>
 
-            <!-- Situational Modifier Chips -->
+            <!-- Situational Modifier Chips (iOS Toggle Style) -->
             <div class="space-y-2 pt-1">
-              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+              <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">
                 Situational Modifiers
               </span>
               <div class="flex flex-wrap gap-1.5">
@@ -282,7 +184,7 @@
                   type="button"
                   id="mod-a-goalie"
                   onclick="toggleModifier('a', 'goalie')"
-                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
                 >
                   Backup Goalie (-0.75)
                 </button>
@@ -290,7 +192,7 @@
                   type="button"
                   id="mod-a-bench"
                   onclick="toggleModifier('a', 'bench')"
-                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
                 >
                   Short Bench (-0.50)
                 </button>
@@ -298,7 +200,7 @@
                   type="button"
                   id="mod-a-fatigue"
                   onclick="toggleModifier('a', 'fatigue')"
-                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
                 >
                   3rd Game in 24h (-0.50)
                 </button>
@@ -307,10 +209,10 @@
           </div>
 
           <!-- TEAM B INPUT CARD -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-amber-400 uppercase tracking-wider">TEAM B (OPPONENT)</label>
-              <span class="text-[11px] text-slate-400 tabular-nums" id="eff-rating-b-badge">Effective: 84.25</span>
+              <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider">TEAM B (OPPONENT)</label>
+              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-b-badge">Effective: 84.25</span>
             </div>
 
             <!-- Team Name -->
@@ -320,20 +222,20 @@
               value="Warriors"
               oninput="onTeamInputsChanged()"
               placeholder="Team B Name"
-              class="w-full bg-ice-950 border border-slate-700 focus:border-amber-500 rounded-lg px-3.5 py-2 text-sm font-semibold text-white focus:outline-none"
+              class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
             />
 
             <!-- Direct Decimal Numeric Input with Flanking Steppers -->
             <div class="space-y-1.5">
-              <div class="flex justify-between items-center text-xs text-slate-400">
-                <span class="font-medium">Base Team Rating</span>
-                <span class="text-[10px] text-slate-500">Standard rating index</span>
+              <div class="flex justify-between items-center text-xs text-[#8E8E93]">
+                <span class="font-medium text-[#1C1C1E]">Base Team Rating</span>
+                <span class="text-[11px]">Standard rating index</span>
               </div>
               <div class="flex items-center gap-2">
                 <button
                   type="button"
                   onclick="stepRating('b', -0.25)"
-                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-amber-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                 >
                   -0.25
                 </button>
@@ -343,23 +245,25 @@
                   inputmode="decimal"
                   id="team-b-rating"
                   value="84.25"
-                  onfocus="this.select()"
+                  onfocus="this.select(); handleRatingInputTap(this)"
+                  onclick="this.select(); handleRatingInputTap(this)"
+                  ontouchstart="this.select(); handleRatingInputTap(this)"
                   oninput="onTeamInputsChanged()"
-                  class="w-full h-11 bg-ice-950 border border-slate-700 focus:border-amber-500 rounded-lg px-3 text-center text-lg font-bold font-mono text-white focus:outline-none tabular-nums"
+                  class="w-full h-11 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3 text-center text-xl font-bold text-[#1C1C1E] focus:outline-none transition-all"
                 />
                 <button
                   type="button"
                   onclick="stepRating('b', 0.25)"
-                  class="w-12 h-11 bg-ice-850 hover:bg-slate-800 active:bg-amber-900 text-slate-200 hover:text-white rounded-lg border border-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0 select-none"
+                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                 >
                   +0.25
                 </button>
               </div>
             </div>
 
-            <!-- Situational Modifier Chips -->
+            <!-- Situational Modifier Chips (iOS Toggle Style) -->
             <div class="space-y-2 pt-1">
-              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+              <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">
                 Situational Modifiers
               </span>
               <div class="flex flex-wrap gap-1.5">
@@ -367,7 +271,7 @@
                   type="button"
                   id="mod-b-goalie"
                   onclick="toggleModifier('b', 'goalie')"
-                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
                 >
                   Backup Goalie (-0.75)
                 </button>
@@ -375,7 +279,7 @@
                   type="button"
                   id="mod-b-bench"
                   onclick="toggleModifier('b', 'bench')"
-                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
                 >
                   Short Bench (-0.50)
                 </button>
@@ -383,7 +287,7 @@
                   type="button"
                   id="mod-b-fatigue"
                   onclick="toggleModifier('b', 'fatigue')"
-                  class="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors"
+                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
                 >
                   3rd Game in 24h (-0.50)
                 </button>
@@ -393,160 +297,289 @@
 
         </div>
 
-        <!-- COLLAPSIBLE ACCORDION DRAWERS (SECONDARY TOOLS) -->
+        <!-- 2ND (MIDDLE): MATCHUP PREDICTOR RESULTS CARD (HERO RESULTS CONTAINER) -->
+        <div id="hero-prediction-card" class="rounded-2xl p-6 sm:p-7 border border-slate-200/80 bg-white shadow-sm space-y-6 transition-all duration-300">
+          
+          <!-- Spread & Dynamic Verdict -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div>
+              <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93] block">
+                Projected Goal Spread (Δ)
+              </span>
+              <div class="flex items-baseline gap-2.5 mt-1">
+                <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1C1C1E]" id="hero-spread-val">
+                  Δ 0.25
+                </span>
+                <span class="text-xs font-medium text-[#8E8E93]" id="hero-favored-label">Even parity matchup</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Verdict Badge (iOS Pill) -->
+            <div id="hero-verdict-badge" class="px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-current"></span>
+              <span id="hero-verdict-text">Even Battle</span>
+            </div>
+          </div>
+
+          <!-- Score & Win Probability Bar (iOS Battery Style) -->
+          <div class="space-y-4">
+            <div class="grid grid-cols-3 items-center text-center">
+              <div class="text-left sm:text-center space-y-0.5">
+                <span id="label-team-a" class="text-xs sm:text-sm font-bold text-[#007AFF] truncate block">Wings</span>
+                <div id="score-team-a" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.2</div>
+                <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
+              </div>
+
+              <div class="space-y-1">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-[#8E8E93]">PROJECTION</span>
+                <div class="text-lg sm:text-xl font-bold text-slate-400">VS</div>
+                <span id="total-goals-label" class="text-xs text-[#8E8E93] font-medium">6.3 Tot Goals</span>
+              </div>
+
+              <div class="text-right sm:text-center space-y-0.5">
+                <span id="label-team-b" class="text-xs sm:text-sm font-bold text-[#FF9500] truncate block">Warriors</span>
+                <div id="score-team-b" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.1</div>
+                <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
+              </div>
+            </div>
+
+            <!-- Win Probability Meter (Apple iOS Segmented Bar) -->
+            <div class="space-y-1.5 pt-1">
+              <div class="flex justify-between text-xs font-semibold px-0.5">
+                <span class="text-[#007AFF]" id="prob-a-label">Wings 48%</span>
+                <span class="text-[#8E8E93]" id="prob-tie-label">OT/Tie 18%</span>
+                <span class="text-[#FF9500]" id="prob-b-label">Warriors 34%</span>
+              </div>
+              <div class="h-3.5 w-full bg-[#E5E5EA] rounded-full overflow-hidden flex p-0.5 shadow-inner">
+                <div id="prob-bar-a" class="h-full bg-[#007AFF] rounded-l-full transition-all duration-300" style="width: 48%"></div>
+                <div id="prob-bar-tie" class="h-full bg-[#8E8E93] transition-all duration-300" style="width: 18%"></div>
+                <div id="prob-bar-b" class="h-full bg-[#FF9500] rounded-r-full transition-all duration-300" style="width: 34%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tactical Coaching Summary Card (iOS Clean Alert Container) -->
+          <div id="tactical-summary-box" class="p-4 rounded-xl bg-blue-50/70 border border-blue-100 space-y-1.5 text-xs">
+            <div class="flex items-center justify-between font-semibold">
+              <span class="flex items-center gap-1.5 text-[#007AFF]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Tactical Coaching &amp; Developmental Assessment
+              </span>
+              <span id="tactical-verdict-tag" class="text-[11px] font-bold text-emerald-700">Peak Parity</span>
+            </div>
+            <p id="tactical-summary-text" class="text-slate-700 leading-relaxed text-xs">
+              This matchup represents ideal competitive balance. Both teams can execute neutral-zone forechecks and test special teams without blowout demoralization.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- 3RD: MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs text-[#8E8E93] px-1">
+            <span class="font-semibold uppercase tracking-wider text-[#1C1C1E]">Matchup Suggestions</span>
+            <span class="text-[11px]">1-Tap Quick Scenarios</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <button
+              onclick="loadPreset('Wings', 84.50, 'Warriors', 84.25)"
+              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
+            >
+              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">Wings vs Warriors</div>
+              <div class="text-[11px] text-[#34C759] font-bold mt-0.5">Δ 0.25 (Even)</div>
+            </button>
+            <button
+              onclick="loadPreset('Hawks', 85.80, 'Lions', 84.50)"
+              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
+            >
+              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">Hawks vs Lions</div>
+              <div class="text-[11px] text-[#007AFF] font-bold mt-0.5">Δ 1.30 (Competitive)</div>
+            </button>
+            <button
+              onclick="loadPreset('Bisons', 87.20, 'Jr. Amerks', 84.10)"
+              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
+            >
+              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#FF9500] truncate">Bisons vs Jr. Amerks</div>
+              <div class="text-[11px] text-[#FF9500] font-bold mt-0.5">Δ 3.10 (Skewed)</div>
+            </button>
+            <button
+              onclick="loadPreset('Knights', 92.50, 'Selects', 85.00)"
+              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
+            >
+              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#FF3B30] truncate">Knights vs Selects</div>
+              <div class="text-[11px] text-[#FF3B30] font-bold mt-0.5">Δ 7.50 (Blowout)</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- COLLAPSIBLE ACCORDION DRAWERS (iOS DISCLOSURE GROUPS) -->
         <div class="space-y-3">
 
           <!-- ACCORDION 1: COST CALCULATOR -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl overflow-hidden transition-all">
+          <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
               type="button"
               onclick="toggleAccordion('cost')"
-              class="w-full px-5 py-3.5 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white hover:bg-slate-800/40 transition-colors"
+              class="w-full px-5 py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#1C1C1E] hover:bg-slate-50 transition-colors group cursor-pointer"
             >
-              <span class="flex items-center gap-2">
-                <span id="accordion-cost-icon" class="text-blue-400 font-mono text-sm">+</span>
+              <span class="flex items-center gap-2.5">
+                <i class="fa-solid fa-calculator text-[#007AFF] text-sm"></i>
                 <span>Cost Calculator &amp; Financial Parity</span>
               </span>
-              <span id="accordion-cost-summary" class="text-slate-400 font-mono font-semibold tabular-nums">$235.00 / team</span>
+              <div class="flex items-center gap-3">
+                <span id="accordion-cost-summary" class="text-[#007AFF] font-bold text-xs">$235.00 / team</span>
+                <i id="accordion-cost-chevron" class="fa-solid fa-chevron-down text-[#8E8E93] text-xs inline-block transition-transform duration-200 ease-in-out transform"></i>
+              </div>
             </button>
 
-            <div id="accordion-cost-content" class="hidden px-5 pb-5 pt-2 border-t border-slate-800/80 space-y-4">
-              <!-- Drive Time Chips -->
-              <div class="space-y-1.5">
-                <label class="text-xs font-semibold text-slate-300 block">Drive Time / Distance Bracket</label>
-                <div class="grid grid-cols-3 gap-2">
-                  <button
-                    type="button"
-                    onclick="setDriveTime('<30m')"
-                    id="drive-opt-1"
-                    class="py-2 px-3 text-xs font-medium rounded-lg border border-blue-500 bg-blue-600/20 text-blue-300 text-center"
-                  >
-                    &lt; 30m (Local)
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setDriveTime('30-90m')"
-                    id="drive-opt-2"
-                    class="py-2 px-3 text-xs font-medium rounded-lg border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 text-center"
-                  >
-                    30–90m (Regional)
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setDriveTime('2-4h')"
-                    id="drive-opt-3"
-                    class="py-2 px-3 text-xs font-medium rounded-lg border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 text-center"
-                  >
-                    2–4h (Travel Hub)
-                  </button>
+            <div id="accordion-cost-content" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-5 pb-5 pt-3 border-t border-slate-100 space-y-4">
+                <!-- Drive Time Chips -->
+                <div class="space-y-1.5">
+                  <label class="text-xs font-semibold text-[#1C1C1E] block">Drive Time / Distance Bracket</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button
+                      type="button"
+                      onclick="setDriveTime('<30m')"
+                      id="drive-opt-1"
+                      class="py-2.5 px-3 text-xs font-semibold rounded-xl bg-[#007AFF] text-white text-center shadow-xs cursor-pointer"
+                    >
+                      &lt; 30m (Local)
+                    </button>
+                    <button
+                      type="button"
+                      onclick="setDriveTime('30-90m')"
+                      id="drive-opt-2"
+                      class="py-2.5 px-3 text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors"
+                    >
+                      30–90m (Regional)
+                    </button>
+                    <button
+                      type="button"
+                      onclick="setDriveTime('2-4h')"
+                      id="drive-opt-3"
+                      class="py-2.5 px-3 text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors"
+                    >
+                      2–4h (Travel Hub)
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Fees & Split -->
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div class="space-y-1">
-                  <label class="text-xs text-slate-400">Ice Slot Fee ($)</label>
-                  <input
-                    type="number"
-                    id="cost-ice-fee"
-                    value="350"
-                    onfocus="this.select()"
-                    oninput="recalculateCosts()"
-                    class="w-full bg-ice-950 border border-slate-700 rounded-lg px-3 py-2 text-sm font-mono text-white tabular-nums"
-                  />
+                <!-- Fees & Split -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="space-y-1">
+                    <label class="text-xs text-[#8E8E93] font-medium">Ice Slot Fee ($)</label>
+                    <input
+                      type="number"
+                      id="cost-ice-fee"
+                      value="350"
+                      onfocus="this.select(); handleRatingInputTap(this)"
+                      onclick="this.select(); handleRatingInputTap(this)"
+                      ontouchstart="this.select(); handleRatingInputTap(this)"
+                      oninput="recalculateCosts()"
+                      class="w-full bg-[#F2F2F7] border border-slate-200 focus:bg-white focus:border-[#007AFF] rounded-xl px-3.5 py-2 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div class="space-y-1">
+                    <label class="text-xs text-[#8E8E93] font-medium">Ref / Officials Fee ($)</label>
+                    <input
+                      type="number"
+                      id="cost-ref-fee"
+                      value="120"
+                      onfocus="this.select(); handleRatingInputTap(this)"
+                      onclick="this.select(); handleRatingInputTap(this)"
+                      ontouchstart="this.select(); handleRatingInputTap(this)"
+                      oninput="recalculateCosts()"
+                      class="w-full bg-[#F2F2F7] border border-slate-200 focus:bg-white focus:border-[#007AFF] rounded-xl px-3.5 py-2 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div class="space-y-1">
+                    <label class="text-xs text-[#8E8E93] font-medium">Cost Sharing Split</label>
+                    <button
+                      type="button"
+                      id="cost-split-btn"
+                      onclick="toggleCostSplit()"
+                      class="w-full h-[40px] bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 rounded-xl px-3 text-xs font-semibold text-[#1C1C1E] text-center flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                    >
+                      <span id="cost-split-label">50/50 Split</span>
+                    </button>
+                  </div>
                 </div>
-                <div class="space-y-1">
-                  <label class="text-xs text-slate-400">Ref / Officials Fee ($)</label>
-                  <input
-                    type="number"
-                    id="cost-ref-fee"
-                    value="120"
-                    onfocus="this.select()"
-                    oninput="recalculateCosts()"
-                    class="w-full bg-ice-950 border border-slate-700 rounded-lg px-3 py-2 text-sm font-mono text-white tabular-nums"
-                  />
-                </div>
-                <div class="space-y-1">
-                  <label class="text-xs text-slate-400">Cost Sharing Split</label>
-                  <button
-                    type="button"
-                    id="cost-split-btn"
-                    onclick="toggleCostSplit()"
-                    class="w-full h-[38px] bg-ice-850 hover:bg-slate-800 border border-slate-700 rounded-lg px-3 text-xs font-semibold text-slate-200 text-center flex items-center justify-center gap-1.5"
-                  >
-                    <span id="cost-split-label">50/50 Split</span>
-                  </button>
-                </div>
-              </div>
 
-              <!-- Cost Summary Results -->
-              <div class="p-3 bg-ice-950 rounded-lg border border-slate-800 flex items-center justify-between text-xs">
-                <div>
-                  <span class="text-slate-400">Total Fixture Cost: </span>
-                  <strong id="cost-total-display" class="text-white font-mono">$470.00</strong>
-                </div>
-                <div>
-                  <span class="text-blue-400 font-semibold">Net Cost Per Team: </span>
-                  <strong id="cost-net-display" class="text-emerald-400 font-mono text-sm font-bold tabular-nums">$235.00</strong>
+                <!-- Cost Summary Results (iOS Inset Card) -->
+                <div class="p-3.5 bg-[#F2F2F7] rounded-xl border border-slate-200/80 flex items-center justify-between text-xs">
+                  <div>
+                    <span class="text-[#8E8E93]">Total Fixture Cost: </span>
+                    <strong id="cost-total-display" class="text-[#1C1C1E] font-bold">$470.00</strong>
+                  </div>
+                  <div>
+                    <span class="text-[#007AFF] font-semibold">Net Cost Per Team: </span>
+                    <strong id="cost-net-display" class="text-[#34C759] font-bold text-sm">$235.00</strong>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- ACCORDION 2: DRAFT COACH PITCH EMAIL / TEXT -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl overflow-hidden transition-all">
+          <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
               type="button"
               onclick="toggleAccordion('pitch')"
-              class="w-full px-5 py-3.5 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white hover:bg-slate-800/40 transition-colors"
+              class="w-full px-5 py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#1C1C1E] hover:bg-slate-50 transition-colors group cursor-pointer"
             >
-              <span class="flex items-center gap-2">
-                <span id="accordion-pitch-icon" class="text-blue-400 font-mono text-sm">+</span>
+              <span class="flex items-center gap-2.5">
+                <i class="fa-solid fa-envelope text-[#007AFF] text-sm"></i>
                 <span>Draft Coach Pitch Email / Text</span>
               </span>
-              <span class="text-blue-400 font-mono text-xs">Pre-filled Proposal</span>
+              <div class="flex items-center gap-3">
+                <span class="text-[#007AFF] font-semibold text-xs">Pre-filled Proposal</span>
+                <i id="accordion-pitch-chevron" class="fa-solid fa-chevron-down text-[#8E8E93] text-xs inline-block transition-transform duration-200 ease-in-out transform"></i>
+              </div>
             </button>
 
-            <div id="accordion-pitch-content" class="hidden px-5 pb-5 pt-2 border-t border-slate-800/80 space-y-3">
-              <p class="text-[11px] text-slate-400">
-                Pre-formatted booking proposal ready to send to the opposing coach or scheduler via text or email.
-              </p>
+            <div id="accordion-pitch-content" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-5 pb-5 pt-3 border-t border-slate-100 space-y-3.5">
+                <p class="text-xs text-[#8E8E93]">
+                  Pre-formatted booking proposal ready to send to the opposing coach or scheduler via text or email.
+                </p>
 
-              <!-- Pitch Text Area -->
-              <textarea
-                id="pitch-textarea"
-                rows="7"
-                class="w-full bg-ice-950 border border-slate-700 rounded-lg p-3 text-xs font-mono text-slate-200 leading-relaxed focus:outline-none focus:border-blue-500"
-              ></textarea>
+                <!-- Pitch Text Area -->
+                <textarea
+                  id="pitch-textarea"
+                  rows="7"
+                  class="w-full bg-[#F2F2F7] border border-slate-200 rounded-xl p-3.5 text-xs text-[#1C1C1E] leading-relaxed focus:bg-white focus:border-[#007AFF] focus:outline-none transition-all"
+                ></textarea>
 
-              <!-- Action Buttons -->
-              <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
-                <div class="flex items-center gap-2">
-                  <a
-                    id="btn-sms-pitch"
-                    href="#"
-                    class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
+                <!-- Action Buttons (iOS Blue Filled Primary) -->
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                  <div class="flex items-center gap-2">
+                    <a
+                      id="btn-sms-pitch"
+                      href="#"
+                      class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F2F2F7] hover:bg-slate-200 text-[#1C1C1E] border border-slate-200 transition-colors"
+                    >
+                      Open in Messages
+                    </a>
+                    <a
+                      id="btn-email-pitch"
+                      href="#"
+                      class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F2F2F7] hover:bg-slate-200 text-[#1C1C1E] border border-slate-200 transition-colors"
+                    >
+                      Open in Mail
+                    </a>
+                  </div>
+
+                  <button
+                    type="button"
+                    id="btn-copy-pitch"
+                    onclick="copyPitchToClipboard()"
+                    class="px-5 py-2 text-xs font-bold text-white bg-[#007AFF] hover:bg-blue-600 active:scale-98 rounded-xl transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
                   >
-                    Open in Messages
-                  </a>
-                  <a
-                    id="btn-email-pitch"
-                    href="#"
-                    class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
-                  >
-                    Open in Mail
-                  </a>
+                    <i class="fa-regular fa-copy text-xs"></i>
+                    <span id="copy-btn-text">Copy Pitch</span>
+                  </button>
                 </div>
-
-                <button
-                  type="button"
-                  id="btn-copy-pitch"
-                  onclick="copyPitchToClipboard()"
-                  class="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 active:scale-95 rounded-lg transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
-                >
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                  <span id="copy-btn-text">Copy Pitch</span>
-                </button>
               </div>
             </div>
           </div>
@@ -561,80 +594,80 @@
       <!-- ========================================== -->
       <div id="view-bracket" class="hidden space-y-6">
 
-        <!-- Division Setup & Preset Presets -->
-        <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+        <!-- Division Setup & Presets (iOS Grouped Container) -->
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h2 class="text-base font-bold text-white">Tournament Bracket Parity Grader</h2>
-              <p class="text-xs text-slate-400">
+              <h2 class="text-base font-bold text-[#1C1C1E]">Tournament Bracket Parity Grader</h2>
+              <p class="text-xs text-[#8E8E93] mt-0.5">
                 Evaluate 4-to-8 team divisions for competitive equity, blowout frequency, and round-robin health.
               </p>
             </div>
 
-            <!-- Team Count Selector -->
+            <!-- Team Count Selector (iOS Segmented Style) -->
             <div class="flex items-center gap-2">
-              <span class="text-xs text-slate-400 font-medium">Teams:</span>
-              <div class="inline-flex rounded-lg bg-ice-950 p-1 border border-slate-800">
-                <button onclick="setBracketTeamCount(4)" id="btn-count-4" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">4</button>
-                <button onclick="setBracketTeamCount(5)" id="btn-count-5" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">5</button>
-                <button onclick="setBracketTeamCount(6)" id="btn-count-6" class="px-2.5 py-1 text-xs font-semibold rounded bg-blue-600 text-white">6</button>
-                <button onclick="setBracketTeamCount(7)" id="btn-count-7" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">7</button>
-                <button onclick="setBracketTeamCount(8)" id="btn-count-8" class="px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white">8</button>
+              <span class="text-xs text-[#8E8E93] font-medium">Teams:</span>
+              <div class="inline-flex rounded-xl bg-[#E5E5EA] p-1">
+                <button onclick="setBracketTeamCount(4)" id="btn-count-4" class="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black">4</button>
+                <button onclick="setBracketTeamCount(5)" id="btn-count-5" class="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black">5</button>
+                <button onclick="setBracketTeamCount(6)" id="btn-count-6" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm">6</button>
+                <button onclick="setBracketTeamCount(7)" id="btn-count-7" class="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black">7</button>
+                <button onclick="setBracketTeamCount(8)" id="btn-count-8" class="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black">8</button>
               </div>
             </div>
           </div>
 
           <!-- Presets -->
-          <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-800/80 text-xs">
-            <span class="text-slate-400 font-medium">Presets:</span>
-            <button onclick="loadBracketPreset('balanced')" class="px-2.5 py-1 rounded bg-ice-850 hover:bg-slate-800 border border-slate-700 text-slate-300 text-xs">
+          <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100 text-xs">
+            <span class="text-[#8E8E93] font-medium">Presets:</span>
+            <button onclick="loadBracketPreset('balanced')" class="px-3 py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#1C1C1E] text-xs font-medium cursor-pointer transition-colors">
               WNY 12U Peewee AA (Balanced)
             </button>
-            <button onclick="loadBracketPreset('elite')" class="px-2.5 py-1 rounded bg-ice-850 hover:bg-slate-800 border border-slate-700 text-slate-300 text-xs">
+            <button onclick="loadBracketPreset('elite')" class="px-3 py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#007AFF] text-xs font-medium cursor-pointer transition-colors">
               Tier 1 AAA Invitational
             </button>
-            <button onclick="loadBracketPreset('unbalanced')" class="px-2.5 py-1 rounded bg-ice-850 hover:bg-slate-800 border border-slate-700 text-rose-300 text-xs">
+            <button onclick="loadBracketPreset('unbalanced')" class="px-3 py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#FF3B30] text-xs font-medium cursor-pointer transition-colors">
               Unbalanced Mix (Blowout Hazard)
             </button>
           </div>
         </div>
 
-        <!-- Division Parity Metric Cards -->
+        <!-- Division Parity Metric Cards (Apple iOS Cards) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <!-- Grade Card -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Round-Robin Grade</span>
-            <div id="bracket-grade-val" class="text-3xl sm:text-4xl font-black font-display text-emerald-400">A</div>
-            <span id="bracket-grade-label" class="text-[10px] text-slate-400 block">Competitive Division</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
+            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Round-Robin Grade</span>
+            <div id="bracket-grade-val" class="text-3xl sm:text-4xl font-extrabold text-[#34C759]">A</div>
+            <span id="bracket-grade-label" class="text-xs text-[#8E8E93] font-medium block">Competitive Division</span>
           </div>
 
           <!-- Division Mean -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Division Mean (x̄)</span>
-            <div id="bracket-mean-val" class="text-2xl sm:text-3xl font-bold font-mono text-white tabular-nums">84.15</div>
-            <span class="text-[10px] text-slate-400 block">Average Rating</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
+            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Division Mean (x̄)</span>
+            <div id="bracket-mean-val" class="text-2xl sm:text-3xl font-extrabold text-[#1C1C1E]">84.15</div>
+            <span class="text-xs text-[#8E8E93] font-medium block">Average Rating</span>
           </div>
 
           <!-- Rating Spread -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Rating Spread</span>
-            <div id="bracket-spread-val" class="text-2xl sm:text-3xl font-bold font-mono text-blue-400 tabular-nums">Δ 3.40</div>
-            <span class="text-[10px] text-slate-400 block">Max – Min Rating</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
+            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Rating Spread</span>
+            <div id="bracket-spread-val" class="text-2xl sm:text-3xl font-extrabold text-[#007AFF]">Δ 3.40</div>
+            <span class="text-xs text-[#8E8E93] font-medium block">Max – Min Rating</span>
           </div>
 
           <!-- Std Dev -->
-          <div class="bg-ice-900 border border-slate-800 rounded-xl p-4 text-center space-y-1">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Standard Deviation (σ)</span>
-            <div id="bracket-stddev-val" class="text-2xl sm:text-3xl font-bold font-mono text-slate-200 tabular-nums">1.24</div>
-            <span class="text-[10px] text-slate-400 block">Dispersion Index</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
+            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Standard Deviation (σ)</span>
+            <div id="bracket-stddev-val" class="text-2xl sm:text-3xl font-extrabold text-[#1C1C1E]">1.24</div>
+            <span class="text-xs text-[#8E8E93] font-medium block">Dispersion Index</span>
           </div>
         </div>
 
         <!-- Editable Team List Table -->
-        <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-sm">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-200">Division Teams &amp; Ratings</h3>
-            <span class="text-xs text-slate-400 font-mono" id="bracket-team-count-text">6 Teams</span>
+            <h3 class="text-sm font-bold text-[#1C1C1E]">Division Teams &amp; Ratings</h3>
+            <span class="text-xs text-[#8E8E93] font-semibold" id="bracket-team-count-text">6 Teams</span>
           </div>
 
           <div id="bracket-teams-container" class="space-y-2.5">
@@ -643,23 +676,28 @@
         </div>
 
         <!-- Pairwise Round-Robin Matchup Parity Grid -->
-        <div class="bg-ice-900 border border-slate-800 rounded-xl p-5 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
-            <div>
-              <h3 class="text-sm font-bold text-slate-200">Round-Robin Matchup Parity Breakdown</h3>
-              <p class="text-xs text-slate-400" id="bracket-fixtures-summary">
-                15 total matchups simulated.
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <h3 class="text-sm font-bold text-[#1C1C1E]">Round-Robin Matchup Parity Breakdown</h3>
+                <span id="bracket-blowout-pill" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-emerald-200 bg-emerald-50 text-emerald-700">
+                  Blowout Hazard: 0% (0 of 15 games)
+                </span>
+              </div>
+              <p class="text-xs text-[#8E8E93]" id="bracket-fixtures-summary">
+                15 total matchups simulated across all teams.
               </p>
             </div>
-            <div class="flex items-center gap-3 text-[11px]">
-              <span class="text-emerald-400 font-semibold" id="bracket-count-even">Even (0)</span>
-              <span class="text-blue-400 font-semibold" id="bracket-count-comp">Comp (0)</span>
-              <span class="text-amber-400 font-semibold" id="bracket-count-skewed">Skew (0)</span>
-              <span class="text-rose-400 font-semibold" id="bracket-count-blowout">Blowout (0)</span>
+            <div class="flex items-center gap-2 sm:gap-2.5 text-[11px] flex-wrap">
+              <span class="text-emerald-700 font-semibold px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-200" id="bracket-count-even">Even (0)</span>
+              <span class="text-[#007AFF] font-semibold px-2 py-0.5 rounded-md bg-blue-50 border border-blue-200" id="bracket-count-comp">Comp (0)</span>
+              <span class="text-[#FF9500] font-semibold px-2 py-0.5 rounded-md bg-amber-50 border border-amber-200" id="bracket-count-skewed">Skew (0)</span>
+              <span class="text-[#FF3B30] font-semibold px-2 py-0.5 rounded-md bg-rose-50 border border-rose-200" id="bracket-count-blowout">Blowout (0)</span>
             </div>
           </div>
 
-          <div id="bracket-matchups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+          <div id="bracket-matchups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <!-- Populated via JavaScript -->
           </div>
         </div>
@@ -668,14 +706,14 @@
 
     </main>
 
-    <!-- TRADEMARK DISCLAIMER FOOTER (10PX AS REQUIRED) -->
-    <footer class="mt-auto border-t border-slate-900 bg-ice-950 px-4 py-4 text-center">
-      <p class="text-[10px] text-slate-500 max-w-xl mx-auto leading-relaxed">
-        PuckEdge is an independent scheduling utility. Not affiliated, sponsored, or endorsed by MYHockey Rankings, LLC.
+    <!-- FOOTER -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white px-4 py-5 text-center">
+      <p class="text-xs text-slate-400 max-w-xl mx-auto leading-relaxed">
+        © 2026 PuckEdge.app • Independent youth hockey parity and scheduling analytics.
       </p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <!-- JAVASCRIPT LOGIC ENGINE (100% PRESERVED MATH & STATE) -->
     <script>
       // ==========================================
       // STATE MANAGEMENT
@@ -713,18 +751,18 @@
         bracket: {
           teamCount: 6,
           teams: [
-            { name: 'Buffalo Bisons', rating: 86.80 },
-            { name: 'Rochester Monarchs', rating: 85.50 },
-            { name: 'Wheatfield Blades', rating: 84.90 },
-            { name: 'Hamburg Hawks', rating: 84.20 },
-            { name: 'Syracuse Blazers', rating: 83.50 },
-            { name: 'Batavia Ramparts', rating: 82.80 }
+            { name: 'Buffalo Bisons AA', rating: 86.80 },
+            { name: 'Rochester Monarchs AA', rating: 85.50 },
+            { name: 'Wheatfield Blades AA', rating: 84.90 },
+            { name: 'Hamburg Hawks AA', rating: 84.20 },
+            { name: 'Syracuse Blazers AA', rating: 83.50 },
+            { name: 'Batavia Ramparts AA', rating: 82.80 }
           ]
         }
       };
 
       // ==========================================
-      // TAB SWITCHING
+      // TAB SWITCHING (iOS SEGMENTED CONTROL)
       // ==========================================
       function switchMainTab(tabId) {
         state.activeTab = tabId;
@@ -736,14 +774,14 @@
         if (tabId === 'predictor') {
           viewPredictor.classList.remove('hidden');
           viewBracket.classList.add('hidden');
-          btnPredictor.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-semibold border-b-2 border-blue-500 text-blue-400 transition-colors';
-          btnBracket.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-colors';
+          btnPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all';
+          btnBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all';
           updatePredictor();
         } else {
           viewPredictor.classList.add('hidden');
           viewBracket.classList.remove('hidden');
-          btnPredictor.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-colors';
-          btnBracket.className = 'flex-1 py-2.5 text-center text-xs sm:text-sm font-semibold border-b-2 border-blue-500 text-blue-400 transition-colors';
+          btnPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all';
+          btnBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all';
           renderBracketView();
         }
       }
@@ -792,9 +830,9 @@
       function setChipActive(el, active) {
         if (!el) return;
         if (active) {
-          el.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-blue-500 bg-blue-600/30 text-blue-300 transition-colors shadow-sm';
+          el.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold border border-[#007AFF] bg-[#007AFF] text-white shadow-sm transition-all cursor-pointer';
         } else {
-          el.className = 'px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 transition-colors';
+          el.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-all cursor-pointer';
         }
       }
 
@@ -814,6 +852,15 @@
 
         updateModifierChips();
         updatePredictor();
+
+        // Smooth visual feedback on the Matchup Predictor card immediately above
+        const heroCard = document.getElementById('hero-prediction-card');
+        if (heroCard) {
+          heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
+          setTimeout(() => {
+            heroCard.classList.remove('ring-2', 'ring-[#007AFF]/40');
+          }, 350);
+        }
       }
 
       function onTeamInputsChanged() {
@@ -824,6 +871,20 @@
         state.teamB.baseRating = parseFloat(document.getElementById('team-b-rating').value) || 80.00;
 
         updatePredictor();
+      }
+
+      // 1-Tap numeric entry handler for desktop & iOS/Android mobile
+      function handleRatingInputTap(el) {
+        if (!el) return;
+        el.select();
+        setTimeout(() => {
+          try {
+            el.select();
+            if (el.setSelectionRange && el.type !== 'number') {
+              el.setSelectionRange(0, 9999);
+            }
+          } catch(e) {}
+        }, 40);
       }
 
       function updatePredictor() {
@@ -881,41 +942,39 @@
         document.getElementById('prob-bar-tie').style.width = `${roundTie}%`;
         document.getElementById('prob-bar-b').style.width = `${roundB}%`;
 
-        // DYNAMIC VERDICT & TACTICAL SUMMARY
-        // Criteria:
+        // DYNAMIC VERDICT & TACTICAL SUMMARY (iOS HIG PASTEL PILLS)
         // Even Battle (Green, Δ <= 1.00)
         // Competitive Game (Blue, 1.01 - 2.25)
         // Skewed (Amber, 2.26 - 3.50)
         // Blowout Risk (Red, > 3.50)
         const verdictBadge = document.getElementById('hero-verdict-badge');
         const verdictText = document.getElementById('hero-verdict-text');
-        const tacticalBox = document.getElementById('tactical-summary-box');
         const tacticalTag = document.getElementById('tactical-verdict-tag');
         const tacticalSummary = document.getElementById('tactical-summary-text');
 
         if (spread <= 1.00) {
-          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-emerald-600 bg-emerald-950/80 text-emerald-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-emerald-950';
+          verdictBadge.className = 'px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border border-emerald-200 bg-emerald-50 text-emerald-700 flex items-center gap-2 self-start sm:self-center shadow-xs';
           verdictText.textContent = 'Even Battle';
           tacticalTag.textContent = 'Peak Parity';
-          tacticalTag.className = 'text-[10px] font-mono text-emerald-400';
-          tacticalSummary.textContent = 'Ideal developmental parity. High intensity one-goal contest anticipated where puck luck, discipline, and net-front scrambles will decide the outcome.';
+          tacticalTag.className = 'text-[11px] font-bold text-emerald-700';
+          tacticalSummary.textContent = 'Ideal developmental parity. High intensity one-goal contest anticipated where puck luck, discipline, and net-front execution will decide the outcome.';
         } else if (spread <= 2.25) {
-          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-blue-600 bg-blue-950/80 text-blue-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-blue-950';
+          verdictBadge.className = 'px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border border-blue-200 bg-blue-50 text-[#007AFF] flex items-center gap-2 self-start sm:self-center shadow-xs';
           verdictText.textContent = 'Competitive Game';
           tacticalTag.textContent = 'Competitive Parity';
-          tacticalTag.className = 'text-[10px] font-mono text-blue-400';
+          tacticalTag.className = 'text-[11px] font-bold text-[#007AFF]';
           tacticalSummary.textContent = 'Strong developmental game. The trailing squad will face sustained neutral-zone pressure but remains within a reachable two-goal striking distance.';
         } else if (spread <= 3.50) {
-          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-amber-600 bg-amber-950/80 text-amber-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-amber-950';
+          verdictBadge.className = 'px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border border-amber-200 bg-amber-50 text-[#FF9500] flex items-center gap-2 self-start sm:self-center shadow-xs';
           verdictText.textContent = 'Skewed';
           tacticalTag.textContent = 'Caution / Mismatch';
-          tacticalTag.className = 'text-[10px] font-mono text-amber-400';
+          tacticalTag.className = 'text-[11px] font-bold text-[#FF9500]';
           tacticalSummary.textContent = 'Moderate disparity. Favored team likely controls zone time. Trailing team must avoid extended defensive-zone shifts and rely on counter-attack rushes.';
         } else {
-          verdictBadge.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border border-rose-600 bg-rose-950/80 text-rose-400 flex items-center gap-2 self-start sm:self-center shadow-sm shadow-rose-950';
+          verdictBadge.className = 'px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border border-rose-200 bg-rose-50 text-[#FF3B30] flex items-center gap-2 self-start sm:self-center shadow-xs';
           verdictText.textContent = 'Blowout Risk';
           tacticalTag.textContent = 'Severe Blowout Alert';
-          tacticalTag.className = 'text-[10px] font-mono text-rose-400 font-bold';
+          tacticalTag.className = 'text-[11px] font-bold text-[#FF3B30]';
           tacticalSummary.textContent = 'High blowout risk. High probability of running-clock / mercy rule conditions (5+ goal spread). Rebalancing schedule or pairing alternate opponents strongly recommended.';
         }
 
@@ -924,31 +983,47 @@
       }
 
       // ==========================================
-      // ACCORDION DRAWER 1: COST CALCULATOR
+      // ACCORDION DRAWER 1 & 2 EXPANSION LOGIC
       // ==========================================
       function toggleAccordion(drawer) {
         if (drawer === 'cost') {
           state.cost.isOpen = !state.cost.isOpen;
           const content = document.getElementById('accordion-cost-content');
-          const icon = document.getElementById('accordion-cost-icon');
+          const chevron = document.getElementById('accordion-cost-chevron');
           if (state.cost.isOpen) {
-            content.classList.remove('hidden');
-            icon.textContent = '−';
+            content.classList.remove('max-h-0', 'opacity-0');
+            content.classList.add('max-h-[600px]', 'opacity-100');
+            if (chevron) {
+              chevron.classList.add('rotate-180', 'text-[#007AFF]');
+              chevron.classList.remove('rotate-0', 'text-[#8E8E93]');
+            }
           } else {
-            content.classList.add('hidden');
-            icon.textContent = '+';
+            content.classList.remove('max-h-[600px]', 'opacity-100');
+            content.classList.add('max-h-0', 'opacity-0');
+            if (chevron) {
+              chevron.classList.remove('rotate-180', 'text-[#007AFF]');
+              chevron.classList.add('rotate-0', 'text-[#8E8E93]');
+            }
           }
         } else if (drawer === 'pitch') {
           state.pitch.isOpen = !state.pitch.isOpen;
           const content = document.getElementById('accordion-pitch-content');
-          const icon = document.getElementById('accordion-pitch-icon');
+          const chevron = document.getElementById('accordion-pitch-chevron');
           if (state.pitch.isOpen) {
-            content.classList.remove('hidden');
-            icon.textContent = '−';
+            content.classList.remove('max-h-0', 'opacity-0');
+            content.classList.add('max-h-[600px]', 'opacity-100');
+            if (chevron) {
+              chevron.classList.add('rotate-180', 'text-[#007AFF]');
+              chevron.classList.remove('rotate-0', 'text-[#8E8E93]');
+            }
             updatePitchDraft();
           } else {
-            content.classList.add('hidden');
-            icon.textContent = '+';
+            content.classList.remove('max-h-[600px]', 'opacity-100');
+            content.classList.add('max-h-0', 'opacity-0');
+            if (chevron) {
+              chevron.classList.remove('rotate-180', 'text-[#007AFF]');
+              chevron.classList.add('rotate-0', 'text-[#8E8E93]');
+            }
           }
         }
       }
@@ -959,9 +1034,9 @@
         opts.forEach((opt, idx) => {
           const btn = document.getElementById(`drive-opt-${idx + 1}`);
           if (opt === timeStr) {
-            btn.className = 'py-2 px-3 text-xs font-semibold rounded-lg border border-blue-500 bg-blue-600/20 text-blue-300 text-center shadow-sm';
+            btn.className = 'py-2.5 px-3 text-xs font-semibold rounded-xl bg-[#007AFF] text-white text-center shadow-xs cursor-pointer';
           } else {
-            btn.className = 'py-2 px-3 text-xs font-medium rounded-lg border border-slate-800 bg-ice-950 text-slate-400 hover:text-slate-200 text-center';
+            btn.className = 'py-2.5 px-3 text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors';
           }
         });
         recalculateCosts();
@@ -999,7 +1074,6 @@
         const netCost = state.cost.isSplit5050 ? (total / 2).toFixed(2) : total.toFixed(2);
         const splitText = state.cost.isSplit5050 ? '50/50 split' : 'Host covers ice';
 
-        // Requirement: Email text must say: "Based on current rating differential analytics, our clubs project to a tight goal spread of Δ [spread]..."
         const pitchText = `Hi Coach,
 
 I hope your season is going well. Based on current rating differential analytics, our clubs project to a tight goal spread of Δ ${spread} (${state.teamA.name} vs ${state.teamB.name}), which makes this an ideal high-parity developmental matchup for both squads.
@@ -1036,7 +1110,7 @@ Coach / Scheduler (${state.teamA.name})`;
         if (!textarea) return;
         navigator.clipboard.writeText(textarea.value).then(() => {
           const btnText = document.getElementById('copy-btn-text');
-          btnText.textContent = 'Copied to Clipboard!';
+          btnText.textContent = 'Copied!';
           setTimeout(() => {
             btnText.textContent = 'Copy Pitch';
           }, 2000);
@@ -1075,7 +1149,6 @@ Coach / Scheduler (${state.teamA.name})`;
 
       function setBracketTeamCount(count) {
         state.bracket.teamCount = count;
-        // Adjust teams array length
         while (state.bracket.teams.length < count) {
           const idx = state.bracket.teams.length + 1;
           state.bracket.teams.push({ name: `Team ${idx}`, rating: parseFloat((84.00 - idx * 0.5).toFixed(2)) });
@@ -1088,9 +1161,9 @@ Coach / Scheduler (${state.teamA.name})`;
         [4, 5, 6, 7, 8].forEach(c => {
           const btn = document.getElementById(`btn-count-${c}`);
           if (c === count) {
-            btn.className = 'px-2.5 py-1 text-xs font-semibold rounded bg-blue-600 text-white';
+            btn.className = 'px-2.5 py-1 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm';
           } else {
-            btn.className = 'px-2.5 py-1 text-xs font-semibold rounded text-slate-400 hover:text-white';
+            btn.className = 'px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black';
           }
         });
 
@@ -1128,20 +1201,20 @@ Coach / Scheduler (${state.teamA.name})`;
         document.getElementById('bracket-team-count-text').textContent = `${state.bracket.teams.length} Teams`;
 
         container.innerHTML = state.bracket.teams.map((team, idx) => `
-          <div class="flex items-center gap-2 p-2 bg-ice-950 rounded-lg border border-slate-800">
-            <span class="w-6 text-center font-mono text-xs font-semibold text-slate-500">${idx + 1}</span>
+          <div class="flex items-center gap-2 p-2.5 bg-[#F2F2F7] rounded-xl border border-slate-200/80">
+            <span class="w-6 text-center text-xs font-semibold text-[#8E8E93]">${idx + 1}</span>
             <input
               type="text"
               value="${team.name}"
               placeholder="Team Name"
               oninput="onBracketTeamChange(${idx}, 'name', this.value)"
-              class="flex-1 bg-transparent border-b border-slate-800 focus:border-blue-500 px-2 py-1 text-xs font-semibold text-white focus:outline-none"
+              class="flex-1 bg-transparent border-b border-transparent focus:border-[#007AFF] px-2 py-1 text-xs font-bold text-[#1C1C1E] focus:outline-none transition-colors"
             />
             <div class="flex items-center gap-1.5 shrink-0">
               <button
                 type="button"
                 onclick="stepBracketTeamRating(${idx}, -0.25)"
-                class="w-8 h-8 rounded bg-ice-850 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold border border-slate-700"
+                class="w-8 h-8 rounded-lg bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200 shadow-xs cursor-pointer select-none"
               >-0.25</button>
               <input
                 type="number"
@@ -1149,14 +1222,16 @@ Coach / Scheduler (${state.teamA.name})`;
                 inputmode="decimal"
                 id="bracket-team-rating-${idx}"
                 value="${team.rating.toFixed(2)}"
-                onfocus="this.select()"
+                onfocus="this.select(); handleRatingInputTap(this)"
+                onclick="this.select(); handleRatingInputTap(this)"
+                ontouchstart="this.select(); handleRatingInputTap(this)"
                 oninput="onBracketTeamChange(${idx}, 'rating', this.value)"
-                class="w-20 h-8 bg-ice-900 border border-slate-700 rounded text-center text-xs font-mono font-bold text-white tabular-nums"
+                class="w-20 h-8 bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-1 focus:ring-blue-100 rounded-lg text-center text-xs font-bold text-[#1C1C1E] focus:outline-none"
               />
               <button
                 type="button"
                 onclick="stepBracketTeamRating(${idx}, 0.25)"
-                class="w-8 h-8 rounded bg-ice-850 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold border border-slate-700"
+                class="w-8 h-8 rounded-lg bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200 shadow-xs cursor-pointer select-none"
               >+0.25</button>
             </div>
           </div>
@@ -1185,41 +1260,36 @@ Coach / Scheduler (${state.teamA.name})`;
         document.getElementById('bracket-spread-val').textContent = `Δ ${spread.toFixed(2)}`;
         document.getElementById('bracket-stddev-val').textContent = stdDev.toFixed(2);
 
-        // Grade calculation
-        // Grade A+ (Exceptional Parity, stdDev <= 1.00, Spread <= 2.50)
-        // Grade A  (High Parity, stdDev <= 1.80, Spread <= 4.00)
-        // Grade B  (Moderate Parity, stdDev <= 2.60, Spread <= 6.00)
-        // Grade C  (Uneven Bracket, stdDev <= 3.60, Spread <= 8.00)
-        // Grade F  (Severe Blowout Hazard, stdDev > 3.60 or Spread > 8.00)
+        // Grade calculation (iOS pastel colors)
         let grade = 'B';
         let gradeLabel = 'Moderate Parity';
-        let gradeColor = 'text-amber-400';
+        let gradeColor = 'text-[#FF9500]';
 
         if (stdDev <= 1.00 && spread <= 2.50) {
           grade = 'A+';
           gradeLabel = 'Exceptional Parity';
-          gradeColor = 'text-emerald-400';
+          gradeColor = 'text-[#34C759]';
         } else if (stdDev <= 1.80 && spread <= 4.00) {
           grade = 'A';
           gradeLabel = 'High Parity Division';
-          gradeColor = 'text-emerald-400';
+          gradeColor = 'text-[#34C759]';
         } else if (stdDev <= 2.60 && spread <= 6.00) {
           grade = 'B';
           gradeLabel = 'Moderate Parity';
-          gradeColor = 'text-blue-400';
+          gradeColor = 'text-[#007AFF]';
         } else if (stdDev <= 3.60 && spread <= 8.00) {
           grade = 'C';
           gradeLabel = 'Uneven Division (High Variance)';
-          gradeColor = 'text-amber-400';
+          gradeColor = 'text-[#FF9500]';
         } else {
           grade = 'F';
-          gradeLabel = 'Blowout Hazard (Running Clock Expected)';
-          gradeColor = 'text-rose-400';
+          gradeLabel = 'Blowout Hazard (Running Clock)';
+          gradeColor = 'text-[#FF3B30]';
         }
 
         const gradeValEl = document.getElementById('bracket-grade-val');
         gradeValEl.textContent = grade;
-        gradeValEl.className = `text-3xl sm:text-4xl font-black font-display ${gradeColor}`;
+        gradeValEl.className = `text-3xl sm:text-4xl font-extrabold ${gradeColor}`;
         document.getElementById('bracket-grade-label').textContent = gradeLabel;
 
         // Generate round-robin matchups
@@ -1233,20 +1303,20 @@ Coach / Scheduler (${state.teamA.name})`;
           for (let j = i + 1; j < n; j++) {
             const diff = parseFloat(Math.abs(teams[i].rating - teams[j].rating).toFixed(2));
             let status = 'Even';
-            let pillClass = 'bg-emerald-950/80 text-emerald-400 border-emerald-800/60';
+            let pillClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
             if (diff <= 1.00) {
               countEven++;
             } else if (diff <= 2.25) {
               status = 'Competitive';
-              pillClass = 'bg-blue-950/80 text-blue-400 border-blue-800/60';
+              pillClass = 'bg-blue-50 text-[#007AFF] border-blue-200';
               countComp++;
             } else if (diff <= 3.50) {
               status = 'Skewed';
-              pillClass = 'bg-amber-950/80 text-amber-400 border-amber-800/60';
+              pillClass = 'bg-amber-50 text-[#FF9500] border-amber-200';
               countSkewed++;
             } else {
               status = 'Blowout';
-              pillClass = 'bg-rose-950/80 text-rose-400 border-rose-800/60';
+              pillClass = 'bg-rose-50 text-[#FF3B30] border-rose-200';
               countBlowout++;
             }
 
@@ -1260,23 +1330,41 @@ Coach / Scheduler (${state.teamA.name})`;
           }
         }
 
+        // Blowout Hazard Pill Counter
+        const blowoutPct = matchups.length > 0 ? Math.round((countBlowout / matchups.length) * 100) : 0;
+        const blowoutPill = document.getElementById('bracket-blowout-pill');
+        if (blowoutPill) {
+          blowoutPill.textContent = `Blowout Hazard: ${blowoutPct}% (${countBlowout} of ${matchups.length} games)`;
+          if (countBlowout === 0) {
+            blowoutPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-emerald-200 bg-emerald-50 text-emerald-700';
+          } else if (blowoutPct <= 15) {
+            blowoutPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-amber-200 bg-amber-50 text-[#FF9500]';
+          } else {
+            blowoutPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-rose-200 bg-rose-50 text-[#FF3B30]';
+          }
+        }
+
         // Summary counts
-        document.getElementById('bracket-fixtures-summary').textContent = `${matchups.length} round-robin matchups evaluated.`;
+        document.getElementById('bracket-fixtures-summary').textContent = `${matchups.length} round-robin matchups simulated across all teams.`;
         document.getElementById('bracket-count-even').textContent = `Even (${countEven})`;
         document.getElementById('bracket-count-comp').textContent = `Comp (${countComp})`;
         document.getElementById('bracket-count-skewed').textContent = `Skew (${countSkewed})`;
         document.getElementById('bracket-count-blowout').textContent = `Blowout (${countBlowout})`;
 
-        // Render Matchup Grid
+        // Render Matchup Grid (Taller cards with clean 2-line formatting)
         const grid = document.getElementById('bracket-matchups-grid');
         grid.innerHTML = matchups.map(m => `
-          <div class="p-3 bg-ice-950 rounded-lg border border-slate-800/90 flex items-center justify-between gap-2">
-            <div class="truncate text-xs font-semibold text-slate-200">
-              ${m.team1} <span class="text-slate-500 font-normal">vs</span> ${m.team2}
+          <div class="p-3.5 bg-white rounded-xl border border-slate-200/90 hover:border-slate-300 transition-all flex items-center justify-between gap-3 min-h-[72px] shadow-xs">
+            <div class="space-y-1 min-w-0 flex-1">
+              <div class="text-xs font-bold text-[#1C1C1E] truncate">${m.team1}</div>
+              <div class="text-[11px] text-slate-500 truncate flex items-center gap-1.5">
+                <span class="text-slate-400 font-semibold text-[10px]">vs</span>
+                <span class="truncate text-slate-700 font-medium">${m.team2}</span>
+              </div>
             </div>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span class="font-mono text-xs font-bold text-white tabular-nums">Δ ${m.diff.toFixed(2)}</span>
-              <span class="text-[10px] font-semibold px-2 py-0.5 rounded border ${m.pillClass}">${m.status}</span>
+            <div class="flex flex-col items-end gap-1 shrink-0">
+              <span class="text-xs font-bold text-[#1C1C1E] tracking-tight">Δ ${m.diff.toFixed(2)}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border ${m.pillClass} whitespace-nowrap">${m.status}</span>
             </div>
           </div>
         `).join('');
