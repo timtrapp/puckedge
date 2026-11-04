@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120" fill="none">
+  <defs>
+    <!-- Background drop shadow for puck -->
+    <radialGradient id="pe-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.38" />
+      <stop offset="60%" stop-color="#0f172a" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Cylindrical side body gradient -->
+    <linearGradient id="pe-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d14" />
+      <stop offset="30%" stop-color="#141923" />
+      <stop offset="60%" stop-color="#1c2331" />
+      <stop offset="85%" stop-color="#0f131c" />
+      <stop offset="100%" stop-color="#07090e" />
+    </linearGradient>
+
+    <!-- Top deck carbon gradient -->
+    <linearGradient id="pe-deck" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#2a3242" />
+      <stop offset="35%" stop-color="#1b212c" />
+      <stop offset="70%" stop-color="#121620" />
+      <stop offset="100%" stop-color="#0a0d14" />
+    </linearGradient>
+
+    <!-- Carbon weave pattern on puck face -->
+    <pattern id="pe-carbon" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(25)">
+      <rect width="2" height="2" fill="#202735" opacity="0.45" />
+      <rect x="2" y="2" width="2" height="2" fill="#202735" opacity="0.45" />
+      <rect x="2" y="0" width="2" height="2" fill="#131722" opacity="0.6" />
+      <rect x="0" y="2" width="2" height="2" fill="#131722" opacity="0.6" />
+    </pattern>
+
+    <!-- Electric Cyan Glowing Filters -->
+    <filter id="pe-glow-intense" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1" />
+      <feGaussianBlur stdDeviation="7" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="pe-electric-rim" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="1" dy="-1" stdDeviation="3" flood-color="#00D2FF" flood-opacity="0.9" />
+      <feDropShadow dx="2" dy="-2" stdDeviation="6" flood-color="#007AFF" flood-opacity="0.75" />
+    </filter>
+
+    <linearGradient id="pe-electric-edge" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#007AFF" />
+      <stop offset="40%" stop-color="#00D2FF" />
+      <stop offset="75%" stop-color="#60EFFF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+
+    <!-- Letter E Cyan Gradient -->
+    <linearGradient id="pe-cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C8FF" />
+      <stop offset="50%" stop-color="#008FFF" />
+      <stop offset="100%" stop-color="#0062E3" />
+    </linearGradient>
+  </defs>
+
+  <!-- ========================================== -->
+  <!-- 1. LEFT PUCK ICON                          -->
+  <!-- ========================================== -->
+  <g transform="translate(10, 5)">
+    <!-- Ambient Blue Flare Behind Puck -->
+    <ellipse cx="68" cy="46" rx="42" ry="28" fill="#00c8ff" opacity="0.18" filter="url(#pe-glow-intense)" />
+    
+    <!-- Cast Shadow under Puck -->
+    <ellipse cx="58" cy="88" rx="46" ry="14" fill="url(#pe-shadow)" />
+
+    <!-- 3D Cylindrical Side Wall -->
+    <path d="M 16 52 C 16 75, 98 75, 98 52 L 98 70 C 98 93, 16 93, 16 70 Z" fill="url(#pe-body)" />
+
+    <!-- Diamond Knurled Grip on Side Rim -->
+    <g stroke="#263143" stroke-width="1.2" opacity="0.8">
+      <path d="M 22 56 L 30 74 M 32 58 L 40 76 M 42 60 L 50 78 M 52 61 L 60 79 M 62 60 L 70 78 M 72 58 L 80 76 M 82 56 L 90 74" />
+      <path d="M 30 56 L 22 74 M 40 58 L 32 76 M 50 60 L 42 78 M 60 61 L 52 79 M 70 60 L 62 78 M 80 58 L 72 76 M 90 56 L 82 74" />
+    </g>
+
+    <!-- Top Deck Base Oval -->
+    <ellipse cx="57" cy="52" rx="41" ry="24" fill="url(#pe-deck)" stroke="#0d1117" stroke-width="1.5" />
+    <!-- Carbon texture overlay -->
+    <ellipse cx="57" cy="52" rx="40.5" ry="23.5" fill="url(#pe-carbon)" />
+
+    <!-- Back Bevel Rim Highlight -->
+    <path d="M 17 52 C 22 34, 60 28, 97 52" stroke="#334155" stroke-width="1.2" fill="none" opacity="0.7" />
+
+    <!-- High-Voltage Electric Cyan Glowing Edge (Top Right Deck Rim) -->
+    <path d="M 52 28.5 C 76 29, 97 38, 97 52 C 97 62, 80 71, 65 73.5" 
+          stroke="url(#pe-electric-edge)" 
+          stroke-width="3.5" 
+          stroke-linecap="round" 
+          fill="none" 
+          filter="url(#pe-electric-rim)" />
+    <!-- Inner White-Hot Core -->
+    <path d="M 55 29.2 C 77 30, 95.5 39, 95.5 52 C 95.5 61, 81 69.5, 67 72" 
+          stroke="#FFFFFF" 
+          stroke-width="1.4" 
+          stroke-linecap="round" 
+          fill="none" />
+
+    <!-- ========================================== -->
+    <!-- STYLIZED ATHLETIC "PE" MONOGRAM CREST       -->
+    <!-- ========================================== -->
+    <!-- Group tilted into puck isometric perspective -->
+    <g transform="translate(57, 52) rotate(-8) skewX(-12) translate(-57, -52)">
+      <!-- Outer White Bevel/Stroke of "P" and "E" Crest -->
+      <path d="M 34 32 L 54 32 C 63 32, 68 37, 68 45 C 68 53, 62 58, 53 58 L 45 58 L 41 74 L 31 74 L 38 46 L 34 46 Z" 
+            fill="#0b0e14" 
+            stroke="#FFFFFF" 
+            stroke-width="3.5" 
+            stroke-linejoin="miter" 
+            stroke-miterlimit="3" />
+      
+      <!-- Inner Cutout Hole of P -->
+      <path d="M 44 40 L 52 40 C 56 40, 58 42, 58 45 C 58 48, 56 50, 52 50 L 42 50 Z" 
+            fill="#FFFFFF" />
+      <path d="M 44.5 41 L 51.5 41 C 54.5 41, 56 42.5, 56 45 C 56 47.5, 54.5 49, 51.5 49 L 43 49 Z" 
+            fill="#0b0e14" />
+
+      <!-- Sharp Athletic Letter "E" Wings (Electric Cyan) -->
+      <!-- Top Bar of E -->
+      <polygon points="56,36 78,36 74,42 58,42" fill="url(#pe-cyan-grad)" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" />
+      <line x1="58" y1="38" x2="75" y2="38" stroke="#A5F3FC" stroke-width="1" />
+
+      <!-- Middle Bar of E (with arrow notch) -->
+      <polygon points="52,46 72,46 69,52 50,52" fill="url(#pe-cyan-grad)" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" />
+      <line x1="53" y1="48" x2="69" y2="48" stroke="#A5F3FC" stroke-width="1" />
+
+      <!-- Bottom Bar of E (longer dynamic baseline blade) -->
+      <polygon points="45,56 76,56 71,64 43,64" fill="url(#pe-cyan-grad)" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round" />
+      <line x1="46" y1="58.5" x2="72" y2="58.5" stroke="#A5F3FC" stroke-width="1.2" />
+    </g>
+
+    <!-- Star/Glow Sparkle at Rim Vertex -->
+    <circle cx="89" cy="38" r="2" fill="#FFFFFF" filter="url(#pe-glow-intense)" />
+    <path d="M 89 33 L 89 43 M 84 38 L 94 38" stroke="#FFFFFF" stroke-width="0.8" opacity="0.9" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. TYPOGRAPHY: PuckEdge.app                -->
+  <!-- ========================================== -->
+  <g transform="translate(130, 24)">
+    <!-- "PuckEdge" in Heavy Athletic Italic Black -->
+    <text x="0" y="44" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Montserrat', 'Impact', 'Arial Black', sans-serif" 
+          font-weight="900" 
+          font-style="italic" 
+          font-size="46" 
+          letter-spacing="-1.2" 
+          fill="#000000">PuckEdge</text>
+
+    <!-- ".app" in Vibrant Electric Cyan Blue -->
+    <!-- Dot -->
+    <rect x="220" y="34.5" width="8.5" height="8.5" rx="1.5" fill="#007AFF" />
+    <!-- app -->
+    <text x="232" y="44" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Montserrat', 'Arial Black', sans-serif" 
+          font-weight="900" 
+          font-style="italic" 
+          font-size="46" 
+          letter-spacing="-0.8" 
+          fill="#007AFF">app</text>
+
+    <!-- ========================================== -->
+    <!-- 3. TAGLINE                                 -->
+    <!-- ========================================== -->
+    <text x="0" y="70" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" 
+          font-weight="600" 
+          font-size="14.5" 
+          letter-spacing="0.1" 
+          fill="#334155">Independent Youth Hockey Scheduling &amp; Parity Tool</text>
+  </g>
+</svg>
