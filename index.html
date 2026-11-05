@@ -299,7 +299,7 @@
                 <div id="team-a-record-badge" class="flex items-center gap-1.5 truncate">
                   <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
                     <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
-                    Ranked (NY MHR)
+                    Ranked • AA (NY)
                   </span>
                   <span class="font-medium text-slate-600 truncate">18-7-3 • 12U (NY)</span>
                 </div>
@@ -525,7 +525,7 @@
                 <div id="team-b-record-badge" class="flex items-center gap-1.5 truncate">
                   <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
                     <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
-                    Ranked (NY MHR)
+                    Ranked • AA (NY)
                   </span>
                   <span class="font-medium text-slate-600 truncate">14-10-3 • 12U (NY)</span>
                 </div>
@@ -708,11 +708,11 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div>
               <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93] block">
-                Projected Goal Spread (Δ)
+                Projected Spread
               </span>
               <div class="flex items-baseline gap-2.5 mt-1">
-                <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1C1C1E]" id="hero-spread-val">
-                  Δ 0.25
+                <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF]" id="hero-spread-val">
+                  +0.25
                 </span>
                 <span class="text-xs font-medium text-[#8E8E93]" id="hero-favored-label">Even parity matchup</span>
               </div>
@@ -1306,6 +1306,22 @@
     <!-- JAVASCRIPT LOGIC ENGINE (100% PRESERVED MATH & STATE) -->
     <script>
       // ==========================================
+      // VERCEL WEB ANALYTICS SAFE EVENT DISPATCHER
+      // ==========================================
+      window.__puckedgeQueue = window.__puckedgeQueue || [];
+      function trackAnalyticsEvent(name, props) {
+        try {
+          if (typeof window.puckedgeTrack === 'function') {
+            window.puckedgeTrack(name, props);
+          } else {
+            window.__puckedgeQueue.push({ name, props });
+          }
+        } catch (err) {
+          // Safe fallback for local development or uninitialized tracking
+        }
+      }
+
+      // ==========================================
       // MASTER TEAMS DATASET (EMBEDDED FALLBACK)
       // ==========================================
       const FALLBACK_TEAMS = [
@@ -1453,6 +1469,7 @@
         state.teams = [...FALLBACK_TEAMS];
         state.teams.forEach(t => {
           if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
+          if (!t.tier) t.tier = getTeamTier(t);
         });
         updateTeamsCountBadge();
         updateTeamRecordBadges();
@@ -1466,6 +1483,7 @@
             if (Array.isArray(data) && data.length > 0) {
               data.forEach(t => {
                 if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
+                if (!t.tier) t.tier = getTeamTier(t);
               });
               state.teams = data;
               updateTeamsCountBadge();
@@ -1484,15 +1502,33 @@
         if (!badge) return;
         const total = state.teams.length;
         if (state.selectedDivision === 'ALL') {
-          badge.textContent = `${total} clubs loaded across 9U–18U birth years`;
+          badge.textContent = `${total.toLocaleString()} clubs loaded across nationwide directory`;
         } else {
           const inDiv = state.teams.filter(t => teamMatchesDivision(t, state.selectedDivision)).length;
-          badge.textContent = `${inDiv} clubs in ${state.selectedDivision} (${total} total)`;
+          badge.textContent = `${inDiv.toLocaleString()} clubs in ${state.selectedDivision} nationwide (${total.toLocaleString()} total)`;
         }
+      }
+
+      function getTeamTier(team) {
+        if (!team) return 'Tier 2';
+        if (team.tier) return team.tier;
+        const name = (team.name || '').toUpperCase();
+        if (name.includes('AAA')) return 'AAA';
+        if (name.includes('AA')) return 'AA';
+        if (name.includes(' A ') || name.endsWith(' A') || name.includes(' A-')) return 'A';
+        if (name.includes(' B ') || name.endsWith(' B')) return 'B';
+        return 'Tier 2';
+      }
+
+      function getTeamRankedBadgeText(team) {
+        const stateStr = (team && team.state) ? team.state : 'USA';
+        const tierStr = (team && team.tier) ? team.tier : getTeamTier(team);
+        return tierStr ? `Ranked • ${tierStr} (${stateStr})` : `Ranked (${stateStr})`;
       }
 
       function setDivisionFilter(div) {
         state.selectedDivision = div;
+        trackAnalyticsEvent('filter_division_changed', { division: div });
         MASTER_DIVISIONS.forEach(d => {
           const safeId = d.replace('/', '-');
           const btn = document.getElementById(`div-filter-${safeId}`);
@@ -1554,21 +1590,24 @@
 
           if (matched) {
             const ageTag = matched.age_bracket || matched.division;
+            const badgeText = getTeamRankedBadgeText(matched);
             badge.innerHTML = `
               <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
                 <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
-                Ranked (NY MHR)
+                ${badgeText}
               </span>
-              <span class="font-medium text-slate-600 truncate">${matched.record} • ${ageTag} (${matched.state})</span>
+              <span class="font-medium text-slate-600 truncate">${matched.record ? `${matched.record} • ` : ''}${ageTag} (${matched.state || 'USA'})</span>
             `;
             badge.className = 'flex items-center gap-1.5 truncate';
             state[`team${k.toUpperCase()}`].division = ageTag;
             state[`team${k.toUpperCase()}`].record = matched.record;
             state[`team${k.toUpperCase()}`].state = matched.state;
+            state[`team${k.toUpperCase()}`].tier = matched.tier || getTeamTier(matched);
           } else {
             const storedRec = state[`team${k.toUpperCase()}`].record;
+            const storedState = state[`team${k.toUpperCase()}`].state || '';
             if (storedRec) {
-              badge.innerHTML = `<span class="font-medium text-slate-600 truncate">Record: ${storedRec} • ${state[`team${k.toUpperCase()}`].division || 'Custom'}</span>`;
+              badge.innerHTML = `<span class="font-medium text-slate-600 truncate">Record: ${storedRec} • ${state[`team${k.toUpperCase()}`].division || 'Custom'}${storedState ? ` (${storedState})` : ''}</span>`;
             } else {
               badge.innerHTML = `
                 <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200 shrink-0">
@@ -1683,52 +1722,84 @@
         const q = (query || '').toLowerCase().trim();
         const activeDiv = state.selectedDivision;
 
+        function matchTeam(t) {
+          if (!q) return true;
+          const name = (t.name || '').toLowerCase();
+          const stateCode = (t.state || '').toLowerCase();
+          const tier = (t.tier || '').toLowerCase();
+          const age = (t.age_bracket || t.division || '').toLowerCase();
+
+          return name.includes(q) ||
+            stateCode === q ||
+            stateCode.includes(q) ||
+            tier.includes(q) ||
+            age.includes(q);
+        }
+
         let filtered = pool.filter(t => {
           const matchDiv = teamMatchesDivision(t, activeDiv);
-          const matchQuery = !q || 
-            t.name.toLowerCase().includes(q) || 
-            (t.state && t.state.toLowerCase().includes(q)) || 
-            (t.age_bracket && t.age_bracket.toLowerCase().includes(q)) ||
-            (t.division && t.division.toLowerCase().includes(q));
-          return matchDiv && matchQuery;
+          return matchDiv && matchTeam(t);
         });
 
-        // Fallback to all divisions if user typed query but zero results in current division
+        // Fallback to all divisions if user typed a specific query but zero results in active division
         if (filtered.length === 0 && q) {
-          filtered = pool.filter(t => 
-            t.name.toLowerCase().includes(q) || 
-            (t.state && t.state.toLowerCase().includes(q)) ||
-            (t.age_bracket && t.age_bracket.toLowerCase().includes(q))
-          );
+          filtered = pool.filter(t => matchTeam(t));
         }
 
         if (filtered.length === 0) {
           container.innerHTML = `
             <div class="px-3.5 py-3 text-xs text-slate-400 text-center">
-              No matching clubs found in directory. Keep typing to use custom name.
+              No matching clubs found in nationwide directory. Keep typing to use custom team name.
             </div>
           `;
           return;
         }
 
-        const displayItems = filtered.slice(0, 14);
+        // Sort: exact state match first, or name prefix match, then by rating descending
+        if (q) {
+          filtered.sort((a, b) => {
+            const aState = (a.state || '').toLowerCase();
+            const bState = (b.state || '').toLowerCase();
+            const aName = (a.name || '').toLowerCase();
+            const bName = (b.name || '').toLowerCase();
+
+            const aStateExact = aState === q;
+            const bStateExact = bState === q;
+            if (aStateExact && !bStateExact) return -1;
+            if (bStateExact && !aStateExact) return 1;
+
+            const aStarts = aName.startsWith(q);
+            const bStarts = bName.startsWith(q);
+            if (aStarts && !bStarts) return -1;
+            if (!aStarts && bStarts) return 1;
+
+            return (b.rating || 0) - (a.rating || 0);
+          });
+        }
+
+        const displayItems = filtered.slice(0, 18);
         container.innerHTML = displayItems.map(team => {
           const rawIdx = pool.indexOf(team);
           const displayBracket = team.age_bracket || team.division;
+          const stateTag = team.state || 'USA';
+          const tierTag = team.tier || getTeamTier(team);
+          const rankedBadge = `Ranked • ${tierTag} (${stateTag})`;
           return `
             <div
               onmousedown="selectTeamFromDropdown('${teamKey}', ${rawIdx})"
               class="px-3.5 py-2.5 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-3 group"
             >
               <div class="min-w-0 flex-1">
-                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">
-                  ${team.name}
+                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate flex items-center gap-1.5">
+                  <span class="truncate">${team.name}</span>
+                  <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70 shrink-0">${stateTag}</span>
                 </div>
                 <div class="text-[11px] text-slate-500 flex items-center gap-1.5 mt-0.5">
-                  <span class="font-medium text-slate-600">Rec: ${team.record}</span>
+                  <span class="font-medium text-slate-600">Rec: ${team.record || '--'}</span>
                   <span class="text-slate-300">•</span>
                   <span class="px-1.5 py-0.2 rounded bg-slate-100 text-[10px] font-semibold text-slate-700">${displayBracket}</span>
-                  <span class="text-slate-400 text-[10px]">${team.state}</span>
+                  <span class="text-slate-300">•</span>
+                  <span class="text-emerald-700 font-semibold text-[10px]">${rankedBadge}</span>
                 </div>
               </div>
               <div class="shrink-0 flex items-center gap-1 text-right">
@@ -1749,6 +1820,7 @@
         state[`team${teamKey.toUpperCase()}`].record = team.record;
         state[`team${teamKey.toUpperCase()}`].division = team.age_bracket || team.division;
         state[`team${teamKey.toUpperCase()}`].state = team.state;
+        state[`team${teamKey.toUpperCase()}`].tier = team.tier || getTeamTier(team);
 
         const nameEl = document.getElementById(`team-${teamKey}-name`);
         if (nameEl) nameEl.value = team.name;
@@ -1946,6 +2018,7 @@
       // ==========================================
       function switchMainTab(tab) {
         state.activeTab = tab;
+        trackAnalyticsEvent('tab_switched', { target_tab: tab });
         const viewPredictor = document.getElementById('view-predictor');
         const viewBracket = document.getElementById('view-bracket');
         const navPredictor = document.getElementById('nav-tab-predictor');
@@ -2021,6 +2094,17 @@
         if (!team) return;
         if (!team.modifiers) team.modifiers = { goalie: false, bench: false, fatigue: false };
         team.modifiers[modKey] = !team.modifiers[modKey];
+
+        const modifierLabels = {
+          goalie: 'Backup Goalie',
+          bench: 'Short Bench',
+          fatigue: '3rd Game in 24h'
+        };
+        trackAnalyticsEvent('modifier_toggled', {
+          modifier: modifierLabels[modKey] || modKey,
+          active: !!team.modifiers[modKey]
+        });
+
         updateModifierChips();
         updatePredictor();
       }
@@ -2140,7 +2224,10 @@
         const tacticalSummary = document.getElementById('tactical-summary-text');
 
         if (!isReady) {
-          if (heroSpreadVal) heroSpreadVal.textContent = 'Δ --';
+          if (heroSpreadVal) {
+            heroSpreadVal.textContent = '--';
+            heroSpreadVal.className = 'text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-400';
+          }
           if (heroFavoredLabel) {
             if (!nameA && !nameB) {
               heroFavoredLabel.textContent = 'Select or enter both teams above to predict matchup';
@@ -2194,7 +2281,23 @@
 
         // Differential calculation
         const spread = parseFloat(Math.abs(effA - effB).toFixed(2));
-        if (heroSpreadVal) heroSpreadVal.textContent = `Δ ${spread.toFixed(2)}`;
+        if (heroSpreadVal) {
+          heroSpreadVal.textContent = `+${spread.toFixed(2)}`;
+          if (spread === 0) {
+            heroSpreadVal.className = 'text-4xl sm:text-5xl font-extrabold tracking-tight text-[#34C759]';
+          } else if (effA > effB) {
+            heroSpreadVal.className = 'text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF]';
+          } else {
+            heroSpreadVal.className = 'text-4xl sm:text-5xl font-extrabold tracking-tight text-[#FF9500]';
+          }
+        }
+
+        trackAnalyticsEvent('matchup_analyzed', {
+          division: state.selectedDivision,
+          team1_name: nameA,
+          team2_name: nameB,
+          spread: spread
+        });
 
         // Favored Team Label
         if (heroFavoredLabel) {
@@ -2369,7 +2472,7 @@
 
         const pitchText = `Hi Coach,
 
-I hope your season is going well. Based on current rating differential analytics, our clubs project to a tight goal spread of Δ ${spread} (${state.teamA.name} vs ${state.teamB.name}), which makes this an ideal high-parity developmental matchup for both squads.
+I hope your season is going well. Based on current rating differential analytics, our clubs project to a tight goal spread of +${spread} (${state.teamA.name} vs ${state.teamB.name}), which makes this an ideal high-parity developmental matchup for both squads.
 
 Proposed Details:
 - Teams: ${state.teamA.name} vs ${state.teamB.name}
@@ -2465,6 +2568,7 @@ Coach / Scheduler (${state.teamA.name})`;
       function setBracketTeamCount(count) {
         state.bracket.teamCount = count;
         state.bracket.advances = {};
+        trackAnalyticsEvent('bracket_generated', { team_count: count });
         const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
 
         while (state.bracket.teams.length < count) {
@@ -2531,22 +2635,27 @@ Coach / Scheduler (${state.teamA.name})`;
           return `<span class="text-slate-400 text-[10px] italic">No team selected (TBD)</span>`;
         }
         const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
-        const matched = pool.find(t => t.name.toLowerCase() === team.name.toLowerCase().trim());
+        const matched = pool.find(t => t.name.toLowerCase() === team.name.toLowerCase().trim())
+          || pool.find(t => t.name.toLowerCase().includes(team.name.toLowerCase().trim()));
         if (matched) {
+          const badgeText = getTeamRankedBadgeText(matched);
+          const stateTag = matched.state || team.state || 'USA';
           return `
             <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/80 shrink-0">
-              <i class="fa-solid fa-circle-check text-[9px]"></i> Ranked (NY MHR)
+              <i class="fa-solid fa-circle-check text-[9px]"></i> ${badgeText}
             </span>
-            <span class="font-medium text-slate-600 text-[10px] shrink-0">Rec: ${matched.record}</span>
+            <span class="font-medium text-slate-600 text-[10px] shrink-0">Rec: ${matched.record || '--'}</span>
             <span class="text-slate-300">•</span>
             <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700 text-[10px] shrink-0">${matched.age_bracket || matched.division}</span>
-            <span class="text-slate-400 text-[10px] shrink-0">${matched.state}</span>
+            <span class="text-slate-400 text-[10px] shrink-0">${stateTag}</span>
           `;
         } else {
+          const stateTag = team.state ? ` (${team.state})` : '';
           return `
             <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-semibold border border-slate-200 shrink-0">
               <i class="fa-solid fa-pen text-[9px] text-slate-400"></i> Custom / Unranked
             </span>
+            <span class="text-slate-400 text-[10px] shrink-0">${team.division || ''}${stateTag}</span>
           `;
         }
       }
@@ -2737,51 +2846,83 @@ Coach / Scheduler (${state.teamA.name})`;
         const q = (query || '').toLowerCase().trim();
         const activeDiv = state.selectedDivision;
 
+        function matchTeam(t) {
+          if (!q) return true;
+          const name = (t.name || '').toLowerCase();
+          const stateCode = (t.state || '').toLowerCase();
+          const tier = (t.tier || '').toLowerCase();
+          const age = (t.age_bracket || t.division || '').toLowerCase();
+
+          return name.includes(q) ||
+            stateCode === q ||
+            stateCode.includes(q) ||
+            tier.includes(q) ||
+            age.includes(q);
+        }
+
         let filtered = pool.filter(t => {
           const matchDiv = teamMatchesDivision(t, activeDiv);
-          const matchQuery = !q || 
-            t.name.toLowerCase().includes(q) || 
-            (t.state && t.state.toLowerCase().includes(q)) || 
-            (t.age_bracket && t.age_bracket.toLowerCase().includes(q)) ||
-            (t.division && t.division.toLowerCase().includes(q));
-          return matchDiv && matchQuery;
+          return matchDiv && matchTeam(t);
         });
 
         if (filtered.length === 0 && q) {
-          filtered = pool.filter(t => 
-            t.name.toLowerCase().includes(q) || 
-            (t.state && t.state.toLowerCase().includes(q)) ||
-            (t.age_bracket && t.age_bracket.toLowerCase().includes(q))
-          );
+          filtered = pool.filter(t => matchTeam(t));
         }
 
         if (filtered.length === 0) {
           container.innerHTML = `
             <div class="px-3.5 py-3 text-xs text-slate-400 text-center">
-              No matching clubs found. Press Enter to use custom team.
+              No matching clubs found in nationwide directory. Press Enter to use custom team.
             </div>
           `;
           return;
         }
 
-        const displayItems = filtered.slice(0, 10);
+        // Sort: exact state match first, or name prefix match, then by rating descending
+        if (q) {
+          filtered.sort((a, b) => {
+            const aState = (a.state || '').toLowerCase();
+            const bState = (b.state || '').toLowerCase();
+            const aName = (a.name || '').toLowerCase();
+            const bName = (b.name || '').toLowerCase();
+
+            const aStateExact = aState === q;
+            const bStateExact = bState === q;
+            if (aStateExact && !bStateExact) return -1;
+            if (bStateExact && !aStateExact) return 1;
+
+            const aStarts = aName.startsWith(q);
+            const bStarts = bName.startsWith(q);
+            if (aStarts && !bStarts) return -1;
+            if (!aStarts && bStarts) return 1;
+
+            return (b.rating || 0) - (a.rating || 0);
+          });
+        }
+
+        const displayItems = filtered.slice(0, 16);
         container.innerHTML = displayItems.map(team => {
           const rawIdx = pool.indexOf(team);
           const displayBracket = team.age_bracket || team.division;
+          const stateTag = team.state || 'USA';
+          const tierTag = team.tier || getTeamTier(team);
+          const rankedBadge = `Ranked • ${tierTag} (${stateTag})`;
           return `
             <div
               onmousedown="selectBracketTeamFromDropdown(${idx}, ${rawIdx})"
               class="px-3.5 py-2 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-3 group"
             >
               <div class="min-w-0 flex-1">
-                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">
-                  ${escapeHtml(team.name)}
+                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate flex items-center gap-1.5">
+                  <span class="truncate">${escapeHtml(team.name)}</span>
+                  <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-[#007AFF] border border-blue-200/60 shrink-0">${stateTag}</span>
                 </div>
                 <div class="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5">
-                  <span class="font-medium text-slate-600">Rec: ${team.record}</span>
+                  <span class="font-medium text-slate-600">Rec: ${team.record || '--'}</span>
                   <span class="text-slate-300">•</span>
                   <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700">${displayBracket}</span>
-                  <span class="text-slate-400">${team.state}</span>
+                  <span class="text-slate-300">•</span>
+                  <span class="text-emerald-700 font-semibold text-[10px]">${rankedBadge}</span>
                 </div>
               </div>
               <div class="shrink-0 flex items-center gap-1 text-right">
@@ -2802,6 +2943,7 @@ Coach / Scheduler (${state.teamA.name})`;
         state.bracket.teams[idx].record = team.record;
         state.bracket.teams[idx].division = team.age_bracket || team.division;
         state.bracket.teams[idx].state = team.state;
+        state.bracket.teams[idx].tier = team.tier || getTeamTier(team);
 
         const nameInput = document.getElementById(`bracket-slot-name-${idx}`);
         if (nameInput) nameInput.value = team.name;
@@ -3339,7 +3481,12 @@ Coach / Scheduler (${state.teamA.name})`;
         updatePredictor();
         recalculateCosts();
         renderBracketView();
+        trackAnalyticsEvent('bracket_generated', { team_count: state.bracket.teams.length });
       });
     </script>
+
+    <!-- Vercel Web Analytics Root Container & React Module Entry -->
+    <div id="root" class="hidden"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
