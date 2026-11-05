@@ -55,6 +55,21 @@
         -moz-appearance: textfield;
       }
 
+      /* Accordion Tray Slide/Fade Transition */
+      @keyframes accordionSlideFade {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-tray-open {
+        animation: accordionSlideFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
       /* Export Division Report Print Stylesheet */
       @media print {
         header, footer, nav, #btn-export-division-report, .no-print {
@@ -152,7 +167,7 @@
               <span class="text-[11px] text-[#8E8E93] block" id="teams-dataset-count">Loading master team directory...</span>
             </div>
           </div>
-          <!-- Division Filter Pills -->
+          <!-- Division Filter Pills (Master Importer Categories) -->
           <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 sm:pb-0" id="division-filter-pills">
             <button
               type="button"
@@ -164,11 +179,27 @@
             </button>
             <button
               type="button"
+              onclick="setDivisionFilter('9U')"
+              id="div-filter-9U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              9U
+            </button>
+            <button
+              type="button"
               onclick="setDivisionFilter('10U')"
               id="div-filter-10U"
               class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
             >
               10U
+            </button>
+            <button
+              type="button"
+              onclick="setDivisionFilter('11U')"
+              id="div-filter-11U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              11U
             </button>
             <button
               type="button"
@@ -180,6 +211,14 @@
             </button>
             <button
               type="button"
+              onclick="setDivisionFilter('13U')"
+              id="div-filter-13U"
+              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+            >
+              13U
+            </button>
+            <button
+              type="button"
               onclick="setDivisionFilter('14U')"
               id="div-filter-14U"
               class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
@@ -188,11 +227,11 @@
             </button>
             <button
               type="button"
-              onclick="setDivisionFilter('16U')"
-              id="div-filter-16U"
+              onclick="setDivisionFilter('16U/15U')"
+              id="div-filter-16U-15U"
               class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
             >
-              16U
+              16U/15U
             </button>
             <button
               type="button"
@@ -312,84 +351,124 @@
               </div>
             </div>
 
-            <!-- "Estimate by Tier" Helper Pill Buttons -->
-            <div class="space-y-1.5 pt-1 border-t border-slate-100/90">
-              <div class="flex items-center justify-between text-xs text-[#8E8E93]">
-                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+            <!-- Collapsible Tray 1: Estimate by Tier (1-Tap Benchmarks) -->
+            <div class="border-t border-slate-100/90 pt-1">
+              <button
+                type="button"
+                onclick="toggleCardTray('a', 'tier')"
+                id="tray-btn-a-tier"
+                aria-expanded="false"
+                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
+              >
+                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#007AFF]">
                   <i class="fa-solid fa-chart-line text-[#007AFF] text-[10px]"></i>
-                  Estimate by Tier
+                  <span>Estimate by Tier (1-Tap Benchmarks)</span>
                 </span>
-                <span class="text-[10px] text-slate-400">1-Tap benchmark</span>
-              </div>
-              <div class="flex flex-wrap gap-1.5">
-                <button
-                  type="button"
-                  onclick="setTierRating('a', 92.50, 'AAA / Elite')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('a', 85.00, 'Tier 2 AA')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('a', 78.50, 'Tier 2 A')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('a', 71.00, 'Tier 3 B')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('a', 64.00, 'House / Rec')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  House / Rec <span class="text-slate-400 font-normal">64.0</span>
-                </button>
+                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
+                  <i id="tray-chevron-a-tier" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                </span>
+              </button>
+              <div
+                id="tray-content-a-tier"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
+              >
+                <div class="flex flex-wrap gap-1.5">
+                  <button
+                    type="button"
+                    onclick="setTierRating('a', 92.50, 'AAA / Elite')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('a', 85.00, 'Tier 2 AA')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('a', 78.50, 'Tier 2 A')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('a', 71.00, 'Tier 3 B')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('a', 64.00, 'House / Rec')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    House / Rec <span class="text-slate-400 font-normal">64.0</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            <!-- Situational Modifier Chips (iOS Toggle Style) -->
-            <div class="space-y-2 pt-1 border-t border-slate-100/90">
-              <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">
-                Situational Modifiers
-              </span>
-              <div class="flex flex-wrap gap-1.5">
-                <button
-                  type="button"
-                  id="mod-a-goalie"
-                  onclick="toggleModifier('a', 'goalie')"
-                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                >
-                  Backup Goalie (-0.75)
-                </button>
-                <button
-                  type="button"
-                  id="mod-a-bench"
-                  onclick="toggleModifier('a', 'bench')"
-                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                >
-                  Short Bench (-0.50)
-                </button>
-                <button
-                  type="button"
-                  id="mod-a-fatigue"
-                  onclick="toggleModifier('a', 'fatigue')"
-                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                >
-                  3rd Game in 24h (-0.50)
-                </button>
+            <!-- Collapsible Tray 2: Situational Modifiers -->
+            <div class="border-t border-slate-100/90 pt-1">
+              <button
+                type="button"
+                onclick="toggleCardTray('a', 'modifiers')"
+                id="tray-btn-a-modifiers"
+                aria-expanded="false"
+                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#007AFF]">
+                    <i class="fa-solid fa-sliders text-[#007AFF] text-[10px]"></i>
+                    <span>Situational Modifiers</span>
+                  </span>
+                  <!-- Pill badge shown if active (e.g. "1 active") -->
+                  <span
+                    id="tray-mod-badge-a"
+                    class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-[#FF3B30] border border-rose-200/90"
+                  >
+                    1 active
+                  </span>
+                </div>
+                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
+                  <span id="tray-mod-summary-a" class="text-[10px] text-slate-400 font-medium">Goalie, bench, rest</span>
+                  <i id="tray-chevron-a-modifiers" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                </span>
+              </button>
+              <div
+                id="tray-content-a-modifiers"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
+              >
+                <div class="flex flex-wrap gap-1.5">
+                  <button
+                    type="button"
+                    id="mod-a-goalie"
+                    onclick="toggleModifier('a', 'goalie')"
+                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                  >
+                    Backup Goalie (-0.75)
+                  </button>
+                  <button
+                    type="button"
+                    id="mod-a-bench"
+                    onclick="toggleModifier('a', 'bench')"
+                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                  >
+                    Short Bench (-0.50)
+                  </button>
+                  <button
+                    type="button"
+                    id="mod-a-fatigue"
+                    onclick="toggleModifier('a', 'fatigue')"
+                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                  >
+                    3rd Game in 24h (-0.50)
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -498,84 +577,124 @@
               </div>
             </div>
 
-            <!-- "Estimate by Tier" Helper Pill Buttons -->
-            <div class="space-y-1.5 pt-1 border-t border-slate-100/90">
-              <div class="flex items-center justify-between text-xs text-[#8E8E93]">
-                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+            <!-- Collapsible Tray 1: Estimate by Tier (1-Tap Benchmarks) -->
+            <div class="border-t border-slate-100/90 pt-1">
+              <button
+                type="button"
+                onclick="toggleCardTray('b', 'tier')"
+                id="tray-btn-b-tier"
+                aria-expanded="false"
+                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
+              >
+                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#FF9500]">
                   <i class="fa-solid fa-chart-line text-[#FF9500] text-[10px]"></i>
-                  Estimate by Tier
+                  <span>Estimate by Tier (1-Tap Benchmarks)</span>
                 </span>
-                <span class="text-[10px] text-slate-400">1-Tap benchmark</span>
-              </div>
-              <div class="flex flex-wrap gap-1.5">
-                <button
-                  type="button"
-                  onclick="setTierRating('b', 92.50, 'AAA / Elite')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('b', 85.00, 'Tier 2 AA')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('b', 78.50, 'Tier 2 A')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('b', 71.00, 'Tier 3 B')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
-                </button>
-                <button
-                  type="button"
-                  onclick="setTierRating('b', 64.00, 'House / Rec')"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                >
-                  House / Rec <span class="text-slate-400 font-normal">64.0</span>
-                </button>
+                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
+                  <i id="tray-chevron-b-tier" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                </span>
+              </button>
+              <div
+                id="tray-content-b-tier"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
+              >
+                <div class="flex flex-wrap gap-1.5">
+                  <button
+                    type="button"
+                    onclick="setTierRating('b', 92.50, 'AAA / Elite')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('b', 85.00, 'Tier 2 AA')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('b', 78.50, 'Tier 2 A')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('b', 71.00, 'Tier 3 B')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTierRating('b', 64.00, 'House / Rec')"
+                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                  >
+                    House / Rec <span class="text-slate-400 font-normal">64.0</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            <!-- Situational Modifier Chips (iOS Toggle Style) -->
-            <div class="space-y-2 pt-1 border-t border-slate-100/90">
-              <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">
-                Situational Modifiers
-              </span>
-              <div class="flex flex-wrap gap-1.5">
-                <button
-                  type="button"
-                  id="mod-b-goalie"
-                  onclick="toggleModifier('b', 'goalie')"
-                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                >
-                  Backup Goalie (-0.75)
-                </button>
-                <button
-                  type="button"
-                  id="mod-b-bench"
-                  onclick="toggleModifier('b', 'bench')"
-                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                >
-                  Short Bench (-0.50)
-                </button>
-                <button
-                  type="button"
-                  id="mod-b-fatigue"
-                  onclick="toggleModifier('b', 'fatigue')"
-                  class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                >
-                  3rd Game in 24h (-0.50)
-                </button>
+            <!-- Collapsible Tray 2: Situational Modifiers -->
+            <div class="border-t border-slate-100/90 pt-1">
+              <button
+                type="button"
+                onclick="toggleCardTray('b', 'modifiers')"
+                id="tray-btn-b-modifiers"
+                aria-expanded="false"
+                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#FF9500]">
+                    <i class="fa-solid fa-sliders text-[#FF9500] text-[10px]"></i>
+                    <span>Situational Modifiers</span>
+                  </span>
+                  <!-- Pill badge shown if active (e.g. "1 active") -->
+                  <span
+                    id="tray-mod-badge-b"
+                    class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200/90"
+                  >
+                    1 active
+                  </span>
+                </div>
+                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
+                  <span id="tray-mod-summary-b" class="text-[10px] text-slate-400 font-medium">Goalie, bench, rest</span>
+                  <i id="tray-chevron-b-modifiers" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                </span>
+              </button>
+              <div
+                id="tray-content-b-modifiers"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
+              >
+                <div class="flex flex-wrap gap-1.5">
+                  <button
+                    type="button"
+                    id="mod-b-goalie"
+                    onclick="toggleModifier('b', 'goalie')"
+                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                  >
+                    Backup Goalie (-0.75)
+                  </button>
+                  <button
+                    type="button"
+                    id="mod-b-bench"
+                    onclick="toggleModifier('b', 'bench')"
+                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                  >
+                    Short Bench (-0.50)
+                  </button>
+                  <button
+                    type="button"
+                    id="mod-b-fatigue"
+                    onclick="toggleModifier('b', 'fatigue')"
+                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                  >
+                    3rd Game in 24h (-0.50)
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1033,10 +1152,13 @@
             <div class="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
               <span class="text-[#8E8E93] font-medium text-[11px] mr-1">Filter Div:</span>
               <button onclick="setBracketDivisionFilter('ALL')" id="bracket-div-ALL" class="px-2 py-1 rounded-lg text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer">ALL</button>
+              <button onclick="setBracketDivisionFilter('9U')" id="bracket-div-9U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">9U</button>
               <button onclick="setBracketDivisionFilter('10U')" id="bracket-div-10U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">10U</button>
+              <button onclick="setBracketDivisionFilter('11U')" id="bracket-div-11U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">11U</button>
               <button onclick="setBracketDivisionFilter('12U')" id="bracket-div-12U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">12U</button>
+              <button onclick="setBracketDivisionFilter('13U')" id="bracket-div-13U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">13U</button>
               <button onclick="setBracketDivisionFilter('14U')" id="bracket-div-14U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">14U</button>
-              <button onclick="setBracketDivisionFilter('16U')" id="bracket-div-16U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">16U</button>
+              <button onclick="setBracketDivisionFilter('16U/15U')" id="bracket-div-16U-15U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">16U/15U</button>
               <button onclick="setBracketDivisionFilter('18U')" id="bracket-div-18U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">18U</button>
             </div>
           </div>
@@ -1298,23 +1420,58 @@
       };
 
       // ==========================================
-      // DATA INGESTION & DIVISION FILTER
+      // DATA INGESTION & AGE-BRACKET DIVISION FILTER
       // ==========================================
+      const MASTER_DIVISIONS = ['ALL', '9U', '10U', '11U', '12U', '13U', '14U', '16U/15U', '18U'];
+
+      function getTeamAgeBracket(team) {
+        if (team && team.age_bracket) return team.age_bracket;
+        const name = (team && team.name) ? team.name : '';
+        if (/\b9U\b/i.test(name)) return '9U';
+        if (/\b10U\b/i.test(name)) return '10U';
+        if (/\b11U\b/i.test(name)) return '11U';
+        if (/\b12U\b/i.test(name)) return '12U';
+        if (/\b13U\b/i.test(name)) return '13U';
+        if (/\b14U\b/i.test(name)) return '14U';
+        if (/\b15U\b/i.test(name)) return '15U';
+        if (/\b16U\b/i.test(name)) return '16U';
+        if (/\b18U\b/i.test(name)) return '18U';
+        return (team && team.division) ? team.division : '12U';
+      }
+
+      function teamMatchesDivision(team, selectedDivision) {
+        if (!selectedDivision || selectedDivision === 'ALL') return true;
+        const bracket = getTeamAgeBracket(team);
+        const div = (team && team.division) ? team.division : '';
+        if (selectedDivision === '16U/15U') {
+          return bracket === '16U' || bracket === '15U' || div === '16U' || div === '15U';
+        }
+        return bracket === selectedDivision || div === selectedDivision;
+      }
+
       async function initTeamsData() {
         state.teams = [...FALLBACK_TEAMS];
+        state.teams.forEach(t => {
+          if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
+        });
         updateTeamsCountBadge();
         updateTeamRecordBadges();
         updateClearButtons();
+        updateModifierChips();
 
         try {
           const res = await fetch('/teams.json');
           if (res.ok) {
             const data = await res.json();
             if (Array.isArray(data) && data.length > 0) {
+              data.forEach(t => {
+                if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
+              });
               state.teams = data;
               updateTeamsCountBadge();
               updateTeamRecordBadges();
               updateClearButtons();
+              updateModifierChips();
             }
           }
         } catch (err) {
@@ -1327,24 +1484,30 @@
         if (!badge) return;
         const total = state.teams.length;
         if (state.selectedDivision === 'ALL') {
-          badge.textContent = `${total} clubs loaded across 10U–18U divisions`;
+          badge.textContent = `${total} clubs loaded across 9U–18U birth years`;
         } else {
-          const inDiv = state.teams.filter(t => t.division === state.selectedDivision).length;
+          const inDiv = state.teams.filter(t => teamMatchesDivision(t, state.selectedDivision)).length;
           badge.textContent = `${inDiv} clubs in ${state.selectedDivision} (${total} total)`;
         }
       }
 
       function setDivisionFilter(div) {
         state.selectedDivision = div;
-        const divs = ['ALL', '10U', '12U', '14U', '16U', '18U'];
-        divs.forEach(d => {
-          const btn = document.getElementById(`div-filter-${d}`);
+        MASTER_DIVISIONS.forEach(d => {
+          const safeId = d.replace('/', '-');
+          const btn = document.getElementById(`div-filter-${safeId}`);
           if (btn) {
             if (d === div) {
               btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap';
             } else {
               btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap';
             }
+          }
+          const bracketBtn = document.getElementById(`bracket-div-${safeId}`);
+          if (bracketBtn) {
+            bracketBtn.className = (d === div)
+              ? 'px-2 py-1 rounded-lg text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer'
+              : 'px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer';
           }
         });
 
@@ -1361,11 +1524,15 @@
 
       function detectDivision(teamName) {
         const str = (teamName || '').toUpperCase();
-        if (str.includes('10U')) return '10U';
-        if (str.includes('12U')) return '12U';
-        if (str.includes('14U')) return '14U';
-        if (str.includes('16U')) return '16U';
-        if (str.includes('18U')) return '18U';
+        if (/\b9U\b/.test(str)) return '9U';
+        if (/\b10U\b/.test(str)) return '10U';
+        if (/\b11U\b/.test(str)) return '11U';
+        if (/\b12U\b/.test(str)) return '12U';
+        if (/\b13U\b/.test(str)) return '13U';
+        if (/\b14U\b/.test(str)) return '14U';
+        if (/\b15U\b/.test(str)) return '15U';
+        if (/\b16U\b/.test(str)) return '16U';
+        if (/\b18U\b/.test(str)) return '18U';
         return null;
       }
 
@@ -1386,15 +1553,16 @@
             || pool.find(t => t.name.toLowerCase().includes(name.toLowerCase()));
 
           if (matched) {
+            const ageTag = matched.age_bracket || matched.division;
             badge.innerHTML = `
               <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
                 <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
                 Ranked (NY MHR)
               </span>
-              <span class="font-medium text-slate-600 truncate">${matched.record} • ${matched.division} (${matched.state})</span>
+              <span class="font-medium text-slate-600 truncate">${matched.record} • ${ageTag} (${matched.state})</span>
             `;
             badge.className = 'flex items-center gap-1.5 truncate';
-            state[`team${k.toUpperCase()}`].division = matched.division;
+            state[`team${k.toUpperCase()}`].division = ageTag;
             state[`team${k.toUpperCase()}`].record = matched.record;
             state[`team${k.toUpperCase()}`].state = matched.state;
           } else {
@@ -1516,14 +1684,22 @@
         const activeDiv = state.selectedDivision;
 
         let filtered = pool.filter(t => {
-          const matchDiv = (activeDiv === 'ALL' || t.division === activeDiv);
-          const matchQuery = !q || t.name.toLowerCase().includes(q) || t.state.toLowerCase().includes(q) || t.division.toLowerCase().includes(q);
+          const matchDiv = teamMatchesDivision(t, activeDiv);
+          const matchQuery = !q || 
+            t.name.toLowerCase().includes(q) || 
+            (t.state && t.state.toLowerCase().includes(q)) || 
+            (t.age_bracket && t.age_bracket.toLowerCase().includes(q)) ||
+            (t.division && t.division.toLowerCase().includes(q));
           return matchDiv && matchQuery;
         });
 
         // Fallback to all divisions if user typed query but zero results in current division
         if (filtered.length === 0 && q) {
-          filtered = pool.filter(t => t.name.toLowerCase().includes(q) || t.state.toLowerCase().includes(q));
+          filtered = pool.filter(t => 
+            t.name.toLowerCase().includes(q) || 
+            (t.state && t.state.toLowerCase().includes(q)) ||
+            (t.age_bracket && t.age_bracket.toLowerCase().includes(q))
+          );
         }
 
         if (filtered.length === 0) {
@@ -1538,6 +1714,7 @@
         const displayItems = filtered.slice(0, 14);
         container.innerHTML = displayItems.map(team => {
           const rawIdx = pool.indexOf(team);
+          const displayBracket = team.age_bracket || team.division;
           return `
             <div
               onmousedown="selectTeamFromDropdown('${teamKey}', ${rawIdx})"
@@ -1550,7 +1727,7 @@
                 <div class="text-[11px] text-slate-500 flex items-center gap-1.5 mt-0.5">
                   <span class="font-medium text-slate-600">Rec: ${team.record}</span>
                   <span class="text-slate-300">•</span>
-                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-[10px] font-semibold text-slate-700">${team.division}</span>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-[10px] font-semibold text-slate-700">${displayBracket}</span>
                   <span class="text-slate-400 text-[10px]">${team.state}</span>
                 </div>
               </div>
@@ -1570,7 +1747,7 @@
         state[`team${teamKey.toUpperCase()}`].name = team.name;
         state[`team${teamKey.toUpperCase()}`].baseRating = team.rating;
         state[`team${teamKey.toUpperCase()}`].record = team.record;
-        state[`team${teamKey.toUpperCase()}`].division = team.division;
+        state[`team${teamKey.toUpperCase()}`].division = team.age_bracket || team.division;
         state[`team${teamKey.toUpperCase()}`].state = team.state;
 
         const nameEl = document.getElementById(`team-${teamKey}-name`);
@@ -1848,20 +2025,69 @@
         updatePredictor();
       }
 
+      function toggleCardTray(teamKey, trayType) {
+        const content = document.getElementById(`tray-content-${teamKey}-${trayType}`);
+        const chevron = document.getElementById(`tray-chevron-${teamKey}-${trayType}`);
+        const btn = document.getElementById(`tray-btn-${teamKey}-${trayType}`);
+        if (!content) return;
+
+        const isClosed = content.classList.contains('hidden');
+        if (isClosed) {
+          content.classList.remove('hidden');
+          content.classList.add('animate-tray-open');
+          if (chevron) chevron.classList.add('rotate-180');
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+        } else {
+          content.classList.add('hidden');
+          content.classList.remove('animate-tray-open');
+          if (chevron) chevron.classList.remove('rotate-180');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+      }
+
       function updateModifierChips() {
         ['a', 'b'].forEach(teamKey => {
           const team = state[`team${teamKey.toUpperCase()}`];
           if (!team || !team.modifiers) return;
+          let activeCount = 0;
+          let totalPenalty = 0;
+
           ['goalie', 'bench', 'fatigue'].forEach(modKey => {
             const btn = document.getElementById(`mod-${teamKey}-${modKey}`);
             if (!btn) return;
             const isActive = !!team.modifiers[modKey];
             if (isActive) {
+              activeCount++;
+              if (modKey === 'goalie') totalPenalty += 0.75;
+              if (modKey === 'bench') totalPenalty += 0.50;
+              if (modKey === 'fatigue') totalPenalty += 0.50;
               btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold border border-rose-300 bg-rose-50 text-[#FF3B30] shadow-xs transition-colors cursor-pointer ring-1 ring-rose-200';
             } else {
               btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer';
             }
           });
+
+          // Update active badge in collapsible tray header
+          const badge = document.getElementById(`tray-mod-badge-${teamKey}`);
+          if (badge) {
+            if (activeCount > 0) {
+              badge.textContent = `${activeCount} active`;
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
+          }
+
+          const summary = document.getElementById(`tray-mod-summary-${teamKey}`);
+          if (summary) {
+            if (activeCount > 0) {
+              summary.textContent = `-${totalPenalty.toFixed(2)} pts penalty`;
+              summary.className = 'text-[10px] text-[#FF3B30] font-bold';
+            } else {
+              summary.textContent = 'Goalie, bench, rest';
+              summary.className = 'text-[10px] text-slate-400 font-medium';
+            }
+          }
         });
       }
 
@@ -2226,23 +2452,7 @@ Coach / Scheduler (${state.teamA.name})`;
       };
 
       function setBracketDivisionFilter(div) {
-        state.selectedDivision = div;
-        const divs = ['ALL', '10U', '12U', '14U', '16U', '18U'];
-        divs.forEach(d => {
-          const btn1 = document.getElementById(`div-filter-${d}`);
-          if (btn1) {
-            btn1.className = (d === div)
-              ? 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap'
-              : 'px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap';
-          }
-          const btn2 = document.getElementById(`bracket-div-${d}`);
-          if (btn2) {
-            btn2.className = (d === div)
-              ? 'px-2 py-1 rounded-lg text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer'
-              : 'px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer';
-          }
-        });
-        updateTeamsCountBadge();
+        setDivisionFilter(div);
         state.bracket.teams.forEach((_, i) => {
           const dd = document.getElementById(`bracket-dropdown-${i}`);
           if (dd && !dd.classList.contains('hidden')) {
@@ -2261,7 +2471,7 @@ Coach / Scheduler (${state.teamA.name})`;
           const idx = state.bracket.teams.length;
           const existingNames = state.bracket.teams.map(t => (t.name || '').toLowerCase());
           const candidate = pool.find(t => {
-            const matchDiv = (state.selectedDivision === 'ALL' || t.division === state.selectedDivision);
+            const matchDiv = teamMatchesDivision(t, state.selectedDivision);
             return matchDiv && !existingNames.includes(t.name.toLowerCase());
           }) || pool.find(t => !existingNames.includes(t.name.toLowerCase())) || pool[idx % pool.length];
 
@@ -2270,7 +2480,7 @@ Coach / Scheduler (${state.teamA.name})`;
               name: candidate.name,
               rating: candidate.rating,
               record: candidate.record,
-              division: candidate.division,
+              division: candidate.age_bracket || candidate.division,
               state: candidate.state
             });
           } else {
@@ -2329,7 +2539,7 @@ Coach / Scheduler (${state.teamA.name})`;
             </span>
             <span class="font-medium text-slate-600 text-[10px] shrink-0">Rec: ${matched.record}</span>
             <span class="text-slate-300">•</span>
-            <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700 text-[10px] shrink-0">${matched.division}</span>
+            <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700 text-[10px] shrink-0">${matched.age_bracket || matched.division}</span>
             <span class="text-slate-400 text-[10px] shrink-0">${matched.state}</span>
           `;
         } else {
@@ -2496,7 +2706,7 @@ Coach / Scheduler (${state.teamA.name})`;
           if (matched) {
             state.bracket.teams[idx].rating = matched.rating;
             state.bracket.teams[idx].record = matched.record;
-            state.bracket.teams[idx].division = matched.division;
+            state.bracket.teams[idx].division = matched.age_bracket || matched.division;
             state.bracket.teams[idx].state = matched.state;
             const ratingInput = document.getElementById(`bracket-team-rating-${idx}`);
             if (ratingInput) ratingInput.value = matched.rating.toFixed(2);
@@ -2528,13 +2738,21 @@ Coach / Scheduler (${state.teamA.name})`;
         const activeDiv = state.selectedDivision;
 
         let filtered = pool.filter(t => {
-          const matchDiv = (activeDiv === 'ALL' || t.division === activeDiv);
-          const matchQuery = !q || t.name.toLowerCase().includes(q) || t.state.toLowerCase().includes(q) || t.division.toLowerCase().includes(q);
+          const matchDiv = teamMatchesDivision(t, activeDiv);
+          const matchQuery = !q || 
+            t.name.toLowerCase().includes(q) || 
+            (t.state && t.state.toLowerCase().includes(q)) || 
+            (t.age_bracket && t.age_bracket.toLowerCase().includes(q)) ||
+            (t.division && t.division.toLowerCase().includes(q));
           return matchDiv && matchQuery;
         });
 
         if (filtered.length === 0 && q) {
-          filtered = pool.filter(t => t.name.toLowerCase().includes(q) || t.state.toLowerCase().includes(q));
+          filtered = pool.filter(t => 
+            t.name.toLowerCase().includes(q) || 
+            (t.state && t.state.toLowerCase().includes(q)) ||
+            (t.age_bracket && t.age_bracket.toLowerCase().includes(q))
+          );
         }
 
         if (filtered.length === 0) {
@@ -2549,6 +2767,7 @@ Coach / Scheduler (${state.teamA.name})`;
         const displayItems = filtered.slice(0, 10);
         container.innerHTML = displayItems.map(team => {
           const rawIdx = pool.indexOf(team);
+          const displayBracket = team.age_bracket || team.division;
           return `
             <div
               onmousedown="selectBracketTeamFromDropdown(${idx}, ${rawIdx})"
@@ -2561,7 +2780,7 @@ Coach / Scheduler (${state.teamA.name})`;
                 <div class="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5">
                   <span class="font-medium text-slate-600">Rec: ${team.record}</span>
                   <span class="text-slate-300">•</span>
-                  <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700">${team.division}</span>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700">${displayBracket}</span>
                   <span class="text-slate-400">${team.state}</span>
                 </div>
               </div>
@@ -2581,7 +2800,7 @@ Coach / Scheduler (${state.teamA.name})`;
         state.bracket.teams[idx].name = team.name;
         state.bracket.teams[idx].rating = team.rating;
         state.bracket.teams[idx].record = team.record;
-        state.bracket.teams[idx].division = team.division;
+        state.bracket.teams[idx].division = team.age_bracket || team.division;
         state.bracket.teams[idx].state = team.state;
 
         const nameInput = document.getElementById(`bracket-slot-name-${idx}`);
