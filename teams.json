@@ -1,63 +1,5672 @@
 [
-  { "name": "Buffalo Bisons 10U AA", "rating": 86.40, "record": "19-3-2", "division": "10U", "state": "NY" },
-  { "name": "Rochester Jr. Amerks 10U AAA", "rating": 88.50, "record": "21-2-1", "division": "10U", "state": "NY" },
-  { "name": "Syracuse Nationals 10U AAA", "rating": 90.20, "record": "24-1-0", "division": "10U", "state": "NY" },
-  { "name": "Wheatfield Blades 10U AA", "rating": 84.80, "record": "15-7-2", "division": "10U", "state": "NY" },
-  { "name": "Hamburg Hawks 10U AA", "rating": 84.10, "record": "14-8-3", "division": "10U", "state": "NY" },
-  { "name": "Webster Cyclones 10U AA", "rating": 83.50, "record": "12-10-2", "division": "10U", "state": "NY" },
-  { "name": "Perinton Blades 10U A", "rating": 82.20, "record": "11-12-1", "division": "10U", "state": "NY" },
-  { "name": "Batavia Ramparts 10U A", "rating": 80.75, "record": "9-14-3", "division": "10U", "state": "NY" },
-  { "name": "Tri-County Eagles 10U A", "rating": 79.10, "record": "7-16-2", "division": "10U", "state": "NY" },
-  { "name": "Jamestown Lakers 10U B", "rating": 77.30, "record": "5-18-1", "division": "10U", "state": "NY" },
-
-  { "name": "Buffalo Jr. Sabres 12U AAA", "rating": 91.80, "record": "22-4-1", "division": "12U", "state": "NY" },
-  { "name": "Syracuse Nationals 12U AAA", "rating": 89.90, "record": "20-5-2", "division": "12U", "state": "NY" },
-  { "name": "Rochester Jr. Amerks 12U AAA", "rating": 88.20, "record": "19-6-1", "division": "12U", "state": "NY" },
-  { "name": "Buffalo Bisons 12U AA", "rating": 86.50, "record": "18-7-3", "division": "12U", "state": "NY" },
-  { "name": "Rochester Monarchs 12U AA", "rating": 85.20, "record": "16-8-2", "division": "12U", "state": "NY" },
-  { "name": "Wheatfield Blades 12U AA", "rating": 84.50, "record": "15-9-2", "division": "12U", "state": "NY" },
-  { "name": "Warriors Hockey 12U AA", "rating": 84.25, "record": "14-10-3", "division": "12U", "state": "NY" },
-  { "name": "Hamburg Hawks 12U AA", "rating": 83.60, "record": "13-11-2", "division": "12U", "state": "NY" },
-  { "name": "Webster Cyclones 12U A", "rating": 82.50, "record": "11-13-2", "division": "12U", "state": "NY" },
-  { "name": "Perinton Blades 12U A", "rating": 81.70, "record": "10-14-1", "division": "12U", "state": "NY" },
-  { "name": "Batavia Ramparts 12U A", "rating": 80.40, "record": "8-16-2", "division": "12U", "state": "NY" },
-  { "name": "Ithaca Outlaws 12U B", "rating": 78.80, "record": "6-17-1", "division": "12U", "state": "NY" },
-
-  { "name": "Shattuck-St. Mary's 14U AAA", "rating": 96.20, "record": "28-2-1", "division": "14U", "state": "MN" },
-  { "name": "Chicago Mission 14U AAA", "rating": 95.80, "record": "26-4-2", "division": "14U", "state": "IL" },
-  { "name": "Detroit Honeybaked 14U AAA", "rating": 94.60, "record": "24-5-3", "division": "14U", "state": "MI" },
-  { "name": "Boston Jr. Eagles 14U AAA", "rating": 93.90, "record": "23-6-2", "division": "14U", "state": "MA" },
-  { "name": "Pittsburgh Pens Elite 14U AAA", "rating": 92.40, "record": "21-8-3", "division": "14U", "state": "PA" },
-  { "name": "Buffalo Jr. Sabres 14U AAA", "rating": 90.75, "record": "19-7-4", "division": "14U", "state": "NY" },
-  { "name": "Syracuse Nationals 14U AAA", "rating": 89.20, "record": "18-9-3", "division": "14U", "state": "NY" },
-  { "name": "Rochester Jr. Amerks 14U AAA", "rating": 87.80, "record": "17-10-2", "division": "14U", "state": "NY" },
-  { "name": "Buffalo Bisons 14U AA", "rating": 86.80, "record": "16-11-3", "division": "14U", "state": "NY" },
-  { "name": "Wheatfield Blades 14U AA", "rating": 84.90, "record": "15-12-2", "division": "14U", "state": "NY" },
-  { "name": "Hamburg Hawks 14U AA", "rating": 83.80, "record": "13-13-3", "division": "14U", "state": "NY" },
-  { "name": "Perinton Blades 14U AA", "rating": 83.25, "record": "12-14-2", "division": "14U", "state": "NY" },
-  { "name": "Batavia Ramparts 14U A", "rating": 81.50, "record": "10-16-1", "division": "14U", "state": "NY" },
-  { "name": "Tri-County Eagles 14U A", "rating": 79.90, "record": "8-18-2", "division": "14U", "state": "NY" },
-  { "name": "Binghamton Jr. Devils 14U B", "rating": 78.40, "record": "6-19-1", "division": "14U", "state": "NY" },
-
-  { "name": "Chicago Mission 16U AAA", "rating": 96.50, "record": "27-3-2", "division": "16U", "state": "IL" },
-  { "name": "Detroit Honeybaked 16U AAA", "rating": 95.20, "record": "25-5-2", "division": "16U", "state": "MI" },
-  { "name": "Buffalo Jr. Sabres 16U AAA", "rating": 92.10, "record": "21-7-3", "division": "16U", "state": "NY" },
-  { "name": "Rochester Jr. Amerks 16U AAA", "rating": 89.60, "record": "19-8-2", "division": "16U", "state": "NY" },
-  { "name": "Syracuse Nationals 16U AAA", "rating": 88.70, "record": "18-9-3", "division": "16U", "state": "NY" },
-  { "name": "Buffalo Bisons 16U AA", "rating": 87.20, "record": "17-10-3", "division": "16U", "state": "NY" },
-  { "name": "Rochester Monarchs 16U AA", "rating": 85.90, "record": "15-11-2", "division": "16U", "state": "NY" },
-  { "name": "Wheatfield Blades 16U AA", "rating": 84.70, "record": "14-12-2", "division": "16U", "state": "NY" },
-  { "name": "Hamburg Hawks 16U AA", "rating": 83.40, "record": "12-14-3", "division": "16U", "state": "NY" },
-  { "name": "Webster Cyclones 16U A", "rating": 81.80, "record": "10-15-2", "division": "16U", "state": "NY" },
-  { "name": "Ithaca Outlaws 16U A", "rating": 80.10, "record": "8-17-1", "division": "16U", "state": "NY" },
-
-  { "name": "Shattuck-St. Mary's 18U Prep", "rating": 97.40, "record": "31-2-0", "division": "18U", "state": "MN" },
-  { "name": "Chicago Mission 18U AAA", "rating": 96.10, "record": "26-5-3", "division": "18U", "state": "IL" },
-  { "name": "Buffalo Jr. Sabres 18U AAA", "rating": 92.80, "record": "22-8-2", "division": "18U", "state": "NY" },
-  { "name": "Rochester Jr. Amerks 18U AAA", "rating": 90.10, "record": "20-9-3", "division": "18U", "state": "NY" },
-  { "name": "Buffalo Bisons 18U AA", "rating": 87.80, "record": "18-11-2", "division": "18U", "state": "NY" },
-  { "name": "Wheatfield Blades 18U AA", "rating": 85.50, "record": "16-12-3", "division": "18U", "state": "NY" },
-  { "name": "Rochester Monarchs 18U AA", "rating": 84.90, "record": "14-13-2", "division": "18U", "state": "NY" },
-  { "name": "Hamburg Hawks 18U AA", "rating": 83.60, "record": "12-15-2", "division": "18U", "state": "NY" },
-  { "name": "Batavia Ramparts 18U A", "rating": 81.20, "record": "9-17-1", "division": "18U", "state": "NY" }
+  {
+    "name": "Buffalo Jr Sabres 10U AAA (NY)",
+    "rating": 97.9,
+    "record": "14-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 10U AAA (NY)",
+    "rating": 94.5,
+    "record": "16-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 10U AAA (NY)",
+    "rating": 92.5,
+    "record": "13-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 10U AAA (NY)",
+    "rating": 91.8,
+    "record": "10-10-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Saints 10U AAA (NY)",
+    "rating": 91.5,
+    "record": "9-11-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 10U AAA (NY)",
+    "rating": 90.8,
+    "record": "12-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 10U AAA (NY)",
+    "rating": 89.4,
+    "record": "6-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Major) 10U A (NY)",
+    "rating": 89,
+    "record": "22-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 10U AAA (NY)",
+    "rating": 88.8,
+    "record": "6-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres (OConnell) 9U AAA (NY)",
+    "rating": 88.6,
+    "record": "11-10-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 10U AA (NY)",
+    "rating": 88.5,
+    "record": "0-3-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 10U AAA (NY)",
+    "rating": 88.5,
+    "record": "9-7-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Lines) 10U AAA (NY)",
+    "rating": 88.4,
+    "record": "7-8-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Leber) 9U AAA (NY)",
+    "rating": 87.2,
+    "record": "22-3-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers 10U AA (NY)",
+    "rating": 87.2,
+    "record": "5-0-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks (Militello) 10U AA (NY)",
+    "rating": 87.2,
+    "record": "8-4-5",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 10U AA (NY)",
+    "rating": 87.2,
+    "record": "17-5-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 10U AA (NY)",
+    "rating": 87.1,
+    "record": "15-3-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Kings (Wakie) 10U A (NY)",
+    "rating": 86.6,
+    "record": "14-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 10U AAA (NY)",
+    "rating": 86.4,
+    "record": "9-15-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Lindell) 10U AAA (NY)",
+    "rating": 85.7,
+    "record": "9-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 10U AA (NY)",
+    "rating": 85.6,
+    "record": "12-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 10U AAA (NY)",
+    "rating": 85.5,
+    "record": "4-13-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 10U AA (NY)",
+    "rating": 85.4,
+    "record": "16-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Rice) 10U AA (NY)",
+    "rating": 85.3,
+    "record": "8-9-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings 10U AA (NY)",
+    "rating": 85.3,
+    "record": "9-3-4",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Saints 9U AAA (NY)",
+    "rating": 85.2,
+    "record": "9-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 10U AA (NY)",
+    "rating": 84.9,
+    "record": "10-12-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 9U AAA (NY)",
+    "rating": 84.8,
+    "record": "8-10-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 9U AAA (NY)",
+    "rating": 84.6,
+    "record": "12-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Gold) 10U AA (NY)",
+    "rating": 84.6,
+    "record": "4-10-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors 10U AA (NY)",
+    "rating": 84.4,
+    "record": "7-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Hartford Spartans 10U AA (NY)",
+    "rating": 84.4,
+    "record": "8-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 10U AA (NY)",
+    "rating": 84.1,
+    "record": "13-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 10U AA (NY)",
+    "rating": 83.7,
+    "record": "9-13-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 10U AA (NY)",
+    "rating": 83.6,
+    "record": "8-7-4",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 10U AA (NY)",
+    "rating": 83.5,
+    "record": "7-8-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars 10U AA (NY)",
+    "rating": 83.4,
+    "record": "7-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 9U AA (NY)",
+    "rating": 83,
+    "record": "1-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 10U AA (NY)",
+    "rating": 82.9,
+    "record": "18-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 9U AAA (NY)",
+    "rating": 82.8,
+    "record": "8-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 9U AAA (NY)",
+    "rating": 82.6,
+    "record": "4-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels 10U AA (NY)",
+    "rating": 82.5,
+    "record": "8-10-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 10U AA (NY)",
+    "rating": 82.5,
+    "record": "4-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 10U AA (NY)",
+    "rating": 82.4,
+    "record": "7-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 10U AA (NY)",
+    "rating": 82.4,
+    "record": "3-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Gold) 9U AA (NY)",
+    "rating": 82.1,
+    "record": "12-5-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws (Colbert) 10U A (NY)",
+    "rating": 82,
+    "record": "7-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles 10U AA (NY)",
+    "rating": 81.6,
+    "record": "7-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Gold) 9U AA (NY)",
+    "rating": 81.5,
+    "record": "10-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 9U AAA (NY)",
+    "rating": 81.5,
+    "record": "10-11-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Batavia Ramparts (Briggs) 10U AA (NY)",
+    "rating": 81.3,
+    "record": "5-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 9U AAA (NY)",
+    "rating": 81.2,
+    "record": "5-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express 9U AA (NY)",
+    "rating": 81.1,
+    "record": "10-6-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 10U AA (NY)",
+    "rating": 81.1,
+    "record": "6-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 9U AAA (NY)",
+    "rating": 81.1,
+    "record": "11-10-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 9U AAA (NY)",
+    "rating": 81,
+    "record": "7-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Oswego Buccaneers 10U A (NY)",
+    "rating": 80.8,
+    "record": "7-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx 10U A (NY)",
+    "rating": 80.7,
+    "record": "12-0-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 10U A (NY)",
+    "rating": 80.6,
+    "record": "20-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Tweedle) 10U AA (NY)",
+    "rating": 80.5,
+    "record": "6-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express 10U AA (NY)",
+    "rating": 80.4,
+    "record": "10-12-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 10U AA (NY)",
+    "rating": 79.8,
+    "record": "8-15-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 10U AA (NY)",
+    "rating": 79.8,
+    "record": "5-9-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 9U AA (NY)",
+    "rating": 79.3,
+    "record": "13-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 10U Girls (NY)",
+    "rating": 79.1,
+    "record": "5-0-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks (Izzo) 10U AA (NY)",
+    "rating": 79,
+    "record": "7-8-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 9U AAA (NY)",
+    "rating": 78.9,
+    "record": "6-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 9U AAA (NY)",
+    "rating": 78.9,
+    "record": "3-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 10U AA (NY)",
+    "rating": 78.6,
+    "record": "1-13-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 10U AA (NY)",
+    "rating": 78.5,
+    "record": "4-10-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 10U A (NY)",
+    "rating": 78.4,
+    "record": "11-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 10U AA (NY)",
+    "rating": 78.4,
+    "record": "6-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast 10U AA (NY)",
+    "rating": 78.3,
+    "record": "5-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Radens) 9U AAA (NY)",
+    "rating": 78.1,
+    "record": "6-7-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 9U A (NY)",
+    "rating": 78,
+    "record": "8-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 10U A (NY)",
+    "rating": 78,
+    "record": "8-9-4",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers 10U A (NY)",
+    "rating": 77.8,
+    "record": "10-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Clinton Comets 10U A (NY)",
+    "rating": 77.8,
+    "record": "3-1-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 10U A (NY)",
+    "rating": 77.7,
+    "record": "11-6-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Lester) 10U AA (NY)",
+    "rating": 77.6,
+    "record": "8-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Whitestown Wolfpack 10U A (NY)",
+    "rating": 77.4,
+    "record": "7-3-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 10U A (NY)",
+    "rating": 77.3,
+    "record": "11-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 10U A (NY)",
+    "rating": 77.2,
+    "record": "7-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Southern Tier Freeze 10U AA (NY)",
+    "rating": 77.2,
+    "record": "0-6-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 10U A (NY)",
+    "rating": 77.1,
+    "record": "9-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 9U AA (NY)",
+    "rating": 77.1,
+    "record": "4-19-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals 9U AA (NY)",
+    "rating": 76.9,
+    "record": "11-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Chazy Lady Flyers 10U Girls (NY)",
+    "rating": 76.9,
+    "record": "4-4-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York Saints 9U AAA (NY)",
+    "rating": 76.9,
+    "record": "2-16-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Pelham Pelicans 10U A (NY)",
+    "rating": 76.8,
+    "record": "10-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 9U AA (NY)",
+    "rating": 76.8,
+    "record": "4-9-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Hart) 10U AA (NY)",
+    "rating": 76.8,
+    "record": "2-8-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Blackhawks 10U A (NY)",
+    "rating": 76.7,
+    "record": "7-9-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Auburn Ice Hawks 10U AA (NY)",
+    "rating": 76.7,
+    "record": "8-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Minor) 10U A (NY)",
+    "rating": 76.6,
+    "record": "11-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs 10U AA (NY)",
+    "rating": 76.6,
+    "record": "4-11-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Olean Arrows (Gold) 10U A (NY)",
+    "rating": 76.5,
+    "record": "4-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Greater New York Stars 10U A (NY)",
+    "rating": 76.5,
+    "record": "10-4-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 10U A (NY)",
+    "rating": 76.5,
+    "record": "5-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Canandaigua Knights 10U A (NY)",
+    "rating": 76.4,
+    "record": "6-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Mendolia) 10U AA (NY)",
+    "rating": 76.4,
+    "record": "5-11-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (McGowan) 10U AA (NY)",
+    "rating": 76.4,
+    "record": "4-12-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 10U A (NY)",
+    "rating": 76.3,
+    "record": "10-8-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 10U A (NY)",
+    "rating": 76.2,
+    "record": "4-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles 9U AA (NY)",
+    "rating": 76.2,
+    "record": "7-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Kings (Arceri) 10U A (NY)",
+    "rating": 76,
+    "record": "6-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cortland Flames 10U A (NY)",
+    "rating": 75.8,
+    "record": "5-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Blue) 9U AA (NY)",
+    "rating": 75.8,
+    "record": "4-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 10U A (NY)",
+    "rating": 75.8,
+    "record": "6-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Webster Cyclones 10U AA (NY)",
+    "rating": 75.7,
+    "record": "4-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Ithaca Bears 10U A (NY)",
+    "rating": 75.6,
+    "record": "2-6-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Green) 10U AA (NY)",
+    "rating": 75.1,
+    "record": "3-15-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 10U A (NY)",
+    "rating": 75.1,
+    "record": "9-9-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows (Green) 10U A (NY)",
+    "rating": 75,
+    "record": "11-9-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 10U A (NY)",
+    "rating": 75,
+    "record": "1-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Crawford) 10U AA (NY)",
+    "rating": 74.9,
+    "record": "4-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors (Mixed) 10U A (NY)",
+    "rating": 74.8,
+    "record": "8-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 9U AA (NY)",
+    "rating": 74.7,
+    "record": "5-6-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Lewis County Cobras 10U A (NY)",
+    "rating": 74.7,
+    "record": "2-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Massena River Queens 10U Girls (NY)",
+    "rating": 74.1,
+    "record": "5-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 10U A (NY)",
+    "rating": 74,
+    "record": "3-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (LaShomb) 9U AA (NY)",
+    "rating": 74,
+    "record": "4-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks 10U A (NY)",
+    "rating": 73.9,
+    "record": "7-7-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors 9U AA (NY)",
+    "rating": 73.9,
+    "record": "4-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings 10U Girls (NY)",
+    "rating": 73.8,
+    "record": "3-3-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Saugerties Mustangs 10U A (NY)",
+    "rating": 73.8,
+    "record": "5-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Fredonia Steelers 10U A (NY)",
+    "rating": 73.8,
+    "record": "5-0-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 9U AA (NY)",
+    "rating": 73.8,
+    "record": "8-4-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels 10U A (NY)",
+    "rating": 73.6,
+    "record": "1-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs 9U AA (NY)",
+    "rating": 73.3,
+    "record": "4-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Plattsburgh Jr Cardinals 10U B (NY)",
+    "rating": 73.2,
+    "record": "2-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws (Sevey) 10U A (NY)",
+    "rating": 73.1,
+    "record": "9-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins 10U A1 (NY)",
+    "rating": 73,
+    "record": "2-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Blades 10U Girls (NY)",
+    "rating": 72.8,
+    "record": "3-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Quesnel) 10U AA (NY)",
+    "rating": 72.8,
+    "record": "7-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Ice Cats 10U Girls (NY)",
+    "rating": 72.6,
+    "record": "4-0-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 10U A (NY)",
+    "rating": 72.6,
+    "record": "4-12-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochelle Lightning 10U A1 (NY)",
+    "rating": 72.4,
+    "record": "15-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Plattsburgh Jr Cardinals 10U Girls (NY)",
+    "rating": 72.3,
+    "record": "5-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 10U A (NY)",
+    "rating": 72.3,
+    "record": "5-2-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Dix Hills Hawks 10U A1 (NY)",
+    "rating": 72.3,
+    "record": "3-10-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars (#1) 10U B (NY)",
+    "rating": 72.2,
+    "record": "3-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast 9U AA (NY)",
+    "rating": 72.1,
+    "record": "2-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Hartford Spartans (Knight) 10U B (NY)",
+    "rating": 71.9,
+    "record": "6-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Team Long Island 10U Girls (NY)",
+    "rating": 71.9,
+    "record": "1-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 10U B (NY)",
+    "rating": 71.7,
+    "record": "14-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces 9U AA (NY)",
+    "rating": 71.5,
+    "record": "1-10-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 10U A1 (NY)",
+    "rating": 71.5,
+    "record": "3-11-2",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Edge (Select) 10U Girls (NY)",
+    "rating": 71.4,
+    "record": "4-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Callahan) 9U AA (NY)",
+    "rating": 71.4,
+    "record": "1-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Watertown Wolves (White) 10U B (NY)",
+    "rating": 71.3,
+    "record": "3-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Jamestown Lakers 10U A (NY)",
+    "rating": 71.2,
+    "record": "1-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Cataracts 10U AA (NY)",
+    "rating": 71.2,
+    "record": "2-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "West Point Jr Black Knights 10U A1 (NY)",
+    "rating": 71.2,
+    "record": "4-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 10U AA (NY)",
+    "rating": 71.1,
+    "record": "0-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Batavia Ramparts (Calkins) 10U A (NY)",
+    "rating": 71,
+    "record": "3-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 9U AA (NY)",
+    "rating": 70.9,
+    "record": "4-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 10U Girls (NY)",
+    "rating": 70.8,
+    "record": "5-2-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Green) 9U AA (NY)",
+    "rating": 70.8,
+    "record": "3-10-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 10U B (NY)",
+    "rating": 70.7,
+    "record": "7-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 9U AA (NY)",
+    "rating": 70.7,
+    "record": "3-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Southern Tier Freeze 10U A (NY)",
+    "rating": 70.5,
+    "record": "2-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 10U B (NY)",
+    "rating": 70.4,
+    "record": "9-1-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 10U B (NY)",
+    "rating": 70.3,
+    "record": "3-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres (McQuiggan) 9U AA (NY)",
+    "rating": 70.2,
+    "record": "0-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Oswego Buccaneers 10U B (NY)",
+    "rating": 70,
+    "record": "3-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 10U B (NY)",
+    "rating": 70,
+    "record": "5-6-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Lady Knights 10U Girls (NY)",
+    "rating": 69.9,
+    "record": "4-4-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (James) 9U AA (NY)",
+    "rating": 69.9,
+    "record": "4-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Mauro) 10U B (NY)",
+    "rating": 69.7,
+    "record": "2-11-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Pellegrino) 9U AA (NY)",
+    "rating": 69.5,
+    "record": "3-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 9U AA (NY)",
+    "rating": 69.3,
+    "record": "2-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 10U A1 (NY)",
+    "rating": 69.2,
+    "record": "2-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Upstate Badgers 10U A (NY)",
+    "rating": 69.2,
+    "record": "6-4-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 10U B (NY)",
+    "rating": 69.1,
+    "record": "2-3-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 10U B (NY)",
+    "rating": 69.1,
+    "record": "12-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Lewis) 9U A1 (NY)",
+    "rating": 69.1,
+    "record": "1-14-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 9U AA (NY)",
+    "rating": 69,
+    "record": "3-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 10U A (NY)",
+    "rating": 69,
+    "record": "1-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 10U B (NY)",
+    "rating": 68.6,
+    "record": "4-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Hinds) 10U B (NY)",
+    "rating": 68.6,
+    "record": "2-3-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Palonis) 10U B (NY)",
+    "rating": 68.1,
+    "record": "7-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "York Islanders 10U Girls (NY)",
+    "rating": 68.1,
+    "record": "6-13-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers (#1) 10U B (NY)",
+    "rating": 67.7,
+    "record": "2-5-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 10U Girls (NY)",
+    "rating": 67.2,
+    "record": "6-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 10U B (NY)",
+    "rating": 66.7,
+    "record": "5-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins 10U B (NY)",
+    "rating": 66.5,
+    "record": "1-10-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Edge (White) 10U Girls (NY)",
+    "rating": 66.5,
+    "record": "5-0-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 10U B (NY)",
+    "rating": 66.3,
+    "record": "6-8-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Northstars 10U Girls (NY)",
+    "rating": 66.1,
+    "record": "2-11-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Olean Arrows (White) 10U A (NY)",
+    "rating": 65.8,
+    "record": "0-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Cortland Flames 10U B (NY)",
+    "rating": 65.7,
+    "record": "1-4-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Raiders 10U B (NY)",
+    "rating": 65.4,
+    "record": "4-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Stateline Hawks (A) 10U Girls (NY)",
+    "rating": 65.3,
+    "record": "7-10-3",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 9U AA (NY)",
+    "rating": 65.2,
+    "record": "1-7-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 10U B (NY)",
+    "rating": 65.1,
+    "record": "0-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 10U C (NY)",
+    "rating": 64.3,
+    "record": "4-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 10U B1 (NY)",
+    "rating": 64.3,
+    "record": "4-1-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 10U B1 (NY)",
+    "rating": 64.1,
+    "record": "8-2-1",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Oswego Buccaneers 10U C (NY)",
+    "rating": 63.7,
+    "record": "0-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 10U Girls (NY)",
+    "rating": 63.2,
+    "record": "0-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 10U B (NY)",
+    "rating": 63.2,
+    "record": "0-5-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 10U C (NY)",
+    "rating": 62.6,
+    "record": "5-4-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 10U B1 (NY)",
+    "rating": 61.6,
+    "record": "3-7-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 10U C (NY)",
+    "rating": 61.3,
+    "record": "2-10-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 10U B1 (NY)",
+    "rating": 61,
+    "record": "2-9-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 10U B1 (NY)",
+    "rating": 60.7,
+    "record": "3-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Millbrook Knights 10U B1 (NY)",
+    "rating": 59.8,
+    "record": "1-6-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Blue) 10U B1 (NY)",
+    "rating": 58.9,
+    "record": "0-8-0",
+    "division": "10U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 12U AAA (NY)",
+    "rating": 97.68,
+    "record": "10-6-5",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 12U AA (NY)",
+    "rating": 94.09,
+    "record": "18-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 12U AAA (NY)",
+    "rating": 93.66,
+    "record": "16-10-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 12U AAA (NY)",
+    "rating": 93.6,
+    "record": "15-5-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 12U AAA (NY)",
+    "rating": 92.91,
+    "record": "11-10-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 12U AAA (NY)",
+    "rating": 92.39,
+    "record": "14-10-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Rainey) 12U AAA (NY)",
+    "rating": 92.1,
+    "record": "18-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 12U AAA (NY)",
+    "rating": 91.21,
+    "record": "5-15-4",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Saints 12U AAA (NY)",
+    "rating": 90.81,
+    "record": "4-14-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders (Blue) 11U AAA (NY)",
+    "rating": 90.71,
+    "record": "17-12-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 12U AAA (NY)",
+    "rating": 90.49,
+    "record": "6-12-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 11U AAA (NY)",
+    "rating": 89.99,
+    "record": "10-8-4",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 12U AAA (NY)",
+    "rating": 89.91,
+    "record": "11-13-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Saints 11U AAA (NY)",
+    "rating": 89.86,
+    "record": "20-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 12U AAA (NY)",
+    "rating": 89.54,
+    "record": "10-13-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 12U AAA (NY)",
+    "rating": 89.17,
+    "record": "7-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Gold) 11U AA (NY)",
+    "rating": 88.75,
+    "record": "12-9-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 12U AA (NY)",
+    "rating": 88.59,
+    "record": "13-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (TB) 12U AA (NY)",
+    "rating": 88.21,
+    "record": "11-7-4",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 12U AAA (NY)",
+    "rating": 87.77,
+    "record": "16-0-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 11U AAA (NY)",
+    "rating": 87.54,
+    "record": "12-13-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Catanzaro) 12U AA (NY)",
+    "rating": 87.52,
+    "record": "17-1-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals 11U AAA (NY)",
+    "rating": 87.26,
+    "record": "9-14-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 12U AA (NY)",
+    "rating": 87.2,
+    "record": "9-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 11U AAA (NY)",
+    "rating": 87.12,
+    "record": "17-11-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 11U AAA (NY)",
+    "rating": 87.03,
+    "record": "14-9-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 12U AA (NY)",
+    "rating": 86.92,
+    "record": "12-6-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels (Major) 12U AA (NY)",
+    "rating": 86.89,
+    "record": "13-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights (TB) 12U AA (NY)",
+    "rating": 86.78,
+    "record": "18-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 11U AAA (NY)",
+    "rating": 86.67,
+    "record": "4-10-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Montalbo) 12U AAA (NY)",
+    "rating": 86.67,
+    "record": "7-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs (TB) 12U AA (NY)",
+    "rating": 86.43,
+    "record": "8-4-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 11U AAA (NY)",
+    "rating": 86.31,
+    "record": "14-5-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 12U AA (NY)",
+    "rating": 86.13,
+    "record": "13-3-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Cortland Flames (TB) 12U A (NY)",
+    "rating": 86.12,
+    "record": "8-0-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers (TB) 12U AA (NY)",
+    "rating": 86.11,
+    "record": "12-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 12U AAA (NY)",
+    "rating": 85.66,
+    "record": "3-19-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors 12U AA (NY)",
+    "rating": 85.54,
+    "record": "8-6-8",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express 12U AAA (NY)",
+    "rating": 85.43,
+    "record": "7-12-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 11U AAA (NY)",
+    "rating": 85.35,
+    "record": "10-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 11U AA (NY)",
+    "rating": 85.06,
+    "record": "8-7-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 12U AA (NY)",
+    "rating": 85.05,
+    "record": "12-7-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 12U AA (NY)",
+    "rating": 85.03,
+    "record": "1-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Hartford Spartans 12U AA (NY)",
+    "rating": 84.86,
+    "record": "13-2-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Nau) 12U AA (NY)",
+    "rating": 84.82,
+    "record": "10-7-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (TB) 12U AA (NY)",
+    "rating": 84.77,
+    "record": "7-10-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Plattsburgh Jr Cardinals 12U AA (NY)",
+    "rating": 84.67,
+    "record": "7-3-5",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Gold) 11U AA (NY)",
+    "rating": 84.67,
+    "record": "7-16-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins (Gold) 12U A (NY)",
+    "rating": 84.51,
+    "record": "20-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 12U AA (NY)",
+    "rating": 84.37,
+    "record": "9-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (Elite) 12U AA (NY)",
+    "rating": 84.35,
+    "record": "16-13-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 12U AA (NY)",
+    "rating": 84.31,
+    "record": "7-12-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders (Orange) 11U AAA (NY)",
+    "rating": 84.18,
+    "record": "5-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Cataracts (TB) 12U AA (NY)",
+    "rating": 84.06,
+    "record": "9-11-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 12U AA (NY)",
+    "rating": 83.92,
+    "record": "10-10-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 11U AA (NY)",
+    "rating": 83.83,
+    "record": "17-8-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Saugerties Mustangs 12U A (NY)",
+    "rating": 83.83,
+    "record": "17-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers 12U AA (NY)",
+    "rating": 83.75,
+    "record": "3-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 12U AA (NY)",
+    "rating": 83.7,
+    "record": "9-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights (NTB) 12U AA (NY)",
+    "rating": 83.47,
+    "record": "11-12-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 12U AA (NY)",
+    "rating": 83.41,
+    "record": "7-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Blackhawks 12U AA (NY)",
+    "rating": 83.23,
+    "record": "11-9-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Lapietra) 12U A (NY)",
+    "rating": 83.16,
+    "record": "9-2-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Major) 12U A (NY)",
+    "rating": 83.1,
+    "record": "15-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx (North) 12U A (NY)",
+    "rating": 83.04,
+    "record": "11-1-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 12U A (NY)",
+    "rating": 82.86,
+    "record": "5-8-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 11U AA (NY)",
+    "rating": 82.74,
+    "record": "9-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels (Minor) 12U AA (NY)",
+    "rating": 82.66,
+    "record": "8-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 12U AA (NY)",
+    "rating": 82.62,
+    "record": "7-9-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Annechino) 11U AA (NY)",
+    "rating": 82.52,
+    "record": "8-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Batavia Ramparts (TB) 12U A (NY)",
+    "rating": 82.52,
+    "record": "7-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 11U AA (NY)",
+    "rating": 82.5,
+    "record": "4-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks 12U AA (NY)",
+    "rating": 82.27,
+    "record": "6-13-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 12U AA (NY)",
+    "rating": 82.1,
+    "record": "9-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 12U AA (NY)",
+    "rating": 82.1,
+    "record": "0-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 11U AAA (NY)",
+    "rating": 81.9,
+    "record": "7-9-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars 12U AA (NY)",
+    "rating": 81.49,
+    "record": "4-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 11U AAA (NY)",
+    "rating": 81.48,
+    "record": "6-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Herzog) 12U AA (NY)",
+    "rating": 81.42,
+    "record": "5-12-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 12U A (NY)",
+    "rating": 81.32,
+    "record": "12-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast (TB) 12U A (NY)",
+    "rating": 81.2,
+    "record": "4-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 12U AA (NY)",
+    "rating": 81.16,
+    "record": "7-12-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Kings (Napoli) 12U A (NY)",
+    "rating": 81.16,
+    "record": "8-10-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Pelligra) 12U AA (NY)",
+    "rating": 81.09,
+    "record": "8-4-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 12U AA (NY)",
+    "rating": 81.06,
+    "record": "2-13-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 11U AAA (NY)",
+    "rating": 81.02,
+    "record": "7-10-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Kings (Wittekind) 12U A (NY)",
+    "rating": 81.01,
+    "record": "9-10-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Whitestown Wolfpack 12U A (NY)",
+    "rating": 80.86,
+    "record": "6-2-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 11U AA (NY)",
+    "rating": 80.79,
+    "record": "7-6-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws (TB) 12U A (NY)",
+    "rating": 80.67,
+    "record": "5-9-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (NTB) 12U AA (NY)",
+    "rating": 80.47,
+    "record": "4-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs 12U AA (NY)",
+    "rating": 80.14,
+    "record": "0-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Canandaigua Knights (TB) 12U A (NY)",
+    "rating": 80.12,
+    "record": "5-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 11U AAA (NY)",
+    "rating": 79.83,
+    "record": "7-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 11U A (NY)",
+    "rating": 79.56,
+    "record": "14-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Dix Hills Hawks 12U A (NY)",
+    "rating": 79.5,
+    "record": "11-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 12U A (NY)",
+    "rating": 79.44,
+    "record": "12-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 12U A (NY)",
+    "rating": 79.17,
+    "record": "11-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Ithaca Bears 12U AA (NY)",
+    "rating": 79.05,
+    "record": "4-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 11U AA (NY)",
+    "rating": 79.03,
+    "record": "7-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Oswego Buccaneers 12U A (NY)",
+    "rating": 78.88,
+    "record": "7-2-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (Select) 11U A (NY)",
+    "rating": 78.87,
+    "record": "12-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Green) 11U AA (NY)",
+    "rating": 78.83,
+    "record": "8-7-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Blue) 11U AA (NY)",
+    "rating": 78.54,
+    "record": "7-7-5",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 12U A (NY)",
+    "rating": 78.38,
+    "record": "3-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 12U AA (NY)",
+    "rating": 78.37,
+    "record": "6-7-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Greater New York Stars 12U A (NY)",
+    "rating": 78.24,
+    "record": "7-10-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Lewis County Cobras 12U A (NY)",
+    "rating": 78.21,
+    "record": "8-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 11U AA (NY)",
+    "rating": 78.09,
+    "record": "9-2-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 12U A (NY)",
+    "rating": 77.97,
+    "record": "3-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Clinton Comets 12U A (NY)",
+    "rating": 77.77,
+    "record": "5-2-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 12U AA (NY)",
+    "rating": 77.72,
+    "record": "2-12-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 12U A (NY)",
+    "rating": 77.68,
+    "record": "6-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles (Maslona) 11U AA (NY)",
+    "rating": 77.39,
+    "record": "5-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers 12U A (NY)",
+    "rating": 77.26,
+    "record": "6-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 12U AA (NY)",
+    "rating": 77.2,
+    "record": "15-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers (NTB) 12U AA (NY)",
+    "rating": 77.18,
+    "record": "3-9-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Wisniewski) 12U AA (NY)",
+    "rating": 77.11,
+    "record": "3-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (NTB) 12U AA (NY)",
+    "rating": 77.02,
+    "record": "3-12-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 11U AA (NY)",
+    "rating": 76.92,
+    "record": "3-9-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 12U A (NY)",
+    "rating": 76.92,
+    "record": "9-7-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Moore) 12U AA (NY)",
+    "rating": 76.9,
+    "record": "9-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Salt City Kings 12U AA (NY)",
+    "rating": 76.88,
+    "record": "5-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast 11U AA (NY)",
+    "rating": 76.81,
+    "record": "4-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 12U A (NY)",
+    "rating": 76.67,
+    "record": "6-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Kucera) 11U A (NY)",
+    "rating": 76.65,
+    "record": "7-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Whitestown Wolfpack 12U B (NY)",
+    "rating": 76.5,
+    "record": "6-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Minor) 12U A (NY)",
+    "rating": 76.42,
+    "record": "14-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 12U A (NY)",
+    "rating": 76.24,
+    "record": "10-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Webster Cyclones 11U AA (NY)",
+    "rating": 76.24,
+    "record": "5-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Enforcers 12U A1 (NY)",
+    "rating": 76.16,
+    "record": "12-8-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs (NTB) 12U AA (NY)",
+    "rating": 76.14,
+    "record": "5-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Jamestown Lakers 12U A (NY)",
+    "rating": 76.09,
+    "record": "6-1-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks 12U A (NY)",
+    "rating": 76.03,
+    "record": "13-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Molino) 12U AA (NY)",
+    "rating": 75.73,
+    "record": "1-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 11U AA (NY)",
+    "rating": 75.7,
+    "record": "3-15-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles 12U AA (NY)",
+    "rating": 75.56,
+    "record": "5-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Pala) 12U A1 (NY)",
+    "rating": 75.55,
+    "record": "7-8-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors 11U AA (NY)",
+    "rating": 75.49,
+    "record": "8-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals 11U AA (NY)",
+    "rating": 75.46,
+    "record": "5-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "West Point Jr Black Knights 12U A1 (NY)",
+    "rating": 75.32,
+    "record": "8-3-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Raiders 12U A (NY)",
+    "rating": 75.24,
+    "record": "7-6-4",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Cataracts (NTB) 12U AA (NY)",
+    "rating": 75.2,
+    "record": "7-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 12U A (NY)",
+    "rating": 75.2,
+    "record": "6-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 12U A (NY)",
+    "rating": 75,
+    "record": "4-5-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 12U A1 (NY)",
+    "rating": 74.95,
+    "record": "5-5-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Capella) 11U AA (NY)",
+    "rating": 74.93,
+    "record": "2-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 12U B (NY)",
+    "rating": 74.92,
+    "record": "8-0-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Selects) 12U B (NY)",
+    "rating": 74.84,
+    "record": "4-1-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 12U A (NY)",
+    "rating": 74.74,
+    "record": "3-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Pelham Pelicans 12U A (NY)",
+    "rating": 74.73,
+    "record": "4-11-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 12U A (NY)",
+    "rating": 74.63,
+    "record": "3-19-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Fulton Riverhawks 12U A (NY)",
+    "rating": 74.61,
+    "record": "2-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Allison) 12U AA (NY)",
+    "rating": 74.44,
+    "record": "7-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 12U A (NY)",
+    "rating": 74.06,
+    "record": "2-15-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 12U A (NY)",
+    "rating": 74.03,
+    "record": "3-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws (#2) 12U A (NY)",
+    "rating": 73.64,
+    "record": "2-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins (Black) 12U A1 (NY)",
+    "rating": 73.51,
+    "record": "9-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles (Guzzetta) 11U AA (NY)",
+    "rating": 73.45,
+    "record": "6-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Fredonia Steelers 12U A (NY)",
+    "rating": 73.36,
+    "record": "3-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 12U AA (NY)",
+    "rating": 73.04,
+    "record": "4-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Dix Hills Selects 12U A (NY)",
+    "rating": 72.87,
+    "record": "1-3-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows (Silver) 12U A (NY)",
+    "rating": 72.82,
+    "record": "5-14-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 12U A (NY)",
+    "rating": 72.51,
+    "record": "2-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 11U AA (NY)",
+    "rating": 72.49,
+    "record": "7-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Ruestow) 11U AA (NY)",
+    "rating": 72.4,
+    "record": "5-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 12U B (NY)",
+    "rating": 72.18,
+    "record": "5-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Cortland Flames (NTB) 12U A (NY)",
+    "rating": 72.13,
+    "record": "5-2-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 12U B (NY)",
+    "rating": 72.01,
+    "record": "9-0-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Chazy Flyers 12U B (NY)",
+    "rating": 71.99,
+    "record": "2-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Batavia Ramparts (NTB) 12U A (NY)",
+    "rating": 71.97,
+    "record": "4-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx (South) 12U A (NY)",
+    "rating": 71.81,
+    "record": "2-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Dito) 12U AA (NY)",
+    "rating": 71.75,
+    "record": "2-6-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 12U A (NY)",
+    "rating": 71.73,
+    "record": "5-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 11U AA (NY)",
+    "rating": 71.71,
+    "record": "2-5-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 12U B (NY)",
+    "rating": 71.55,
+    "record": "5-2-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Upstate Badgers 12U A (NY)",
+    "rating": 71.53,
+    "record": "5-14-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (Green) 12U A1 (NY)",
+    "rating": 71.45,
+    "record": "7-7-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 12U A (NY)",
+    "rating": 71.35,
+    "record": "5-7-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 12U A1 (NY)",
+    "rating": 71.1,
+    "record": "2-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 12U B (NY)",
+    "rating": 70.93,
+    "record": "7-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 11U AA (NY)",
+    "rating": 70.85,
+    "record": "4-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 12U A1 (NY)",
+    "rating": 70.78,
+    "record": "6-10-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 12U B1 (NY)",
+    "rating": 70.78,
+    "record": "12-4-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Olean Arrows 12U A (NY)",
+    "rating": 70.72,
+    "record": "2-6-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 12U A1 (NY)",
+    "rating": 70.66,
+    "record": "2-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 12U B (NY)",
+    "rating": 70.37,
+    "record": "2-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Rickard) 11U AA (NY)",
+    "rating": 70.26,
+    "record": "1-8-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Elmira Jr Aviators 12U B (NY)",
+    "rating": 70.21,
+    "record": "3-2-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Saugerties Mustangs 12U A1 (NY)",
+    "rating": 70.14,
+    "record": "2-9-3",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Raiders 12U B (NY)",
+    "rating": 69.69,
+    "record": "5-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Canandaigua Knights (NTB) 12U A (NY)",
+    "rating": 69.52,
+    "record": "0-7-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park (White) 12U B (NY)",
+    "rating": 69.18,
+    "record": "8-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 12U A1 (NY)",
+    "rating": 68.8,
+    "record": "0-4-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochelle Lightning 12U B (NY)",
+    "rating": 68.77,
+    "record": "6-12-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 12U B (NY)",
+    "rating": 68.76,
+    "record": "4-3-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 12U B1 (NY)",
+    "rating": 68.16,
+    "record": "4-4-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Rockland Revolution 12U A (NY)",
+    "rating": 68,
+    "record": "1-12-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 12U C (NY)",
+    "rating": 67.89,
+    "record": "7-2-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Prestige Stars 12U B (NY)",
+    "rating": 67.4,
+    "record": "3-14-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 12U B1 (NY)",
+    "rating": 66.93,
+    "record": "1-6-2",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 12U B (NY)",
+    "rating": 66.2,
+    "record": "4-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 12U B (NY)",
+    "rating": 65.8,
+    "record": "0-11-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Hartford Spartans 12U C (NY)",
+    "rating": 65.49,
+    "record": "3-8-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans (Smith) 12U C (NY)",
+    "rating": 64.32,
+    "record": "1-4-1",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans (Sweeney) 12U C (NY)",
+    "rating": 63.05,
+    "record": "0-5-0",
+    "division": "12U",
+    "state": "NY"
+  },
+  {
+    "name": "Bishop Kearney Selects 14U AAA (NY)",
+    "rating": 96.27,
+    "record": "19-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 14U AAA (NY)",
+    "rating": 94.4,
+    "record": "16-9-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 13U AAA (NY)",
+    "rating": 92.92,
+    "record": "23-5-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 14U AAA (NY)",
+    "rating": 92.81,
+    "record": "9-12-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 14U AAA (NY)",
+    "rating": 91.55,
+    "record": "12-11-4",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals 14U AAA (NY)",
+    "rating": 90.5,
+    "record": "14-8-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 14U AAA (NY)",
+    "rating": 90.25,
+    "record": "23-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 14U AAA (NY)",
+    "rating": 90.24,
+    "record": "13-21-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings 14U AA (NY)",
+    "rating": 89.82,
+    "record": "22-3-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 13U AAA (NY)",
+    "rating": 89.29,
+    "record": "12-8-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 14U AAA (NY)",
+    "rating": 89.27,
+    "record": "9-6-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 14U AA (NY)",
+    "rating": 89.01,
+    "record": "8-6-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 14U AA (NY)",
+    "rating": 88.68,
+    "record": "22-1-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 13U AAA (NY)",
+    "rating": 88.64,
+    "record": "10-15-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 14U AA (NY)",
+    "rating": 88.63,
+    "record": "20-4-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 14U AAA (NY)",
+    "rating": 88.43,
+    "record": "7-12-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 13U AAA (NY)",
+    "rating": 88.32,
+    "record": "15-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Saints 13U AAA (NY)",
+    "rating": 88.11,
+    "record": "7-14-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 14U AAA (NY)",
+    "rating": 88.09,
+    "record": "10-9-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Peeso) 14U AA (NY)",
+    "rating": 88.06,
+    "record": "19-5-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels 14U AA (NY)",
+    "rating": 87.9,
+    "record": "15-2-4",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 14U AAA (NY)",
+    "rating": 87.44,
+    "record": "4-17-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (TB) 14U AA (NY)",
+    "rating": 87.43,
+    "record": "8-7-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 14U AAA (NY)",
+    "rating": 87.35,
+    "record": "14-15-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (South) 14U AAA (NY)",
+    "rating": 86.89,
+    "record": "7-8-7",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 13U AA (NY)",
+    "rating": 86.84,
+    "record": "9-3-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 14U AA (NY)",
+    "rating": 86.73,
+    "record": "13-5-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers (TB) 14U AA (NY)",
+    "rating": 86.44,
+    "record": "11-7-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 14U AAA (NY)",
+    "rating": 86.28,
+    "record": "7-13-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors (TB) 14U AA (NY)",
+    "rating": 85.98,
+    "record": "8-6-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs 14U AA (NY)",
+    "rating": 85.86,
+    "record": "5-8-4",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades (Gold) 14U AA (NY)",
+    "rating": 85.75,
+    "record": "9-6-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors (Red) 13U AA (NY)",
+    "rating": 85.2,
+    "record": "16-6-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (Elite) 13U AAA (NY)",
+    "rating": 85.16,
+    "record": "9-15-6",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Kings 14U A (NY)",
+    "rating": 85.04,
+    "record": "25-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 14U AA (NY)",
+    "rating": 84.96,
+    "record": "4-9-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Elliott) 13U AAA (NY)",
+    "rating": 84.55,
+    "record": "8-10-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 14U AA (NY)",
+    "rating": 84.28,
+    "record": "8-15-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 13U AAA (NY)",
+    "rating": 84.12,
+    "record": "8-8-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 14U AA (NY)",
+    "rating": 84.05,
+    "record": "14-7-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Batavia Ramparts (TB) 14U A (NY)",
+    "rating": 84.01,
+    "record": "14-7-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Hartford Spartans 14U AA (NY)",
+    "rating": 83.97,
+    "record": "13-3-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Webster Cyclones 14U AA (NY)",
+    "rating": 83.95,
+    "record": "8-7-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 14U AA (NY)",
+    "rating": 83.86,
+    "record": "13-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 14U AA (NY)",
+    "rating": 83.78,
+    "record": "12-8-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 13U AAA (NY)",
+    "rating": 83.5,
+    "record": "5-10-5",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Utica Jr Comets 13U AAA (NY)",
+    "rating": 83.48,
+    "record": "7-14-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 13U AAA (NY)",
+    "rating": 83.41,
+    "record": "9-11-4",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels 14U A (NY)",
+    "rating": 83.32,
+    "record": "14-6-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cortland Flames 14U A (NY)",
+    "rating": 83.26,
+    "record": "8-2-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 13U AAA (NY)",
+    "rating": 83.09,
+    "record": "9-9-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 14U AA (NY)",
+    "rating": 82.96,
+    "record": "6-4-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Webster Cyclones 13U AA (NY)",
+    "rating": 82.93,
+    "record": "17-10-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars 14U AA (NY)",
+    "rating": 82.87,
+    "record": "10-4-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles 13U AA (NY)",
+    "rating": 82.86,
+    "record": "8-10-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (NTB) 14U AA (NY)",
+    "rating": 82.61,
+    "record": "10-1-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 14U AA (NY)",
+    "rating": 82.48,
+    "record": "11-7-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 13U AA (NY)",
+    "rating": 82.4,
+    "record": "12-2-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 14U AAA (NY)",
+    "rating": 82.28,
+    "record": "1-18-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express 14U AA (NY)",
+    "rating": 82.06,
+    "record": "9-19-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 14U AA (NY)",
+    "rating": 82,
+    "record": "4-2-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 13U AAA (NY)",
+    "rating": 81.95,
+    "record": "5-18-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles (TB) 14U AA (NY)",
+    "rating": 81.77,
+    "record": "3-13-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers (TB) 14U AA (NY)",
+    "rating": 81.74,
+    "record": "5-14-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Plattsburgh Jr Cardinals 14U AA (NY)",
+    "rating": 81.73,
+    "record": "4-5-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Lewis County Cobras 14U A (NY)",
+    "rating": 81.64,
+    "record": "9-5-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Ithaca Bears 14U AA (NY)",
+    "rating": 81.63,
+    "record": "6-4-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 14U AA (NY)",
+    "rating": 81.56,
+    "record": "8-5-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 14U A (NY)",
+    "rating": 81.32,
+    "record": "9-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs 13U AA (NY)",
+    "rating": 81.28,
+    "record": "11-8-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "North Country Cougars 14U A (NY)",
+    "rating": 81.22,
+    "record": "4-1-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (Select) 13U AA (NY)",
+    "rating": 81.2,
+    "record": "8-4-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 13U AAA (NY)",
+    "rating": 81.13,
+    "record": "5-11-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Gold) 13U AA (NY)",
+    "rating": 81.04,
+    "record": "9-6-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast (TB) 14U A (NY)",
+    "rating": 81.03,
+    "record": "3-2-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 13U AAA (NY)",
+    "rating": 80.81,
+    "record": "6-12-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces 14U A (NY)",
+    "rating": 80.68,
+    "record": "6-8-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 14U A (NY)",
+    "rating": 80.45,
+    "record": "11-4-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 14U AA (NY)",
+    "rating": 80.38,
+    "record": "7-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 14U AA (NY)",
+    "rating": 80.19,
+    "record": "5-12-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Gelb) 14U AA (NY)",
+    "rating": 80.13,
+    "record": "9-10-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 14U AA (NY)",
+    "rating": 80.09,
+    "record": "6-13-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Southern Tier Freeze 14U AA (NY)",
+    "rating": 80.03,
+    "record": "6-6-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Oswego Buccaneers 14U A (NY)",
+    "rating": 79.84,
+    "record": "12-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx (North) 14U A (NY)",
+    "rating": 79.59,
+    "record": "8-4-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 14U AA (NY)",
+    "rating": 79.59,
+    "record": "3-10-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Pelham Pelicans 14U AA (NY)",
+    "rating": 79.54,
+    "record": "11-9-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 13U AA (NY)",
+    "rating": 79.47,
+    "record": "11-8-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 13U AA (NY)",
+    "rating": 79.47,
+    "record": "9-13-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Ferreri) 14U AA (NY)",
+    "rating": 79.37,
+    "record": "6-16-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Gaiser) 13U AAA (NY)",
+    "rating": 79.36,
+    "record": "7-10-5",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "North Country Cougars 13U A (NY)",
+    "rating": 79.04,
+    "record": "4-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Greater New York Stars 14U A (NY)",
+    "rating": 78.83,
+    "record": "9-8-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 14U A (NY)",
+    "rating": 78.76,
+    "record": "21-3-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Enforcers 14U A (NY)",
+    "rating": 78.75,
+    "record": "14-6-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 14U AA (NY)",
+    "rating": 78.74,
+    "record": "7-3-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws (TB) 14U A (NY)",
+    "rating": 78.72,
+    "record": "4-5-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 14U AA (NY)",
+    "rating": 78.65,
+    "record": "14-6-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks (Chaples) 13U AA (NY)",
+    "rating": 78.56,
+    "record": "6-7-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Blackhawks 14U AA (NY)",
+    "rating": 78.5,
+    "record": "10-8-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 13U AA (NY)",
+    "rating": 78.45,
+    "record": "6-10-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades (Blue) 14U AA (NY)",
+    "rating": 78.38,
+    "record": "2-9-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Major) 14U A (NY)",
+    "rating": 78.38,
+    "record": "11-10-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 14U AA (NY)",
+    "rating": 78.28,
+    "record": "1-13-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Lendway) 13U AA (NY)",
+    "rating": 78.23,
+    "record": "4-9-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Saugerties Mustangs 14U A (NY)",
+    "rating": 78.23,
+    "record": "5-10-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 13U AA (NY)",
+    "rating": 78.2,
+    "record": "7-12-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 14U AA (NY)",
+    "rating": 78.06,
+    "record": "9-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers (NTB) 14U AA (NY)",
+    "rating": 77.85,
+    "record": "4-11-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx (South) 14U A (NY)",
+    "rating": 77.79,
+    "record": "8-2-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Massena Jr Raiders 14U A (NY)",
+    "rating": 77.71,
+    "record": "2-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 13U AA (NY)",
+    "rating": 77.68,
+    "record": "6-14-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 14U A (NY)",
+    "rating": 77.66,
+    "record": "6-4-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors (Black) 14U AA (NY)",
+    "rating": 77.62,
+    "record": "3-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers (NTB) 14U AA (NY)",
+    "rating": 77.51,
+    "record": "4-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 14U AA (NY)",
+    "rating": 77.37,
+    "record": "6-6-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 14U AA (NY)",
+    "rating": 77.35,
+    "record": "2-11-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 14U A (NY)",
+    "rating": 77.3,
+    "record": "9-5-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 14U AA (NY)",
+    "rating": 77.28,
+    "record": "2-10-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 13U AA (NY)",
+    "rating": 77.26,
+    "record": "3-3-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors (Red) 14U AA (NY)",
+    "rating": 76.94,
+    "record": "6-8-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Plattsburgh Roadrunners 14U A (NY)",
+    "rating": 76.73,
+    "record": "4-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 13U AA (NY)",
+    "rating": 76.67,
+    "record": "5-4-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Salt City Kings 14U AA (NY)",
+    "rating": 76.54,
+    "record": "2-18-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Deming) 13U AA (NY)",
+    "rating": 76.47,
+    "record": "8-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 14U A (NY)",
+    "rating": 76.11,
+    "record": "4-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Olean Arrows 14U A (NY)",
+    "rating": 76.08,
+    "record": "4-1-2",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 14U A (NY)",
+    "rating": 75.93,
+    "record": "6-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Blue) 13U AA (NY)",
+    "rating": 75.86,
+    "record": "6-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 14U A (NY)",
+    "rating": 75.79,
+    "record": "4-9-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Dix Hills Hawks 14U A (NY)",
+    "rating": 75.62,
+    "record": "3-8-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Burritt) 13U AA (NY)",
+    "rating": 75.59,
+    "record": "7-9-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 14U A (NY)",
+    "rating": 75.53,
+    "record": "5-12-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Fredonia Steelers 14U A (NY)",
+    "rating": 75.32,
+    "record": "7-0-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins 14U A1 (NY)",
+    "rating": 74.81,
+    "record": "5-3-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles (NTB) 14U AA (NY)",
+    "rating": 74.75,
+    "record": "10-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 14U A (NY)",
+    "rating": 74.62,
+    "record": "6-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Burnham) 14U AA (NY)",
+    "rating": 74.61,
+    "record": "5-12-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 13U AA (NY)",
+    "rating": 74.52,
+    "record": "2-9-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Upstate Badgers 14U A (NY)",
+    "rating": 74.5,
+    "record": "3-5-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars 14U A (NY)",
+    "rating": 74.4,
+    "record": "4-3-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Whitestown Wolfpack 14U A (NY)",
+    "rating": 74.24,
+    "record": "8-13-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Clinton Comets 14U A (NY)",
+    "rating": 74.15,
+    "record": "2-3-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 13U A (NY)",
+    "rating": 73.89,
+    "record": "5-10-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Carbone) 13U AA (NY)",
+    "rating": 73.77,
+    "record": "4-3-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Cataracts 14U AA (NY)",
+    "rating": 73.73,
+    "record": "6-12-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars 13U AA (NY)",
+    "rating": 73.15,
+    "record": "4-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Batavia Ramparts (NTB) 14U A (NY)",
+    "rating": 72.93,
+    "record": "5-5-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws (Minor) 14U A (NY)",
+    "rating": 72.64,
+    "record": "1-9-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Raiders 14U A (NY)",
+    "rating": 72.6,
+    "record": "9-11-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 14U A1 (NY)",
+    "rating": 72.48,
+    "record": "6-8-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Prestige Stars 14U A1 (NY)",
+    "rating": 72.31,
+    "record": "6-4-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Rupp) 14U AA (NY)",
+    "rating": 72.25,
+    "record": "7-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Krauss) 13U AA (NY)",
+    "rating": 72.03,
+    "record": "4-7-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Southern Tier Freeze 14U A (NY)",
+    "rating": 72,
+    "record": "4-4-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Pelham Pelicans 14U A1 (NY)",
+    "rating": 71.93,
+    "record": "6-3-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 14U A (NY)",
+    "rating": 71.69,
+    "record": "2-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 14U A1 (NY)",
+    "rating": 71.64,
+    "record": "6-7-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Thousand Island Pirates 14U B (NY)",
+    "rating": 71.17,
+    "record": "3-2-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Minor) 14U A (NY)",
+    "rating": 71.12,
+    "record": "4-14-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Mros) 13U AA (NY)",
+    "rating": 71.06,
+    "record": "1-9-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rockland Revolution 14U A (NY)",
+    "rating": 70.98,
+    "record": "3-4-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rye Rangers 14U A1 (NY)",
+    "rating": 70.9,
+    "record": "5-6-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Mamaroneck Tigers 14U A1 (NY)",
+    "rating": 70.89,
+    "record": "3-7-3",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 14U A (NY)",
+    "rating": 70.84,
+    "record": "0-12-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 14U B (NY)",
+    "rating": 70.82,
+    "record": "5-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 14U A (NY)",
+    "rating": 70.73,
+    "record": "4-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 14U A (NY)",
+    "rating": 70.72,
+    "record": "1-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Clinton Comets 14U B (NY)",
+    "rating": 70.64,
+    "record": "5-1-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks 14U A (NY)",
+    "rating": 70.34,
+    "record": "5-10-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 14U B (NY)",
+    "rating": 70.1,
+    "record": "2-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (MacKenzie) 14U AA (NY)",
+    "rating": 69.95,
+    "record": "4-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors (Black) 13U AA (NY)",
+    "rating": 69.26,
+    "record": "0-6-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "York Aviators 14U B (NY)",
+    "rating": 68.47,
+    "record": "2-4-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Jamestown Lakers 14U A (NY)",
+    "rating": 68.42,
+    "record": "1-5-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks (Westfield) 13U AA (NY)",
+    "rating": 67.88,
+    "record": "0-12-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 14U B (NY)",
+    "rating": 67.25,
+    "record": "2-8-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Raiders 14U B (NY)",
+    "rating": 66.39,
+    "record": "4-5-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 14U B (NY)",
+    "rating": 65.09,
+    "record": "2-7-1",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 14U B (NY)",
+    "rating": 65,
+    "record": "1-4-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 14U B (NY)",
+    "rating": 64.65,
+    "record": "0-12-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 14U B (NY)",
+    "rating": 64.38,
+    "record": "0-7-0",
+    "division": "14U",
+    "state": "NY"
+  },
+  {
+    "name": "Bishop Kearney Selects 15U AAA (NY)",
+    "rating": 95.82,
+    "record": "16-2-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 16U AAA (NY)",
+    "rating": 95.44,
+    "record": "19-2-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Bishop Kearney Selects 16U AAA (NY)",
+    "rating": 92.47,
+    "record": "13-10-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Notre Dame Hockey Academy 16U AAA (NY)",
+    "rating": 92.33,
+    "record": "14-12-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express 16U AAA (NY)",
+    "rating": 92.32,
+    "record": "13-11-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Notre Dame Hockey Academy 15U AAA (NY)",
+    "rating": 91.55,
+    "record": "16-9-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 15U AAA (NY)",
+    "rating": 91.31,
+    "record": "12-9-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 16U AAA (NY)",
+    "rating": 90.78,
+    "record": "19-6-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 16U AAA (NY)",
+    "rating": 90.57,
+    "record": "11-10-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Northwood School 16U AAA (NY)",
+    "rating": 90.1,
+    "record": "6-7-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 16U AAA (NY)",
+    "rating": 89.74,
+    "record": "14-16-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 16U AAA (NY)",
+    "rating": 89.63,
+    "record": "18-10-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 16U AAA (NY)",
+    "rating": 89.55,
+    "record": "18-10-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 15U AAA (NY)",
+    "rating": 88.99,
+    "record": "7-8-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Nichols School 16U AAA (NY)",
+    "rating": 88.8,
+    "record": "14-11-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 15U AAA (NY)",
+    "rating": 88.3,
+    "record": "10-13-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 15U AAA (NY)",
+    "rating": 88.08,
+    "record": "12-7-5",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (TB) 16U AA (NY)",
+    "rating": 87.86,
+    "record": "18-7-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Royals 16U AAA (NY)",
+    "rating": 87.6,
+    "record": "10-15-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 16U AAA (NY)",
+    "rating": 87.48,
+    "record": "9-14-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 16U AA (NY)",
+    "rating": 87.07,
+    "record": "16-9-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (TB) 16U AA (NY)",
+    "rating": 87.06,
+    "record": "16-4-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 15U AAA (NY)",
+    "rating": 87.01,
+    "record": "10-9-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 15U AAA (NY)",
+    "rating": 86.88,
+    "record": "15-9-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Elmira Jr Aviators Academy 16U AAA (NY)",
+    "rating": 86.65,
+    "record": "7-16-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs (TB) 16U AA (NY)",
+    "rating": 86.53,
+    "record": "9-7-5",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 16U AA (NY)",
+    "rating": 86.4,
+    "record": "15-4-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 16U AA (NY)",
+    "rating": 86.1,
+    "record": "13-1-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (South) 16U AAA (NY)",
+    "rating": 85.87,
+    "record": "4-8-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Greater New York Stars 16U AA (NY)",
+    "rating": 85.8,
+    "record": "19-2-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express 15U AAA (NY)",
+    "rating": 85.77,
+    "record": "14-12-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Szczesniak) 16U AA (NY)",
+    "rating": 85.75,
+    "record": "11-11-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Hartford Spartans 16U AA (NY)",
+    "rating": 85.49,
+    "record": "19-2-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 16U AA (NY)",
+    "rating": 85.2,
+    "record": "12-2-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Gold) 15U AA (NY)",
+    "rating": 85.18,
+    "record": "10-9-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 16U AAA (NY)",
+    "rating": 85.03,
+    "record": "2-16-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels 16U AA (NY)",
+    "rating": 84.81,
+    "record": "10-8-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Nationals 15U AAA (NY)",
+    "rating": 84.77,
+    "record": "8-14-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 15U AA (NY)",
+    "rating": 84.68,
+    "record": "18-6-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 15U AA (NY)",
+    "rating": 84.43,
+    "record": "15-4-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Summers) 15U AA (NY)",
+    "rating": 84.38,
+    "record": "19-4-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Hockey Club 15U AAA (NY)",
+    "rating": 84.35,
+    "record": "8-12-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 16U AA (NY)",
+    "rating": 84.34,
+    "record": "7-6-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades (Gold) 16U AA (NY)",
+    "rating": 84.17,
+    "record": "15-10-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 16U AA (NY)",
+    "rating": 84.13,
+    "record": "12-4-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Salt City Kings 16U AA (NY)",
+    "rating": 83.62,
+    "record": "7-4-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 16U AA (NY)",
+    "rating": 83.6,
+    "record": "11-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 15U AAA (NY)",
+    "rating": 83.37,
+    "record": "7-18-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 16U AA (NY)",
+    "rating": 83.3,
+    "record": "7-8-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 16U AA (NY)",
+    "rating": 83.09,
+    "record": "9-12-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Gold) 15U AA (NY)",
+    "rating": 83.05,
+    "record": "12-8-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 15U AA (NY)",
+    "rating": 82.87,
+    "record": "9-4-4",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (NTB) 16U AA (NY)",
+    "rating": 82.87,
+    "record": "17-4-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 16U AA (NY)",
+    "rating": 82.57,
+    "record": "9-16-4",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Renelt) 16U AA (NY)",
+    "rating": 82.54,
+    "record": "17-8-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Pelham Pelicans 16U AA (NY)",
+    "rating": 82.4,
+    "record": "4-10-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals 15U AA (NY)",
+    "rating": 82.27,
+    "record": "8-7-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "North Country Cougars 16U A (NY)",
+    "rating": 82.01,
+    "record": "3-0-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 15U AA (NY)",
+    "rating": 82.01,
+    "record": "9-7-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Webster Cyclones (Monks) 16U AA (NY)",
+    "rating": 81.9,
+    "record": "10-6-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 16U AA (NY)",
+    "rating": 81.88,
+    "record": "5-14-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 15U AA (NY)",
+    "rating": 81.82,
+    "record": "9-7-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Gold) 15U AA (NY)",
+    "rating": 81.82,
+    "record": "17-5-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 15U AA (NY)",
+    "rating": 81.69,
+    "record": "13-10-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 15U AA (NY)",
+    "rating": 81.54,
+    "record": "15-7-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 15U AA (NY)",
+    "rating": 81.54,
+    "record": "11-7-5",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 16U AA (NY)",
+    "rating": 81.41,
+    "record": "14-14-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 15U A (NY)",
+    "rating": 81.27,
+    "record": "10-7-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack 46ers 16U A (NY)",
+    "rating": 81.24,
+    "record": "4-3-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Sound Tigers 16U A (NY)",
+    "rating": 81.11,
+    "record": "20-5-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors 16U AA (NY)",
+    "rating": 81.11,
+    "record": "7-8-4",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Salt City Kings 15U AA (NY)",
+    "rating": 81.07,
+    "record": "9-15-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Johnson) 15U AA (NY)",
+    "rating": 81.05,
+    "record": "13-5-4",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 16U AA (NY)",
+    "rating": 81.01,
+    "record": "12-16-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 15U AA (NY)",
+    "rating": 80.92,
+    "record": "9-7-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx (Ferraro) 16U A (NY)",
+    "rating": 80.72,
+    "record": "13-4-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Massena Jr Raiders 16U A (NY)",
+    "rating": 80.69,
+    "record": "8-4-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Express (South) 15U AA (NY)",
+    "rating": 80.68,
+    "record": "2-16-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars 16U AA (NY)",
+    "rating": 80.67,
+    "record": "14-3-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Red Raiders 16U AA (NY)",
+    "rating": 80.63,
+    "record": "3-22-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Skaneateles Lakers 16U AA (NY)",
+    "rating": 80.35,
+    "record": "10-13-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Rich) 15U AA (NY)",
+    "rating": 80.31,
+    "record": "9-7-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons (Leber) 15U AA (NY)",
+    "rating": 80.3,
+    "record": "10-11-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 16U AA (NY)",
+    "rating": 80.18,
+    "record": "7-13-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast 16U A (NY)",
+    "rating": 79.95,
+    "record": "5-11-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 16U AA (NY)",
+    "rating": 79.63,
+    "record": "8-4-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "York Rams 16U AA (NY)",
+    "rating": 79.58,
+    "record": "2-12-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws 16U A (NY)",
+    "rating": 79.54,
+    "record": "10-12-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Major) 16U A (NY)",
+    "rating": 79.49,
+    "record": "8-7-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Geneva Generals 16U A (NY)",
+    "rating": 79.46,
+    "record": "10-3-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings (Blue) 15U AA (NY)",
+    "rating": 79.39,
+    "record": "6-10-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Dix Hills Hawks 16U A (NY)",
+    "rating": 79.27,
+    "record": "7-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 16U AA (NY)",
+    "rating": 79.03,
+    "record": "11-8-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Clinton Comets 16U AA (NY)",
+    "rating": 79,
+    "record": "5-14-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Southern Tier Freeze 16U AA (NY)",
+    "rating": 78.87,
+    "record": "5-13-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 16U AA (NY)",
+    "rating": 78.86,
+    "record": "2-17-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 16U A (NY)",
+    "rating": 78.85,
+    "record": "7-9-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 15U AA (NY)",
+    "rating": 78.83,
+    "record": "1-17-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 16U A (NY)",
+    "rating": 78.78,
+    "record": "6-9-5",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "West Point Jr Black Knights (Major) 16U A (NY)",
+    "rating": 78.69,
+    "record": "11-1-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 15U AA (NY)",
+    "rating": 78.56,
+    "record": "7-14-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Auburn Ice Hawks 16U A (NY)",
+    "rating": 78.54,
+    "record": "3-7-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Dwyer) 16U A (NY)",
+    "rating": 78.31,
+    "record": "3-18-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 16U A (NY)",
+    "rating": 78.3,
+    "record": "8-7-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars (Green) 15U AA (NY)",
+    "rating": 78.3,
+    "record": "7-15-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Bethlehem Eagles 16U A (NY)",
+    "rating": 78.17,
+    "record": "3-2-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Edge 16U A (NY)",
+    "rating": 77.79,
+    "record": "6-8-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons (ONeill) 15U AA (NY)",
+    "rating": 77.53,
+    "record": "8-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx (Fredriksen) 16U A (NY)",
+    "rating": 77.35,
+    "record": "6-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Wicker) 15U AA (NY)",
+    "rating": 77.33,
+    "record": "12-7-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 16U A (NY)",
+    "rating": 77.24,
+    "record": "4-10-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs (NTB) 16U AA (NY)",
+    "rating": 76.91,
+    "record": "9-5-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 16U AA (NY)",
+    "rating": 76.83,
+    "record": "6-10-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Saratoga Blue Knights 16U A (NY)",
+    "rating": 76.7,
+    "record": "4-4-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Blackhawks 16U A (NY)",
+    "rating": 76.69,
+    "record": "8-12-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals 16U AA (NY)",
+    "rating": 76.45,
+    "record": "7-11-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Upstate Badgers (TB) 16U A (NY)",
+    "rating": 76.41,
+    "record": "6-10-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Fredonia Steelers 16U AA (NY)",
+    "rating": 76.19,
+    "record": "7-3-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Southtowns Stars 16U AA (NY)",
+    "rating": 76.14,
+    "record": "9-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Prestige Stars 16U A (NY)",
+    "rating": 75.92,
+    "record": "3-14-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks (Tory) 16U A (NY)",
+    "rating": 75.81,
+    "record": "12-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks (Rudzewick) 16U AA (NY)",
+    "rating": 75.79,
+    "record": "8-10-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Pelham Pelicans 16U A (NY)",
+    "rating": 75.66,
+    "record": "8-6-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Mid-Hudson Polar Bears 16U A (NY)",
+    "rating": 75.51,
+    "record": "10-6-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Webster Cyclones (Mixed) 16U A (NY)",
+    "rating": 75.33,
+    "record": "6-5-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Jamestown Lakers 16U A (NY)",
+    "rating": 75.31,
+    "record": "5-7-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 16U A (NY)",
+    "rating": 75.28,
+    "record": "7-1-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Pilon) 15U AA (NY)",
+    "rating": 75.21,
+    "record": "6-11-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Auerhahn) 15U AA (NY)",
+    "rating": 74.77,
+    "record": "7-9-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Lewis County Cobras 16U A (NY)",
+    "rating": 74.32,
+    "record": "0-9-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 16U A (NY)",
+    "rating": 74.25,
+    "record": "5-5-3",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "York Rams (Blue) 16U A (NY)",
+    "rating": 74.08,
+    "record": "5-9-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Schenectady Chargers 16U A (NY)",
+    "rating": 73.64,
+    "record": "0-4-2",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins 16U A (NY)",
+    "rating": 73.22,
+    "record": "4-9-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Cazenovia Chiefs 15U AA (NY)",
+    "rating": 73.11,
+    "record": "1-14-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Whitestown Wolfpack 16U A (NY)",
+    "rating": 72.77,
+    "record": "1-6-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition (Korn) 16U B (NY)",
+    "rating": 72.3,
+    "record": "2-6-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats (Minor) 16U A (NY)",
+    "rating": 72.16,
+    "record": "6-12-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Sickles) 16U AA (NY)",
+    "rating": 72.02,
+    "record": "2-17-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "West Point Jr Black Knights (Minor) 16U A (NY)",
+    "rating": 71.78,
+    "record": "1-5-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "York Rams (Orange) 16U A (NY)",
+    "rating": 71.75,
+    "record": "1-7-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Upstate Badgers (Roth) 16U A (NY)",
+    "rating": 71.55,
+    "record": "1-5-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades (Blue) 16U AA (NY)",
+    "rating": 71.43,
+    "record": "0-13-0",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 16U A (NY)",
+    "rating": 71.4,
+    "record": "0-13-1",
+    "division": "16U",
+    "state": "NY"
+  },
+  {
+    "name": "Bishop Kearney Selects 18U AAA (NY)",
+    "rating": 96.69,
+    "record": "16-7-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Northwood School 18U Prep (NY)",
+    "rating": 96.16,
+    "record": "10-6-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Jr Islanders 18U AAA (NY)",
+    "rating": 94.26,
+    "record": "14-7-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Jr Sabres 18U AAA (NY)",
+    "rating": 94.16,
+    "record": "11-10-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Elmira Jr Aviators Academy 18U AAA (NY)",
+    "rating": 93.5,
+    "record": "15-9-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Cheektowaga Warriors 18U AA (NY)",
+    "rating": 92.38,
+    "record": "17-4-4",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Gulls 18U AAA (NY)",
+    "rating": 92.26,
+    "record": "14-4-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Clarence Mustangs 18U AA (NY)",
+    "rating": 92.08,
+    "record": "21-6-4",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 18U AA (NY)",
+    "rating": 91.82,
+    "record": "15-8-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Beach Lightning 18U AA (NY)",
+    "rating": 91.61,
+    "record": "16-3-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Arrows 18U AAA (NY)",
+    "rating": 91.23,
+    "record": "8-8-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans 18U AAA (NY)",
+    "rating": 91.06,
+    "record": "14-10-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Purple Eagles 18U AA (NY)",
+    "rating": 90.85,
+    "record": "9-8-5",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Northwood School (Varsity) 18U AAA (NY)",
+    "rating": 90.29,
+    "record": "7-4-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Troy Albany Titans 18U AAA (NY)",
+    "rating": 89.85,
+    "record": "8-11-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rebels 18U AA (NY)",
+    "rating": 89.75,
+    "record": "13-4-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "NY Dynamo 18U AAA (NY)",
+    "rating": 89.34,
+    "record": "5-14-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Nassau County Lions 18U AA (NY)",
+    "rating": 89.14,
+    "record": "13-4-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Canton Steel 18U AA (NY)",
+    "rating": 87.34,
+    "record": "11-8-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Pender) 18U AA (NY)",
+    "rating": 87.14,
+    "record": "16-7-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Camillus Cougars 18U AA (NY)",
+    "rating": 86.82,
+    "record": "7-1-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 18U AAA (NY)",
+    "rating": 86.74,
+    "record": "4-12-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Simmons) 18U AA (NY)",
+    "rating": 86.47,
+    "record": "22-13-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Greater New York Stars 18U AA (NY)",
+    "rating": 86.43,
+    "record": "7-9-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "PAL Blue Knights 18U AA (NY)",
+    "rating": 85.82,
+    "record": "6-8-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Bedford Bears 18U A (NY)",
+    "rating": 85.67,
+    "record": "10-1-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Lewis County Cobras 18U A (NY)",
+    "rating": 85.46,
+    "record": "8-5-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Salt City Kings 18U AA (NY)",
+    "rating": 85.09,
+    "record": "6-7-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Lockport Lock Monsters 18U AA (NY)",
+    "rating": 84.95,
+    "record": "5-8-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Amherst Knights 18U AA (NY)",
+    "rating": 84.85,
+    "record": "10-13-4",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "North Park 18U AA (NY)",
+    "rating": 84.81,
+    "record": "8-11-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Clifton Park Eagles 18U A (NY)",
+    "rating": 84.76,
+    "record": "12-5-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Sharks 18U AA (NY)",
+    "rating": 84.7,
+    "record": "8-18-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Kings 18U A (NY)",
+    "rating": 84.42,
+    "record": "15-4-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Central Outlaws 18U A (NY)",
+    "rating": 84.37,
+    "record": "15-7-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack 46ers 18U A (NY)",
+    "rating": 84.34,
+    "record": "3-9-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Occhino) 18U A (NY)",
+    "rating": 84.33,
+    "record": "24-9-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rome Grizzlies 18U AA (NY)",
+    "rating": 84.13,
+    "record": "4-6-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Tonawanda Whalers 18U AA (NY)",
+    "rating": 84.08,
+    "record": "11-14-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "South Westchester Blackhawks 18U A (NY)",
+    "rating": 84.03,
+    "record": "6-9-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Adirondack Thunder 18U AA (NY)",
+    "rating": 83.4,
+    "record": "10-9-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Syracuse Valley Eagles 18U AA (NY)",
+    "rating": 83.27,
+    "record": "3-13-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Hamburg Hawks 18U AA (NY)",
+    "rating": 83.24,
+    "record": "8-12-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "White Plains Plainsmen 18U A (NY)",
+    "rating": 83.11,
+    "record": "11-4-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Wheatfield Blades 18U AA (NY)",
+    "rating": 83.03,
+    "record": "9-10-5",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "East Aurora Beast 18U A (NY)",
+    "rating": 82.98,
+    "record": "17-3-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Saugerties Mustangs 18U A (NY)",
+    "rating": 82.8,
+    "record": "6-10-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Southern Tier Freeze 18U A (NY)",
+    "rating": 82.72,
+    "record": "5-2-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "York City Cyclones 18U A (NY)",
+    "rating": 82.6,
+    "record": "7-4-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Great Neck Bruins 18U A (NY)",
+    "rating": 82.36,
+    "record": "10-8-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Bisons 18U AA (NY)",
+    "rating": 81.31,
+    "record": "12-6-5",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Peconic Wildcats 18U A (NY)",
+    "rating": 81.11,
+    "record": "5-12-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Enforcers 18U A (NY)",
+    "rating": 81.06,
+    "record": "2-3-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Oswego Buccaneers 18U A (NY)",
+    "rating": 80.67,
+    "record": "2-4-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Upstate Badgers 18U A (NY)",
+    "rating": 80.56,
+    "record": "4-2-1",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Long Island Rinx 18U A (NY)",
+    "rating": 80.2,
+    "record": "1-10-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Jamestown Lakers 18U A (NY)",
+    "rating": 80.14,
+    "record": "8-7-5",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "West Seneca Wings 18U AA (NY)",
+    "rating": 79.63,
+    "record": "3-15-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Carbone) 18U AA (NY)",
+    "rating": 79.34,
+    "record": "8-13-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Cortland Flames 18U A (NY)",
+    "rating": 79.1,
+    "record": "3-7-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Jr Americans (Harrington) 18U AA (NY)",
+    "rating": 79.09,
+    "record": "8-15-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Niagara Jr Cataracts 18U AA (NY)",
+    "rating": 79.05,
+    "record": "6-9-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Olean Arrows 18U A (NY)",
+    "rating": 78.19,
+    "record": "3-9-4",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Aces (Quick) 18U AA (NY)",
+    "rating": 77.65,
+    "record": "1-15-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Rochester Coalition 18U B (NY)",
+    "rating": 77.58,
+    "record": "2-8-0",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Lysander Lightning 18U B (NY)",
+    "rating": 77.52,
+    "record": "2-7-3",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Buffalo Regals (Fargino) 18U AA (NY)",
+    "rating": 77.4,
+    "record": "3-13-2",
+    "division": "18U",
+    "state": "NY"
+  },
+  {
+    "name": "Westchester Vipers 18U A (NY)",
+    "rating": 75.6,
+    "record": "1-7-0",
+    "division": "18U",
+    "state": "NY"
+  }
 ]
