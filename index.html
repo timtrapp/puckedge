@@ -54,6 +54,35 @@
       input[type="number"] {
         -moz-appearance: textfield;
       }
+
+      /* Export Division Report Print Stylesheet */
+      @media print {
+        header, footer, nav, #btn-export-division-report, .no-print {
+          display: none !important;
+        }
+        #view-bracket {
+          display: block !important;
+        }
+        #view-predictor {
+          display: none !important;
+        }
+        body, main {
+          background-color: #ffffff !important;
+          color: #111827 !important;
+          max-width: 100% !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        .shadow-sm, .shadow-xs, .shadow-md, .shadow-inner {
+          box-shadow: none !important;
+        }
+        .bg-white {
+          background-color: #ffffff !important;
+        }
+        .border-slate-200\/80, .border-slate-200 {
+          border-color: #e2e8f0 !important;
+        }
+      }
     </style>
   </head>
   <body class="bg-[#F2F2F7] text-[#1C1C1E] min-h-screen flex flex-col antialiased selection:bg-[#007AFF] selection:text-white">
@@ -63,11 +92,12 @@
       <div class="max-w-4xl mx-auto px-4 py-3 sm:py-3.5 flex items-center justify-between gap-4">
         
         <!-- Left: Brand Logo Lockup (Native Transparent Header Integration) -->
-        <a href="#" class="flex items-center bg-transparent group cursor-pointer focus:outline-none shrink-0 p-0 m-0 border-0" title="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool">
+        <a href="#" class="flex items-center bg-transparent mix-blend-multiply group cursor-pointer focus:outline-none shrink-0 p-0 m-0 border-0" style="background: transparent; border: none;" title="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool">
           <img 
             src="/assets/aistudio/puckedge-logo-transparent.png" 
             alt="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool"
-            class="h-10 w-auto bg-transparent mix-blend-multiply drop-shadow-sm object-contain cursor-pointer transition-opacity hover:opacity-95"
+            class="h-10 w-auto bg-transparent mix-blend-multiply object-contain cursor-pointer transition-opacity hover:opacity-95"
+            style="background: transparent; border: none;"
             loading="eager"
           />
         </a>
@@ -971,15 +1001,15 @@
               </p>
             </div>
 
-            <!-- Team Count Selector (iOS Segmented Style) -->
+            <!-- Team Count Selector (iOS Segmented Style - Standardized) -->
             <div class="flex items-center gap-2">
               <span class="text-xs text-[#8E8E93] font-medium">Format:</span>
-              <div class="inline-flex rounded-xl bg-[#E5E5EA] p-1">
-                <button onclick="setBracketTeamCount(4)" id="btn-count-4" class="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black transition-all">4 Teams</button>
-                <button onclick="setBracketTeamCount(6)" id="btn-count-6" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all">6 Teams</button>
-                <button onclick="setBracketTeamCount(8)" id="btn-count-8" class="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black transition-all">8 Teams</button>
-                <button onclick="setBracketTeamCount(5)" id="btn-count-5" class="px-2 py-1 text-xs font-medium rounded-lg text-slate-500 hover:text-black transition-all">5</button>
-                <button onclick="setBracketTeamCount(7)" id="btn-count-7" class="px-2 py-1 text-xs font-medium rounded-lg text-slate-500 hover:text-black transition-all">7</button>
+              <div class="inline-flex rounded-xl bg-[#E5E5EA] p-1 gap-1">
+                <button type="button" onclick="setBracketTeamCount(4)" id="btn-count-4" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">4 Teams</button>
+                <button type="button" onclick="setBracketTeamCount(5)" id="btn-count-5" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">5 Teams</button>
+                <button type="button" onclick="setBracketTeamCount(6)" id="btn-count-6" class="h-8 px-3 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-xs cursor-default flex items-center justify-center transition-all whitespace-nowrap">6 Teams</button>
+                <button type="button" onclick="setBracketTeamCount(7)" id="btn-count-7" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">7 Teams</button>
+                <button type="button" onclick="setBracketTeamCount(8)" id="btn-count-8" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">8 Teams</button>
               </div>
             </div>
           </div>
@@ -1010,6 +1040,32 @@
               <button onclick="setBracketDivisionFilter('18U')" id="bracket-div-18U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">18U</button>
             </div>
           </div>
+        </div>
+
+        <!-- Division Parity Metric Header & Export Action Button -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+          <div>
+            <h3 class="text-sm font-bold text-[#1C1C1E] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">
+                <i class="fa-solid fa-award"></i>
+              </span>
+              <span>Round-Robin Parity Grade &amp; Metrics</span>
+            </h3>
+            <p class="text-xs text-[#8E8E93] mt-0.5">
+              Composite competitive balance score across all division matchup pairings
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="btn-export-division-report"
+            onclick="exportDivisionReport()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#007AFF] hover:bg-blue-600 active:scale-98 text-white shadow-xs transition-all cursor-pointer shrink-0 self-start sm:self-center"
+            title="Export or print division parity report"
+          >
+            <i class="fa-solid fa-file-pdf text-xs"></i>
+            <span>Export Division Report</span>
+          </button>
         </div>
 
         <!-- Division Parity Metric Cards (Apple iOS Cards) -->
@@ -2232,18 +2288,14 @@ Coach / Scheduler (${state.teamA.name})`;
           state.bracket.teams = state.bracket.teams.slice(0, count);
         }
 
-        // Update count buttons
+        // Update count buttons (Standardized height, padding, and font styling)
         [4, 5, 6, 7, 8].forEach(c => {
           const btn = document.getElementById(`btn-count-${c}`);
           if (btn) {
             if (c === count) {
-              btn.className = (c === 4 || c === 6 || c === 8)
-                ? 'px-2.5 py-1 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all'
-                : 'px-2 py-1 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all';
+              btn.className = 'h-8 px-3 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-xs cursor-default flex items-center justify-center transition-all whitespace-nowrap';
             } else {
-              btn.className = (c === 4 || c === 6 || c === 8)
-                ? 'px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-600 hover:text-black transition-all'
-                : 'px-2 py-1 text-xs font-medium rounded-lg text-slate-500 hover:text-black transition-all';
+              btn.className = 'h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap';
             }
           }
         });
@@ -2865,10 +2917,18 @@ Coach / Scheduler (${state.teamA.name})`;
         const isT1Winner = match.winnerSlot === 1 && match.team1?.name;
         const isT2Winner = match.winnerSlot === 2 && match.team2?.name;
 
+        const probBadge1 = match.isReady
+          ? `<span class="bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded-full text-xs min-w-[38px] text-center shrink-0">${match.prob1}%</span>`
+          : `<span class="bg-slate-100 text-slate-400 font-medium px-2 py-0.5 rounded-full text-xs min-w-[38px] text-center shrink-0">--</span>`;
+
+        const probBadge2 = match.isReady
+          ? `<span class="bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded-full text-xs min-w-[38px] text-center shrink-0">${match.prob2}%</span>`
+          : `<span class="bg-slate-100 text-slate-400 font-medium px-2 py-0.5 rounded-full text-xs min-w-[38px] text-center shrink-0">--</span>`;
+
         return `
-          <div class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden w-64 sm:w-72 transition-all hover:border-slate-300">
+          <div class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden w-68 sm:w-76 transition-all hover:border-slate-300">
             <!-- Header -->
-            <div class="px-3 py-1.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            <div class="px-3.5 py-2 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider">
               <span>${match.roundLabel}</span>
               <span class="text-[#007AFF] font-bold">${match.spreadText}</span>
             </div>
@@ -2877,18 +2937,16 @@ Coach / Scheduler (${state.teamA.name})`;
             <div
               onclick="toggleBracketAdvance('${match.id}', 1)"
               title="Click to advance as winner"
-              class="px-3 py-2 flex items-center justify-between gap-2 border-b border-slate-100 cursor-pointer transition-colors ${isT1Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
+              class="px-3 py-2.5 flex items-center justify-between gap-2.5 border-b border-slate-100 cursor-pointer transition-colors ${isT1Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
             >
               <div class="flex items-center gap-1.5 min-w-0 flex-1">
-                <span class="text-[10px] font-bold text-slate-400 shrink-0">${t1Seed}</span>
+                <span class="text-[11px] font-bold text-slate-400 shrink-0">${t1Seed}</span>
                 <span class="text-xs truncate ${isT1Winner ? 'font-bold text-[#007AFF]' : 'font-semibold'}">${t1Name}</span>
-                ${t1Rating ? `<span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.2 rounded shrink-0">${t1Rating}</span>` : ''}
+                ${t1Rating ? `<span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded-md shrink-0 border border-slate-200/60">${t1Rating}</span>` : ''}
               </div>
               <div class="flex items-center gap-1.5 shrink-0 text-right">
-                <span class="text-xs font-bold ${match.isReady ? (match.prob1 >= 50 ? 'text-[#007AFF]' : 'text-slate-400') : 'text-slate-300'}">
-                  ${match.isReady ? `${match.prob1}%` : '--'}
-                </span>
-                ${isT1Winner ? `<span class="text-[#007AFF] text-xs font-bold">✓</span>` : ''}
+                ${probBadge1}
+                ${isT1Winner ? `<span class="w-4 h-4 rounded-full bg-[#007AFF] text-white flex items-center justify-center text-[10px] font-bold shadow-xs shrink-0">✓</span>` : ''}
               </div>
             </div>
 
@@ -2896,24 +2954,22 @@ Coach / Scheduler (${state.teamA.name})`;
             <div
               onclick="toggleBracketAdvance('${match.id}', 2)"
               title="Click to advance as winner"
-              class="px-3 py-2 flex items-center justify-between gap-2 cursor-pointer transition-colors ${isT2Winner ? 'bg-amber-50/70 text-[#FF9500]' : 'hover:bg-slate-50 text-slate-800'}"
+              class="px-3 py-2.5 flex items-center justify-between gap-2.5 cursor-pointer transition-colors ${isT2Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
             >
               <div class="flex items-center gap-1.5 min-w-0 flex-1">
-                <span class="text-[10px] font-bold text-slate-400 shrink-0">${t2Seed}</span>
-                <span class="text-xs truncate ${isT2Winner ? 'font-bold text-[#FF9500]' : 'font-semibold'}">${t2Name}</span>
-                ${t2Rating ? `<span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.2 rounded shrink-0">${t2Rating}</span>` : ''}
+                <span class="text-[11px] font-bold text-slate-400 shrink-0">${t2Seed}</span>
+                <span class="text-xs truncate ${isT2Winner ? 'font-bold text-[#007AFF]' : 'font-semibold'}">${t2Name}</span>
+                ${t2Rating ? `<span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded-md shrink-0 border border-slate-200/60">${t2Rating}</span>` : ''}
               </div>
               <div class="flex items-center gap-1.5 shrink-0 text-right">
-                <span class="text-xs font-bold ${match.isReady ? (match.prob2 >= 50 ? 'text-[#FF9500]' : 'text-slate-400') : 'text-slate-300'}">
-                  ${match.isReady ? `${match.prob2}%` : '--'}
-                </span>
-                ${isT2Winner ? `<span class="text-[#FF9500] text-xs font-bold">✓</span>` : ''}
+                ${probBadge2}
+                ${isT2Winner ? `<span class="w-4 h-4 rounded-full bg-[#007AFF] text-white flex items-center justify-center text-[10px] font-bold shadow-xs shrink-0">✓</span>` : ''}
               </div>
             </div>
 
             <!-- Footer -->
-            <div class="px-3 py-1 bg-slate-50/80 border-t border-slate-100 text-[10px] text-slate-500 flex items-center justify-between">
-              <span class="truncate">${match.verdictText}</span>
+            <div class="px-3.5 py-1.5 bg-slate-50/80 border-t border-slate-100 text-[10px] text-slate-500 flex items-center justify-between">
+              <span class="truncate font-medium">${match.verdictText}</span>
               <span class="text-[9px] text-slate-400 shrink-0 ml-1">Click team to advance</span>
             </div>
           </div>
@@ -3047,6 +3103,13 @@ Coach / Scheduler (${state.teamA.name})`;
             </div>
           </div>
         `;
+      }
+
+      function exportDivisionReport() {
+        switchMainTab('bracket');
+        setTimeout(() => {
+          window.print();
+        }, 150);
       }
 
       // Initialize on load

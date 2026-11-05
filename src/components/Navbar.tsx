@@ -28,12 +28,13 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Top Bar Contract: 3 zones separated by gap-8 (Brand Wordmark, Single-line Nav Links, Primary CTA) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
         {/* Zone 1: Brand Logo */}
-        <div className="flex items-center gap-2 shrink-0 bg-transparent p-0 m-0">
+        <div className="flex items-center gap-2 shrink-0 bg-transparent mix-blend-multiply p-0 m-0 border-0" style={{ background: 'transparent', border: 'none' }}>
           <img 
             src="/assets/aistudio/puckedge-logo-transparent.png" 
             alt="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool" 
             loading="eager"
-            className="h-10 w-auto bg-transparent mix-blend-multiply drop-shadow-sm object-contain cursor-pointer transition-opacity hover:opacity-95"
+            className="h-10 w-auto bg-transparent mix-blend-multiply object-contain cursor-pointer transition-opacity hover:opacity-95"
+            style={{ background: 'transparent', border: 'none' }}
           />
         </div>
 
