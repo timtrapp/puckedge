@@ -283,7 +283,7 @@
           <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4 relative">
             <div class="flex items-center justify-between">
               <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider">TEAM 1</label>
-              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-a-badge">Effective: 84.50</span>
+              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-a-badge">Effective: --</span>
             </div>
 
             <!-- Team Name Autocomplete / Typeahead -->
@@ -292,11 +292,11 @@
                 <input
                   type="text"
                   id="team-a-name"
-                  value="Buffalo Bisons 12U AA"
+                  value=""
                   oninput="handleTeamSearchInput('a')"
                   onfocus="showTeamDropdown('a')"
                   onclick="showTeamDropdown('a')"
-                  placeholder="Search team or type custom name..."
+                  placeholder="Search and select a team..."
                   autocomplete="off"
                   class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-3.5 pr-16 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
                 />
@@ -307,7 +307,7 @@
                     onclick="clearTeamSelection('a')"
                     aria-label="Clear team selection"
                     title="Clear team selection"
-                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6"
+                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6 hidden"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -329,11 +329,7 @@
               <!-- Record / Division Helper text -->
               <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[16px]">
                 <div id="team-a-record-badge" class="flex items-center gap-1.5 truncate">
-                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
-                    <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
-                    Ranked • AA (NY)
-                  </span>
-                  <span class="font-medium text-slate-600 truncate">18-7-3 • 12U (NY)</span>
+                  <span class="text-slate-400 text-[10px]">No team selected</span>
                 </div>
                 <span class="text-slate-400 text-[10px] shrink-0">Editable rating</span>
               </div>
@@ -366,7 +362,8 @@
                   step="0.01"
                   inputmode="decimal"
                   id="team-a-rating"
-                  value="86.50"
+                  value=""
+                  placeholder="0.00"
                   onfocus="this.select(); handleRatingInputTap(this)"
                   onclick="this.select(); handleRatingInputTap(this)"
                   ontouchstart="this.select(); handleRatingInputTap(this)"
@@ -509,7 +506,7 @@
           <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4 relative">
             <div class="flex items-center justify-between">
               <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider">TEAM 2</label>
-              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-b-badge">Effective: 84.25</span>
+              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-b-badge">Effective: --</span>
             </div>
 
             <!-- Team Name Autocomplete / Typeahead -->
@@ -518,11 +515,11 @@
                 <input
                   type="text"
                   id="team-b-name"
-                  value="Warriors Hockey 12U AA"
+                  value=""
                   oninput="handleTeamSearchInput('b')"
                   onfocus="showTeamDropdown('b')"
                   onclick="showTeamDropdown('b')"
-                  placeholder="Search team or type custom name..."
+                  placeholder="Search and select a team..."
                   autocomplete="off"
                   class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl pl-3.5 pr-16 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
                 />
@@ -533,7 +530,7 @@
                     onclick="clearTeamSelection('b')"
                     aria-label="Clear team selection"
                     title="Clear team selection"
-                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6"
+                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6 hidden"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -555,11 +552,7 @@
               <!-- Record / Division Helper text -->
               <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[16px]">
                 <div id="team-b-record-badge" class="flex items-center gap-1.5 truncate">
-                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/90 shrink-0">
-                    <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
-                    Ranked • AA (NY)
-                  </span>
-                  <span class="font-medium text-slate-600 truncate">14-10-3 • 12U (NY)</span>
+                  <span class="text-slate-400 text-[10px]">No team selected</span>
                 </div>
                 <span class="text-slate-400 text-[10px] shrink-0">Editable rating</span>
               </div>
@@ -592,7 +585,8 @@
                   step="0.01"
                   inputmode="decimal"
                   id="team-b-rating"
-                  value="84.25"
+                  value=""
+                  placeholder="0.00"
                   onfocus="this.select(); handleRatingInputTap(this)"
                   onclick="this.select(); handleRatingInputTap(this)"
                   ontouchstart="this.select(); handleRatingInputTap(this)"
@@ -736,94 +730,140 @@
         <!-- 2ND (MIDDLE): MATCHUP PREDICTOR RESULTS CARD (HERO RESULTS CONTAINER) -->
         <div id="hero-prediction-card" class="rounded-2xl p-6 sm:p-7 border border-slate-200/80 bg-white shadow-sm space-y-6 transition-all duration-300">
           
-          <!-- Spread & Dynamic Verdict -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-            <div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93]">
-                  Projected Spread
-                </span>
-                <button
-                  type="button"
-                  id="btn-share-matchup"
-                  onclick="handleShareAction('matchup')"
-                  class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
-                  title="Share this matchup deep-link"
-                >
-                  <i class="fa-solid fa-share-nodes text-[10px]"></i>
-                  <span id="btn-share-matchup-label">Share Matchup</span>
-                </button>
-              </div>
-              <div class="flex items-baseline gap-2.5 mt-1">
-                <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF]" id="hero-spread-val">
-                  +0.25
-                </span>
-                <span class="text-xs font-medium text-[#8E8E93]" id="hero-favored-label">Even parity matchup</span>
-              </div>
+          <!-- Empty State (Shown when teams are not selected) -->
+          <div id="hero-empty-state" class="py-10 px-4 text-center space-y-4">
+            <div class="w-14 h-14 rounded-2xl bg-[#F2F2F7] border border-slate-200/90 text-slate-400 flex items-center justify-center mx-auto text-xl shadow-xs">
+              <i class="fa-solid fa-scale-unbalanced text-slate-400 text-lg"></i>
             </div>
-
-            <!-- Dynamic Verdict Badge (iOS Pill) -->
-            <div id="hero-verdict-badge" class="px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-current"></span>
-              <span id="hero-verdict-text">Even Battle</span>
+            <div class="max-w-md mx-auto space-y-1.5">
+              <h3 class="text-base font-bold text-[#1C1C1E]">Matchup Predictor Standby</h3>
+              <p class="text-xs sm:text-sm text-[#8E8E93] leading-relaxed">
+                Search and select two teams above to project the goal spread and win probability.
+              </p>
             </div>
-          </div>
-
-          <!-- Score & Win Probability Bar (iOS Battery Style) -->
-          <div class="space-y-4">
-            <div class="grid grid-cols-3 items-center text-center">
-              <div class="text-left sm:text-center space-y-0.5">
-                <span id="label-team-a" class="text-xs sm:text-sm font-bold text-[#007AFF] truncate block">Wings</span>
-                <div id="score-team-a" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.2</div>
-                <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
-              </div>
-
-              <div class="space-y-1">
-                <span class="text-[10px] uppercase font-bold tracking-widest text-[#8E8E93]">PROJECTION</span>
-                <div class="text-lg sm:text-xl font-bold text-slate-400">VS</div>
-                <span id="total-goals-label" class="text-xs text-[#8E8E93] font-medium">6.3 Tot Goals</span>
-              </div>
-
-              <div class="text-right sm:text-center space-y-0.5">
-                <span id="label-team-b" class="text-xs sm:text-sm font-bold text-[#FF9500] truncate block">Warriors</span>
-                <div id="score-team-b" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.1</div>
-                <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
-              </div>
-            </div>
-
-            <!-- Win Probability Meter (Apple iOS Segmented Bar) -->
-            <div class="space-y-1.5 pt-1">
-              <div class="flex justify-between text-xs font-semibold px-0.5">
-                <span class="text-[#007AFF]" id="prob-a-label">Wings 48%</span>
-                <span class="text-[#8E8E93]" id="prob-tie-label">OT/Tie 18%</span>
-                <span class="text-[#FF9500]" id="prob-b-label">Warriors 34%</span>
-              </div>
-              <div class="h-3.5 w-full bg-[#E5E5EA] rounded-full overflow-hidden flex p-0.5 shadow-inner">
-                <div id="prob-bar-a" class="h-full bg-[#007AFF] rounded-l-full transition-all duration-300" style="width: 48%"></div>
-                <div id="prob-bar-tie" class="h-full bg-[#8E8E93] transition-all duration-300" style="width: 18%"></div>
-                <div id="prob-bar-b" class="h-full bg-[#FF9500] rounded-r-full transition-all duration-300" style="width: 34%"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tactical Coaching Summary Card (iOS Clean Alert Container) -->
-          <div id="tactical-summary-box" class="p-4 rounded-xl bg-blue-50/70 border border-blue-100 space-y-1.5 text-xs">
-            <div class="flex items-center justify-between font-semibold">
-              <span class="flex items-center gap-1.5 text-[#007AFF]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Tactical Coaching &amp; Developmental Assessment
+            <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs">
+              <span id="empty-state-status-t1" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200">
+                <i class="fa-regular fa-circle text-[9px]"></i> Team 1: Unselected
               </span>
-              <span id="tactical-verdict-tag" class="text-[11px] font-bold text-emerald-700">Peak Parity</span>
+              <span id="empty-state-status-t2" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200">
+                <i class="fa-regular fa-circle text-[9px]"></i> Team 2: Unselected
+              </span>
             </div>
-            <p id="tactical-summary-text" class="text-slate-700 leading-relaxed text-xs">
-              This matchup represents ideal competitive balance. Both teams can execute neutral-zone forechecks and test special teams without blowout demoralization.
-            </p>
+          </div>
+
+          <!-- Active Calculation Content (Hidden until both teams are selected) -->
+          <div id="hero-active-content" class="hidden space-y-6">
+            <!-- Spread & Dynamic Verdict -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+              <div>
+                <div class="flex items-center gap-2.5">
+                  <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93]">
+                    Projected Spread
+                  </span>
+                  <button
+                    type="button"
+                    id="btn-share-matchup"
+                    onclick="handleShareAction('matchup')"
+                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
+                    title="Share this matchup deep-link"
+                  >
+                    <i class="fa-solid fa-share-nodes text-[10px]"></i>
+                    <span id="btn-share-matchup-label">Share Matchup</span>
+                  </button>
+                </div>
+                <div class="flex items-baseline gap-2.5 mt-1">
+                  <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF]" id="hero-spread-val">
+                    +0.00
+                  </span>
+                  <span class="text-xs font-medium text-[#8E8E93]" id="hero-favored-label">Even parity matchup</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Verdict Badge (iOS Pill) -->
+              <div id="hero-verdict-badge" class="px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center shadow-xs">
+                <span class="w-2 h-2 rounded-full bg-current"></span>
+                <span id="hero-verdict-text">Even Battle</span>
+              </div>
+            </div>
+
+            <!-- Score & Win Probability Bar (iOS Battery Style) -->
+            <div class="space-y-4">
+              <div class="grid grid-cols-3 items-center text-center">
+                <div class="text-left sm:text-center space-y-1">
+                  <div class="flex items-center justify-start sm:justify-center gap-1.5 flex-wrap">
+                    <span id="label-team-a" class="text-xs sm:text-sm font-bold text-[#007AFF] truncate max-w-[130px] sm:max-w-[180px]">Team 1</span>
+                    <span id="label-badge-a" class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-blue-100 text-[#007AFF] border border-blue-200 shrink-0">12U AA</span>
+                  </div>
+                  <div id="score-team-a" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.2</div>
+                  <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
+                </div>
+
+                <div class="space-y-1">
+                  <span class="text-[10px] uppercase font-bold tracking-widest text-[#8E8E93]">PROJECTION</span>
+                  <div class="text-lg sm:text-xl font-bold text-slate-400">VS</div>
+                  <span id="total-goals-label" class="text-xs text-[#8E8E93] font-medium">6.3 Tot Goals</span>
+                </div>
+
+                <div class="text-right sm:text-center space-y-1">
+                  <div class="flex items-center justify-end sm:justify-center gap-1.5 flex-wrap">
+                    <span id="label-badge-b" class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200 shrink-0">12U AA</span>
+                    <span id="label-team-b" class="text-xs sm:text-sm font-bold text-[#FF9500] truncate max-w-[130px] sm:max-w-[180px]">Team 2</span>
+                  </div>
+                  <div id="score-team-b" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.1</div>
+                  <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
+                </div>
+              </div>
+
+              <!-- Win Probability Meter (Apple iOS Segmented Bar) -->
+              <div class="space-y-1.5 pt-1">
+                <div class="flex justify-between text-xs font-semibold px-0.5">
+                  <span class="text-[#007AFF]" id="prob-a-label">Team 1 48%</span>
+                  <span class="text-[#8E8E93]" id="prob-tie-label">OT/Tie 18%</span>
+                  <span class="text-[#FF9500]" id="prob-b-label">Team 2 34%</span>
+                </div>
+                <div class="h-3.5 w-full bg-[#E5E5EA] rounded-full overflow-hidden flex p-0.5 shadow-inner">
+                  <div id="prob-bar-a" class="h-full bg-[#007AFF] rounded-l-full transition-all duration-300" style="width: 48%"></div>
+                  <div id="prob-bar-tie" class="h-full bg-[#8E8E93] transition-all duration-300" style="width: 18%"></div>
+                  <div id="prob-bar-b" class="h-full bg-[#FF9500] rounded-r-full transition-all duration-300" style="width: 34%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cross-Division Game Contextual Notice (Shown when age divisions differ) -->
+            <div id="cross-division-alert" class="hidden p-3.5 rounded-xl bg-amber-50/90 border border-amber-200/90 flex items-start gap-2.5 text-xs text-amber-950 shadow-2xs">
+              <div class="w-5 h-5 rounded-full bg-amber-200/70 text-[#FF9500] flex items-center justify-center shrink-0 mt-0.5">
+                <i class="fa-solid fa-arrows-split-up-and-left text-[11px]"></i>
+              </div>
+              <div class="space-y-0.5">
+                <div class="font-bold flex items-center gap-2">
+                  <span class="text-[#FF9500] uppercase tracking-wider text-[10px] font-black">Cross-Division Matchup</span>
+                  <span id="cross-div-badge" class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-200/80 text-amber-900">16U vs 18U</span>
+                </div>
+                <p class="text-amber-900/90 leading-relaxed text-[11px]">
+                  Cross-Division Game: Physical maturity, checking intensity, and game speed differences between age classifications may impact on-ice play beyond standard ratings.
+                </p>
+              </div>
+            </div>
+
+            <!-- Tactical Coaching Summary Card (iOS Clean Alert Container) -->
+            <div id="tactical-summary-box" class="p-4 rounded-xl bg-blue-50/70 border border-blue-100 space-y-1.5 text-xs">
+              <div class="flex items-center justify-between font-semibold">
+                <span class="flex items-center gap-1.5 text-[#007AFF]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  Tactical Coaching &amp; Developmental Assessment
+                </span>
+                <span id="tactical-verdict-tag" class="text-[11px] font-bold text-emerald-700">Peak Parity</span>
+              </div>
+              <p id="tactical-summary-text" class="text-slate-700 leading-relaxed text-xs">
+                This matchup represents ideal competitive balance. Both teams can execute neutral-zone forechecks and test special teams without blowout demoralization.
+              </p>
+            </div>
           </div>
 
         </div>
 
         <!-- MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) - POSITIONED DIRECTLY BELOW SPREAD RESULTS -->
-        <div id="matchup-suggestions-container" class="space-y-2">
+        <div id="matchup-suggestions-container" class="hidden space-y-2">
           <div class="flex items-center justify-between text-xs text-[#8E8E93] px-1">
             <span class="font-semibold uppercase tracking-wider text-[#1C1C1E] flex items-center gap-1.5">
               <span>Matchup Suggestions</span>
@@ -1445,29 +1485,37 @@
       ];
 
       // ==========================================
-      // STATE MANAGEMENT
+      // STATE MANAGEMENT & LOCALSTORAGE KEYS
       // ==========================================
+      const STORAGE_KEYS = {
+        TEAM1_ID: 'puckedge_team1_id',
+        TEAM2_ID: 'puckedge_team2_id',
+        TOURNAMENT_TEAMS: 'puckedge_tournament_team_ids',
+        ACTIVE_TAB: 'puckedge_active_tab',
+        DIVISION: 'puckedge_division'
+      };
+
       const state = {
         activeTab: 'predictor',
         selectedDivision: 'ALL',
         currentMatchupSuggestions: [],
         teams: [...FALLBACK_TEAMS],
         teamA: {
-          id: 'buffalobisons12uaa_12U',
-          name: 'Buffalo Bisons 12U AA',
-          baseRating: 86.50,
-          record: '18-7-3',
-          division: '12U',
-          state: 'NY',
+          id: '',
+          name: '',
+          baseRating: 0,
+          record: '',
+          division: '',
+          state: '',
           modifiers: { goalie: false, bench: false, fatigue: false }
         },
         teamB: {
-          id: 'warriorshockey12uaa_12U',
-          name: 'Warriors Hockey 12U AA',
-          baseRating: 84.25,
-          record: '14-10-3',
-          division: '12U',
-          state: 'NY',
+          id: '',
+          name: '',
+          baseRating: 0,
+          record: '',
+          division: '',
+          state: '',
           modifiers: { goalie: false, bench: false, fatigue: false }
         },
         cost: {
@@ -1481,15 +1529,8 @@
           isOpen: false
         },
         bracket: {
-          teamCount: 6,
-          teams: [
-            { name: 'Buffalo Bisons AA', rating: 86.80 },
-            { name: 'Rochester Monarchs AA', rating: 85.50 },
-            { name: 'Wheatfield Blades AA', rating: 84.90 },
-            { name: 'Hamburg Hawks AA', rating: 84.20 },
-            { name: 'Syracuse Blazers AA', rating: 83.50 },
-            { name: 'Batavia Ramparts AA', rating: 82.80 }
-          ]
+          teamCount: 0,
+          teams: []
         },
         matchmakerGame: {
           selectedDivision: '10U',
@@ -1707,6 +1748,14 @@
           team.modifiers = { goalie: false, bench: false, fatigue: false };
         }
 
+        try {
+          if (teamKey === 'a') {
+            localStorage.removeItem(STORAGE_KEYS.TEAM1_ID);
+          } else {
+            localStorage.removeItem(STORAGE_KEYS.TEAM2_ID);
+          }
+        } catch (e) {}
+
         const nameInput = document.getElementById(`team-${teamKey}-name`);
         if (nameInput) {
           nameInput.value = '';
@@ -1733,6 +1782,7 @@
         hideTeamDropdown(teamKey);
         updateClearButtons();
         updatePredictor();
+        syncUrlState();
 
         // Focus the text cursor back into the input field so user can immediately type
         if (nameInput) {
@@ -1902,9 +1952,18 @@
         if (ratingEl) ratingEl.value = team.rating.toFixed(2);
 
         hideTeamDropdown(teamKey);
+        try {
+          if (teamKey === 'a') {
+            localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+          } else {
+            localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+          }
+        } catch (e) {}
+
         updateClearButtons();
         updateTeamRecordBadges();
         updatePredictor();
+        syncUrlState();
 
         const card = nameEl?.closest('.rounded-2xl');
         if (card) {
@@ -1932,15 +1991,23 @@
       // DYNAMIC MATCHUP SUGGESTIONS (DRIVEN OFF TEAM 1)
       // ==========================================
       function renderMatchupSuggestions() {
+        const container = document.getElementById('matchup-suggestions-container');
         const grid = document.getElementById('matchup-suggestions-grid');
         const teamLabel = document.getElementById('suggestions-team-label');
         if (!grid) return;
 
-        const t1Name = (document.getElementById('team-a-name')?.value || state.teamA.name || 'Team 1').trim();
-        const t1Rating = parseFloat(document.getElementById('team-a-rating')?.value) || state.teamA.baseRating || 84.50;
+        const t1Name = (document.getElementById('team-a-name')?.value || state.teamA?.name || '').trim();
+        const t1Rating = parseFloat(document.getElementById('team-a-rating')?.value) || state.teamA?.baseRating || 0;
+
+        if (!t1Name || t1Rating <= 0) {
+          if (container) container.classList.add('hidden');
+          return;
+        }
+
+        if (container) container.classList.remove('hidden');
 
         if (teamLabel) {
-          teamLabel.textContent = t1Name ? `for ${t1Name}` : '';
+          teamLabel.textContent = `for ${t1Name}`;
         }
 
         const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
@@ -2062,6 +2129,10 @@
         state.teamB.tier = getTeamTier({ name, tier: '' });
         state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
 
+        try {
+          localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+        } catch (e) {}
+
         const nameEl = document.getElementById('team-b-name');
         if (nameEl) nameEl.value = name;
 
@@ -2124,17 +2195,20 @@
       function syncUrlState() {
         try {
           const url = new URL(window.location.href);
-          const activeTab = state.activeTab;
+          const activeTab = state.activeTab || 'predictor';
 
           if (activeTab === 'tournament' || activeTab === 'bracket') {
-            url.searchParams.set('tab', 'tournament');
-            if (state.selectedDivision) {
-              url.searchParams.set('div', state.selectedDivision);
-            }
             const stagedTeamIds = (state.bracket?.teams || [])
               .filter(t => t && t.name && t.name.trim())
               .map(t => getTeamId(t))
               .filter(Boolean);
+
+            url.searchParams.set('tab', 'tournament');
+            if (state.selectedDivision && state.selectedDivision !== 'ALL') {
+              url.searchParams.set('div', state.selectedDivision);
+            } else {
+              url.searchParams.delete('div');
+            }
             if (stagedTeamIds.length > 0) {
               url.searchParams.set('teams', stagedTeamIds.join(','));
             } else {
@@ -2162,37 +2236,46 @@
             url.searchParams.delete('r2');
           } else {
             // Matchup Predictor Tab
-            url.searchParams.set('tab', 'matchup');
-            if (state.selectedDivision) {
-              url.searchParams.set('div', state.selectedDivision);
-            }
             const t1Id = getTeamId(state.teamA);
             const t2Id = getTeamId(state.teamB);
-            if (t1Id) {
-              url.searchParams.set('t1', t1Id);
-            } else {
-              url.searchParams.delete('t1');
-            }
-            if (t2Id) {
-              url.searchParams.set('t2', t2Id);
-            } else {
-              url.searchParams.delete('t2');
-            }
+            const hasDiv = state.selectedDivision && state.selectedDivision !== 'ALL';
+            const hasTeams = Boolean(t1Id || t2Id);
 
-            const inputRatingA = document.getElementById('team-a-rating')?.value;
-            const inputRatingB = document.getElementById('team-b-rating')?.value;
-            const r1 = (inputRatingA !== undefined && inputRatingA !== '') ? parseFloat(inputRatingA) : state.teamA?.baseRating;
-            const r2 = (inputRatingB !== undefined && inputRatingB !== '') ? parseFloat(inputRatingB) : state.teamB?.baseRating;
+            if (hasTeams || hasDiv) {
+              url.searchParams.set('tab', 'matchup');
+              if (hasDiv) {
+                url.searchParams.set('div', state.selectedDivision);
+              } else {
+                url.searchParams.delete('div');
+              }
+              if (t1Id) {
+                url.searchParams.set('t1', t1Id);
+              } else {
+                url.searchParams.delete('t1');
+              }
+              if (t2Id) {
+                url.searchParams.set('t2', t2Id);
+              } else {
+                url.searchParams.delete('t2');
+              }
 
-            if (r1 && r1 > 0) {
-              url.searchParams.set('r1', r1.toFixed(2));
+              const inputRatingA = document.getElementById('team-a-rating')?.value;
+              const inputRatingB = document.getElementById('team-b-rating')?.value;
+              const r1 = (inputRatingA !== undefined && inputRatingA !== '') ? parseFloat(inputRatingA) : state.teamA?.baseRating;
+              const r2 = (inputRatingB !== undefined && inputRatingB !== '') ? parseFloat(inputRatingB) : state.teamB?.baseRating;
+
+              if (r1 && r1 > 0 && t1Id) {
+                url.searchParams.set('r1', r1.toFixed(2));
+              } else {
+                url.searchParams.delete('r1');
+              }
+              if (r2 && r2 > 0 && t2Id) {
+                url.searchParams.set('r2', r2.toFixed(2));
+              } else {
+                url.searchParams.delete('r2');
+              }
             } else {
-              url.searchParams.delete('r1');
-            }
-            if (r2 && r2 > 0) {
-              url.searchParams.set('r2', r2.toFixed(2));
-            } else {
-              url.searchParams.delete('r2');
+              url.search = '';
             }
 
             // Clear tournament params
@@ -2890,6 +2973,8 @@
 
         const isReady = effA > 0 && effB > 0 && nameA.length > 0 && nameB.length > 0;
 
+        const heroEmptyState = document.getElementById('hero-empty-state');
+        const heroActiveContent = document.getElementById('hero-active-content');
         const heroSpreadVal = document.getElementById('hero-spread-val');
         const heroFavoredLabel = document.getElementById('hero-favored-label');
         const scoreTeamA = document.getElementById('score-team-a');
@@ -2905,63 +2990,77 @@
         const verdictText = document.getElementById('hero-verdict-text');
         const tacticalTag = document.getElementById('tactical-verdict-tag');
         const tacticalSummary = document.getElementById('tactical-summary-text');
+        const suggestionsContainer = document.getElementById('matchup-suggestions-container');
 
         if (!isReady) {
-          if (heroSpreadVal) {
-            heroSpreadVal.textContent = '--';
-            heroSpreadVal.className = 'text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-400';
-          }
-          if (heroFavoredLabel) {
-            if (!nameA && !nameB) {
-              heroFavoredLabel.textContent = 'Select or enter both teams above to predict matchup';
-            } else if (!nameA || effA <= 0) {
-              heroFavoredLabel.textContent = 'Awaiting Team 1 selection & rating';
+          if (heroEmptyState) heroEmptyState.classList.remove('hidden');
+          if (heroActiveContent) heroActiveContent.classList.add('hidden');
+
+          const statusT1 = document.getElementById('empty-state-status-t1');
+          const statusT2 = document.getElementById('empty-state-status-t2');
+          if (statusT1) {
+            if (nameA && effA > 0) {
+              const divA = state.teamA.division || getTeamAgeBracket(state.teamA);
+              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-blue-50 text-[#007AFF] border border-blue-200';
+              statusT1.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#007AFF]"></i> Team 1: ${escapeHtml(nameA)} (${divA})`;
             } else {
-              heroFavoredLabel.textContent = 'Awaiting Team 2 selection & rating';
+              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200';
+              statusT1.innerHTML = `<i class="fa-regular fa-circle text-[9px]"></i> Team 1: Unselected`;
             }
           }
-          if (scoreTeamA) scoreTeamA.textContent = '--';
-          if (scoreTeamB) scoreTeamB.textContent = '--';
-          if (totalGoalsLabel) totalGoalsLabel.textContent = '-- Tot Goals';
-
-          if (probALabel) probALabel.textContent = `${nameA || 'Team 1'} --%`;
-          if (probTieLabel) probTieLabel.textContent = 'OT/Tie --%';
-          if (probBLabel) probBLabel.textContent = `${nameB || 'Team 2'} --%`;
-
-          if (probBarA) {
-            probBarA.style.width = '33.3%';
-            probBarA.className = 'h-full bg-slate-200 rounded-l-full transition-all duration-300';
-          }
-          if (probBarTie) {
-            probBarTie.style.width = '33.3%';
-            probBarTie.className = 'h-full bg-slate-300 transition-all duration-300';
-          }
-          if (probBarB) {
-            probBarB.style.width = '33.3%';
-            probBarB.className = 'h-full bg-slate-200 rounded-r-full transition-all duration-300';
+          if (statusT2) {
+            if (nameB && effB > 0) {
+              const divB = state.teamB.division || getTeamAgeBracket(state.teamB);
+              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-amber-50 text-[#FF9500] border border-amber-200';
+              statusT2.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#FF9500]"></i> Team 2: ${escapeHtml(nameB)} (${divB})`;
+            } else {
+              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200';
+              statusT2.innerHTML = `<i class="fa-regular fa-circle text-[9px]"></i> Team 2: Unselected`;
+            }
           }
 
-          if (verdictBadge && verdictText) {
-            verdictBadge.className = 'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider border border-slate-200 bg-slate-100 text-slate-500 flex items-center gap-2 self-start sm:self-center shadow-xs';
-            verdictText.textContent = 'Awaiting Matchup';
-          }
-          if (tacticalTag) {
-            tacticalTag.textContent = 'Standby';
-            tacticalTag.className = 'text-[11px] font-bold text-slate-500';
-          }
-          if (tacticalSummary) {
-            tacticalSummary.textContent = 'Enter or select teams and ratings for Team 1 and Team 2 to generate the expected goal spread, score projection, win distribution, and tactical parity assessment.';
+          if (nameA && effA > 0) {
+            if (suggestionsContainer) suggestionsContainer.classList.remove('hidden');
+            renderMatchupSuggestions();
+          } else {
+            if (suggestionsContainer) suggestionsContainer.classList.add('hidden');
           }
 
           updatePitchDraft();
-          renderMatchupSuggestions();
+          syncMatchupUrlParams();
           return;
         }
 
         // Active state with valid teams & ratings
+        if (heroEmptyState) heroEmptyState.classList.add('hidden');
+        if (heroActiveContent) heroActiveContent.classList.remove('hidden');
+        if (suggestionsContainer) suggestionsContainer.classList.remove('hidden');
+
         if (probBarA) probBarA.className = 'h-full bg-[#007AFF] rounded-l-full transition-all duration-300';
         if (probBarTie) probBarTie.className = 'h-full bg-[#8E8E93] transition-all duration-300';
         if (probBarB) probBarB.className = 'h-full bg-[#FF9500] rounded-r-full transition-all duration-300';
+
+        // Badges for Division and Tier
+        const badgeA = document.getElementById('label-badge-a');
+        const badgeB = document.getElementById('label-badge-b');
+        const divA = state.teamA.division || getTeamAgeBracket(state.teamA);
+        const divB = state.teamB.division || getTeamAgeBracket(state.teamB);
+        const tierA = state.teamA.tier || getTeamTier(state.teamA);
+        const tierB = state.teamB.tier || getTeamTier(state.teamB);
+        if (badgeA) badgeA.textContent = `${divA} ${tierA}`;
+        if (badgeB) badgeB.textContent = `${divB} ${tierB}`;
+
+        // Cross-Division Notice
+        const crossAlert = document.getElementById('cross-division-alert');
+        const crossBadge = document.getElementById('cross-div-badge');
+        if (crossAlert) {
+          if (divA && divB && divA !== divB) {
+            crossAlert.classList.remove('hidden');
+            if (crossBadge) crossBadge.textContent = `${divA} vs ${divB}`;
+          } else {
+            crossAlert.classList.add('hidden');
+          }
+        }
 
         // Differential calculation
         const spread = parseFloat(Math.abs(effA - effB).toFixed(2));
@@ -3057,6 +3156,12 @@
             tacticalSummary.textContent = 'High blowout risk. High probability of running-clock / mercy rule conditions (5+ goal spread). Rebalancing schedule or pairing alternate opponents strongly recommended.';
           }
         }
+
+        // Save to localStorage for returning users
+        try {
+          if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+          if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+        } catch (e) {}
 
         // Update accordion pre-filled draft pitch email
         updatePitchDraft();
@@ -3255,33 +3360,16 @@ Coach / Scheduler (${state.teamA.name})`;
         state.bracket.teamCount = count;
         state.bracket.advances = {};
         trackAnalyticsEvent('bracket_generated', { team_count: count });
-        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
 
         while (state.bracket.teams.length < count) {
-          const idx = state.bracket.teams.length;
-          const existingNames = state.bracket.teams.map(t => (t.name || '').toLowerCase());
-          const candidate = pool.find(t => {
-            const matchDiv = teamMatchesDivision(t, state.selectedDivision);
-            return matchDiv && !existingNames.includes(t.name.toLowerCase());
-          }) || pool.find(t => !existingNames.includes(t.name.toLowerCase())) || pool[idx % pool.length];
-
-          if (candidate) {
-            state.bracket.teams.push({
-              name: candidate.name,
-              rating: candidate.rating,
-              record: candidate.record,
-              division: candidate.age_bracket || candidate.division,
-              state: candidate.state
-            });
-          } else {
-            state.bracket.teams.push({
-              name: `Team ${idx + 1}`,
-              rating: parseFloat((84.00 - idx * 0.5).toFixed(2)),
-              record: '',
-              division: '12U',
-              state: 'NY'
-            });
-          }
+          state.bracket.teams.push({
+            id: '',
+            name: '',
+            rating: 0,
+            record: '',
+            division: state.selectedDivision !== 'ALL' ? state.selectedDivision : '',
+            state: ''
+          });
         }
 
         if (state.bracket.teams.length > count) {
@@ -3302,10 +3390,30 @@ Coach / Scheduler (${state.teamA.name})`;
 
         const badge = document.getElementById('bracket-format-badge');
         if (badge) {
-          badge.textContent = `${count}-Team Bracket`;
+          badge.textContent = count > 0 ? `${count}-Team Bracket` : 'Unstaged';
         }
 
         renderBracketView();
+        saveBracketToStorage();
+        syncUrlState();
+      }
+
+      function addBlankBracketSlot() {
+        const nextCount = Math.min(8, Math.max(4, state.bracket.teams.length + 1));
+        setBracketTeamCount(nextCount);
+      }
+
+      function saveBracketToStorage() {
+        try {
+          const validIds = (state.bracket?.teams || [])
+            .map(t => getTeamId(t))
+            .filter(Boolean);
+          if (validIds.length >= 2) {
+            localStorage.setItem(STORAGE_KEYS.TOURNAMENT_TEAMS, JSON.stringify(validIds));
+          } else {
+            localStorage.removeItem(STORAGE_KEYS.TOURNAMENT_TEAMS);
+          }
+        } catch (e) {}
       }
 
       function loadBracketPreset(presetKey) {
@@ -3355,7 +3463,34 @@ Coach / Scheduler (${state.teamA.name})`;
         const count = state.bracket.teams.length;
         document.getElementById('bracket-team-count-text').textContent = `${count} Teams`;
         const formatBadge = document.getElementById('bracket-format-badge');
-        if (formatBadge) formatBadge.textContent = `${count}-Team Bracket`;
+        if (formatBadge) formatBadge.textContent = count > 0 ? `${count}-Team Bracket` : 'Unstaged';
+
+        if (count < 2) {
+          container.innerHTML = `
+            <div class="col-span-full p-8 rounded-2xl bg-white border border-dashed border-slate-300 text-center space-y-3.5 shadow-sm">
+              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#007AFF] flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-sitemap"></i>
+              </div>
+              <div class="max-w-md mx-auto space-y-1">
+                <h4 class="text-sm font-bold text-[#1C1C1E]">No Tournament Teams Staged</h4>
+                <p class="text-xs text-slate-500">
+                  Add at least 2 teams to calculate tournament parity, tier variance, and competitive balance.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+                <button type="button" onclick="loadBracketPreset('balanced')" class="px-3.5 py-2 rounded-xl bg-[#007AFF] text-white text-xs font-semibold shadow-xs hover:bg-blue-600 active:scale-98 cursor-pointer transition-all">
+                  Load WNY 12U Peewee AA Preset
+                </button>
+                <button type="button" onclick="addBlankBracketSlot()" class="px-3.5 py-2 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200/90 text-[#1C1C1E] text-xs font-semibold shadow-xs active:scale-98 cursor-pointer transition-all">
+                  + Add Seed Slot
+                </button>
+              </div>
+            </div>
+          `;
+          calculateBracketParity();
+          renderSingleEliminationBracket();
+          return;
+        }
 
         container.innerHTML = state.bracket.teams.map((team, idx) => {
           const hasName = !!(team.name && team.name.trim());
@@ -3656,8 +3791,10 @@ Coach / Scheduler (${state.teamA.name})`;
         }
 
         hideBracketDropdown(idx);
+        saveBracketToStorage();
         calculateBracketParity();
         renderSingleEliminationBracket();
+        syncUrlState();
       }
 
       function clearBracketSlot(idx) {
@@ -3696,8 +3833,10 @@ Coach / Scheduler (${state.teamA.name})`;
         }
 
         hideBracketDropdown(idx);
+        saveBracketToStorage();
         calculateBracketParity();
         renderSingleEliminationBracket();
+        syncUrlState();
       }
 
       function onBracketTeamRatingInput(idx, value) {
@@ -3710,8 +3849,10 @@ Coach / Scheduler (${state.teamA.name})`;
             ? 'text-[11px] font-bold text-[#007AFF] bg-blue-50 border-blue-200 px-2 py-0.5 rounded-md border shrink-0'
             : 'text-[11px] font-bold text-slate-400 bg-slate-100 border-slate-200 px-2 py-0.5 rounded-md border shrink-0';
         }
+        saveBracketToStorage();
         calculateBracketParity();
         renderSingleEliminationBracket();
+        syncUrlState();
       }
 
       function stepBracketTeamRating(idx, delta) {
@@ -3727,27 +3868,75 @@ Coach / Scheduler (${state.teamA.name})`;
             ? 'text-[11px] font-bold text-[#007AFF] bg-blue-50 border-blue-200 px-2 py-0.5 rounded-md border shrink-0'
             : 'text-[11px] font-bold text-slate-400 bg-slate-100 border-slate-200 px-2 py-0.5 rounded-md border shrink-0';
         }
+        saveBracketToStorage();
         calculateBracketParity();
         renderSingleEliminationBracket();
+        syncUrlState();
       }
 
       function calculateBracketParity() {
         const teams = state.bracket.teams;
         const n = teams.length;
-        if (n < 2) return;
 
-        const validRatings = teams.map(t => t.rating).filter(r => r > 0);
-        const ratingsForMath = validRatings.length > 0 ? validRatings : [80.0, 80.0];
-        const numTeams = ratingsForMath.length;
+        const validTeams = teams.filter(t => t && t.name && t.name.trim() && t.rating > 0);
+        if (n < 2 || validTeams.length < 2) {
+          const meanEl = document.getElementById('bracket-mean-val');
+          const spreadEl = document.getElementById('bracket-spread-val');
+          const stddevEl = document.getElementById('bracket-stddev-val');
+          if (meanEl) meanEl.textContent = '--';
+          if (spreadEl) spreadEl.textContent = 'Δ --';
+          if (stddevEl) stddevEl.textContent = '--';
 
-        const sum = ratingsForMath.reduce((a, b) => a + b, 0);
+          const gradeValEl = document.getElementById('bracket-grade-val');
+          if (gradeValEl) {
+            gradeValEl.textContent = '--';
+            gradeValEl.className = 'text-3xl sm:text-4xl font-extrabold text-slate-400';
+          }
+          const gradeLabelEl = document.getElementById('bracket-grade-label');
+          if (gradeLabelEl) gradeLabelEl.textContent = 'Awaiting Teams';
+
+          const blowoutPill = document.getElementById('bracket-blowout-pill');
+          if (blowoutPill) {
+            blowoutPill.textContent = 'Awaiting Teams';
+            blowoutPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-slate-200 bg-slate-100 text-slate-500';
+          }
+
+          const summaryEl = document.getElementById('bracket-fixtures-summary');
+          if (summaryEl) summaryEl.textContent = 'Add at least 2 teams to calculate round-robin matchups.';
+          const cEven = document.getElementById('bracket-count-even');
+          const cComp = document.getElementById('bracket-count-comp');
+          const cSkew = document.getElementById('bracket-count-skewed');
+          const cBlow = document.getElementById('bracket-count-blowout');
+          if (cEven) cEven.textContent = 'Even (0)';
+          if (cComp) cComp.textContent = 'Comp (0)';
+          if (cSkew) cSkew.textContent = 'Skew (0)';
+          if (cBlow) cBlow.textContent = 'Blowout (0)';
+
+          const grid = document.getElementById('bracket-matchups-grid');
+          if (grid) {
+            grid.innerHTML = `
+              <div class="col-span-full py-8 px-4 rounded-xl bg-white border border-dashed border-slate-300 text-center space-y-2">
+                <div class="text-xs font-bold text-slate-600">Awaiting Tournament Teams</div>
+                <p class="text-xs text-slate-400 max-w-sm mx-auto">
+                  Add at least 2 teams to calculate tournament parity, tier variance, and competitive balance.
+                </p>
+              </div>
+            `;
+          }
+          return;
+        }
+
+        const validRatings = validTeams.map(t => t.rating);
+        const numTeams = validRatings.length;
+
+        const sum = validRatings.reduce((a, b) => a + b, 0);
         const mean = sum / numTeams;
-        const max = Math.max(...ratingsForMath);
-        const min = Math.min(...ratingsForMath);
+        const max = Math.max(...validRatings);
+        const min = Math.min(...validRatings);
         const spread = max - min;
 
         // Variance & Standard Deviation
-        const variance = ratingsForMath.reduce((acc, r) => acc + Math.pow(r - mean, 2), 0) / numTeams;
+        const variance = validRatings.reduce((acc, r) => acc + Math.pow(r - mean, 2), 0) / numTeams;
         const stdDev = Math.sqrt(variance);
 
         document.getElementById('bracket-mean-val').textContent = mean.toFixed(2);
@@ -4036,6 +4225,24 @@ Coach / Scheduler (${state.teamA.name})`;
         if (!container) return;
 
         const count = state.bracket.teamCount;
+        const validTeams = state.bracket.teams.filter(t => t && t.name && t.name.trim() && t.rating > 0);
+        if (count < 2 || validTeams.length < 2) {
+          container.innerHTML = `
+            <div class="w-full max-w-md mx-auto py-10 px-6 rounded-2xl bg-white border border-dashed border-slate-300 text-center space-y-3 shadow-xs">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#007AFF] flex items-center justify-center mx-auto text-base">
+                <i class="fa-solid fa-sitemap"></i>
+              </div>
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-[#1C1C1E]">Playoff Bracket Generator</h4>
+                <p class="text-xs text-slate-500">
+                  Add at least 2 teams above to generate single-elimination playoff bracket projections.
+                </p>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
         const T = state.bracket.teams.map((t, idx) => ({
           name: t.name || '',
           rating: t.rating || 0,
@@ -4169,9 +4376,12 @@ Coach / Scheduler (${state.teamA.name})`;
 
       // Initialize on load
       // ==========================================
-      // URL HYDRATION / DEEP-LINKING HANDLER
+      // MULTI-TIER PERSISTENCE & PRIORITY HYDRATION ENGINE
+      // Priority 1: URL Query Params (Shared Deep-Links)
+      // Priority 2: localStorage (Returning Visitors)
+      // Priority 3: Clean Slate (First-Time Visitors)
       // ==========================================
-      function hydrateFromUrl() {
+      function hydrateApplication() {
         try {
           const urlParams = new URLSearchParams(window.location.search);
           const rawTab = (urlParams.get('tab') || '').toLowerCase().trim();
@@ -4182,129 +4392,245 @@ Coach / Scheduler (${state.teamA.name})`;
           const r2Param = urlParams.get('r2');
           const teamsParam = urlParams.get('teams');
 
-          // 1. Division filter hydration
-          if (pDiv && MASTER_DIVISIONS.includes(pDiv)) {
-            setDivisionFilter(pDiv);
-            if (MATCHMAKER_DIVISIONS.includes(pDiv)) {
-              state.matchmakerGame.selectedDivision = pDiv;
+          const hasUrlParams = Boolean(
+            t1Param || t2Param || teamsParam || rawTab || pDiv || r1Param || r2Param
+          );
+
+          if (hasUrlParams) {
+            // --------------------------------------------------
+            // PRIORITY 1: URL QUERY PARAMS (SHARED DEEP-LINKS)
+            // --------------------------------------------------
+            if (pDiv && MASTER_DIVISIONS.includes(pDiv)) {
+              setDivisionFilter(pDiv);
+              if (MATCHMAKER_DIVISIONS.includes(pDiv)) {
+                state.matchmakerGame.selectedDivision = pDiv;
+              }
             }
-          }
 
-          // 2. Tournament Bracket Parity Tab
-          if (rawTab === 'tournament' || rawTab === 'bracket' || teamsParam) {
-            switchMainTab('bracket');
-            if (teamsParam) {
-              const ids = teamsParam.split(',').map(s => s.trim()).filter(Boolean);
-              if (ids.length >= 2) {
-                const count = Math.min(8, Math.max(4, ids.length));
-                state.bracket.teamCount = count;
-                state.bracket.teams = ids.slice(0, count).map((id) => {
-                  const found = findTeamByIdOrName(id);
-                  if (found) {
+            if (rawTab === 'tournament' || rawTab === 'bracket' || teamsParam) {
+              switchMainTab('bracket');
+              if (teamsParam) {
+                const ids = teamsParam.split(',').map(s => s.trim()).filter(Boolean);
+                if (ids.length >= 2) {
+                  const count = Math.min(8, Math.max(4, ids.length));
+                  state.bracket.teamCount = count;
+                  state.bracket.teams = ids.slice(0, count).map(id => {
+                    const found = findTeamByIdOrName(id);
+                    if (found) {
+                      return {
+                        id: found.id || id,
+                        name: found.name,
+                        rating: found.rating,
+                        record: found.record || '',
+                        division: found.age_bracket || found.division || '',
+                        state: found.state || '',
+                        tier: found.tier || getTeamTier(found)
+                      };
+                    }
                     return {
-                      id: found.id,
-                      name: found.name,
-                      rating: found.rating,
-                      record: found.record || '',
-                      division: found.age_bracket || found.division || '',
-                      state: found.state || '',
-                      tier: found.tier || getTeamTier(found)
+                      id: id,
+                      name: decodeURIComponent(id),
+                      rating: 82.00,
+                      record: '',
+                      division: pDiv || '12U',
+                      state: 'USA',
+                      tier: 'Tier 2'
                     };
-                  }
-                  return {
-                    id: id,
-                    name: decodeURIComponent(id),
-                    rating: 82.00,
-                    record: '',
-                    division: pDiv || '12U',
-                    state: 'USA',
-                    tier: 'Tier 2'
-                  };
-                });
-
-                while (state.bracket.teams.length < count) {
-                  const fallback = bracketPresets.balanced[state.bracket.teams.length] || { name: `Team ${state.bracket.teams.length + 1}`, rating: 80.00 };
-                  state.bracket.teams.push(JSON.parse(JSON.stringify(fallback)));
+                  });
+                  saveBracketToStorage();
+                  renderBracketView();
                 }
+              }
+            } else if (rawTab === 'matchmaker') {
+              switchMainTab('matchmaker');
+            } else {
+              switchMainTab('predictor');
+              if (t1Param) {
+                const found1 = findTeamByIdOrName(t1Param);
+                if (found1) {
+                  state.teamA.id = found1.id || t1Param;
+                  state.teamA.name = found1.name;
+                  state.teamA.baseRating = (r1Param && !isNaN(parseFloat(r1Param))) ? parseFloat(r1Param) : found1.rating;
+                  state.teamA.record = found1.record || '';
+                  state.teamA.division = found1.age_bracket || found1.division || '';
+                  state.teamA.state = found1.state || '';
+                  state.teamA.tier = found1.tier || getTeamTier(found1);
+                } else {
+                  state.teamA.id = t1Param;
+                  state.teamA.name = decodeURIComponent(t1Param);
+                  if (r1Param && !isNaN(parseFloat(r1Param))) state.teamA.baseRating = parseFloat(r1Param);
+                }
+                const inputA = document.getElementById('team-a-name');
+                const ratingA = document.getElementById('team-a-rating');
+                if (inputA) inputA.value = state.teamA.name;
+                if (ratingA) ratingA.value = state.teamA.baseRating > 0 ? state.teamA.baseRating.toFixed(2) : '';
+                try {
+                  if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+                } catch(e) {}
+              }
 
-                setBracketTeamCount(count);
-                renderBracketView();
-                calculateBracketParity();
-                renderSingleEliminationBracket();
+              if (t2Param) {
+                const found2 = findTeamByIdOrName(t2Param);
+                if (found2) {
+                  state.teamB.id = found2.id || t2Param;
+                  state.teamB.name = found2.name;
+                  state.teamB.baseRating = (r2Param && !isNaN(parseFloat(r2Param))) ? parseFloat(r2Param) : found2.rating;
+                  state.teamB.record = found2.record || '';
+                  state.teamB.division = found2.age_bracket || found2.division || '';
+                  state.teamB.state = found2.state || '';
+                  state.teamB.tier = found2.tier || getTeamTier(found2);
+                } else {
+                  state.teamB.id = t2Param;
+                  state.teamB.name = decodeURIComponent(t2Param);
+                  if (r2Param && !isNaN(parseFloat(r2Param))) state.teamB.baseRating = parseFloat(r2Param);
+                }
+                const inputB = document.getElementById('team-b-name');
+                const ratingB = document.getElementById('team-b-rating');
+                if (inputB) inputB.value = state.teamB.name;
+                if (ratingB) ratingB.value = state.teamB.baseRating > 0 ? state.teamB.baseRating.toFixed(2) : '';
+                try {
+                  if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+                } catch(e) {}
+              }
+            }
+          } else {
+            // --------------------------------------------------
+            // PRIORITY 2: LOCALSTORAGE (RETURNING VISITORS)
+            // --------------------------------------------------
+            let savedTab = null;
+            let savedDiv = null;
+            let savedT1 = null;
+            let savedT2 = null;
+            let savedBracket = null;
+
+            try {
+              savedTab = localStorage.getItem(STORAGE_KEYS.ACTIVE_TAB);
+              savedDiv = localStorage.getItem(STORAGE_KEYS.DIVISION);
+              savedT1 = localStorage.getItem(STORAGE_KEYS.TEAM1_ID);
+              savedT2 = localStorage.getItem(STORAGE_KEYS.TEAM2_ID);
+              savedBracket = localStorage.getItem(STORAGE_KEYS.TOURNAMENT_TEAMS);
+            } catch (e) {}
+
+            const hasLocalStorage = Boolean(
+              savedT1 || savedT2 || savedBracket || (savedTab && savedTab !== 'predictor') || (savedDiv && savedDiv !== 'ALL')
+            );
+
+            if (hasLocalStorage) {
+              if (savedDiv && MASTER_DIVISIONS.includes(savedDiv)) {
+                setDivisionFilter(savedDiv);
+              }
+
+              if (savedTab && ['predictor', 'bracket', 'matchmaker'].includes(savedTab)) {
+                switchMainTab(savedTab);
+              }
+
+              if (savedT1) {
+                const found1 = findTeamByIdOrName(savedT1);
+                if (found1) {
+                  state.teamA.id = found1.id || savedT1;
+                  state.teamA.name = found1.name;
+                  state.teamA.baseRating = found1.rating;
+                  state.teamA.record = found1.record || '';
+                  state.teamA.division = found1.age_bracket || found1.division || '';
+                  state.teamA.state = found1.state || '';
+                  state.teamA.tier = found1.tier || getTeamTier(found1);
+                  const inputA = document.getElementById('team-a-name');
+                  const ratingA = document.getElementById('team-a-rating');
+                  if (inputA) inputA.value = state.teamA.name;
+                  if (ratingA) ratingA.value = state.teamA.baseRating.toFixed(2);
+                }
+              }
+
+              if (savedT2) {
+                const found2 = findTeamByIdOrName(savedT2);
+                if (found2) {
+                  state.teamB.id = found2.id || savedT2;
+                  state.teamB.name = found2.name;
+                  state.teamB.baseRating = found2.rating;
+                  state.teamB.record = found2.record || '';
+                  state.teamB.division = found2.age_bracket || found2.division || '';
+                  state.teamB.state = found2.state || '';
+                  state.teamB.tier = found2.tier || getTeamTier(found2);
+                  const inputB = document.getElementById('team-b-name');
+                  const ratingB = document.getElementById('team-b-rating');
+                  if (inputB) inputB.value = state.teamB.name;
+                  if (ratingB) ratingB.value = state.teamB.baseRating.toFixed(2);
+                }
+              }
+
+              if (savedBracket) {
+                try {
+                  const ids = JSON.parse(savedBracket);
+                  if (Array.isArray(ids) && ids.length >= 2) {
+                    const count = Math.min(8, Math.max(4, ids.length));
+                    state.bracket.teamCount = count;
+                    state.bracket.teams = ids.slice(0, count).map(id => {
+                      const found = findTeamByIdOrName(id);
+                      if (found) {
+                        return {
+                          id: found.id || id,
+                          name: found.name,
+                          rating: found.rating,
+                          record: found.record || '',
+                          division: found.age_bracket || found.division || '',
+                          state: found.state || '',
+                          tier: found.tier || getTeamTier(found)
+                        };
+                      }
+                      return {
+                        id: id,
+                        name: id,
+                        rating: 82.00,
+                        record: '',
+                        division: '12U',
+                        state: 'USA',
+                        tier: 'Tier 2'
+                      };
+                    });
+                    renderBracketView();
+                  }
+                } catch(e) {}
               }
             } else {
-              calculateBracketParity();
-            }
-          } else if (rawTab === 'matchmaker') {
-            switchMainTab('matchmaker');
-          } else if (rawTab === 'matchup' || rawTab === 'predictor' || t1Param || t2Param || r1Param || r2Param) {
-            switchMainTab('predictor');
-            if (t1Param) {
-              const found1 = findTeamByIdOrName(t1Param);
-              if (found1) {
-                state.teamA.id = found1.id;
-                state.teamA.name = found1.name;
-                state.teamA.baseRating = (r1Param && !isNaN(parseFloat(r1Param))) ? parseFloat(r1Param) : found1.rating;
-                state.teamA.record = found1.record || '';
-                state.teamA.division = found1.age_bracket || found1.division || '';
-                state.teamA.state = found1.state || '';
-                state.teamA.tier = found1.tier || getTeamTier(found1);
-              } else {
-                state.teamA.name = decodeURIComponent(t1Param);
-                if (r1Param && !isNaN(parseFloat(r1Param))) state.teamA.baseRating = parseFloat(r1Param);
-              }
+              // --------------------------------------------------
+              // PRIORITY 3: CLEAN SLATE (FIRST-TIME VISITORS)
+              // --------------------------------------------------
+              // Inputs start completely blank without pre-populating demo teams
+              state.teamA = { id: '', name: '', baseRating: 0, record: '', division: '', state: '', tier: '', modifiers: { goalie: false, bench: false, fatigue: false } };
+              state.teamB = { id: '', name: '', baseRating: 0, record: '', division: '', state: '', tier: '', modifiers: { goalie: false, bench: false, fatigue: false } };
+              state.bracket.teams = [];
+              state.bracket.teamCount = 0;
+
               const inputA = document.getElementById('team-a-name');
               const ratingA = document.getElementById('team-a-rating');
-              if (inputA) inputA.value = state.teamA.name;
-              if (ratingA) ratingA.value = state.teamA.baseRating.toFixed(2);
-            } else if (r1Param && !isNaN(parseFloat(r1Param))) {
-              state.teamA.baseRating = parseFloat(r1Param);
-              const ratingA = document.getElementById('team-a-rating');
-              if (ratingA) ratingA.value = state.teamA.baseRating.toFixed(2);
-            }
-
-            if (t2Param) {
-              const found2 = findTeamByIdOrName(t2Param);
-              if (found2) {
-                state.teamB.id = found2.id;
-                state.teamB.name = found2.name;
-                state.teamB.baseRating = (r2Param && !isNaN(parseFloat(r2Param))) ? parseFloat(r2Param) : found2.rating;
-                state.teamB.record = found2.record || '';
-                state.teamB.division = found2.age_bracket || found2.division || '';
-                state.teamB.state = found2.state || '';
-                state.teamB.tier = found2.tier || getTeamTier(found2);
-              } else {
-                state.teamB.name = decodeURIComponent(t2Param);
-                if (r2Param && !isNaN(parseFloat(r2Param))) state.teamB.baseRating = parseFloat(r2Param);
-              }
               const inputB = document.getElementById('team-b-name');
               const ratingB = document.getElementById('team-b-rating');
-              if (inputB) inputB.value = state.teamB.name;
-              if (ratingB) ratingB.value = state.teamB.baseRating.toFixed(2);
-            } else if (r2Param && !isNaN(parseFloat(r2Param))) {
-              state.teamB.baseRating = parseFloat(r2Param);
-              const ratingB = document.getElementById('team-b-rating');
-              if (ratingB) ratingB.value = state.teamB.baseRating.toFixed(2);
-            }
+              if (inputA) inputA.value = '';
+              if (ratingA) ratingA.value = '';
+              if (inputB) inputB.value = '';
+              if (ratingB) ratingB.value = '';
 
-            updateClearButtons();
-            updateTeamRecordBadges();
-            updateModifierChips();
-            updatePredictor();
+              renderBracketView();
+            }
           }
+
+          updateClearButtons();
+          updateTeamRecordBadges();
+          updateModifierChips();
+          updatePredictor();
         } catch (e) {
-          console.warn('URL Hydration error:', e);
+          console.warn('Hydration error:', e);
         }
       }
 
       // Initialize on load
       window.addEventListener('DOMContentLoaded', () => {
         // Run preliminary hydration
-        hydrateFromUrl();
+        hydrateApplication();
 
         initTeamsData().then(() => {
           // Re-hydrate with complete teams dataset loaded
-          hydrateFromUrl();
+          hydrateApplication();
           if (state.activeTab === 'matchmaker') {
             generateMatchmakerMatchup();
           }
