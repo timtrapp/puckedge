@@ -70,6 +70,29 @@
         animation: accordionSlideFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
+      /* Matchmaker Card Swipe & Entry Animations */
+      @keyframes cardSwipeRight {
+        0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateX(120%) rotate(10deg); opacity: 0; }
+      }
+      @keyframes cardSwipeLeft {
+        0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateX(-120%) rotate(-10deg); opacity: 0; }
+      }
+      @keyframes cardPopIn {
+        0% { transform: scale(0.95) translateY(8px); opacity: 0; }
+        100% { transform: scale(1) translateY(0); opacity: 1; }
+      }
+      .animate-swipe-right {
+        animation: cardSwipeRight 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .animate-swipe-left {
+        animation: cardSwipeLeft 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .animate-card-in {
+        animation: cardPopIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
       /* Export Division Report Print Stylesheet */
       @media print {
         header, footer, nav, #btn-export-division-report, .no-print {
@@ -128,21 +151,29 @@
       </div>
 
       <!-- iOS SEGMENTED CONTROL TABS -->
-      <div class="max-w-md mx-auto px-4 pb-2.5 pt-1">
+      <div class="max-w-xl mx-auto px-4 pb-2.5 pt-1">
         <div class="bg-[#E5E5EA] p-1 rounded-xl flex items-center gap-1 shadow-inner">
           <button
             id="nav-tab-predictor"
             onclick="switchMainTab('predictor')"
-            class="flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all"
+            class="flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all whitespace-nowrap cursor-pointer"
           >
             Matchup Predictor
           </button>
           <button
             id="nav-tab-bracket"
             onclick="switchMainTab('bracket')"
-            class="flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all"
+            class="flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer"
           >
-            Tournament Bracket Parity
+            Tournament Bracket
+          </button>
+          <button
+            id="nav-tab-matchmaker"
+            onclick="switchMainTab('matchmaker')"
+            class="flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5"
+          >
+            <span>Matchmaker</span>
+            <span class="text-xs">🎲</span>
           </button>
         </div>
       </div>
@@ -778,153 +809,17 @@
 
         </div>
 
-        <!-- 3RD: MATCHMAKER (DYNAMIC OPPONENT GENERATOR) -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-3.5 transition-all">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded-lg bg-blue-50 text-[#007AFF] flex items-center justify-center text-xs font-bold shrink-0">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </span>
-                <h3 class="text-sm font-bold text-[#1C1C1E]">Matchmaker</h3>
-              </div>
-              <p class="text-xs text-[#8E8E93] mt-0.5">
-                Calibrated opponent scouting and tournament bracket parity guidance
-              </p>
-            </div>
-
-            <!-- Right: Search Mode Segmented Switcher & Opponent Found Badge -->
-            <div class="flex items-center gap-2 flex-wrap self-start sm:self-center">
-              <div class="flex items-center bg-[#F2F2F7] p-0.5 rounded-xl border border-slate-200/80 text-xs">
-                <button
-                  type="button"
-                  id="mm-mode-ny"
-                  onclick="setMatchmakerMode('ny')"
-                  class="px-2.5 py-1 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs transition-all cursor-pointer"
-                >
-                  NY Master Directory
-                </button>
-                <button
-                  type="button"
-                  id="mm-mode-oos"
-                  onclick="setMatchmakerMode('oos')"
-                  class="px-2.5 py-1 rounded-lg font-medium text-slate-500 hover:text-slate-800 transition-all cursor-pointer"
-                >
-                  Out-of-State / Tournament Target
-                </button>
-              </div>
-
-              <!-- Opponent Found Badge -->
-              <div id="matchmaker-status-badge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/90 transition-all">
-                <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
-                <span id="matchmaker-status-text">Opponent Found</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            <!-- 1. Confidence Booster: Soft Green -->
-            <button
-              type="button"
-              onclick="findMatchmakerOpponent('confidence')"
-              class="p-3.5 bg-emerald-50/70 hover:bg-emerald-100/70 active:scale-98 border border-emerald-200/80 rounded-xl text-left transition-all shadow-xs group cursor-pointer"
-            >
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-emerald-900 group-hover:text-emerald-700 flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-[#34C759]"></span>
-                  Confidence Booster
-                </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-                  Target: -1.5 to -2.5
-                </span>
-              </div>
-              <div class="text-[11px] text-emerald-700 font-medium mt-1">
-                Scouts division rivals -1.5 to -2.5 below Team 1
-              </div>
-            </button>
-
-            <!-- 2. Even Battle: Soft Blue -->
-            <button
-              type="button"
-              onclick="findMatchmakerOpponent('even')"
-              class="p-3.5 bg-blue-50/70 hover:bg-blue-100/70 active:scale-98 border border-blue-200/80 rounded-xl text-left transition-all shadow-xs group cursor-pointer"
-            >
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-blue-900 group-hover:text-[#007AFF] flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-[#007AFF]"></span>
-                  Even Battle
-                </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
-                  Target: ±0.5
-                </span>
-              </div>
-              <div class="text-[11px] text-[#007AFF] font-medium mt-1">
-                Scouts true parity twin clubs in same division
-              </div>
-            </button>
-
-            <!-- 3. Challenge My Team: Soft Amber -->
-            <button
-              type="button"
-              onclick="findMatchmakerOpponent('challenge')"
-              class="p-3.5 bg-amber-50/70 hover:bg-amber-100/70 active:scale-98 border border-amber-200/80 rounded-xl text-left transition-all shadow-xs group cursor-pointer"
-            >
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-amber-900 group-hover:text-[#FF9500] flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-[#FF9500]"></span>
-                  Challenge My Team
-                </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
-                  Target: +1.5 to +2.5
-                </span>
-              </div>
-              <div class="text-[11px] text-[#FF9500] font-medium mt-1">
-                Scouts tier-up stretch opponents in same division
-              </div>
-            </button>
-          </div>
-
-          <!-- DYNAMIC PLANNING CARD / TARGET GUIDANCE CONTAINER -->
-          <div id="matchmaker-planning-card" class="hidden rounded-xl border border-blue-200/80 bg-[#F2F2F7]/70 p-4 space-y-3 transition-all duration-300">
-            <!-- Rendered dynamically by findMatchmakerOpponent() -->
-          </div>
-        </div>
-
-        <!-- 4TH: MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) -->
-        <div class="space-y-2">
+        <!-- MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) - POSITIONED DIRECTLY BELOW SPREAD RESULTS -->
+        <div id="matchup-suggestions-container" class="space-y-2">
           <div class="flex items-center justify-between text-xs text-[#8E8E93] px-1">
-            <span class="font-semibold uppercase tracking-wider text-[#1C1C1E]">Matchup Suggestions</span>
+            <span class="font-semibold uppercase tracking-wider text-[#1C1C1E] flex items-center gap-1.5">
+              <span>Matchup Suggestions</span>
+              <span id="suggestions-team-label" class="font-normal text-[#8E8E93] text-[11px] truncate max-w-[200px] sm:max-w-[340px]"></span>
+            </span>
             <span class="text-[11px]">1-Tap Quick Scenarios</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            <button
-              onclick="loadPreset('Wings', 84.50, 'Warriors', 84.25)"
-              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
-            >
-              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">Wings vs Warriors</div>
-              <div class="text-[11px] text-[#34C759] font-bold mt-0.5">Δ 0.25 (Even)</div>
-            </button>
-            <button
-              onclick="loadPreset('Hawks', 85.80, 'Lions', 84.50)"
-              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
-            >
-              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">Hawks vs Lions</div>
-              <div class="text-[11px] text-[#007AFF] font-bold mt-0.5">Δ 1.30 (Competitive)</div>
-            </button>
-            <button
-              onclick="loadPreset('Bisons', 87.20, 'Jr. Amerks', 84.10)"
-              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
-            >
-              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#FF9500] truncate">Bisons vs Jr. Amerks</div>
-              <div class="text-[11px] text-[#FF9500] font-bold mt-0.5">Δ 3.10 (Skewed)</div>
-            </button>
-            <button
-              onclick="loadPreset('Knights', 92.50, 'Selects', 85.00)"
-              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
-            >
-              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#FF3B30] truncate">Knights vs Selects</div>
-              <div class="text-[11px] text-[#FF3B30] font-bold mt-0.5">Δ 7.50 (Blowout)</div>
-            </button>
+          <div id="matchup-suggestions-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <!-- Populated dynamically via renderMatchupSuggestions() driven by Team 1 -->
           </div>
         </div>
 
@@ -1294,6 +1189,142 @@
 
       </div>
 
+      <!-- ========================================== -->
+      <!-- VIEW 3: MATCHMAKER (PUCKEDGE TINDER MINI-GAME) -->
+      <!-- ========================================== -->
+      <div id="view-matchmaker" class="hidden space-y-6">
+
+        <!-- GAME CONTROL BAR: DIVISION & PARITY MODE -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-pink-500 via-rose-500 to-amber-500 text-white flex items-center justify-center text-base shadow-sm shrink-0">
+                🎲
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-sm sm:text-base font-bold text-[#1C1C1E]">Matchmaker</h2>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-50 text-pink-700 border border-pink-200">
+                    PuckEdge Tinder
+                  </span>
+                </div>
+                <p class="text-xs text-[#8E8E93] mt-0.5">
+                  Rapid-fire parity voting • Tap to judge competitive balance and schedule matchups
+                </p>
+              </div>
+            </div>
+
+            <!-- Running Session Counter -->
+            <div id="matchmaker-session-stats" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F2F2F7] border border-slate-200/80 text-xs font-semibold text-slate-700 self-start sm:self-center shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-[#007AFF] animate-pulse"></span>
+              <span id="matchmaker-stats-text">0 Matchups Rated (👍 0 / 👎 0)</span>
+            </div>
+          </div>
+
+          <!-- Controls Grid: Division Selector & Parity Toggle -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1">
+            <!-- Age Division Selector -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+              <span class="text-xs font-bold text-slate-600 shrink-0">Age Division:</span>
+              <div class="flex items-center gap-1.5 shrink-0" id="mm-div-pills">
+                <!-- Dynamically populated/styled: 9U, 10U, 11U, 12U, 13U, 14U, 16U/15U, 18U -->
+              </div>
+            </div>
+
+            <!-- Parity Filter Toggle -->
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-xs font-bold text-slate-600 shrink-0">Filter:</span>
+              <div class="inline-flex rounded-xl bg-[#E5E5EA] p-1 gap-1 shadow-inner text-xs">
+                <button
+                  type="button"
+                  id="mm-mode-tight"
+                  onclick="setMatchmakerParityFilter('tight')"
+                  class="h-8 px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap"
+                >
+                  <i class="fa-solid fa-bullseye text-[#007AFF] text-xs"></i>
+                  <span>Tight Parity (±2.5)</span>
+                </button>
+                <button
+                  type="button"
+                  id="mm-mode-wildcard"
+                  onclick="setMatchmakerParityFilter('wildcard')"
+                  class="h-8 px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap"
+                >
+                  <i class="fa-solid fa-bolt text-amber-500 text-xs"></i>
+                  <span>David vs Goliath</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MATCH CARD CONTAINER -->
+        <div class="relative w-full max-w-2xl mx-auto min-h-[360px] flex flex-col justify-center">
+          <div id="matchmaker-card-wrapper" class="relative overflow-visible">
+            <div id="matchmaker-card" class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-md space-y-6 transition-all animate-card-in">
+              <!-- Populated via renderMatchmakerCard() -->
+            </div>
+          </div>
+        </div>
+
+        <!-- VOTING ACTIONS -->
+        <div class="max-w-2xl mx-auto flex items-center gap-3.5 sm:gap-5">
+          <!-- Thumbs Down Button -->
+          <button
+            type="button"
+            id="btn-matchmaker-down"
+            onclick="voteMatchmaker('thumbs_down')"
+            class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 border-2 border-rose-200/90 text-[#FF3B30] font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
+          >
+            <span class="text-xl group-hover:scale-125 transition-transform">👎</span>
+            <span class="whitespace-nowrap">No Way, Ice the Puck!</span>
+          </button>
+
+          <!-- Thumbs Up Button -->
+          <button
+            type="button"
+            id="btn-matchmaker-up"
+            onclick="voteMatchmaker('thumbs_up')"
+            class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-emerald-50 hover:bg-emerald-100 active:scale-95 border-2 border-emerald-300/90 text-emerald-800 font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
+          >
+            <span class="text-xl group-hover:scale-125 transition-transform">👍</span>
+            <span class="whitespace-nowrap">I'd Play That!</span>
+          </button>
+        </div>
+
+        <!-- SECONDARY ACTIONS -->
+        <div class="max-w-md mx-auto flex items-center justify-center gap-4 sm:gap-6 pt-1 text-xs text-slate-500 flex-wrap">
+          <button
+            type="button"
+            onclick="loadMatchmakerInPredictor()"
+            class="hover:text-[#007AFF] font-medium flex items-center gap-1.5 transition-colors cursor-pointer group"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-[11px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            <span>Load in Matchup Predictor</span>
+          </button>
+          <span class="text-slate-300">•</span>
+          <button
+            type="button"
+            onclick="shareMatchmakerMatchup()"
+            class="hover:text-[#007AFF] font-medium flex items-center gap-1.5 transition-colors cursor-pointer group"
+          >
+            <i class="fa-solid fa-share-nodes text-[11px] group-hover:scale-110 transition-transform"></i>
+            <span>Share Matchup</span>
+          </button>
+          <span class="text-slate-300">•</span>
+          <button
+            type="button"
+            onclick="generateMatchmakerMatchup()"
+            class="hover:text-slate-800 font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Skip without voting"
+          >
+            <i class="fa-solid fa-rotate text-[11px]"></i>
+            <span>Skip / Next 🎲</span>
+          </button>
+        </div>
+
+      </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -1394,7 +1425,7 @@
       const state = {
         activeTab: 'predictor',
         selectedDivision: 'ALL',
-        matchmakerMode: 'ny',
+        currentMatchupSuggestions: [],
         teams: [...FALLBACK_TEAMS],
         teamA: {
           name: 'Buffalo Bisons 12U AA',
@@ -1432,6 +1463,15 @@
             { name: 'Syracuse Blazers AA', rating: 83.50 },
             { name: 'Batavia Ramparts AA', rating: 82.80 }
           ]
+        },
+        matchmakerGame: {
+          selectedDivision: '10U',
+          parityMode: 'tight', // 'tight' (±2.5) or 'wildcard' (any)
+          totalVotes: 0,
+          thumbsUp: 0,
+          thumbsDown: 0,
+          currentMatchup: null,
+          isAnimating: false
         }
       };
 
@@ -1490,6 +1530,7 @@
               updateTeamRecordBadges();
               updateClearButtons();
               updateModifierChips();
+              renderMatchupSuggestions();
             }
           }
         } catch (err) {
@@ -1556,6 +1597,9 @@
         if (!document.getElementById('team-b-dropdown')?.classList.contains('hidden')) {
           renderTeamDropdown('b', document.getElementById('team-b-name')?.value || '');
         }
+
+        renderMatchupSuggestions();
+        syncMatchupUrlParams();
       }
 
       function detectDivision(teamName) {
@@ -1856,95 +1900,150 @@
       });
 
       // ==========================================
-      // MATCHMAKER INTEGRATION (SAME DIVISION)
+      // DYNAMIC MATCHUP SUGGESTIONS (DRIVEN OFF TEAM 1)
       // ==========================================
-      function findMatchmakerOpponent(type) {
-        const teamAName = (document.getElementById('team-a-name')?.value || state.teamA.name || '').trim().toLowerCase();
-        const teamARating = parseFloat(document.getElementById('team-a-rating')?.value) || state.teamA.baseRating || 84.50;
+      function renderMatchupSuggestions() {
+        const grid = document.getElementById('matchup-suggestions-grid');
+        const teamLabel = document.getElementById('suggestions-team-label');
+        if (!grid) return;
 
-        // Determine target age division (from filter, Team 1 record, or name detection)
-        let targetDivision = (state.selectedDivision && state.selectedDivision !== 'ALL')
-          ? state.selectedDivision
-          : (state.teamA.division || detectDivision(state.teamA.name) || '12U');
+        const t1Name = (document.getElementById('team-a-name')?.value || state.teamA.name || 'Team 1').trim();
+        const t1Rating = parseFloat(document.getElementById('team-a-rating')?.value) || state.teamA.baseRating || 84.50;
+
+        if (teamLabel) {
+          teamLabel.textContent = t1Name ? `for ${t1Name}` : '';
+        }
 
         const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
 
-        // Filter pool by division, matchmakerMode (NY vs Out-of-State), & exclude Team 1
-        let candidates = pool.filter(t => {
-          const matchDiv = (!targetDivision || targetDivision === 'ALL' || t.division === targetDivision);
-          const notSelf = t.name.toLowerCase() !== teamAName;
-          const matchState = (state.matchmakerMode === 'oos') ? (t.state !== 'NY') : (state.matchmakerMode === 'ny' ? (t.state === 'NY') : true);
-          return matchDiv && notSelf && matchState;
+        // Determine target age division (from active filter or Team 1 division)
+        const targetDiv = (state.selectedDivision && state.selectedDivision !== 'ALL')
+          ? state.selectedDivision
+          : (state.teamA.division || detectDivision(t1Name) || '12U');
+
+        // Filter pool by division and exclude Team 1
+        const inDiv = pool.filter(t => {
+          if (t.name.trim().toLowerCase() === t1Name.toLowerCase()) return false;
+          return teamMatchesDivision(t, targetDiv);
         });
 
-        // Fallback to division rivals without state filter if no specific matches found
-        if (candidates.length === 0) {
-          candidates = pool.filter(t => {
-            const matchDiv = (!targetDivision || targetDivision === 'ALL' || t.division === targetDivision);
-            return matchDiv && t.name.toLowerCase() !== teamAName;
-          });
-        }
-        if (candidates.length === 0) {
-          candidates = pool.filter(t => t.name.toLowerCase() !== teamAName);
-        }
-        if (candidates.length === 0) candidates = pool;
+        const candidatePool = inDiv.length >= 8 ? inDiv : pool.filter(t => t.name.trim().toLowerCase() !== t1Name.toLowerCase());
+        const usedNames = new Set([t1Name.toLowerCase()]);
 
-        let idealTarget = teamARating;
-        if (type === 'confidence') {
-          // Target: Team 1 rating - 1.5 to - 2.5 (center: -2.0)
-          idealTarget = teamARating - 2.00;
-        } else if (type === 'even') {
-          // Target: Team 1 rating ± 0.5
-          idealTarget = teamARating;
-        } else if (type === 'challenge') {
-          // Target: Team 1 rating + 1.5 to + 2.5 (center: +2.0)
-          idealTarget = teamARating + 2.00;
-        }
-
-        // Find candidate in pool with rating closest to idealTarget
-        let bestCandidate = candidates[0];
-        let minDiff = Math.abs(bestCandidate.rating - idealTarget);
-
-        for (let i = 1; i < candidates.length; i++) {
-          const diff = Math.abs(candidates[i].rating - idealTarget);
-          if (diff < minDiff) {
-            minDiff = diff;
-            bestCandidate = candidates[i];
+        function pickBest(candidates, targetDiff, minDiff, maxDiff) {
+          let available = candidates.filter(t => !usedNames.has(t.name.toLowerCase()) && Math.abs(t.rating - t1Rating) >= minDiff && Math.abs(t.rating - t1Rating) <= maxDiff);
+          if (available.length === 0) {
+            available = candidates.filter(t => !usedNames.has(t.name.toLowerCase()));
           }
+          if (available.length === 0) return null;
+          available.sort((a, b) => Math.abs(Math.abs(a.rating - t1Rating) - targetDiff) - Math.abs(Math.abs(b.rating - t1Rating) - targetDiff));
+          const chosen = available[0];
+          usedNames.add(chosen.name.toLowerCase());
+          return chosen;
         }
 
-        // Populate Team 2 inputs & state
-        state.teamB.name = bestCandidate.name;
-        state.teamB.baseRating = bestCandidate.rating;
-        state.teamB.record = bestCandidate.record;
-        state.teamB.division = bestCandidate.division;
-        state.teamB.state = bestCandidate.state;
+        // 1. Even Matchup: Opponent within ±0.3 rating points (Badge: "±0.25 Even")
+        const s1 = pickBest(candidatePool, 0.20, 0, 0.35);
+
+        // 2. Competitive Tilt: Opponent with a +1.0 to +1.5 spread (Badge: "+1.25 Competitive")
+        const s2 = pickBest(candidatePool, 1.25, 0.8, 1.8);
+
+        // 3. Test / Stretch Game: Opponent with a +2.5 to +3.5 spread (Badge: "+3.00 Skewed")
+        const s3 = pickBest(candidatePool, 3.00, 2.2, 3.8);
+
+        // 4. Out of Division / Challenge: Opponent with a +5.0+ spread (Badge: "+5.00+ Heavy Tilt")
+        let s4 = pickBest(candidatePool, 5.00, 4.5, 99);
+        if (!s4) {
+          s4 = pickBest(pool.filter(t => t.name.trim().toLowerCase() !== t1Name.toLowerCase()), 5.00, 4.5, 99);
+        }
+
+        state.currentMatchupSuggestions = [s1, s2, s3, s4];
+
+        const scenarioConfigs = [
+          {
+            team: s1,
+            badgeClass: 'text-[#34C759]',
+            formatBadge: (spread) => `±${spread.toFixed(2)} Even`
+          },
+          {
+            team: s2,
+            badgeClass: 'text-[#007AFF]',
+            formatBadge: (spread) => `+${spread.toFixed(2)} Competitive`
+          },
+          {
+            team: s3,
+            badgeClass: 'text-[#FF9500]',
+            formatBadge: (spread) => `+${spread.toFixed(2)} Skewed`
+          },
+          {
+            team: s4,
+            badgeClass: 'text-[#FF3B30]',
+            formatBadge: (spread) => `+${spread.toFixed(2)} Heavy Tilt`
+          }
+        ];
+
+        grid.innerHTML = scenarioConfigs.map((cfg, idx) => {
+          const opp = cfg.team;
+          if (!opp) {
+            return `
+              <div class="p-3 bg-white border border-slate-200/60 rounded-2xl text-left opacity-60">
+                <div class="text-xs font-semibold text-slate-400 truncate">Searching...</div>
+                <div class="text-[11px] text-slate-400 font-medium mt-0.5">--</div>
+              </div>
+            `;
+          }
+
+          const spread = Math.abs(t1Rating - opp.rating);
+          const badgeText = cfg.formatBadge(spread);
+          const stateCode = opp.state || 'USA';
+          const safeName = escapeHtml(opp.name);
+          const safeState = escapeHtml(stateCode);
+
+          return `
+            <button
+              type="button"
+              onclick="selectSuggestedOpponentByIndex(${idx})"
+              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
+              title="vs ${safeName} (${safeState}) • Rating: ${opp.rating.toFixed(2)}"
+            >
+              <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">
+                vs ${safeName} (${safeState})
+              </div>
+              <div class="text-[11px] font-bold mt-0.5 ${cfg.badgeClass}">
+                ${badgeText}
+              </div>
+            </button>
+          `;
+        }).join('');
+      }
+
+      function selectSuggestedOpponentByIndex(index) {
+        const opp = state.currentMatchupSuggestions?.[index];
+        if (!opp) return;
+        selectSuggestedOpponent(opp.name, opp.rating, opp.state, opp.division, opp.record);
+      }
+
+      function selectSuggestedOpponent(name, rating, stateCode, division, record) {
+        state.teamB.name = name;
+        state.teamB.baseRating = parseFloat(rating) || 84.00;
+        state.teamB.state = stateCode || '';
+        state.teamB.division = division || '';
+        state.teamB.record = record || '';
+        state.teamB.tier = getTeamTier({ name, tier: '' });
         state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
 
         const nameEl = document.getElementById('team-b-name');
-        if (nameEl) nameEl.value = bestCandidate.name;
+        if (nameEl) nameEl.value = name;
 
         const ratingEl = document.getElementById('team-b-rating');
-        if (ratingEl) ratingEl.value = bestCandidate.rating.toFixed(2);
+        if (ratingEl) ratingEl.value = parseFloat(rating).toFixed(2);
 
         updateClearButtons();
         updateTeamRecordBadges();
         updateModifierChips();
         updatePredictor();
+        syncMatchupUrlParams();
 
-        // Update Matchmaker status badge inside card
-        const badge = document.getElementById('matchmaker-status-badge');
-        const badgeText = document.getElementById('matchmaker-status-text');
-        if (badge && badgeText) {
-          badgeText.textContent = `Opponent Found: ${bestCandidate.name} (${bestCandidate.rating.toFixed(2)}) • Rec: ${bestCandidate.record}`;
-          badge.classList.remove('hidden');
-          badge.classList.add('inline-flex', 'ring-2', 'ring-emerald-300');
-          setTimeout(() => {
-            badge.classList.remove('ring-2', 'ring-emerald-300');
-          }, 600);
-        }
-
-        // Smooth visual highlight on Matchup Predictor card
         const heroCard = document.getElementById('hero-prediction-card');
         if (heroCard) {
           heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
@@ -1954,32 +2053,26 @@
         }
       }
 
-      function loadPreset(nameA, ratingA, nameB, ratingB) {
-        state.teamA.name = nameA;
-        state.teamA.baseRating = ratingA;
-        state.teamA.modifiers = { goalie: false, bench: false, fatigue: false };
-
-        state.teamB.name = nameB;
-        state.teamB.baseRating = ratingB;
-        state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
-
-        document.getElementById('team-a-name').value = nameA;
-        document.getElementById('team-a-rating').value = ratingA.toFixed(2);
-        document.getElementById('team-b-name').value = nameB;
-        document.getElementById('team-b-rating').value = ratingB.toFixed(2);
-
-        updateClearButtons();
-        updateTeamRecordBadges();
-        updateModifierChips();
-        updatePredictor();
-
-        const heroCard = document.getElementById('hero-prediction-card');
-        if (heroCard) {
-          heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
-          setTimeout(() => {
-            heroCard.classList.remove('ring-2', 'ring-[#007AFF]/40');
-          }, 350);
-        }
+      function syncMatchupUrlParams() {
+        try {
+          const url = new URL(window.location.href);
+          if (state.teamA?.name) {
+            url.searchParams.set('teamA', state.teamA.name);
+          } else {
+            url.searchParams.delete('teamA');
+          }
+          if (state.teamB?.name) {
+            url.searchParams.set('teamB', state.teamB.name);
+          } else {
+            url.searchParams.delete('teamB');
+          }
+          if (state.selectedDivision && state.selectedDivision !== 'ALL') {
+            url.searchParams.set('div', state.selectedDivision);
+          } else {
+            url.searchParams.delete('div');
+          }
+          window.history.replaceState({}, '', url.toString());
+        } catch (e) {}
       }
 
       function onTeamInputsChanged() {
@@ -2021,47 +2114,414 @@
         trackAnalyticsEvent('tab_switched', { target_tab: tab });
         const viewPredictor = document.getElementById('view-predictor');
         const viewBracket = document.getElementById('view-bracket');
+        const viewMatchmaker = document.getElementById('view-matchmaker');
         const navPredictor = document.getElementById('nav-tab-predictor');
         const navBracket = document.getElementById('nav-tab-bracket');
+        const navMatchmaker = document.getElementById('nav-tab-matchmaker');
+
+        const activeClass = 'flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all whitespace-nowrap cursor-pointer';
+        const inactiveClass = 'flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer';
+
+        viewPredictor?.classList.add('hidden');
+        viewBracket?.classList.add('hidden');
+        viewMatchmaker?.classList.add('hidden');
+
+        if (navPredictor) navPredictor.className = inactiveClass;
+        if (navBracket) navBracket.className = inactiveClass;
+        if (navMatchmaker) navMatchmaker.className = inactiveClass + ' flex items-center justify-center gap-1.5';
 
         if (tab === 'predictor') {
           viewPredictor?.classList.remove('hidden');
-          viewBracket?.classList.add('hidden');
-          if (navPredictor) {
-            navPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all cursor-pointer';
-          }
-          if (navBracket) {
-            navBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all cursor-pointer';
-          }
-        } else {
-          viewPredictor?.classList.add('hidden');
+          if (navPredictor) navPredictor.className = activeClass;
+        } else if (tab === 'bracket') {
           viewBracket?.classList.remove('hidden');
-          if (navPredictor) {
-            navPredictor.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all cursor-pointer';
-          }
-          if (navBracket) {
-            navBracket.className = 'flex-1 py-1.5 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all cursor-pointer';
-          }
+          if (navBracket) navBracket.className = activeClass;
           calculateBracketParity();
+        } else if (tab === 'matchmaker') {
+          viewMatchmaker?.classList.remove('hidden');
+          if (navMatchmaker) navMatchmaker.className = activeClass + ' flex items-center justify-center gap-1.5';
+          initMatchmakerGame();
         }
       }
 
       // ==========================================
-      // MATCHMAKER MODE SWITCHER
+      // MATCHMAKER (PUCKEDGE TINDER MINI-GAME)
       // ==========================================
-      function setMatchmakerMode(mode) {
-        state.matchmakerMode = mode;
-        const btnNy = document.getElementById('mm-mode-ny');
-        const btnOos = document.getElementById('mm-mode-oos');
-        if (btnNy && btnOos) {
-          if (mode === 'ny') {
-            btnNy.className = 'px-2.5 py-1 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs transition-all cursor-pointer';
-            btnOos.className = 'px-2.5 py-1 rounded-lg font-medium text-slate-500 hover:text-slate-800 transition-all cursor-pointer';
-          } else {
-            btnNy.className = 'px-2.5 py-1 rounded-lg font-medium text-slate-500 hover:text-slate-800 transition-all cursor-pointer';
-            btnOos.className = 'px-2.5 py-1 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs transition-all cursor-pointer';
+      const MATCHMAKER_DIVISIONS = ["9U", "10U", "11U", "12U", "13U", "14U", "16U/15U", "18U"];
+
+      function initMatchmakerGame() {
+        if (state.selectedDivision && state.selectedDivision !== 'ALL' && MATCHMAKER_DIVISIONS.includes(state.selectedDivision)) {
+          state.matchmakerGame.selectedDivision = state.selectedDivision;
+        }
+        renderMatchmakerDivisionPills();
+        updateMatchmakerParityButtons();
+        updateMatchmakerCounter();
+
+        if (!state.matchmakerGame.currentMatchup) {
+          generateMatchmakerMatchup();
+        } else {
+          renderMatchmakerCard();
+        }
+      }
+
+      function renderMatchmakerDivisionPills() {
+        const container = document.getElementById('mm-div-pills');
+        if (!container) return;
+        const currentDiv = state.matchmakerGame.selectedDivision;
+
+        container.innerHTML = MATCHMAKER_DIVISIONS.map(div => {
+          const isActive = div === currentDiv;
+          const cls = isActive
+            ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-[#007AFF] text-white shadow-xs cursor-default whitespace-nowrap'
+            : 'px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 cursor-pointer transition-all whitespace-nowrap';
+          return `<button type="button" onclick="setMatchmakerDivision('${div}')" class="${cls}">${div}</button>`;
+        }).join('');
+      }
+
+      function setMatchmakerDivision(div) {
+        state.matchmakerGame.selectedDivision = div;
+        renderMatchmakerDivisionPills();
+        generateMatchmakerMatchup();
+      }
+
+      function setMatchmakerParityFilter(mode) {
+        state.matchmakerGame.parityMode = mode;
+        updateMatchmakerParityButtons();
+        generateMatchmakerMatchup();
+      }
+
+      function updateMatchmakerParityButtons() {
+        const btnTight = document.getElementById('mm-mode-tight');
+        const btnWild = document.getElementById('mm-mode-wildcard');
+        const isTight = state.matchmakerGame.parityMode === 'tight';
+
+        if (btnTight) {
+          btnTight.className = isTight
+            ? 'h-8 px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap'
+            : 'h-8 px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap';
+        }
+        if (btnWild) {
+          btnWild.className = !isTight
+            ? 'h-8 px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap'
+            : 'h-8 px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap';
+        }
+      }
+
+      function updateMatchmakerCounter() {
+        const textEl = document.getElementById('matchmaker-stats-text');
+        if (!textEl) return;
+        const { totalVotes, thumbsUp, thumbsDown } = state.matchmakerGame;
+        textEl.textContent = `${totalVotes} Matchup${totalVotes === 1 ? '' : 's'} Rated (👍 ${thumbsUp} / 👎 ${thumbsDown})`;
+      }
+
+      function generateMatchmakerMatchup() {
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        const targetDiv = state.matchmakerGame.selectedDivision || '10U';
+        const isTight = state.matchmakerGame.parityMode === 'tight';
+
+        let divTeams = pool.filter(t => teamMatchesDivision(t, targetDiv));
+        if (divTeams.length < 2) {
+          divTeams = pool;
+        }
+
+        const t1Index = Math.floor(Math.random() * divTeams.length);
+        const t1 = divTeams[t1Index];
+
+        let candidates = divTeams.filter((t, idx) => idx !== t1Index && t.name !== t1.name);
+
+        if (isTight) {
+          const tightCandidates = candidates.filter(t => Math.abs(t.rating - t1.rating) <= 2.50);
+          if (tightCandidates.length > 0) {
+            candidates = tightCandidates;
           }
         }
+
+        if (candidates.length === 0) {
+          candidates = divTeams.filter((t, idx) => idx !== t1Index);
+        }
+
+        const t2 = candidates[Math.floor(Math.random() * candidates.length)] || pool[0];
+
+        const spread = parseFloat(Math.abs(t1.rating - t2.rating).toFixed(2));
+        const baseGoals = 3.2;
+        let exp1 = baseGoals + (t1.rating - t2.rating) * 0.45;
+        let exp2 = baseGoals - (t1.rating - t2.rating) * 0.45;
+        exp1 = Math.max(0.6, exp1);
+        exp2 = Math.max(0.6, exp2);
+
+        let winProb1 = 50 + (t1.rating - t2.rating) * 11.5;
+        winProb1 = Math.max(5, Math.min(92, winProb1));
+        let winProb2 = 100 - winProb1;
+        let tieProb = Math.max(8, 22 - spread * 2.8);
+        winProb1 = Math.round((winProb1 * (100 - tieProb)) / 100);
+        winProb2 = Math.round((winProb2 * (100 - tieProb)) / 100);
+
+        let verdict = 'Even Draw';
+        let verdictClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        if (spread <= 0.75) {
+          verdict = 'Even Draw';
+          verdictClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        } else if (spread <= 2.00) {
+          verdict = 'Competitive Tilt';
+          verdictClass = 'bg-blue-50 text-[#007AFF] border-blue-200';
+        } else if (spread <= 3.50) {
+          verdict = 'Skewed Matchup';
+          verdictClass = 'bg-amber-50 text-[#FF9500] border-amber-200';
+        } else {
+          verdict = 'David vs Goliath';
+          verdictClass = 'bg-rose-50 text-[#FF3B30] border-rose-200';
+        }
+
+        state.matchmakerGame.currentMatchup = {
+          t1,
+          t2,
+          spread,
+          exp1: exp1.toFixed(1),
+          exp2: exp2.toFixed(1),
+          winProb1,
+          winProb2,
+          verdict,
+          verdictClass,
+          favoredTeam: t1.rating > t2.rating ? 1 : (t2.rating > t1.rating ? 2 : 0)
+        };
+
+        renderMatchmakerCard();
+      }
+
+      function renderMatchmakerCard() {
+        const container = document.getElementById('matchmaker-card');
+        if (!container) return;
+
+        const current = state.matchmakerGame.currentMatchup;
+        if (!current) {
+          container.innerHTML = `<div class="py-12 text-center text-slate-400 text-sm">Generating matchup...</div>`;
+          return;
+        }
+
+        const { t1, t2, spread, exp1, exp2, winProb1, winProb2, verdict, verdictClass, favoredTeam } = current;
+
+        const t1Tier = t1.tier || getTeamTier(t1);
+        const t2Tier = t2.tier || getTeamTier(t2);
+        const t1State = t1.state || 'USA';
+        const t2State = t2.state || 'USA';
+
+        const spreadColor = favoredTeam === 1 ? 'text-[#007AFF]' : (favoredTeam === 2 ? 'text-[#FF9500]' : 'text-[#34C759]');
+        const favoredText = favoredTeam === 1 ? `${t1.name} favored` : (favoredTeam === 2 ? `${t2.name} favored` : 'Even baseline contest');
+
+        container.className = 'bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-md space-y-5 sm:space-y-6 transition-all animate-card-in select-none';
+
+        container.innerHTML = `
+          <!-- Card Header / Meta Badges -->
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70">
+                ${state.matchmakerGame.selectedDivision} Division
+              </span>
+              <span class="text-xs font-semibold text-slate-500">
+                ${t1State} vs ${t2State}
+              </span>
+            </div>
+
+            <!-- Dynamic Parity Badge -->
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${verdictClass} shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-current"></span>
+              <span>${verdict}</span>
+            </span>
+          </div>
+
+          <!-- Head-to-Head Arena Layout -->
+          <div class="grid grid-cols-1 md:grid-cols-11 gap-4 sm:gap-6 items-center">
+            
+            <!-- TEAM 1 (BLUE) -->
+            <div class="md:col-span-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-blue-50/50 to-slate-50/70 border border-blue-100/80 space-y-2.5 relative">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#007AFF]">TEAM 1</span>
+                <span class="text-xs font-extrabold px-2 py-0.5 rounded-lg bg-blue-100/70 text-[#007AFF]">
+                  ${t1.rating.toFixed(2)}
+                </span>
+              </div>
+              <div>
+                <h3 class="text-base sm:text-lg font-black text-[#1C1C1E] leading-snug line-clamp-2" title="${escapeHtml(t1.name)}">
+                  ${escapeHtml(t1.name)}
+                </h3>
+                <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-white text-emerald-700 border border-emerald-200/90 shadow-2xs">
+                    Ranked • ${t1Tier} (${t1State})
+                  </span>
+                  <span class="text-[11px] font-medium text-slate-500">Rec: ${t1.record || '--'}</span>
+                </div>
+              </div>
+              <div class="pt-1 flex items-center justify-between text-xs text-slate-500 border-t border-blue-100/60">
+                <span>Exp Goals: <strong class="text-[#1C1C1E] font-bold">${exp1}</strong></span>
+                <span>Win Prob: <strong class="text-[#007AFF] font-bold">${winProb1}%</strong></span>
+              </div>
+            </div>
+
+            <!-- CENTER PARITY SUMMARY -->
+            <div class="md:col-span-3 flex flex-col items-center justify-center text-center space-y-2 py-1">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">PROJECTED SPREAD</span>
+              <div class="text-3xl sm:text-4xl font-black tracking-tight ${spreadColor}">
+                +${spread.toFixed(2)}
+              </div>
+              <span class="text-[11px] font-medium text-slate-500 max-w-[170px] truncate" title="${favoredText}">
+                ${favoredText}
+              </span>
+              <!-- Score Preview Pill -->
+              <div class="px-3 py-1 rounded-xl bg-[#F2F2F7] border border-slate-200/80 text-xs font-extrabold text-[#1C1C1E]">
+                <span>${exp1}</span>
+                <span class="text-slate-400 font-medium mx-1.5">vs</span>
+                <span>${exp2}</span>
+              </div>
+            </div>
+
+            <!-- TEAM 2 (AMBER) -->
+            <div class="md:col-span-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-50/50 to-slate-50/70 border border-amber-100/80 space-y-2.5 relative">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#FF9500]">TEAM 2</span>
+                <span class="text-xs font-extrabold px-2 py-0.5 rounded-lg bg-amber-100/70 text-[#FF9500]">
+                  ${t2.rating.toFixed(2)}
+                </span>
+              </div>
+              <div>
+                <h3 class="text-base sm:text-lg font-black text-[#1C1C1E] leading-snug line-clamp-2" title="${escapeHtml(t2.name)}">
+                  ${escapeHtml(t2.name)}
+                </h3>
+                <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-white text-emerald-700 border border-emerald-200/90 shadow-2xs">
+                    Ranked • ${t2Tier} (${t2State})
+                  </span>
+                  <span class="text-[11px] font-medium text-slate-500">Rec: ${t2.record || '--'}</span>
+                </div>
+              </div>
+              <div class="pt-1 flex items-center justify-between text-xs text-slate-500 border-t border-amber-100/60">
+                <span>Exp Goals: <strong class="text-[#1C1C1E] font-bold">${exp2}</strong></span>
+                <span>Win Prob: <strong class="text-[#FF9500] font-bold">${winProb2}%</strong></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Win Probability Meter Bar -->
+          <div class="space-y-1.5 pt-1">
+            <div class="flex justify-between text-xs font-semibold px-0.5">
+              <span class="text-[#007AFF]">${winProb1}%</span>
+              <span class="text-slate-400 text-[11px]">Win Probability Meter</span>
+              <span class="text-[#FF9500]">${winProb2}%</span>
+            </div>
+            <div class="h-2.5 w-full bg-[#E5E5EA] rounded-full overflow-hidden flex shadow-inner">
+              <div class="h-full bg-[#007AFF] transition-all duration-300" style="width: ${winProb1}%"></div>
+              <div class="h-full bg-slate-300 transition-all duration-300" style="width: ${Math.max(0, 100 - winProb1 - winProb2)}%"></div>
+              <div class="h-full bg-[#FF9500] transition-all duration-300" style="width: ${winProb2}%"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      function voteMatchmaker(decision) {
+        if (state.matchmakerGame.isAnimating) return;
+        const current = state.matchmakerGame.currentMatchup;
+        if (!current) return;
+
+        state.matchmakerGame.totalVotes++;
+        if (decision === 'thumbs_up') {
+          state.matchmakerGame.thumbsUp++;
+        } else {
+          state.matchmakerGame.thumbsDown++;
+        }
+
+        // Custom Analytics Tracking via @vercel/analytics
+        trackAnalyticsEvent('matchmaker_vote', {
+          decision: decision,
+          team1: current.t1.name,
+          team2: current.t2.name,
+          division: state.matchmakerGame.selectedDivision,
+          spread: current.spread
+        });
+
+        updateMatchmakerCounter();
+
+        // Animate card off-screen
+        const card = document.getElementById('matchmaker-card');
+        if (card) {
+          state.matchmakerGame.isAnimating = true;
+          const animClass = decision === 'thumbs_up' ? 'animate-swipe-right' : 'animate-swipe-left';
+          card.classList.remove('animate-card-in');
+          card.classList.add(animClass);
+
+          setTimeout(() => {
+            generateMatchmakerMatchup();
+            state.matchmakerGame.isAnimating = false;
+          }, 240);
+        } else {
+          generateMatchmakerMatchup();
+        }
+      }
+
+      function loadMatchmakerInPredictor() {
+        const current = state.matchmakerGame.currentMatchup;
+        if (!current) return;
+
+        state.teamA.name = current.t1.name;
+        state.teamA.baseRating = current.t1.rating;
+        state.teamA.record = current.t1.record || '';
+        state.teamA.division = current.t1.age_bracket || current.t1.division;
+        state.teamA.state = current.t1.state;
+        state.teamA.tier = current.t1.tier || getTeamTier(current.t1);
+
+        state.teamB.name = current.t2.name;
+        state.teamB.baseRating = current.t2.rating;
+        state.teamB.record = current.t2.record || '';
+        state.teamB.division = current.t2.age_bracket || current.t2.division;
+        state.teamB.state = current.t2.state;
+        state.teamB.tier = current.t2.tier || getTeamTier(current.t2);
+
+        const nameAInput = document.getElementById('team-a-name');
+        const ratingAInput = document.getElementById('team-a-rating');
+        const nameBInput = document.getElementById('team-b-name');
+        const ratingBInput = document.getElementById('team-b-rating');
+
+        if (nameAInput) nameAInput.value = current.t1.name;
+        if (ratingAInput) ratingAInput.value = current.t1.rating.toFixed(2);
+        if (nameBInput) nameBInput.value = current.t2.name;
+        if (ratingBInput) ratingBInput.value = current.t2.rating.toFixed(2);
+
+        updateClearButtons();
+        updateTeamRecordBadges();
+        updatePredictor();
+        switchMainTab('predictor');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showToast('Loaded matchup into Matchup Predictor!');
+      }
+
+      function shareMatchmakerMatchup() {
+        const current = state.matchmakerGame.currentMatchup;
+        if (!current) return;
+
+        const shareUrl = `${window.location.origin}${window.location.pathname}?tab=matchmaker&teamA=${encodeURIComponent(current.t1.name)}&teamB=${encodeURIComponent(current.t2.name)}&div=${encodeURIComponent(state.matchmakerGame.selectedDivision)}`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            showToast('Matchup link copied to clipboard!');
+          }).catch(() => {
+            showToast('Matchup link: ' + shareUrl);
+          });
+        } else {
+          showToast('Matchup link: ' + shareUrl);
+        }
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('toast-notification');
+        const text = document.getElementById('toast-message');
+        if (!toast || !text) return;
+        text.textContent = msg;
+        toast.classList.remove('opacity-0', 'pointer-events-none');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0', 'pointer-events-none');
+        }, 2200);
       }
 
       // ==========================================
@@ -2271,6 +2731,7 @@
           }
 
           updatePitchDraft();
+          renderMatchupSuggestions();
           return;
         }
 
@@ -2376,6 +2837,8 @@
 
         // Update accordion pre-filled draft pitch email
         updatePitchDraft();
+        renderMatchupSuggestions();
+        syncMatchupUrlParams();
       }
 
       // ==========================================
@@ -3475,15 +3938,59 @@ Coach / Scheduler (${state.teamA.name})`;
 
       // Initialize on load
       window.addEventListener('DOMContentLoaded', () => {
-        initTeamsData();
+        initTeamsData().then(() => {
+          if (state.activeTab === 'matchmaker') {
+            generateMatchmakerMatchup();
+          }
+        });
         updateClearButtons();
         updateModifierChips();
         updatePredictor();
         recalculateCosts();
         renderBracketView();
         trackAnalyticsEvent('bracket_generated', { team_count: state.bracket.teams.length });
+
+        // URL Deep-linking handler
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const requestedTab = urlParams.get('tab');
+          const pTeamA = urlParams.get('teamA');
+          const pTeamB = urlParams.get('teamB');
+          const pDiv = urlParams.get('div');
+
+          if (pDiv && MATCHMAKER_DIVISIONS.includes(pDiv)) {
+            state.matchmakerGame.selectedDivision = pDiv;
+          }
+
+          if (pTeamA) {
+            state.teamA.name = pTeamA;
+            const inputA = document.getElementById('team-a-name');
+            if (inputA) inputA.value = pTeamA;
+          }
+          if (pTeamB) {
+            state.teamB.name = pTeamB;
+            const inputB = document.getElementById('team-b-name');
+            if (inputB) inputB.value = pTeamB;
+          }
+          if (pTeamA || pTeamB) {
+            updateTeamRecordBadges();
+            updatePredictor();
+          }
+
+          if (requestedTab === 'matchmaker') {
+            switchMainTab('matchmaker');
+          } else if (requestedTab === 'bracket') {
+            switchMainTab('bracket');
+          }
+        } catch (e) {}
       });
     </script>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#1C1C1E] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+      <i class="fa-solid fa-circle-check text-emerald-400"></i>
+      <span id="toast-message">Notification</span>
+    </div>
 
     <!-- Vercel Web Analytics Root Container & React Module Entry -->
     <div id="root" class="hidden"></div>
