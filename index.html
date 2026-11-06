@@ -1204,13 +1204,13 @@
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <h2 class="text-sm sm:text-base font-bold text-[#1C1C1E]">Rink Parity Challenge</h2>
+                  <h2 class="text-sm sm:text-base font-bold text-[#1C1C1E]">Schedule It?</h2>
                   <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#007AFF] border border-blue-200">
                     Matchmaker 🎲
                   </span>
                 </div>
                 <p class="text-xs text-[#8E8E93] mt-0.5">
-                  Simulated national matchups — test competitive balance and cast your vote on whether you'd schedule this game.
+                  Would you book this matchup?
                 </p>
               </div>
             </div>
@@ -1278,7 +1278,7 @@
             class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 border-2 border-rose-200/90 text-[#FF3B30] font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
           >
             <span class="text-xl group-hover:scale-125 transition-transform">👎</span>
-            <span class="whitespace-nowrap">👎 No Way (Ice the Puck)</span>
+            <span class="whitespace-nowrap">No Way (Ice the Puck)</span>
           </button>
 
           <!-- Green Button: Good Game (I'd Schedule It) -->
@@ -1289,7 +1289,7 @@
             class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-emerald-50 hover:bg-emerald-100 active:scale-95 border-2 border-emerald-300/90 text-emerald-800 font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
           >
             <span class="text-xl group-hover:scale-125 transition-transform">👍</span>
-            <span class="whitespace-nowrap">👍 Good Game (I'd Schedule It)</span>
+            <span class="whitespace-nowrap">Good Game (I'd Schedule It)</span>
           </button>
         </div>
 
@@ -2642,8 +2642,12 @@
           <!-- Card Header / Meta Badges -->
           <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70">
-                ${state.matchmakerGame.selectedDivision} Division
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70">
+                <i class="fa-solid fa-calendar-check text-[10px]"></i>
+                Schedule It?
+              </span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700">
+                ${state.matchmakerGame.selectedDivision}
               </span>
               <span class="text-xs font-semibold text-slate-500">
                 ${t1State} vs ${t2State}
