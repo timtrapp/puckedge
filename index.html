@@ -132,11 +132,12 @@
         <!-- Left: Brand Logo Lockup (Native Transparent Header Integration) -->
         <a href="#" class="flex items-center bg-transparent mix-blend-multiply group cursor-pointer focus:outline-none shrink-0 p-0 m-0 border-0" style="background: transparent; border: none;" title="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool">
           <img 
-            src="/assets/aistudio/puckedge-logo-transparent.png" 
+            src="/assets/aistudio/puckedge-logo.png_67773426.jpg" 
             alt="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool"
             class="h-10 w-auto bg-transparent mix-blend-multiply object-contain cursor-pointer transition-opacity hover:opacity-95"
             style="background: transparent; border: none;"
             loading="eager"
+            onerror="this.onerror=null;this.src='/assets/aistudio/puckedge-logo-transparent.png';"
           />
         </a>
 
@@ -738,9 +739,21 @@
           <!-- Spread & Dynamic Verdict -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div>
-              <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93] block">
-                Projected Spread
-              </span>
+              <div class="flex items-center gap-2.5">
+                <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93]">
+                  Projected Spread
+                </span>
+                <button
+                  type="button"
+                  id="btn-share-matchup"
+                  onclick="handleShareAction('matchup')"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
+                  title="Share this matchup deep-link"
+                >
+                  <i class="fa-solid fa-share-nodes text-[10px]"></i>
+                  <span id="btn-share-matchup-label">Share Matchup</span>
+                </button>
+              </div>
               <div class="flex items-baseline gap-2.5 mt-1">
                 <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF]" id="hero-spread-val">
                   +0.25
@@ -1009,7 +1022,19 @@
         <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h2 class="text-base font-bold text-[#1C1C1E]">Tournament Bracket Parity Grader</h2>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <h2 class="text-base font-bold text-[#1C1C1E]">Tournament Bracket Parity Grader</h2>
+                <button
+                  type="button"
+                  id="btn-share-bracket"
+                  onclick="handleShareAction('tournament')"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
+                  title="Share this tournament bracket deep-link"
+                >
+                  <i class="fa-solid fa-share-nodes text-[10px]"></i>
+                  <span id="btn-share-bracket-label">Share Bracket</span>
+                </button>
+              </div>
               <p class="text-xs text-[#8E8E93] mt-0.5">
                 Evaluate 4-to-8 team single-elimination brackets and round-robin divisions for competitive equity.
               </p>
@@ -1428,6 +1453,7 @@
         currentMatchupSuggestions: [],
         teams: [...FALLBACK_TEAMS],
         teamA: {
+          id: 'buffalobisons12uaa_12U',
           name: 'Buffalo Bisons 12U AA',
           baseRating: 86.50,
           record: '18-7-3',
@@ -1436,6 +1462,7 @@
           modifiers: { goalie: false, bench: false, fatigue: false }
         },
         teamB: {
+          id: 'warriorshockey12uaa_12U',
           name: 'Warriors Hockey 12U AA',
           baseRating: 84.25,
           record: '14-10-3',
@@ -1671,6 +1698,7 @@
       function clearTeamSelection(teamKey) {
         const team = state[`team${teamKey.toUpperCase()}`];
         if (team) {
+          team.id = '';
           team.name = '';
           team.baseRating = 0;
           team.record = '';
@@ -1859,6 +1887,7 @@
         const team = pool[teamIndex];
         if (!team) return;
 
+        state[`team${teamKey.toUpperCase()}`].id = team.id || getTeamId(team);
         state[`team${teamKey.toUpperCase()}`].name = team.name;
         state[`team${teamKey.toUpperCase()}`].baseRating = team.rating;
         state[`team${teamKey.toUpperCase()}`].record = team.record;
@@ -2024,6 +2053,7 @@
       }
 
       function selectSuggestedOpponent(name, rating, stateCode, division, record) {
+        state.teamB.id = getTeamId({ name, division });
         state.teamB.name = name;
         state.teamB.baseRating = parseFloat(rating) || 84.00;
         state.teamB.state = stateCode || '';
@@ -2042,7 +2072,7 @@
         updateTeamRecordBadges();
         updateModifierChips();
         updatePredictor();
-        syncMatchupUrlParams();
+        syncUrlState();
 
         const heroCard = document.getElementById('hero-prediction-card');
         if (heroCard) {
@@ -2053,26 +2083,216 @@
         }
       }
 
-      function syncMatchupUrlParams() {
+      // ==========================================
+      // URL SERIALIZATION & STATE SYNCHRONIZATION
+      // ==========================================
+      function getTeamId(team) {
+        if (!team) return '';
+        if (team.id) return team.id;
+        const name = (team.name || '').trim();
+        if (!name) return '';
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        const matched = pool.find(t => t.name.toLowerCase() === name.toLowerCase());
+        if (matched && matched.id) {
+          team.id = matched.id;
+          return matched.id;
+        }
+        return name.toLowerCase().replace(/[^a-z0-9]/g, '') + (team.division ? `_${team.division}` : '');
+      }
+
+      function findTeamByIdOrName(idOrName) {
+        if (!idOrName) return null;
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        const clean = idOrName.trim();
+        const decoded = decodeURIComponent(clean);
+        // 1. Exact ID
+        let match = pool.find(t => t.id === clean || t.id === decoded);
+        if (match) return match;
+        // 2. Case-insensitive ID
+        match = pool.find(t => t.id && t.id.toLowerCase() === decoded.toLowerCase());
+        if (match) return match;
+        // 3. Exact Name
+        match = pool.find(t => t.name && t.name.toLowerCase() === decoded.toLowerCase());
+        if (match) return match;
+        // 4. StartsWith / Includes Name
+        match = pool.find(t => t.name && t.name.toLowerCase().startsWith(decoded.toLowerCase()));
+        if (match) return match;
+        match = pool.find(t => t.name && t.name.toLowerCase().includes(decoded.toLowerCase()));
+        return match || null;
+      }
+
+      function syncUrlState() {
         try {
           const url = new URL(window.location.href);
-          if (state.teamA?.name) {
-            url.searchParams.set('teamA', state.teamA.name);
-          } else {
+          const activeTab = state.activeTab;
+
+          if (activeTab === 'tournament' || activeTab === 'bracket') {
+            url.searchParams.set('tab', 'tournament');
+            if (state.selectedDivision) {
+              url.searchParams.set('div', state.selectedDivision);
+            }
+            const stagedTeamIds = (state.bracket?.teams || [])
+              .filter(t => t && t.name && t.name.trim())
+              .map(t => getTeamId(t))
+              .filter(Boolean);
+            if (stagedTeamIds.length > 0) {
+              url.searchParams.set('teams', stagedTeamIds.join(','));
+            } else {
+              url.searchParams.delete('teams');
+            }
+            // Clear matchup params
+            url.searchParams.delete('t1');
+            url.searchParams.delete('t2');
+            url.searchParams.delete('r1');
+            url.searchParams.delete('r2');
             url.searchParams.delete('teamA');
-          }
-          if (state.teamB?.name) {
-            url.searchParams.set('teamB', state.teamB.name);
+            url.searchParams.delete('teamB');
+          } else if (activeTab === 'matchmaker') {
+            url.searchParams.set('tab', 'matchmaker');
+            const mmDiv = state.matchmakerGame?.selectedDivision || state.selectedDivision || '10U';
+            url.searchParams.set('div', mmDiv);
+            if (state.matchmakerGame?.currentMatchup) {
+              url.searchParams.set('teamA', state.matchmakerGame.currentMatchup.t1.name);
+              url.searchParams.set('teamB', state.matchmakerGame.currentMatchup.t2.name);
+            }
+            url.searchParams.delete('teams');
+            url.searchParams.delete('t1');
+            url.searchParams.delete('t2');
+            url.searchParams.delete('r1');
+            url.searchParams.delete('r2');
           } else {
+            // Matchup Predictor Tab
+            url.searchParams.set('tab', 'matchup');
+            if (state.selectedDivision) {
+              url.searchParams.set('div', state.selectedDivision);
+            }
+            const t1Id = getTeamId(state.teamA);
+            const t2Id = getTeamId(state.teamB);
+            if (t1Id) {
+              url.searchParams.set('t1', t1Id);
+            } else {
+              url.searchParams.delete('t1');
+            }
+            if (t2Id) {
+              url.searchParams.set('t2', t2Id);
+            } else {
+              url.searchParams.delete('t2');
+            }
+
+            const inputRatingA = document.getElementById('team-a-rating')?.value;
+            const inputRatingB = document.getElementById('team-b-rating')?.value;
+            const r1 = (inputRatingA !== undefined && inputRatingA !== '') ? parseFloat(inputRatingA) : state.teamA?.baseRating;
+            const r2 = (inputRatingB !== undefined && inputRatingB !== '') ? parseFloat(inputRatingB) : state.teamB?.baseRating;
+
+            if (r1 && r1 > 0) {
+              url.searchParams.set('r1', r1.toFixed(2));
+            } else {
+              url.searchParams.delete('r1');
+            }
+            if (r2 && r2 > 0) {
+              url.searchParams.set('r2', r2.toFixed(2));
+            } else {
+              url.searchParams.delete('r2');
+            }
+
+            // Clear tournament params
+            url.searchParams.delete('teams');
+            url.searchParams.delete('teamA');
             url.searchParams.delete('teamB');
           }
-          if (state.selectedDivision && state.selectedDivision !== 'ALL') {
-            url.searchParams.set('div', state.selectedDivision);
-          } else {
-            url.searchParams.delete('div');
-          }
+
           window.history.replaceState({}, '', url.toString());
-        } catch (e) {}
+        } catch (e) {
+          console.warn('URL serialization error:', e);
+        }
+      }
+
+      function syncMatchupUrlParams() {
+        syncUrlState();
+      }
+
+      // ==========================================
+      // SHARE ACTION (WEB SHARE API + CLIPBOARD FALLBACK)
+      // ==========================================
+      async function handleShareAction(mode) {
+        syncUrlState();
+        const currentUrl = window.location.href;
+        const isTournament = mode === 'tournament' || mode === 'bracket';
+
+        const t1Name = state.teamA?.name || 'Team 1';
+        const t2Name = state.teamB?.name || 'Team 2';
+        const shareTitle = isTournament
+          ? 'PuckEdge Tournament Bracket'
+          : `PuckEdge: ${t1Name} vs ${t2Name}`;
+
+        if (isTournament) {
+          trackAnalyticsEvent('bracket_link_shared', {
+            team_count: (state.bracket?.teams || []).length,
+            division: state.selectedDivision
+          });
+        } else {
+          trackAnalyticsEvent('matchup_link_shared', {
+            team1: state.teamA?.name,
+            team2: state.teamB?.name,
+            division: state.selectedDivision
+          });
+        }
+
+        const btnId = isTournament ? 'btn-share-bracket' : 'btn-share-matchup';
+        const labelId = isTournament ? 'btn-share-bracket-label' : 'btn-share-matchup-label';
+        const defaultText = isTournament ? 'Share Bracket' : 'Share Matchup';
+
+        function showCopySuccess() {
+          const btn = document.getElementById(btnId);
+          const label = document.getElementById(labelId);
+          if (label) label.textContent = 'Link Copied! ✓';
+          if (btn) {
+            btn.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-300 transition-all cursor-pointer shadow-xs';
+          }
+          showToast(isTournament ? 'Tournament bracket link copied to clipboard!' : 'Matchup link copied to clipboard!');
+
+          setTimeout(() => {
+            if (label) label.textContent = defaultText;
+            if (btn) {
+              btn.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95';
+            }
+          }, 2500);
+        }
+
+        if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent || '')) {
+          try {
+            await navigator.share({
+              title: shareTitle,
+              url: currentUrl
+            });
+            showToast('Link shared successfully!');
+            return;
+          } catch (err) {
+            if (err.name === 'AbortError') return;
+          }
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(currentUrl);
+            showCopySuccess();
+            return;
+          } catch (e) {
+            console.warn('Clipboard writeText failed:', e);
+          }
+        }
+
+        try {
+          const temp = document.createElement('input');
+          temp.value = currentUrl;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+          showCopySuccess();
+        } catch (err) {
+          prompt('Copy this link:', currentUrl);
+        }
       }
 
       function onTeamInputsChanged() {
@@ -2110,6 +2330,8 @@
       // MAIN TAB NAVIGATION
       // ==========================================
       function switchMainTab(tab) {
+        if (tab === 'matchup') tab = 'predictor';
+        if (tab === 'tournament') tab = 'bracket';
         state.activeTab = tab;
         trackAnalyticsEvent('tab_switched', { target_tab: tab });
         const viewPredictor = document.getElementById('view-predictor');
@@ -2142,6 +2364,7 @@
           if (navMatchmaker) navMatchmaker.className = activeClass + ' flex items-center justify-center gap-1.5';
           initMatchmakerGame();
         }
+        syncUrlState();
       }
 
       // ==========================================
@@ -3088,6 +3311,9 @@ Coach / Scheduler (${state.teamA.name})`;
       function loadBracketPreset(presetKey) {
         const raw = bracketPresets[presetKey] || bracketPresets.balanced;
         state.bracket.teams = JSON.parse(JSON.stringify(raw));
+        state.bracket.teams.forEach(t => {
+          t.id = getTeamId(t);
+        });
         state.bracket.teamCount = state.bracket.teams.length;
         state.bracket.advances = {};
         setBracketTeamCount(state.bracket.teamCount);
@@ -3401,6 +3627,7 @@ Coach / Scheduler (${state.teamA.name})`;
         const team = pool[poolIdx];
         if (!team) return;
 
+        state.bracket.teams[idx].id = team.id || getTeamId(team);
         state.bracket.teams[idx].name = team.name;
         state.bracket.teams[idx].rating = team.rating;
         state.bracket.teams[idx].record = team.record;
@@ -3436,6 +3663,7 @@ Coach / Scheduler (${state.teamA.name})`;
       function clearBracketSlot(idx) {
         if (!state.bracket.teams[idx]) return;
 
+        state.bracket.teams[idx].id = '';
         state.bracket.teams[idx].name = '';
         state.bracket.teams[idx].rating = 0;
         state.bracket.teams[idx].record = '';
@@ -3647,6 +3875,9 @@ Coach / Scheduler (${state.teamA.name})`;
               </div>
             </div>
           `).join('');
+        }
+        if (state.activeTab === 'bracket' || state.activeTab === 'tournament') {
+          syncUrlState();
         }
       }
 
@@ -3937,52 +4168,154 @@ Coach / Scheduler (${state.teamA.name})`;
       }
 
       // Initialize on load
+      // ==========================================
+      // URL HYDRATION / DEEP-LINKING HANDLER
+      // ==========================================
+      function hydrateFromUrl() {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const rawTab = (urlParams.get('tab') || '').toLowerCase().trim();
+          const pDiv = urlParams.get('div');
+          const t1Param = urlParams.get('t1') || urlParams.get('teamA');
+          const t2Param = urlParams.get('t2') || urlParams.get('teamB');
+          const r1Param = urlParams.get('r1');
+          const r2Param = urlParams.get('r2');
+          const teamsParam = urlParams.get('teams');
+
+          // 1. Division filter hydration
+          if (pDiv && MASTER_DIVISIONS.includes(pDiv)) {
+            setDivisionFilter(pDiv);
+            if (MATCHMAKER_DIVISIONS.includes(pDiv)) {
+              state.matchmakerGame.selectedDivision = pDiv;
+            }
+          }
+
+          // 2. Tournament Bracket Parity Tab
+          if (rawTab === 'tournament' || rawTab === 'bracket' || teamsParam) {
+            switchMainTab('bracket');
+            if (teamsParam) {
+              const ids = teamsParam.split(',').map(s => s.trim()).filter(Boolean);
+              if (ids.length >= 2) {
+                const count = Math.min(8, Math.max(4, ids.length));
+                state.bracket.teamCount = count;
+                state.bracket.teams = ids.slice(0, count).map((id) => {
+                  const found = findTeamByIdOrName(id);
+                  if (found) {
+                    return {
+                      id: found.id,
+                      name: found.name,
+                      rating: found.rating,
+                      record: found.record || '',
+                      division: found.age_bracket || found.division || '',
+                      state: found.state || '',
+                      tier: found.tier || getTeamTier(found)
+                    };
+                  }
+                  return {
+                    id: id,
+                    name: decodeURIComponent(id),
+                    rating: 82.00,
+                    record: '',
+                    division: pDiv || '12U',
+                    state: 'USA',
+                    tier: 'Tier 2'
+                  };
+                });
+
+                while (state.bracket.teams.length < count) {
+                  const fallback = bracketPresets.balanced[state.bracket.teams.length] || { name: `Team ${state.bracket.teams.length + 1}`, rating: 80.00 };
+                  state.bracket.teams.push(JSON.parse(JSON.stringify(fallback)));
+                }
+
+                setBracketTeamCount(count);
+                renderBracketView();
+                calculateBracketParity();
+                renderSingleEliminationBracket();
+              }
+            } else {
+              calculateBracketParity();
+            }
+          } else if (rawTab === 'matchmaker') {
+            switchMainTab('matchmaker');
+          } else if (rawTab === 'matchup' || rawTab === 'predictor' || t1Param || t2Param || r1Param || r2Param) {
+            switchMainTab('predictor');
+            if (t1Param) {
+              const found1 = findTeamByIdOrName(t1Param);
+              if (found1) {
+                state.teamA.id = found1.id;
+                state.teamA.name = found1.name;
+                state.teamA.baseRating = (r1Param && !isNaN(parseFloat(r1Param))) ? parseFloat(r1Param) : found1.rating;
+                state.teamA.record = found1.record || '';
+                state.teamA.division = found1.age_bracket || found1.division || '';
+                state.teamA.state = found1.state || '';
+                state.teamA.tier = found1.tier || getTeamTier(found1);
+              } else {
+                state.teamA.name = decodeURIComponent(t1Param);
+                if (r1Param && !isNaN(parseFloat(r1Param))) state.teamA.baseRating = parseFloat(r1Param);
+              }
+              const inputA = document.getElementById('team-a-name');
+              const ratingA = document.getElementById('team-a-rating');
+              if (inputA) inputA.value = state.teamA.name;
+              if (ratingA) ratingA.value = state.teamA.baseRating.toFixed(2);
+            } else if (r1Param && !isNaN(parseFloat(r1Param))) {
+              state.teamA.baseRating = parseFloat(r1Param);
+              const ratingA = document.getElementById('team-a-rating');
+              if (ratingA) ratingA.value = state.teamA.baseRating.toFixed(2);
+            }
+
+            if (t2Param) {
+              const found2 = findTeamByIdOrName(t2Param);
+              if (found2) {
+                state.teamB.id = found2.id;
+                state.teamB.name = found2.name;
+                state.teamB.baseRating = (r2Param && !isNaN(parseFloat(r2Param))) ? parseFloat(r2Param) : found2.rating;
+                state.teamB.record = found2.record || '';
+                state.teamB.division = found2.age_bracket || found2.division || '';
+                state.teamB.state = found2.state || '';
+                state.teamB.tier = found2.tier || getTeamTier(found2);
+              } else {
+                state.teamB.name = decodeURIComponent(t2Param);
+                if (r2Param && !isNaN(parseFloat(r2Param))) state.teamB.baseRating = parseFloat(r2Param);
+              }
+              const inputB = document.getElementById('team-b-name');
+              const ratingB = document.getElementById('team-b-rating');
+              if (inputB) inputB.value = state.teamB.name;
+              if (ratingB) ratingB.value = state.teamB.baseRating.toFixed(2);
+            } else if (r2Param && !isNaN(parseFloat(r2Param))) {
+              state.teamB.baseRating = parseFloat(r2Param);
+              const ratingB = document.getElementById('team-b-rating');
+              if (ratingB) ratingB.value = state.teamB.baseRating.toFixed(2);
+            }
+
+            updateClearButtons();
+            updateTeamRecordBadges();
+            updateModifierChips();
+            updatePredictor();
+          }
+        } catch (e) {
+          console.warn('URL Hydration error:', e);
+        }
+      }
+
+      // Initialize on load
       window.addEventListener('DOMContentLoaded', () => {
+        // Run preliminary hydration
+        hydrateFromUrl();
+
         initTeamsData().then(() => {
+          // Re-hydrate with complete teams dataset loaded
+          hydrateFromUrl();
           if (state.activeTab === 'matchmaker') {
             generateMatchmakerMatchup();
           }
         });
+
         updateClearButtons();
         updateModifierChips();
         updatePredictor();
         recalculateCosts();
         renderBracketView();
         trackAnalyticsEvent('bracket_generated', { team_count: state.bracket.teams.length });
-
-        // URL Deep-linking handler
-        try {
-          const urlParams = new URLSearchParams(window.location.search);
-          const requestedTab = urlParams.get('tab');
-          const pTeamA = urlParams.get('teamA');
-          const pTeamB = urlParams.get('teamB');
-          const pDiv = urlParams.get('div');
-
-          if (pDiv && MATCHMAKER_DIVISIONS.includes(pDiv)) {
-            state.matchmakerGame.selectedDivision = pDiv;
-          }
-
-          if (pTeamA) {
-            state.teamA.name = pTeamA;
-            const inputA = document.getElementById('team-a-name');
-            if (inputA) inputA.value = pTeamA;
-          }
-          if (pTeamB) {
-            state.teamB.name = pTeamB;
-            const inputB = document.getElementById('team-b-name');
-            if (inputB) inputB.value = pTeamB;
-          }
-          if (pTeamA || pTeamB) {
-            updateTeamRecordBadges();
-            updatePredictor();
-          }
-
-          if (requestedTab === 'matchmaker') {
-            switchMainTab('matchmaker');
-          } else if (requestedTab === 'bracket') {
-            switchMainTab('bracket');
-          }
-        } catch (e) {}
       });
     </script>
 
