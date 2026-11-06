@@ -70,12 +70,12 @@
         animation: accordionSlideFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
-      /* Matchmaker Card Swipe & Entry Animations */
-      @keyframes cardSwipeRight {
+      /* Matchmaker Rink Parity Challenge Vote Animations */
+      @keyframes cardVoteApprove {
         0% { transform: translateX(0) rotate(0deg); opacity: 1; }
         100% { transform: translateX(120%) rotate(10deg); opacity: 0; }
       }
-      @keyframes cardSwipeLeft {
+      @keyframes cardVoteReject {
         0% { transform: translateX(0) rotate(0deg); opacity: 1; }
         100% { transform: translateX(-120%) rotate(-10deg); opacity: 0; }
       }
@@ -83,11 +83,11 @@
         0% { transform: scale(0.95) translateY(8px); opacity: 0; }
         100% { transform: scale(1) translateY(0); opacity: 1; }
       }
-      .animate-swipe-right {
-        animation: cardSwipeRight 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      .animate-vote-approve {
+        animation: cardVoteApprove 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
-      .animate-swipe-left {
-        animation: cardSwipeLeft 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      .animate-vote-reject {
+        animation: cardVoteReject 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
       .animate-card-in {
         animation: cardPopIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -280,15 +280,26 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <!-- TEAM 1 INPUT CARD -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4 relative">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5 relative">
+            <!-- Card Header: Title & Primary Numerical Rating -->
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider">TEAM 1</label>
-              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-a-badge">Effective: --</span>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#007AFF]"></span>
+                <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider">TEAM 1</label>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] font-semibold text-slate-400">Rating</span>
+                <span id="team-a-primary-rating" class="text-xs sm:text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-blue-50 text-[#007AFF] border border-blue-200/80 min-w-[52px] text-center">
+                  --
+                </span>
+                <span class="text-[10px] text-[#8E8E93] font-medium hidden" id="eff-rating-a-badge">Effective: --</span>
+              </div>
             </div>
 
-            <!-- Team Name Autocomplete / Typeahead -->
-            <div class="relative space-y-1">
-              <div class="relative">
+            <!-- Unmistakable Search Input with Magnifying Glass Icon -->
+            <div class="relative space-y-1.5">
+              <div class="relative flex items-center">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
                 <input
                   type="text"
                   id="team-a-name"
@@ -296,9 +307,9 @@
                   oninput="handleTeamSearchInput('a')"
                   onfocus="showTeamDropdown('a')"
                   onclick="showTeamDropdown('a')"
-                  placeholder="Search and select a team..."
+                  placeholder="Search team name, club, or state..."
                   autocomplete="off"
-                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-3.5 pr-16 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-9 pr-16 py-2.5 text-xs sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all placeholder:text-slate-400 placeholder:font-normal"
                 />
                 <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
                   <button
@@ -326,136 +337,39 @@
                 </div>
               </div>
 
-              <!-- Record / Division Helper text -->
-              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[16px]">
-                <div id="team-a-record-badge" class="flex items-center gap-1.5 truncate">
-                  <span class="text-slate-400 text-[10px]">No team selected</span>
-                </div>
-                <span class="text-slate-400 text-[10px] shrink-0">Editable rating</span>
-              </div>
-
-              <!-- Dropdown Menu -->
+              <!-- Floating Autocomplete Dropdown Menu -->
               <div
                 id="team-a-dropdown"
                 class="hidden absolute left-0 right-0 top-[48px] bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-56 overflow-y-auto divide-y divide-slate-100 transition-all"
               >
                 <!-- Populated dynamically via JS -->
               </div>
-            </div>
 
-            <!-- Direct Decimal Numeric Input with Flanking Steppers -->
-            <div class="space-y-1.5">
-              <div class="flex justify-between items-center text-xs text-[#8E8E93]">
-                <span class="font-medium text-[#1C1C1E]">Base Team Rating</span>
-                <span class="text-[11px]">Standard rating index</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <button
-                  type="button"
-                  onclick="stepRating('a', -0.25)"
-                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
-                >
-                  -0.25
-                </button>
-                <input
-                  type="number"
-                  step="0.01"
-                  inputmode="decimal"
-                  id="team-a-rating"
-                  value=""
-                  placeholder="0.00"
-                  onfocus="this.select(); handleRatingInputTap(this)"
-                  onclick="this.select(); handleRatingInputTap(this)"
-                  ontouchstart="this.select(); handleRatingInputTap(this)"
-                  oninput="onTeamInputsChanged()"
-                  class="w-full h-11 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3 text-center text-xl font-bold text-[#1C1C1E] focus:outline-none transition-all"
-                />
-                <button
-                  type="button"
-                  onclick="stepRating('a', 0.25)"
-                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
-                >
-                  +0.25
-                </button>
-              </div>
-            </div>
-
-            <!-- Collapsible Tray 1: Estimate by Tier (1-Tap Benchmarks) -->
-            <div class="border-t border-slate-100/90 pt-1">
-              <button
-                type="button"
-                onclick="toggleCardTray('a', 'tier')"
-                id="tray-btn-a-tier"
-                aria-expanded="false"
-                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
-              >
-                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#007AFF]">
-                  <i class="fa-solid fa-chart-line text-[#007AFF] text-[10px]"></i>
-                  <span>Estimate by Tier (1-Tap Benchmarks)</span>
-                </span>
-                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
-                  <i id="tray-chevron-a-tier" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
-                </span>
-              </button>
-              <div
-                id="tray-content-a-tier"
-                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
-              >
-                <div class="flex flex-wrap gap-1.5">
-                  <button
-                    type="button"
-                    onclick="setTierRating('a', 92.50, 'AAA / Elite')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('a', 85.00, 'Tier 2 AA')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('a', 78.50, 'Tier 2 A')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('a', 71.00, 'Tier 3 B')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('a', 64.00, 'House / Rec')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    House / Rec <span class="text-slate-400 font-normal">64.0</span>
-                  </button>
+              <!-- Club Name, Division/State, and Record Badge -->
+              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[18px]">
+                <div id="team-a-record-badge" class="flex items-center gap-1.5 truncate">
+                  <span class="text-slate-400 text-[11px] flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-up text-[10px] text-blue-400"></i> Type to search or pick a club above
+                  </span>
                 </div>
+                <span class="text-slate-400 text-[10px] shrink-0">Nationwide index</span>
               </div>
             </div>
 
-            <!-- Collapsible Tray 2: Situational Modifiers -->
-            <div class="border-t border-slate-100/90 pt-1">
+            <!-- COLLAPSIBLE ACCORDION DRAWER: Adjust Rating & Situational Modifiers -->
+            <div class="border-t border-slate-100 pt-1">
               <button
                 type="button"
-                onclick="toggleCardTray('a', 'modifiers')"
-                id="tray-btn-a-modifiers"
+                onclick="toggleCardTray('a', 'advanced')"
+                id="tray-btn-a-advanced"
                 aria-expanded="false"
                 class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
               >
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5">
                   <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#007AFF]">
                     <i class="fa-solid fa-sliders text-[#007AFF] text-[10px]"></i>
-                    <span>Situational Modifiers</span>
+                    <span>⚙️ Adjust Rating &amp; Situational Modifiers</span>
                   </span>
-                  <!-- Pill badge shown if active (e.g. "1 active") -->
                   <span
                     id="tray-mod-badge-a"
                     class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-[#FF3B30] border border-rose-200/90"
@@ -463,55 +377,108 @@
                     1 active
                   </span>
                 </div>
-                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
+                <span class="flex items-center gap-1 text-slate-400 group-hover:text-slate-600 text-xs">
                   <span id="tray-mod-summary-a" class="text-[10px] text-slate-400 font-medium">Goalie, bench, rest</span>
-                  <i id="tray-chevron-a-modifiers" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                  <i id="tray-chevron-a-advanced" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
                 </span>
               </button>
+
               <div
-                id="tray-content-a-modifiers"
-                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
+                id="tray-content-a-advanced"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-2 space-y-3.5 border-t border-slate-100"
               >
-                <div class="flex flex-wrap gap-1.5">
-                  <button
-                    type="button"
-                    id="mod-a-goalie"
-                    onclick="toggleModifier('a', 'goalie')"
-                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                  >
-                    Backup Goalie (-0.75)
-                  </button>
-                  <button
-                    type="button"
-                    id="mod-a-bench"
-                    onclick="toggleModifier('a', 'bench')"
-                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                  >
-                    Short Bench (-0.50)
-                  </button>
-                  <button
-                    type="button"
-                    id="mod-a-fatigue"
-                    onclick="toggleModifier('a', 'fatigue')"
-                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                  >
-                    3rd Game in 24h (-0.50)
-                  </button>
+                <!-- 1. Manual Rating Override -->
+                <div class="space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                      <i class="fa-solid fa-pen text-[10px] text-[#007AFF]"></i>
+                      Manual Rating Override
+                    </span>
+                    <span class="text-[10px] text-slate-400">Step ±0.25</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onclick="stepRating('a', -0.25)"
+                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                    >
+                      -0.25
+                    </button>
+                    <input
+                      type="number"
+                      step="0.01"
+                      inputmode="decimal"
+                      id="team-a-rating"
+                      value=""
+                      placeholder="0.00"
+                      onfocus="this.select(); handleRatingInputTap(this)"
+                      onclick="this.select(); handleRatingInputTap(this)"
+                      ontouchstart="this.select(); handleRatingInputTap(this)"
+                      oninput="onTeamInputsChanged()"
+                      class="w-full h-10 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3 text-center text-lg font-bold text-[#1C1C1E] focus:outline-none transition-all"
+                    />
+                    <button
+                      type="button"
+                      onclick="stepRating('a', 0.25)"
+                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                    >
+                      +0.25
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 2. Estimate by Tier (1-Tap Benchmarks) -->
+                <div class="space-y-1.5 pt-1 border-t border-slate-100">
+                  <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-chart-line text-[10px] text-[#007AFF]"></i>
+                    Estimate by Tier (1-Tap Benchmarks)
+                  </span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <button type="button" onclick="setTierRating('a', 92.50, 'AAA / Elite')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">AAA / Elite <span class="text-slate-400 font-normal">92.5</span></button>
+                    <button type="button" onclick="setTierRating('a', 85.00, 'Tier 2 AA')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 AA <span class="text-slate-400 font-normal">85.0</span></button>
+                    <button type="button" onclick="setTierRating('a', 78.50, 'Tier 2 A')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 A <span class="text-slate-400 font-normal">78.5</span></button>
+                    <button type="button" onclick="setTierRating('a', 71.00, 'Tier 3 B')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 3 B <span class="text-slate-400 font-normal">71.0</span></button>
+                    <button type="button" onclick="setTierRating('a', 64.00, 'House / Rec')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">House / Rec <span class="text-slate-400 font-normal">64.0</span></button>
+                  </div>
+                </div>
+
+                <!-- 3. Situational Modifiers -->
+                <div class="space-y-1.5 pt-1 border-t border-slate-100">
+                  <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-sliders text-[10px] text-[#007AFF]"></i>
+                    Situational Modifiers
+                  </span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <button type="button" id="mod-a-goalie" onclick="toggleModifier('a', 'goalie')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Backup Goalie (-0.75)</button>
+                    <button type="button" id="mod-a-bench" onclick="toggleModifier('a', 'bench')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Short Bench (-0.50)</button>
+                    <button type="button" id="mod-a-fatigue" onclick="toggleModifier('a', 'fatigue')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">3rd Game in 24h (-0.50)</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- TEAM 2 INPUT CARD -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4 relative">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5 relative">
+            <!-- Card Header: Title & Primary Numerical Rating -->
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider">TEAM 2</label>
-              <span class="text-xs text-[#8E8E93] font-medium" id="eff-rating-b-badge">Effective: --</span>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#FF9500]"></span>
+                <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider">TEAM 2</label>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] font-semibold text-slate-400">Rating</span>
+                <span id="team-b-primary-rating" class="text-xs sm:text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-amber-50 text-[#FF9500] border border-amber-200/80 min-w-[52px] text-center">
+                  --
+                </span>
+                <span class="text-[10px] text-[#8E8E93] font-medium hidden" id="eff-rating-b-badge">Effective: --</span>
+              </div>
             </div>
 
-            <!-- Team Name Autocomplete / Typeahead -->
-            <div class="relative space-y-1">
-              <div class="relative">
+            <!-- Unmistakable Search Input with Magnifying Glass Icon -->
+            <div class="relative space-y-1.5">
+              <div class="relative flex items-center">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
                 <input
                   type="text"
                   id="team-b-name"
@@ -519,9 +486,9 @@
                   oninput="handleTeamSearchInput('b')"
                   onfocus="showTeamDropdown('b')"
                   onclick="showTeamDropdown('b')"
-                  placeholder="Search and select a team..."
+                  placeholder="Search team name, club, or state..."
                   autocomplete="off"
-                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl pl-3.5 pr-16 py-2.5 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl pl-9 pr-16 py-2.5 text-xs sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all placeholder:text-slate-400 placeholder:font-normal"
                 />
                 <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
                   <button
@@ -549,136 +516,39 @@
                 </div>
               </div>
 
-              <!-- Record / Division Helper text -->
-              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[16px]">
-                <div id="team-b-record-badge" class="flex items-center gap-1.5 truncate">
-                  <span class="text-slate-400 text-[10px]">No team selected</span>
-                </div>
-                <span class="text-slate-400 text-[10px] shrink-0">Editable rating</span>
-              </div>
-
-              <!-- Dropdown Menu -->
+              <!-- Floating Autocomplete Dropdown Menu -->
               <div
                 id="team-b-dropdown"
                 class="hidden absolute left-0 right-0 top-[48px] bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-56 overflow-y-auto divide-y divide-slate-100 transition-all"
               >
                 <!-- Populated dynamically via JS -->
               </div>
-            </div>
 
-            <!-- Direct Decimal Numeric Input with Flanking Steppers -->
-            <div class="space-y-1.5">
-              <div class="flex justify-between items-center text-xs text-[#8E8E93]">
-                <span class="font-medium text-[#1C1C1E]">Base Team Rating</span>
-                <span class="text-[11px]">Standard rating index</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <button
-                  type="button"
-                  onclick="stepRating('b', -0.25)"
-                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
-                >
-                  -0.25
-                </button>
-                <input
-                  type="number"
-                  step="0.01"
-                  inputmode="decimal"
-                  id="team-b-rating"
-                  value=""
-                  placeholder="0.00"
-                  onfocus="this.select(); handleRatingInputTap(this)"
-                  onclick="this.select(); handleRatingInputTap(this)"
-                  ontouchstart="this.select(); handleRatingInputTap(this)"
-                  oninput="onTeamInputsChanged()"
-                  class="w-full h-11 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3 text-center text-xl font-bold text-[#1C1C1E] focus:outline-none transition-all"
-                />
-                <button
-                  type="button"
-                  onclick="stepRating('b', 0.25)"
-                  class="w-12 h-11 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
-                >
-                  +0.25
-                </button>
-              </div>
-            </div>
-
-            <!-- Collapsible Tray 1: Estimate by Tier (1-Tap Benchmarks) -->
-            <div class="border-t border-slate-100/90 pt-1">
-              <button
-                type="button"
-                onclick="toggleCardTray('b', 'tier')"
-                id="tray-btn-b-tier"
-                aria-expanded="false"
-                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
-              >
-                <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#FF9500]">
-                  <i class="fa-solid fa-chart-line text-[#FF9500] text-[10px]"></i>
-                  <span>Estimate by Tier (1-Tap Benchmarks)</span>
-                </span>
-                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
-                  <i id="tray-chevron-b-tier" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
-                </span>
-              </button>
-              <div
-                id="tray-content-b-tier"
-                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
-              >
-                <div class="flex flex-wrap gap-1.5">
-                  <button
-                    type="button"
-                    onclick="setTierRating('b', 92.50, 'AAA / Elite')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    AAA / Elite <span class="text-slate-400 font-normal">92.5</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('b', 85.00, 'Tier 2 AA')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    Tier 2 AA <span class="text-slate-400 font-normal">85.0</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('b', 78.50, 'Tier 2 A')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    Tier 2 A <span class="text-slate-400 font-normal">78.5</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('b', 71.00, 'Tier 3 B')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    Tier 3 B <span class="text-slate-400 font-normal">71.0</span>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setTierRating('b', 64.00, 'House / Rec')"
-                    class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
-                  >
-                    House / Rec <span class="text-slate-400 font-normal">64.0</span>
-                  </button>
+              <!-- Club Name, Division/State, and Record Badge -->
+              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[18px]">
+                <div id="team-b-record-badge" class="flex items-center gap-1.5 truncate">
+                  <span class="text-slate-400 text-[11px] flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-up text-[10px] text-amber-500"></i> Type to search or pick a club above
+                  </span>
                 </div>
+                <span class="text-slate-400 text-[10px] shrink-0">Nationwide index</span>
               </div>
             </div>
 
-            <!-- Collapsible Tray 2: Situational Modifiers -->
-            <div class="border-t border-slate-100/90 pt-1">
+            <!-- COLLAPSIBLE ACCORDION DRAWER: Adjust Rating & Situational Modifiers -->
+            <div class="border-t border-slate-100 pt-1">
               <button
                 type="button"
-                onclick="toggleCardTray('b', 'modifiers')"
-                id="tray-btn-b-modifiers"
+                onclick="toggleCardTray('b', 'advanced')"
+                id="tray-btn-b-advanced"
                 aria-expanded="false"
                 class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
               >
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5">
                   <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#FF9500]">
                     <i class="fa-solid fa-sliders text-[#FF9500] text-[10px]"></i>
-                    <span>Situational Modifiers</span>
+                    <span>⚙️ Adjust Rating &amp; Situational Modifiers</span>
                   </span>
-                  <!-- Pill badge shown if active (e.g. "1 active") -->
                   <span
                     id="tray-mod-badge-b"
                     class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200/90"
@@ -686,40 +556,82 @@
                     1 active
                   </span>
                 </div>
-                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs">
+                <span class="flex items-center gap-1 text-slate-400 group-hover:text-slate-600 text-xs">
                   <span id="tray-mod-summary-b" class="text-[10px] text-slate-400 font-medium">Goalie, bench, rest</span>
-                  <i id="tray-chevron-b-modifiers" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                  <i id="tray-chevron-b-advanced" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
                 </span>
               </button>
+
               <div
-                id="tray-content-b-modifiers"
-                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-1"
+                id="tray-content-b-advanced"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-2 space-y-3.5 border-t border-slate-100"
               >
-                <div class="flex flex-wrap gap-1.5">
-                  <button
-                    type="button"
-                    id="mod-b-goalie"
-                    onclick="toggleModifier('b', 'goalie')"
-                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                  >
-                    Backup Goalie (-0.75)
-                  </button>
-                  <button
-                    type="button"
-                    id="mod-b-bench"
-                    onclick="toggleModifier('b', 'bench')"
-                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                  >
-                    Short Bench (-0.50)
-                  </button>
-                  <button
-                    type="button"
-                    id="mod-b-fatigue"
-                    onclick="toggleModifier('b', 'fatigue')"
-                    class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
-                  >
-                    3rd Game in 24h (-0.50)
-                  </button>
+                <!-- 1. Manual Rating Override -->
+                <div class="space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                      <i class="fa-solid fa-pen text-[10px] text-[#FF9500]"></i>
+                      Manual Rating Override
+                    </span>
+                    <span class="text-[10px] text-slate-400">Step ±0.25</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onclick="stepRating('b', -0.25)"
+                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                    >
+                      -0.25
+                    </button>
+                    <input
+                      type="number"
+                      step="0.01"
+                      inputmode="decimal"
+                      id="team-b-rating"
+                      value=""
+                      placeholder="0.00"
+                      onfocus="this.select(); handleRatingInputTap(this)"
+                      onclick="this.select(); handleRatingInputTap(this)"
+                      ontouchstart="this.select(); handleRatingInputTap(this)"
+                      oninput="onTeamInputsChanged()"
+                      class="w-full h-10 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3 text-center text-lg font-bold text-[#1C1C1E] focus:outline-none transition-all"
+                    />
+                    <button
+                      type="button"
+                      onclick="stepRating('b', 0.25)"
+                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                    >
+                      +0.25
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 2. Estimate by Tier (1-Tap Benchmarks) -->
+                <div class="space-y-1.5 pt-1 border-t border-slate-100">
+                  <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-chart-line text-[10px] text-[#FF9500]"></i>
+                    Estimate by Tier (1-Tap Benchmarks)
+                  </span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <button type="button" onclick="setTierRating('b', 92.50, 'AAA / Elite')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">AAA / Elite <span class="text-slate-400 font-normal">92.5</span></button>
+                    <button type="button" onclick="setTierRating('b', 85.00, 'Tier 2 AA')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 AA <span class="text-slate-400 font-normal">85.0</span></button>
+                    <button type="button" onclick="setTierRating('b', 78.50, 'Tier 2 A')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 A <span class="text-slate-400 font-normal">78.5</span></button>
+                    <button type="button" onclick="setTierRating('b', 71.00, 'Tier 3 B')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 3 B <span class="text-slate-400 font-normal">71.0</span></button>
+                    <button type="button" onclick="setTierRating('b', 64.00, 'House / Rec')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">House / Rec <span class="text-slate-400 font-normal">64.0</span></button>
+                  </div>
+                </div>
+
+                <!-- 3. Situational Modifiers -->
+                <div class="space-y-1.5 pt-1 border-t border-slate-100">
+                  <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-sliders text-[10px] text-[#FF9500]"></i>
+                    Situational Modifiers
+                  </span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <button type="button" id="mod-b-goalie" onclick="toggleModifier('b', 'goalie')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Backup Goalie (-0.75)</button>
+                    <button type="button" id="mod-b-bench" onclick="toggleModifier('b', 'bench')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Short Bench (-0.50)</button>
+                    <button type="button" id="mod-b-fatigue" onclick="toggleModifier('b', 'fatigue')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">3rd Game in 24h (-0.50)</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -741,13 +653,37 @@
                 Search and select two teams above to project the goal spread and win probability.
               </p>
             </div>
+
+            <!-- Try a Sample Matchup 1-Tap Trigger -->
+            <div class="pt-1">
+              <button
+                type="button"
+                id="btn-try-sample-matchup"
+                onclick="loadSampleMatchup()"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-[#007AFF] border border-blue-200/90 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer group"
+              >
+                <span class="group-hover:rotate-12 transition-transform">🎲</span>
+                <span>Try a Sample Matchup</span>
+              </button>
+            </div>
+
             <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs">
-              <span id="empty-state-status-t1" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200">
-                <i class="fa-regular fa-circle text-[9px]"></i> Team 1: Unselected
-              </span>
-              <span id="empty-state-status-t2" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200">
-                <i class="fa-regular fa-circle text-[9px]"></i> Team 2: Unselected
-              </span>
+              <button
+                type="button"
+                id="empty-state-status-t1"
+                onclick="document.getElementById('team-a-name')?.focus(); showTeamDropdown('a');"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-semibold bg-blue-50/70 hover:bg-blue-100 text-[#007AFF] border border-blue-200/80 transition-all cursor-pointer shadow-2xs"
+              >
+                <i class="fa-solid fa-magnifying-glass text-[9px]"></i> Search Team 1
+              </button>
+              <button
+                type="button"
+                id="empty-state-status-t2"
+                onclick="document.getElementById('team-b-name')?.focus(); showTeamDropdown('b');"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-semibold bg-amber-50/70 hover:bg-amber-100 text-[#FF9500] border border-amber-200/80 transition-all cursor-pointer shadow-2xs"
+              >
+                <i class="fa-solid fa-magnifying-glass text-[9px]"></i> Search Team 2
+              </button>
             </div>
           </div>
 
@@ -1255,7 +1191,7 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- VIEW 3: MATCHMAKER (PUCKEDGE TINDER MINI-GAME) -->
+      <!-- VIEW 3: MATCHMAKER (RINK PARITY CHALLENGE) -->
       <!-- ========================================== -->
       <div id="view-matchmaker" class="hidden space-y-6">
 
@@ -1263,18 +1199,18 @@
         <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-pink-500 via-rose-500 to-amber-500 text-white flex items-center justify-center text-base shadow-sm shrink-0">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-cyan-500 text-white flex items-center justify-center text-base shadow-sm shrink-0">
                 🎲
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <h2 class="text-sm sm:text-base font-bold text-[#1C1C1E]">Matchmaker</h2>
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-50 text-pink-700 border border-pink-200">
-                    PuckEdge Tinder
+                  <h2 class="text-sm sm:text-base font-bold text-[#1C1C1E]">Rink Parity Challenge</h2>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#007AFF] border border-blue-200">
+                    Matchmaker 🎲
                   </span>
                 </div>
                 <p class="text-xs text-[#8E8E93] mt-0.5">
-                  Rapid-fire parity voting • Tap to judge competitive balance and schedule matchups
+                  Simulated national matchups — test competitive balance and cast your vote on whether you'd schedule this game.
                 </p>
               </div>
             </div>
@@ -1334,7 +1270,7 @@
 
         <!-- VOTING ACTIONS -->
         <div class="max-w-2xl mx-auto flex items-center gap-3.5 sm:gap-5">
-          <!-- Thumbs Down Button -->
+          <!-- Red Button: No Way (Ice the Puck) -->
           <button
             type="button"
             id="btn-matchmaker-down"
@@ -1342,10 +1278,10 @@
             class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 border-2 border-rose-200/90 text-[#FF3B30] font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
           >
             <span class="text-xl group-hover:scale-125 transition-transform">👎</span>
-            <span class="whitespace-nowrap">No Way, Ice the Puck!</span>
+            <span class="whitespace-nowrap">👎 No Way (Ice the Puck)</span>
           </button>
 
-          <!-- Thumbs Up Button -->
+          <!-- Green Button: Good Game (I'd Schedule It) -->
           <button
             type="button"
             id="btn-matchmaker-up"
@@ -1353,7 +1289,7 @@
             class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-emerald-50 hover:bg-emerald-100 active:scale-95 border-2 border-emerald-300/90 text-emerald-800 font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
           >
             <span class="text-xl group-hover:scale-125 transition-transform">👍</span>
-            <span class="whitespace-nowrap">I'd Play That!</span>
+            <span class="whitespace-nowrap">👍 Good Game (I'd Schedule It)</span>
           </button>
         </div>
 
@@ -1691,7 +1627,7 @@
           if (!badge) return;
 
           if (!name) {
-            badge.innerHTML = '<span class="text-slate-400 text-[10px]">No team selected</span>';
+            badge.innerHTML = `<span class="text-slate-400 text-[11px] flex items-center gap-1.5"><i class="fa-solid fa-arrow-up text-[10px] ${k === 'a' ? 'text-blue-400' : 'text-amber-400'}"></i> Type to search or pick a club above</span>`;
             badge.className = 'flex items-center gap-1.5 truncate';
             return;
           }
@@ -1769,8 +1705,13 @@
         // Clear displayed record, division tag, or ranked badge under that card
         const recordBadge = document.getElementById(`team-${teamKey}-record-badge`);
         if (recordBadge) {
-          recordBadge.innerHTML = '<span class="text-slate-400 text-[10px]">No team selected</span>';
+          recordBadge.innerHTML = `<span class="text-slate-400 text-[11px] flex items-center gap-1.5"><i class="fa-solid fa-arrow-up text-[10px] ${teamKey === 'a' ? 'text-blue-400' : 'text-amber-400'}"></i> Type to search or pick a club above</span>`;
           recordBadge.className = 'flex items-center gap-1.5 truncate';
+        }
+
+        const primRating = document.getElementById(`team-${teamKey}-primary-rating`);
+        if (primRating) {
+          primRating.textContent = '--';
         }
 
         const effBadge = document.getElementById(`eff-rating-${teamKey}-badge`);
@@ -1803,6 +1744,87 @@
             }
           }
         });
+      }
+
+      // ==========================================
+      // SAMPLE MATCHUP GENERATOR (ONE-TAP DEMO)
+      // ==========================================
+      function loadSampleMatchup() {
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        if (!pool || pool.length < 2) return;
+
+        const currentDiv = state.selectedDivision;
+        let candidates = (currentDiv && currentDiv !== 'ALL')
+          ? pool.filter(t => teamMatchesDivision(t, currentDiv))
+          : pool;
+
+        if (candidates.length < 2) {
+          candidates = pool;
+        }
+
+        // Filter candidates with valid rating
+        const ratedCandidates = candidates.filter(t => typeof t.rating === 'number' && t.rating > 0);
+        const sourcePool = ratedCandidates.length >= 2 ? ratedCandidates : candidates;
+
+        const t1Index = Math.floor(Math.random() * sourcePool.length);
+        const t1 = sourcePool[t1Index];
+
+        // Find an evenly matched opponent (tight spread within +/- 2.5 rating)
+        let opponents = sourcePool.filter((t, idx) => idx !== t1Index && t.name !== t1.name);
+        const tightOpponents = opponents.filter(t => Math.abs(t.rating - t1.rating) <= 2.50);
+        const chosenOpponents = tightOpponents.length > 0 ? tightOpponents : opponents;
+        const t2 = chosenOpponents[Math.floor(Math.random() * chosenOpponents.length)] || opponents[0] || pool[1];
+
+        // Populate Team A
+        state.teamA.id = t1.id || getTeamId(t1);
+        state.teamA.name = t1.name;
+        state.teamA.baseRating = t1.rating;
+        state.teamA.record = t1.record || '';
+        state.teamA.division = t1.age_bracket || t1.division || '';
+        state.teamA.state = t1.state || '';
+        state.teamA.tier = t1.tier || getTeamTier(t1);
+        state.teamA.modifiers = { goalie: false, bench: false, fatigue: false };
+
+        // Populate Team B
+        state.teamB.id = t2.id || getTeamId(t2);
+        state.teamB.name = t2.name;
+        state.teamB.baseRating = t2.rating;
+        state.teamB.record = t2.record || '';
+        state.teamB.division = t2.age_bracket || t2.division || '';
+        state.teamB.state = t2.state || '';
+        state.teamB.tier = t2.tier || getTeamTier(t2);
+        state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
+
+        const nameAEl = document.getElementById('team-a-name');
+        const ratingAEl = document.getElementById('team-a-rating');
+        const nameBEl = document.getElementById('team-b-name');
+        const ratingBEl = document.getElementById('team-b-rating');
+
+        if (nameAEl) nameAEl.value = t1.name;
+        if (ratingAEl) ratingAEl.value = t1.rating.toFixed(2);
+        if (nameBEl) nameBEl.value = t2.name;
+        if (ratingBEl) ratingBEl.value = t2.rating.toFixed(2);
+
+        try {
+          if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+          if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+        } catch (e) {}
+
+        updateClearButtons();
+        updateTeamRecordBadges();
+        updateModifierChips();
+        updatePredictor();
+        syncUrlState();
+
+        const heroCard = document.getElementById('hero-prediction-card');
+        if (heroCard) {
+          heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
+          setTimeout(() => {
+            heroCard.classList.remove('ring-2', 'ring-[#007AFF]/40');
+          }, 400);
+        }
+
+        showToast(`Loaded sample matchup: ${t1.name} vs ${t2.name}`);
       }
 
       function showTeamDropdown(teamKey) {
@@ -2451,7 +2473,7 @@
       }
 
       // ==========================================
-      // MATCHMAKER (PUCKEDGE TINDER MINI-GAME)
+      // MATCHMAKER (RINK PARITY CHALLENGE)
       // ==========================================
       const MATCHMAKER_DIVISIONS = ["9U", "10U", "11U", "12U", "13U", "14U", "16U/15U", "18U"];
 
@@ -2750,7 +2772,7 @@
         const card = document.getElementById('matchmaker-card');
         if (card) {
           state.matchmakerGame.isAnimating = true;
-          const animClass = decision === 'thumbs_up' ? 'animate-swipe-right' : 'animate-swipe-left';
+          const animClass = decision === 'thumbs_up' ? 'animate-vote-approve' : 'animate-vote-reject';
           card.classList.remove('animate-card-in');
           card.classList.add(animClass);
 
@@ -2960,7 +2982,12 @@
         const effA = getEffectiveRating(state.teamA);
         const effB = getEffectiveRating(state.teamB);
 
-        // Update card header effective rating badges
+        // Update card header rating displays
+        const primRatingA = document.getElementById('team-a-primary-rating');
+        const primRatingB = document.getElementById('team-b-primary-rating');
+        if (primRatingA) primRatingA.textContent = effA > 0 ? effA.toFixed(2) : '--';
+        if (primRatingB) primRatingB.textContent = effB > 0 ? effB.toFixed(2) : '--';
+
         const effBadgeA = document.getElementById('eff-rating-a-badge');
         const effBadgeB = document.getElementById('eff-rating-b-badge');
         if (effBadgeA) effBadgeA.textContent = effA > 0 ? `Effective: ${effA.toFixed(2)}` : 'Effective: --';
@@ -3001,21 +3028,21 @@
           if (statusT1) {
             if (nameA && effA > 0) {
               const divA = state.teamA.division || getTeamAgeBracket(state.teamA);
-              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-blue-50 text-[#007AFF] border border-blue-200';
+              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-blue-50 text-[#007AFF] border border-blue-200 cursor-pointer';
               statusT1.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#007AFF]"></i> Team 1: ${escapeHtml(nameA)} (${divA})`;
             } else {
-              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200';
-              statusT1.innerHTML = `<i class="fa-regular fa-circle text-[9px]"></i> Team 1: Unselected`;
+              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200 cursor-pointer hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 transition-colors';
+              statusT1.innerHTML = `<i class="fa-solid fa-magnifying-glass text-[10px]"></i> Team 1: Click to search`;
             }
           }
           if (statusT2) {
             if (nameB && effB > 0) {
               const divB = state.teamB.division || getTeamAgeBracket(state.teamB);
-              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-amber-50 text-[#FF9500] border border-amber-200';
+              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-amber-50 text-[#FF9500] border border-amber-200 cursor-pointer';
               statusT2.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#FF9500]"></i> Team 2: ${escapeHtml(nameB)} (${divB})`;
             } else {
-              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200';
-              statusT2.innerHTML = `<i class="fa-regular fa-circle text-[9px]"></i> Team 2: Unselected`;
+              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200 cursor-pointer hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 transition-colors';
+              statusT2.innerHTML = `<i class="fa-solid fa-magnifying-glass text-[10px]"></i> Team 2: Click to search`;
             }
           }
 
