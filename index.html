@@ -183,6 +183,33 @@
     <!-- MAIN VIEWPORT WRAPPER -->
     <main class="max-w-4xl mx-auto px-4 py-5 w-full flex-1 space-y-6">
 
+      <!-- REMOTE DATA LOADING & ERROR FALLBACK BANNERS -->
+      <div id="teams-loading-banner" class="bg-blue-50/90 border border-blue-200/80 rounded-2xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs text-blue-900 shadow-2xs">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-circle-notch fa-spin text-[#007AFF] text-sm shrink-0"></i>
+          <span class="font-medium">Loading nationwide team directory...</span>
+        </div>
+        <span class="text-[11px] font-semibold text-[#007AFF]/80 hidden sm:inline">Syncing live rankings</span>
+      </div>
+
+      <div id="teams-error-banner" class="hidden bg-amber-50/95 border border-amber-200 rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-950 shadow-2xs">
+        <div class="flex items-start sm:items-center gap-2.5">
+          <i class="fa-solid fa-triangle-exclamation text-[#FF9500] text-sm shrink-0 mt-0.5 sm:mt-0"></i>
+          <div>
+            <span class="font-bold">Couldn't reach the live team directory.</span>
+            <span class="text-amber-900/90"> Using built-in sample clubs so you can still calculate matchups.</span>
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="retryLoadTeamsData()"
+          class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100/70 text-amber-900 font-bold text-[11px] border border-amber-300/90 shadow-2xs transition-colors cursor-pointer shrink-0 self-start sm:self-center"
+        >
+          <i class="fa-solid fa-rotate-right text-[10px]"></i>
+          <span>Retry</span>
+        </button>
+      </div>
+
       <!-- ========================================== -->
       <!-- VIEW 1: MATCHUP PREDICTOR (HERO FOCUS)     -->
       <!-- ========================================== -->
@@ -689,6 +716,32 @@
 
           <!-- Active Calculation Content (Hidden until both teams are selected) -->
           <div id="hero-active-content" class="hidden space-y-6">
+            <!-- Featured Close Matchup Banner & Shuffle Button -->
+            <div id="matchup-featured-bar" class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100/80">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span
+                  id="featured-matchup-badge"
+                  class="hidden inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200/80 shadow-2xs"
+                >
+                  <i class="fa-solid fa-bolt text-[10px] text-indigo-500"></i>
+                  <span>Featured Close Matchup</span>
+                </span>
+                <span id="featured-matchup-meta" class="hidden text-[11px] text-slate-500 font-medium">
+                  Same division &amp; tier • Within 0.3 rating
+                </span>
+              </div>
+              <button
+                type="button"
+                id="btn-shuffle-matchup"
+                onclick="shuffleCloseMatchup()"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F2F2F7] hover:bg-slate-200/80 text-[#1C1C1E] border border-slate-200/90 transition-all cursor-pointer active:scale-95 ml-auto"
+                title="Cycle through other random close matchups from teams.json"
+              >
+                <i class="fa-solid fa-shuffle text-[10px] text-[#007AFF]"></i>
+                <span>Shuffle Matchup</span>
+              </button>
+            </div>
+
             <!-- Spread & Dynamic Verdict -->
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
               <div>
@@ -796,6 +849,22 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- 1-TAP TEAM CHAT SHARING (BELOW MATCHUP PREDICTION CARD) -->
+        <div id="matchup-share-chat-bar" class="hidden">
+          <button
+            type="button"
+            id="btn-share-team-chat-predictor"
+            onclick="shareToTeamChat('predictor')"
+            class="w-full py-3.5 px-5 rounded-2xl bg-[#007AFF] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-sm hover:shadow transition-all cursor-pointer group"
+          >
+            <i class="fa-solid fa-comment-dots text-base group-hover:scale-110 transition-transform"></i>
+            <span id="btn-share-team-chat-predictor-label">Share to Team Chat</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white/95">
+              TeamSnap • Group Text
+            </span>
+          </button>
         </div>
 
         <!-- MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) - POSITIONED DIRECTLY BELOW SPREAD RESULTS -->
@@ -1431,9 +1500,19 @@
         DIVISION: 'puckedge_division'
       };
 
+      const INITIAL_URL_SEARCH = window.location.search;
+      const INITIAL_URL_PARAMS = new URLSearchParams(INITIAL_URL_SEARCH);
+
+      const REMOTE_TEAMS_URL = 'https://raw.githubusercontent.com/timtrapp/puckedge-data/refs/heads/main/teams.json';
+
       const state = {
         activeTab: 'predictor',
         selectedDivision: 'ALL',
+        isFeaturedMatchup: false,
+        teamsJsonLoaded: false,
+        teamsLoading: true,
+        teamsLoadError: false,
+        userManuallyModifiedTeams: false,
         currentMatchupSuggestions: [],
         teams: [...FALLBACK_TEAMS],
         teamA: {
@@ -1509,43 +1588,98 @@
         return bracket === selectedDivision || div === selectedDivision;
       }
 
+      function updateTeamsStatusUI() {
+        const loadingBanner = document.getElementById('teams-loading-banner');
+        const errorBanner = document.getElementById('teams-error-banner');
+        if (loadingBanner) {
+          if (state.teamsLoading) {
+            loadingBanner.classList.remove('hidden');
+          } else {
+            loadingBanner.classList.add('hidden');
+          }
+        }
+        if (errorBanner) {
+          if (!state.teamsLoading && state.teamsLoadError) {
+            errorBanner.classList.remove('hidden');
+          } else {
+            errorBanner.classList.add('hidden');
+          }
+        }
+      }
+
       async function initTeamsData() {
-        state.teams = [...FALLBACK_TEAMS];
-        state.teams.forEach(t => {
-          if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
-          if (!t.tier) t.tier = getTeamTier(t);
-        });
+        state.teamsLoading = true;
+        state.teamsLoadError = false;
+        if (!state.teamsJsonLoaded) {
+          state.teams = [...FALLBACK_TEAMS];
+          state.teams.forEach(t => {
+            if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
+            if (!t.tier) t.tier = getTeamTier(t);
+          });
+        }
+        updateTeamsStatusUI();
         updateTeamsCountBadge();
         updateTeamRecordBadges();
         updateClearButtons();
         updateModifierChips();
 
         try {
-          const res = await fetch('/teams.json');
-          if (res.ok) {
-            const data = await res.json();
-            if (Array.isArray(data) && data.length > 0) {
-              data.forEach(t => {
-                if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
-                if (!t.tier) t.tier = getTeamTier(t);
-              });
-              state.teams = data;
-              updateTeamsCountBadge();
-              updateTeamRecordBadges();
-              updateClearButtons();
-              updateModifierChips();
-              renderMatchupSuggestions();
-            }
+          const res = await fetch(REMOTE_TEAMS_URL);
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status} fetching remote teams directory`);
           }
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) {
+            throw new Error('Remote teams directory payload was empty or invalid');
+          }
+          data.forEach(t => {
+            if (!t.age_bracket) t.age_bracket = getTeamAgeBracket(t);
+            if (!t.tier) t.tier = getTeamTier(t);
+          });
+          state.teams = data;
+          state.teamsJsonLoaded = true;
+          state.teamsLoading = false;
+          state.teamsLoadError = false;
+          updateTeamsStatusUI();
+          updateTeamsCountBadge();
+          updateTeamRecordBadges();
+          updateClearButtons();
+          updateModifierChips();
+          renderMatchupSuggestions();
         } catch (err) {
-          console.warn('Fallback to embedded teams directory:', err);
+          console.warn('Unable to load remote teams.json, using embedded fallback:', err);
+          state.teamsLoading = false;
+          state.teamsLoadError = !state.teamsJsonLoaded;
+          updateTeamsStatusUI();
+          updateTeamsCountBadge();
+        }
+      }
+
+      async function retryLoadTeamsData() {
+        await initTeamsData();
+        if (state.teamsJsonLoaded) {
+          hydrateApplication(true);
+          if (state.activeTab === 'matchmaker') {
+            generateMatchmakerMatchup();
+          }
+          showToast('Nationwide team directory synced!');
+        } else {
+          showToast('Still unable to reach remote directory — using built-in clubs.', 3200);
         }
       }
 
       function updateTeamsCountBadge() {
         const badge = document.getElementById('teams-dataset-count');
         if (!badge) return;
+        if (state.teamsLoading) {
+          badge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-[#007AFF] font-medium"><i class="fa-solid fa-circle-notch fa-spin text-[10px]"></i> Loading nationwide team directory...</span>`;
+          return;
+        }
         const total = state.teams.length;
+        if (state.teamsLoadError) {
+          badge.textContent = `Offline fallback: ${total.toLocaleString()} built-in sample clubs`;
+          return;
+        }
         if (state.selectedDivision === 'ALL') {
           badge.textContent = `${total.toLocaleString()} clubs loaded across nationwide directory`;
         } else {
@@ -1673,6 +1807,8 @@
       // SEARCHABLE AUTOCOMPLETE DROPDOWNS & CLEAR ACTIONS
       // ==========================================
       function clearTeamSelection(teamKey) {
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         const team = state[`team${teamKey.toUpperCase()}`];
         if (team) {
           team.id = '';
@@ -1747,40 +1883,82 @@
       }
 
       // ==========================================
-      // SAMPLE MATCHUP GENERATOR (ONE-TAP DEMO)
+      // FEATURED CLOSE MATCHUP & SHUFFLE ENGINE
       // ==========================================
-      function loadSampleMatchup() {
-        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
-        if (!pool || pool.length < 2) return;
+      function findCloseMatchupPair(pool, targetDiv, currentPairKey = '') {
+        if (!Array.isArray(pool) || pool.length < 2) return null;
 
-        const currentDiv = state.selectedDivision;
-        let candidates = (currentDiv && currentDiv !== 'ALL')
-          ? pool.filter(t => teamMatchesDivision(t, currentDiv))
-          : pool;
+        function buildEligiblePairs(sourceList) {
+          const buckets = new Map();
+          for (let i = 0; i < sourceList.length; i++) {
+            const t = sourceList[i];
+            if (!t || !t.name || typeof t.rating !== 'number' || isNaN(t.rating) || t.rating <= 0) continue;
+            const divKey = getTeamAgeBracket(t) || t.division || '12U';
+            const tierKey = (t.tier || getTeamTier(t) || 'AA').toUpperCase();
+            const bucketKey = `${divKey}__${tierKey}`;
+            if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
+            buckets.get(bucketKey).push(t);
+          }
 
-        if (candidates.length < 2) {
-          candidates = pool;
+          const candidateAnchors = [];
+          buckets.forEach((group) => {
+            if (group.length < 2) return;
+            group.sort((a, b) => a.rating - b.rating);
+            for (let i = 0; i < group.length; i++) {
+              const t1 = group[i];
+              const closeNeighbors = [];
+              // Scan backwards within 0.30
+              for (let j = i - 1; j >= 0 && t1.rating - group[j].rating <= 0.3001; j--) {
+                if (group[j].name !== t1.name) closeNeighbors.push(group[j]);
+              }
+              // Scan forwards within 0.30
+              for (let j = i + 1; j < group.length && group[j].rating - t1.rating <= 0.3001; j++) {
+                if (group[j].name !== t1.name) closeNeighbors.push(group[j]);
+              }
+              if (closeNeighbors.length > 0) {
+                candidateAnchors.push({ t1, neighbors: closeNeighbors });
+              }
+            }
+          });
+          return candidateAnchors;
         }
 
-        // Filter candidates with valid rating
-        const ratedCandidates = candidates.filter(t => typeof t.rating === 'number' && t.rating > 0);
-        const sourcePool = ratedCandidates.length >= 2 ? ratedCandidates : candidates;
+        let scopedPool = (targetDiv && targetDiv !== 'ALL')
+          ? pool.filter(t => teamMatchesDivision(t, targetDiv))
+          : pool;
 
-        const t1Index = Math.floor(Math.random() * sourcePool.length);
-        const t1 = sourcePool[t1Index];
+        let anchors = buildEligiblePairs(scopedPool);
+        if (anchors.length === 0 && targetDiv && targetDiv !== 'ALL') {
+          anchors = buildEligiblePairs(pool);
+        }
+        if (anchors.length === 0) return null;
 
-        // Find an evenly matched opponent (tight spread within +/- 2.5 rating)
-        let opponents = sourcePool.filter((t, idx) => idx !== t1Index && t.name !== t1.name);
-        const tightOpponents = opponents.filter(t => Math.abs(t.rating - t1.rating) <= 2.50);
-        const chosenOpponents = tightOpponents.length > 0 ? tightOpponents : opponents;
-        const t2 = chosenOpponents[Math.floor(Math.random() * chosenOpponents.length)] || opponents[0] || pool[1];
+        // Try a few random picks to avoid repeating the exact same pair
+        for (let attempt = 0; attempt < 10; attempt++) {
+          const pick = anchors[Math.floor(Math.random() * anchors.length)];
+          const t2 = pick.neighbors[Math.floor(Math.random() * pick.neighbors.length)];
+          const pairKey = [pick.t1.name, t2.name].sort().join('||');
+          if (!currentPairKey || pairKey !== currentPairKey || anchors.length === 1) {
+            return { t1: pick.t1, t2 };
+          }
+        }
+
+        const fallbackPick = anchors[Math.floor(Math.random() * anchors.length)];
+        return { t1: fallbackPick.t1, t2: fallbackPick.neighbors[0] };
+      }
+
+      function applyFeaturedMatchupPair(t1, t2, options = {}) {
+        if (!t1 || !t2) return;
+        const { skipLocalStorage = true, skipUrlSync = false } = options;
+
+        state.isFeaturedMatchup = true;
 
         // Populate Team A
         state.teamA.id = t1.id || getTeamId(t1);
         state.teamA.name = t1.name;
         state.teamA.baseRating = t1.rating;
         state.teamA.record = t1.record || '';
-        state.teamA.division = t1.age_bracket || t1.division || '';
+        state.teamA.division = t1.age_bracket || t1.division || getTeamAgeBracket(t1);
         state.teamA.state = t1.state || '';
         state.teamA.tier = t1.tier || getTeamTier(t1);
         state.teamA.modifiers = { goalie: false, bench: false, fatigue: false };
@@ -1790,7 +1968,7 @@
         state.teamB.name = t2.name;
         state.teamB.baseRating = t2.rating;
         state.teamB.record = t2.record || '';
-        state.teamB.division = t2.age_bracket || t2.division || '';
+        state.teamB.division = t2.age_bracket || t2.division || getTeamAgeBracket(t2);
         state.teamB.state = t2.state || '';
         state.teamB.tier = t2.tier || getTeamTier(t2);
         state.teamB.modifiers = { goalie: false, bench: false, fatigue: false };
@@ -1805,16 +1983,45 @@
         if (nameBEl) nameBEl.value = t2.name;
         if (ratingBEl) ratingBEl.value = t2.rating.toFixed(2);
 
-        try {
-          if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
-          if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
-        } catch (e) {}
+        if (!skipLocalStorage) {
+          try {
+            if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+            if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+          } catch (e) {}
+        }
 
         updateClearButtons();
         updateTeamRecordBadges();
         updateModifierChips();
-        updatePredictor();
-        syncUrlState();
+        updatePredictor({ skipUrlSync });
+        if (!skipUrlSync) {
+          syncUrlState();
+        }
+      }
+
+      function loadFeaturedCloseMatchup(options = {}) {
+        const pool = (state.teams && state.teams.length > 0) ? state.teams : FALLBACK_TEAMS;
+        const currentPairKey = (state.teamA?.name && state.teamB?.name)
+          ? [state.teamA.name, state.teamB.name].sort().join('||')
+          : '';
+        const pair = findCloseMatchupPair(pool, state.selectedDivision, currentPairKey);
+        if (!pair) return false;
+
+        applyFeaturedMatchupPair(pair.t1, pair.t2, options);
+        return true;
+      }
+
+      function shuffleCloseMatchup() {
+        const loaded = loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: false });
+        if (!loaded) return;
+
+        const spread = Math.abs((state.teamA?.baseRating || 0) - (state.teamB?.baseRating || 0)).toFixed(2);
+        trackAnalyticsEvent('featured_matchup_shuffled', {
+          division: state.teamA?.division || state.selectedDivision,
+          team1_name: state.teamA?.name,
+          team2_name: state.teamB?.name,
+          spread: parseFloat(spread)
+        });
 
         const heroCard = document.getElementById('hero-prediction-card');
         if (heroCard) {
@@ -1823,8 +2030,20 @@
             heroCard.classList.remove('ring-2', 'ring-[#007AFF]/40');
           }, 400);
         }
+      }
 
-        showToast(`Loaded sample matchup: ${t1.name} vs ${t2.name}`);
+      function loadSampleMatchup() {
+        const loaded = loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: false });
+        if (loaded) {
+          const heroCard = document.getElementById('hero-prediction-card');
+          if (heroCard) {
+            heroCard.classList.add('ring-2', 'ring-[#007AFF]/40');
+            setTimeout(() => {
+              heroCard.classList.remove('ring-2', 'ring-[#007AFF]/40');
+            }, 400);
+          }
+          showToast(`Loaded close matchup: ${state.teamA.name} vs ${state.teamB.name}`);
+        }
       }
 
       function showTeamDropdown(teamKey) {
@@ -1849,6 +2068,8 @@
       }
 
       function handleTeamSearchInput(teamKey) {
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         const val = document.getElementById(`team-${teamKey}-name`)?.value || '';
         state[`team${teamKey.toUpperCase()}`].name = val;
         updateClearButtons();
@@ -1959,6 +2180,8 @@
         const team = pool[teamIndex];
         if (!team) return;
 
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         state[`team${teamKey.toUpperCase()}`].id = team.id || getTeamId(team);
         state[`team${teamKey.toUpperCase()}`].name = team.name;
         state[`team${teamKey.toUpperCase()}`].baseRating = team.rating;
@@ -2142,6 +2365,8 @@
       }
 
       function selectSuggestedOpponent(name, rating, stateCode, division, record) {
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         state.teamB.id = getTeamId({ name, division });
         state.teamB.name = name;
         state.teamB.baseRating = parseFloat(rating) || 84.00;
@@ -2400,7 +2625,132 @@
         }
       }
 
+      function getPredictorVerdictLabel(spread) {
+        if (spread <= 1.00) return 'Even Battle';
+        if (spread <= 2.25) return 'Competitive Game';
+        if (spread <= 3.50) return 'Skewed';
+        return 'Blowout Risk';
+      }
+
+      async function shareToTeamChat(source = 'predictor') {
+        let team1Name = '';
+        let team2Name = '';
+        let spreadStr = '';
+        let parityLabel = '';
+        let directUrl = '';
+
+        if (source === 'matchmaker') {
+          const current = state.matchmakerGame?.currentMatchup;
+          if (!current) return;
+          team1Name = current.t1.name;
+          team2Name = current.t2.name;
+          spreadStr = `+${current.spread.toFixed(2)}`;
+          parityLabel = current.verdict || getPredictorVerdictLabel(current.spread);
+
+          const url = new URL(window.location.origin + window.location.pathname);
+          url.searchParams.set('tab', 'matchup');
+          const mmDiv = state.matchmakerGame.selectedDivision || getTeamAgeBracket(current.t1);
+          if (mmDiv) url.searchParams.set('div', mmDiv);
+          url.searchParams.set('t1', getTeamId(current.t1));
+          url.searchParams.set('t2', getTeamId(current.t2));
+          if (current.t1.rating) url.searchParams.set('r1', current.t1.rating.toFixed(2));
+          if (current.t2.rating) url.searchParams.set('r2', current.t2.rating.toFixed(2));
+          directUrl = url.toString();
+        } else {
+          const nameA = (state.teamA?.name || '').trim();
+          const nameB = (state.teamB?.name || '').trim();
+          const effA = getEffectiveRating(state.teamA);
+          const effB = getEffectiveRating(state.teamB);
+          if (!nameA || !nameB || effA <= 0 || effB <= 0) {
+            showToast('Select two teams first to share this matchup.');
+            return;
+          }
+
+          syncUrlState();
+          directUrl = window.location.href;
+          team1Name = nameA;
+          team2Name = nameB;
+          const spread = parseFloat(Math.abs(effA - effB).toFixed(2));
+          spreadStr = `+${spread.toFixed(2)}`;
+          parityLabel = document.getElementById('hero-verdict-text')?.textContent?.trim() || getPredictorVerdictLabel(spread);
+        }
+
+        const shareText = `PuckEdge Matchup Check: ${team1Name} vs. ${team2Name} — Projected spread: ${spreadStr} (${parityLabel}). Fair fight or blowout? Check the full breakdown: ${directUrl}`;
+
+        trackAnalyticsEvent('team_chat_shared', {
+          source: source,
+          team1: team1Name,
+          team2: team2Name,
+          spread: spreadStr,
+          parity_label: parityLabel
+        });
+
+        const btnId = source === 'matchmaker' ? 'btn-share-team-chat-matchmaker' : 'btn-share-team-chat-predictor';
+        const labelId = source === 'matchmaker' ? 'btn-share-team-chat-matchmaker-label' : 'btn-share-team-chat-predictor-label';
+
+        function markButtonCopied() {
+          const btn = document.getElementById(btnId);
+          const label = document.getElementById(labelId);
+          if (label) label.textContent = 'Copied for Team Chat! ✓';
+          if (btn) {
+            btn.classList.remove('bg-[#007AFF]', 'hover:bg-blue-600');
+            btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+          }
+          showToast('Copied! Ready to paste into TeamSnap or group chat', 3200);
+          setTimeout(() => {
+            const currentLabel = document.getElementById(labelId);
+            const currentBtn = document.getElementById(btnId);
+            if (currentLabel) currentLabel.textContent = 'Share to Team Chat';
+            if (currentBtn) {
+              currentBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+              currentBtn.classList.add('bg-[#007AFF]', 'hover:bg-blue-600');
+            }
+          }, 2600);
+        }
+
+        const isMobileDevice = /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent || '') || (navigator.maxTouchPoints > 1 && window.innerWidth < 1024);
+        if (isMobileDevice && typeof navigator.share === 'function') {
+          try {
+            await navigator.share({
+              title: `PuckEdge Matchup Check: ${team1Name} vs. ${team2Name}`,
+              text: shareText
+            });
+            showToast('Shared to team chat!', 2600);
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+          }
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(shareText);
+            markButtonCopied();
+            return;
+          } catch (err) {
+            console.warn('Clipboard writeText failed, using fallback:', err);
+          }
+        }
+
+        try {
+          const temp = document.createElement('textarea');
+          temp.value = shareText;
+          temp.setAttribute('readonly', '');
+          temp.style.position = 'fixed';
+          temp.style.left = '-9999px';
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+          markButtonCopied();
+        } catch (err) {
+          showToast('Unable to copy automatically. Check URL bar to share.', 3000);
+        }
+      }
+
       function onTeamInputsChanged() {
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         const rawNameA = document.getElementById('team-a-name')?.value || '';
         const rawRatingA = document.getElementById('team-a-rating')?.value;
         const rawNameB = document.getElementById('team-b-name')?.value || '';
@@ -2746,6 +3096,22 @@
               <div class="h-full bg-[#FF9500] transition-all duration-300" style="width: ${winProb2}%"></div>
             </div>
           </div>
+
+          <!-- 1-Tap Share to Team Chat Button on Schedule It? Card -->
+          <div class="pt-3 border-t border-slate-100">
+            <button
+              type="button"
+              id="btn-share-team-chat-matchmaker"
+              onclick="shareToTeamChat('matchmaker')"
+              class="w-full py-3 px-4 rounded-2xl bg-[#007AFF] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer group"
+            >
+              <i class="fa-solid fa-comment-dots text-sm group-hover:scale-110 transition-transform"></i>
+              <span id="btn-share-team-chat-matchmaker-label">Share to Team Chat</span>
+              <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white/95">
+                TeamSnap • Group Text
+              </span>
+            </button>
+          </div>
         `;
       }
 
@@ -2843,23 +3209,27 @@
         }
       }
 
-      function showToast(msg) {
+      let toastTimeoutId = null;
+      function showToast(msg, duration = 2600) {
         const toast = document.getElementById('toast-notification');
         const text = document.getElementById('toast-message');
         if (!toast || !text) return;
         text.textContent = msg;
         toast.classList.remove('opacity-0', 'pointer-events-none');
         toast.classList.add('opacity-100');
-        setTimeout(() => {
+        if (toastTimeoutId) clearTimeout(toastTimeoutId);
+        toastTimeoutId = setTimeout(() => {
           toast.classList.remove('opacity-100');
           toast.classList.add('opacity-0', 'pointer-events-none');
-        }, 2200);
+        }, duration);
       }
 
       // ==========================================
       // RATING CONTROLS & MODIFIERS
       // ==========================================
       function stepRating(teamKey, delta) {
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         const team = state[`team${teamKey.toUpperCase()}`];
         if (!team) return;
         const input = document.getElementById(`team-${teamKey}-rating`);
@@ -2872,6 +3242,8 @@
       }
 
       function setTierRating(teamKey, rating, tierLabel) {
+        state.isFeaturedMatchup = false;
+        state.userManuallyModifiedTeams = true;
         const team = state[`team${teamKey.toUpperCase()}`];
         if (!team) return;
         team.baseRating = rating;
@@ -2980,7 +3352,8 @@
         return parseFloat(rating.toFixed(2));
       }
 
-      function updatePredictor() {
+      function updatePredictor(options = {}) {
+        const { skipUrlSync = false } = options;
         const nameA = (state.teamA?.name || '').trim();
         const nameB = (state.teamB?.name || '').trim();
         const effA = getEffectiveRating(state.teamA);
@@ -3006,6 +3379,9 @@
 
         const heroEmptyState = document.getElementById('hero-empty-state');
         const heroActiveContent = document.getElementById('hero-active-content');
+        const shareChatBar = document.getElementById('matchup-share-chat-bar');
+        const featuredBadge = document.getElementById('featured-matchup-badge');
+        const featuredMeta = document.getElementById('featured-matchup-meta');
         const heroSpreadVal = document.getElementById('hero-spread-val');
         const heroFavoredLabel = document.getElementById('hero-favored-label');
         const scoreTeamA = document.getElementById('score-team-a');
@@ -3023,9 +3399,20 @@
         const tacticalSummary = document.getElementById('tactical-summary-text');
         const suggestionsContainer = document.getElementById('matchup-suggestions-container');
 
+        if (featuredBadge) {
+          if (state.isFeaturedMatchup && isReady) {
+            featuredBadge.classList.remove('hidden');
+            if (featuredMeta) featuredMeta.classList.remove('hidden');
+          } else {
+            featuredBadge.classList.add('hidden');
+            if (featuredMeta) featuredMeta.classList.add('hidden');
+          }
+        }
+
         if (!isReady) {
           if (heroEmptyState) heroEmptyState.classList.remove('hidden');
           if (heroActiveContent) heroActiveContent.classList.add('hidden');
+          if (shareChatBar) shareChatBar.classList.add('hidden');
 
           const statusT1 = document.getElementById('empty-state-status-t1');
           const statusT2 = document.getElementById('empty-state-status-t2');
@@ -3058,13 +3445,14 @@
           }
 
           updatePitchDraft();
-          syncMatchupUrlParams();
+          if (!skipUrlSync) syncMatchupUrlParams();
           return;
         }
 
         // Active state with valid teams & ratings
         if (heroEmptyState) heroEmptyState.classList.add('hidden');
         if (heroActiveContent) heroActiveContent.classList.remove('hidden');
+        if (shareChatBar) shareChatBar.classList.remove('hidden');
         if (suggestionsContainer) suggestionsContainer.classList.remove('hidden');
 
         if (probBarA) probBarA.className = 'h-full bg-[#007AFF] rounded-l-full transition-all duration-300';
@@ -3188,16 +3576,20 @@
           }
         }
 
-        // Save to localStorage for returning users
-        try {
-          if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
-          if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
-        } catch (e) {}
+        // Save to localStorage for returning users (only for user-selected/linked teams)
+        if (!state.isFeaturedMatchup || state.userManuallyModifiedTeams) {
+          try {
+            if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+            if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+          } catch (e) {}
+        }
 
         // Update accordion pre-filled draft pitch email
         updatePitchDraft();
         renderMatchupSuggestions();
-        syncMatchupUrlParams();
+        if (!skipUrlSync) {
+          syncMatchupUrlParams();
+        }
       }
 
       // ==========================================
@@ -4409,25 +4801,28 @@ Coach / Scheduler (${state.teamA.name})`;
       // ==========================================
       // MULTI-TIER PERSISTENCE & PRIORITY HYDRATION ENGINE
       // Priority 1: URL Query Params (Shared Deep-Links)
-      // Priority 2: localStorage (Returning Visitors)
-      // Priority 3: Clean Slate (First-Time Visitors)
+      // Priority 2: localStorage (Returning Visitors with saved pair)
+      // Priority 3: Featured Close Matchup (Initial Visit Auto-Load)
       // ==========================================
-      function hydrateApplication() {
+      function hydrateApplication(isFullDatasetLoaded = false) {
         try {
-          const urlParams = new URLSearchParams(window.location.search);
+          const urlParams = INITIAL_URL_PARAMS;
           const rawTab = (urlParams.get('tab') || '').toLowerCase().trim();
           const pDiv = urlParams.get('div');
-          const t1Param = urlParams.get('t1') || urlParams.get('teamA');
-          const t2Param = urlParams.get('t2') || urlParams.get('teamB');
+          const t1Param = urlParams.get('t1') || urlParams.get('team1') || urlParams.get('teamA');
+          const t2Param = urlParams.get('t2') || urlParams.get('team2') || urlParams.get('teamB');
           const r1Param = urlParams.get('r1');
           const r2Param = urlParams.get('r2');
           const teamsParam = urlParams.get('teams');
 
-          const hasUrlParams = Boolean(
-            t1Param || t2Param || teamsParam || rawTab || pDiv || r1Param || r2Param
+          const hasTeamUrlParams = Boolean(t1Param || t2Param || teamsParam);
+          const hasAnyUrlParams = Boolean(
+            hasTeamUrlParams || rawTab || pDiv || r1Param || r2Param
           );
 
-          if (hasUrlParams) {
+          let shouldAutoLoadFeatured = false;
+
+          if (hasAnyUrlParams) {
             // --------------------------------------------------
             // PRIORITY 1: URL QUERY PARAMS (SHARED DEEP-LINKS)
             // --------------------------------------------------
@@ -4474,54 +4869,104 @@ Coach / Scheduler (${state.teamA.name})`;
               }
             } else if (rawTab === 'matchmaker') {
               switchMainTab('matchmaker');
+              if (t1Param && t2Param) {
+                const found1 = findTeamByIdOrName(t1Param);
+                const found2 = findTeamByIdOrName(t2Param);
+                if (found1 && found2) {
+                  const spread = parseFloat(Math.abs(found1.rating - found2.rating).toFixed(2));
+                  const baseGoals = 3.2;
+                  const exp1 = Math.max(0.6, baseGoals + (found1.rating - found2.rating) * 0.45);
+                  const exp2 = Math.max(0.6, baseGoals - (found1.rating - found2.rating) * 0.45);
+                  let wp1 = Math.max(5, Math.min(92, 50 + (found1.rating - found2.rating) * 11.5));
+                  let wp2 = 100 - wp1;
+                  const tieProb = Math.max(8, 22 - spread * 2.8);
+                  wp1 = Math.round((wp1 * (100 - tieProb)) / 100);
+                  wp2 = Math.round((wp2 * (100 - tieProb)) / 100);
+                  let verdict = 'Even Draw';
+                  let verdictClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                  if (spread <= 0.75) {
+                    verdict = 'Even Draw';
+                    verdictClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                  } else if (spread <= 2.00) {
+                    verdict = 'Competitive Tilt';
+                    verdictClass = 'bg-blue-50 text-[#007AFF] border-blue-200';
+                  } else if (spread <= 3.50) {
+                    verdict = 'Skewed Matchup';
+                    verdictClass = 'bg-amber-50 text-[#FF9500] border-amber-200';
+                  } else {
+                    verdict = 'David vs Goliath';
+                    verdictClass = 'bg-rose-50 text-[#FF3B30] border-rose-200';
+                  }
+                  state.matchmakerGame.currentMatchup = {
+                    t1: found1,
+                    t2: found2,
+                    spread,
+                    exp1: exp1.toFixed(1),
+                    exp2: exp2.toFixed(1),
+                    winProb1: wp1,
+                    winProb2: wp2,
+                    tieProb: Math.max(0, 100 - wp1 - wp2),
+                    verdict,
+                    verdictClass,
+                    favoredTeam: found1.rating > found2.rating ? 1 : (found2.rating > found1.rating ? 2 : 0)
+                  };
+                  renderMatchmakerCard();
+                }
+              }
             } else {
               switchMainTab('predictor');
-              if (t1Param) {
-                const found1 = findTeamByIdOrName(t1Param);
-                if (found1) {
-                  state.teamA.id = found1.id || t1Param;
-                  state.teamA.name = found1.name;
-                  state.teamA.baseRating = (r1Param && !isNaN(parseFloat(r1Param))) ? parseFloat(r1Param) : found1.rating;
-                  state.teamA.record = found1.record || '';
-                  state.teamA.division = found1.age_bracket || found1.division || '';
-                  state.teamA.state = found1.state || '';
-                  state.teamA.tier = found1.tier || getTeamTier(found1);
-                } else {
-                  state.teamA.id = t1Param;
-                  state.teamA.name = decodeURIComponent(t1Param);
-                  if (r1Param && !isNaN(parseFloat(r1Param))) state.teamA.baseRating = parseFloat(r1Param);
+              if (t1Param || t2Param) {
+                state.isFeaturedMatchup = false;
+                if (t1Param) {
+                  const found1 = findTeamByIdOrName(t1Param);
+                  if (found1) {
+                    state.teamA.id = found1.id || t1Param;
+                    state.teamA.name = found1.name;
+                    state.teamA.baseRating = (r1Param && !isNaN(parseFloat(r1Param))) ? parseFloat(r1Param) : found1.rating;
+                    state.teamA.record = found1.record || '';
+                    state.teamA.division = found1.age_bracket || found1.division || '';
+                    state.teamA.state = found1.state || '';
+                    state.teamA.tier = found1.tier || getTeamTier(found1);
+                  } else {
+                    state.teamA.id = t1Param;
+                    state.teamA.name = decodeURIComponent(t1Param);
+                    if (r1Param && !isNaN(parseFloat(r1Param))) state.teamA.baseRating = parseFloat(r1Param);
+                  }
+                  const inputA = document.getElementById('team-a-name');
+                  const ratingA = document.getElementById('team-a-rating');
+                  if (inputA) inputA.value = state.teamA.name;
+                  if (ratingA) ratingA.value = state.teamA.baseRating > 0 ? state.teamA.baseRating.toFixed(2) : '';
+                  try {
+                    if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
+                  } catch(e) {}
                 }
-                const inputA = document.getElementById('team-a-name');
-                const ratingA = document.getElementById('team-a-rating');
-                if (inputA) inputA.value = state.teamA.name;
-                if (ratingA) ratingA.value = state.teamA.baseRating > 0 ? state.teamA.baseRating.toFixed(2) : '';
-                try {
-                  if (state.teamA.id) localStorage.setItem(STORAGE_KEYS.TEAM1_ID, state.teamA.id);
-                } catch(e) {}
-              }
 
-              if (t2Param) {
-                const found2 = findTeamByIdOrName(t2Param);
-                if (found2) {
-                  state.teamB.id = found2.id || t2Param;
-                  state.teamB.name = found2.name;
-                  state.teamB.baseRating = (r2Param && !isNaN(parseFloat(r2Param))) ? parseFloat(r2Param) : found2.rating;
-                  state.teamB.record = found2.record || '';
-                  state.teamB.division = found2.age_bracket || found2.division || '';
-                  state.teamB.state = found2.state || '';
-                  state.teamB.tier = found2.tier || getTeamTier(found2);
-                } else {
-                  state.teamB.id = t2Param;
-                  state.teamB.name = decodeURIComponent(t2Param);
-                  if (r2Param && !isNaN(parseFloat(r2Param))) state.teamB.baseRating = parseFloat(r2Param);
+                if (t2Param) {
+                  const found2 = findTeamByIdOrName(t2Param);
+                  if (found2) {
+                    state.teamB.id = found2.id || t2Param;
+                    state.teamB.name = found2.name;
+                    state.teamB.baseRating = (r2Param && !isNaN(parseFloat(r2Param))) ? parseFloat(r2Param) : found2.rating;
+                    state.teamB.record = found2.record || '';
+                    state.teamB.division = found2.age_bracket || found2.division || '';
+                    state.teamB.state = found2.state || '';
+                    state.teamB.tier = found2.tier || getTeamTier(found2);
+                  } else {
+                    state.teamB.id = t2Param;
+                    state.teamB.name = decodeURIComponent(t2Param);
+                    if (r2Param && !isNaN(parseFloat(r2Param))) state.teamB.baseRating = parseFloat(r2Param);
+                  }
+                  const inputB = document.getElementById('team-b-name');
+                  const ratingB = document.getElementById('team-b-rating');
+                  if (inputB) inputB.value = state.teamB.name;
+                  if (ratingB) ratingB.value = state.teamB.baseRating > 0 ? state.teamB.baseRating.toFixed(2) : '';
+                  try {
+                    if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
+                  } catch(e) {}
                 }
-                const inputB = document.getElementById('team-b-name');
-                const ratingB = document.getElementById('team-b-rating');
-                if (inputB) inputB.value = state.teamB.name;
-                if (ratingB) ratingB.value = state.teamB.baseRating > 0 ? state.teamB.baseRating.toFixed(2) : '';
-                try {
-                  if (state.teamB.id) localStorage.setItem(STORAGE_KEYS.TEAM2_ID, state.teamB.id);
-                } catch(e) {}
+              } else {
+                // URL had only division or tab=matchup without team1/team2 params
+                shouldAutoLoadFeatured = true;
               }
             }
           } else {
@@ -4542,6 +4987,7 @@ Coach / Scheduler (${state.teamA.name})`;
               savedBracket = localStorage.getItem(STORAGE_KEYS.TOURNAMENT_TEAMS);
             } catch (e) {}
 
+            const hasLocalStorageTeams = Boolean(savedT1 && savedT2);
             const hasLocalStorage = Boolean(
               savedT1 || savedT2 || savedBracket || (savedTab && savedTab !== 'predictor') || (savedDiv && savedDiv !== 'ALL')
             );
@@ -4622,33 +5068,30 @@ Coach / Scheduler (${state.teamA.name})`;
                   }
                 } catch(e) {}
               }
+
+              if (!hasLocalStorageTeams && !state.userManuallyModifiedTeams) {
+                shouldAutoLoadFeatured = true;
+              }
             } else {
               // --------------------------------------------------
-              // PRIORITY 3: CLEAN SLATE (FIRST-TIME VISITORS)
+              // PRIORITY 3: INITIAL VISIT — AUTO-LOAD FEATURED CLOSE MATCHUP
               // --------------------------------------------------
-              // Inputs start completely blank without pre-populating demo teams
-              state.teamA = { id: '', name: '', baseRating: 0, record: '', division: '', state: '', tier: '', modifiers: { goalie: false, bench: false, fatigue: false } };
-              state.teamB = { id: '', name: '', baseRating: 0, record: '', division: '', state: '', tier: '', modifiers: { goalie: false, bench: false, fatigue: false } };
               state.bracket.teams = [];
               state.bracket.teamCount = 0;
-
-              const inputA = document.getElementById('team-a-name');
-              const ratingA = document.getElementById('team-a-rating');
-              const inputB = document.getElementById('team-b-name');
-              const ratingB = document.getElementById('team-b-rating');
-              if (inputA) inputA.value = '';
-              if (ratingA) ratingA.value = '';
-              if (inputB) inputB.value = '';
-              if (ratingB) ratingB.value = '';
-
               renderBracketView();
+              shouldAutoLoadFeatured = true;
             }
+          }
+
+          if (shouldAutoLoadFeatured && !state.userManuallyModifiedTeams) {
+            loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: true });
+            return;
           }
 
           updateClearButtons();
           updateTeamRecordBadges();
           updateModifierChips();
-          updatePredictor();
+          updatePredictor({ skipUrlSync: !hasTeamUrlParams && state.isFeaturedMatchup });
         } catch (e) {
           console.warn('Hydration error:', e);
         }
@@ -4656,20 +5099,17 @@ Coach / Scheduler (${state.teamA.name})`;
 
       // Initialize on load
       window.addEventListener('DOMContentLoaded', () => {
-        // Run preliminary hydration
-        hydrateApplication();
+        // Run preliminary hydration with fallback data
+        hydrateApplication(false);
 
         initTeamsData().then(() => {
-          // Re-hydrate with complete teams dataset loaded
-          hydrateApplication();
-          if (state.activeTab === 'matchmaker') {
+          // Re-hydrate with full teams.json dataset loaded
+          hydrateApplication(true);
+          if (state.activeTab === 'matchmaker' && !state.matchmakerGame.currentMatchup) {
             generateMatchmakerMatchup();
           }
         });
 
-        updateClearButtons();
-        updateModifierChips();
-        updatePredictor();
         recalculateCosts();
         renderBracketView();
         trackAnalyticsEvent('bracket_generated', { team_count: state.bracket.teams.length });
@@ -4677,8 +5117,8 @@ Coach / Scheduler (${state.teamA.name})`;
     </script>
 
     <!-- Toast Notification -->
-    <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#1C1C1E] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
-      <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#1C1C1E] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2 max-w-[92vw] text-center">
+      <i class="fa-solid fa-circle-check text-emerald-400 shrink-0"></i>
       <span id="toast-message">Notification</span>
     </div>
 
