@@ -6,10 +6,5 @@
 import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
-  return (
-    <div id="puckedge-analytics-root" style={{ display: 'none' }} aria-hidden="true">
-      {/* Vercel Web Analytics Root Component */}
-      <Analytics />
-    </div>
-  );
+  return <Analytics />;
 }

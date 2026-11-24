@@ -1513,6 +1513,8 @@
         teamsLoading: true,
         teamsLoadError: false,
         userManuallyModifiedTeams: false,
+        lastTrackedMatchupKey: '',
+        lastTrackedBracketKey: '',
         currentMatchupSuggestions: [],
         teams: [...FALLBACK_TEAMS],
         teamA: {
@@ -1949,7 +1951,7 @@
 
       function applyFeaturedMatchupPair(t1, t2, options = {}) {
         if (!t1 || !t2) return;
-        const { skipLocalStorage = true, skipUrlSync = false } = options;
+        const { skipLocalStorage = true, skipUrlSync = false, userInitiated = false } = options;
 
         state.isFeaturedMatchup = true;
 
@@ -1993,7 +1995,7 @@
         updateClearButtons();
         updateTeamRecordBadges();
         updateModifierChips();
-        updatePredictor({ skipUrlSync });
+        updatePredictor({ skipUrlSync, userInitiated });
         if (!skipUrlSync) {
           syncUrlState();
         }
@@ -2012,7 +2014,7 @@
       }
 
       function shuffleCloseMatchup() {
-        const loaded = loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: false });
+        const loaded = loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: false, userInitiated: true });
         if (!loaded) return;
 
         const spread = Math.abs((state.teamA?.baseRating || 0) - (state.teamB?.baseRating || 0)).toFixed(2);
@@ -2033,7 +2035,7 @@
       }
 
       function loadSampleMatchup() {
-        const loaded = loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: false });
+        const loaded = loadFeaturedCloseMatchup({ skipLocalStorage: true, skipUrlSync: false, userInitiated: true });
         if (loaded) {
           const heroCard = document.getElementById('hero-prediction-card');
           if (heroCard) {
@@ -2076,7 +2078,7 @@
         renderTeamDropdown(teamKey, val);
         document.getElementById(`team-${teamKey}-dropdown`)?.classList.remove('hidden');
         updateTeamRecordBadges();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
       }
 
       function renderTeamDropdown(teamKey, query) {
@@ -2207,7 +2209,7 @@
 
         updateClearButtons();
         updateTeamRecordBadges();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
         syncUrlState();
 
         const card = nameEl?.closest('.rounded-2xl');
@@ -2389,7 +2391,7 @@
         updateClearButtons();
         updateTeamRecordBadges();
         updateModifierChips();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
         syncUrlState();
 
         const heroCard = document.getElementById('hero-prediction-card');
@@ -2555,6 +2557,11 @@
           ? 'PuckEdge Tournament Bracket'
           : `PuckEdge: ${t1Name} vs ${t2Name}`;
 
+        trackAnalyticsEvent('share_clicked', {
+          method: isTournament ? 'bracket_link' : 'matchup_link',
+          division: state.selectedDivision
+        });
+
         if (isTournament) {
           trackAnalyticsEvent('bracket_link_shared', {
             team_count: (state.bracket?.teams || []).length,
@@ -2677,6 +2684,13 @@
 
         const shareText = `PuckEdge Matchup Check: ${team1Name} vs. ${team2Name} — Projected spread: ${spreadStr} (${parityLabel}). Fair fight or blowout? Check the full breakdown: ${directUrl}`;
 
+        trackAnalyticsEvent('share_clicked', {
+          method: 'team_chat',
+          source: source,
+          team1: team1Name,
+          team2: team2Name
+        });
+
         trackAnalyticsEvent('team_chat_shared', {
           source: source,
           team1: team1Name,
@@ -2764,7 +2778,7 @@
 
         updateClearButtons();
         updateTeamRecordBadges();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
       }
 
       // 1-Tap numeric entry handler for desktop & iOS/Android mobile
@@ -3185,7 +3199,7 @@
 
         updateClearButtons();
         updateTeamRecordBadges();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
         switchMainTab('predictor');
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3195,6 +3209,11 @@
       function shareMatchmakerMatchup() {
         const current = state.matchmakerGame.currentMatchup;
         if (!current) return;
+
+        trackAnalyticsEvent('share_clicked', {
+          method: 'matchmaker_link',
+          division: state.matchmakerGame.selectedDivision
+        });
 
         const shareUrl = `${window.location.origin}${window.location.pathname}?tab=matchmaker&teamA=${encodeURIComponent(current.t1.name)}&teamB=${encodeURIComponent(current.t2.name)}&div=${encodeURIComponent(state.matchmakerGame.selectedDivision)}`;
 
@@ -3238,7 +3257,7 @@
         team.baseRating = next;
         if (input) input.value = next.toFixed(2);
         updateClearButtons();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
       }
 
       function setTierRating(teamKey, rating, tierLabel) {
@@ -3250,7 +3269,7 @@
         const input = document.getElementById(`team-${teamKey}-rating`);
         if (input) input.value = rating.toFixed(2);
         updateClearButtons();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
       }
 
       function toggleModifier(teamKey, modKey) {
@@ -3270,7 +3289,7 @@
         });
 
         updateModifierChips();
-        updatePredictor();
+        updatePredictor({ userInitiated: true });
       }
 
       function toggleCardTray(teamKey, trayType) {
@@ -3353,7 +3372,7 @@
       }
 
       function updatePredictor(options = {}) {
-        const { skipUrlSync = false } = options;
+        const { skipUrlSync = false, userInitiated = false } = options;
         const nameA = (state.teamA?.name || '').trim();
         const nameB = (state.teamB?.name || '').trim();
         const effA = getEffectiveRating(state.teamA);
@@ -3494,12 +3513,24 @@
           }
         }
 
-        trackAnalyticsEvent('matchup_analyzed', {
-          division: state.selectedDivision,
-          team1_name: nameA,
-          team2_name: nameB,
-          spread: spread
-        });
+        if (userInitiated) {
+          const matchupKey = `${nameA}|${effA.toFixed(2)}|${nameB}|${effB.toFixed(2)}`;
+          if (matchupKey !== state.lastTrackedMatchupKey) {
+            state.lastTrackedMatchupKey = matchupKey;
+            trackAnalyticsEvent('matchup_calculated', {
+              division: state.selectedDivision,
+              team1_name: nameA,
+              team2_name: nameB,
+              spread: spread
+            });
+            trackAnalyticsEvent('matchup_analyzed', {
+              division: state.selectedDivision,
+              team1_name: nameA,
+              team2_name: nameB,
+              spread: spread
+            });
+          }
+        }
 
         // Favored Team Label
         if (heroFavoredLabel) {
@@ -3816,7 +3847,7 @@ Coach / Scheduler (${state.teamA.name})`;
           badge.textContent = count > 0 ? `${count}-Team Bracket` : 'Unstaged';
         }
 
-        renderBracketView();
+        renderBracketView({ userInitiated: true });
         saveBracketToStorage();
         syncUrlState();
       }
@@ -3880,7 +3911,8 @@ Coach / Scheduler (${state.teamA.name})`;
         }
       }
 
-      function renderBracketView() {
+      function renderBracketView(options = {}) {
+        const { userInitiated = false } = options;
         const container = document.getElementById('bracket-teams-container');
         if (!container) return;
         const count = state.bracket.teams.length;
@@ -4012,7 +4044,7 @@ Coach / Scheduler (${state.teamA.name})`;
           `;
         }).join('');
 
-        calculateBracketParity();
+        calculateBracketParity({ userInitiated });
         renderSingleEliminationBracket();
       }
 
@@ -4081,7 +4113,7 @@ Coach / Scheduler (${state.teamA.name})`;
 
         renderBracketDropdown(idx, val);
         showBracketDropdown(idx);
-        calculateBracketParity();
+        calculateBracketParity({ userInitiated: true });
         renderSingleEliminationBracket();
       }
 
@@ -4215,7 +4247,7 @@ Coach / Scheduler (${state.teamA.name})`;
 
         hideBracketDropdown(idx);
         saveBracketToStorage();
-        calculateBracketParity();
+        calculateBracketParity({ userInitiated: true });
         renderSingleEliminationBracket();
         syncUrlState();
       }
@@ -4257,7 +4289,7 @@ Coach / Scheduler (${state.teamA.name})`;
 
         hideBracketDropdown(idx);
         saveBracketToStorage();
-        calculateBracketParity();
+        calculateBracketParity({ userInitiated: true });
         renderSingleEliminationBracket();
         syncUrlState();
       }
@@ -4273,7 +4305,7 @@ Coach / Scheduler (${state.teamA.name})`;
             : 'text-[11px] font-bold text-slate-400 bg-slate-100 border-slate-200 px-2 py-0.5 rounded-md border shrink-0';
         }
         saveBracketToStorage();
-        calculateBracketParity();
+        calculateBracketParity({ userInitiated: true });
         renderSingleEliminationBracket();
         syncUrlState();
       }
@@ -4292,12 +4324,13 @@ Coach / Scheduler (${state.teamA.name})`;
             : 'text-[11px] font-bold text-slate-400 bg-slate-100 border-slate-200 px-2 py-0.5 rounded-md border shrink-0';
         }
         saveBracketToStorage();
-        calculateBracketParity();
+        calculateBracketParity({ userInitiated: true });
         renderSingleEliminationBracket();
         syncUrlState();
       }
 
-      function calculateBracketParity() {
+      function calculateBracketParity(options = {}) {
+        const { userInitiated = false } = options;
         const teams = state.bracket.teams;
         const n = teams.length;
 
@@ -4487,6 +4520,18 @@ Coach / Scheduler (${state.teamA.name})`;
               </div>
             </div>
           `).join('');
+        }
+        if (userInitiated) {
+          const bracketKey = validTeams.map(t => `${t.name.trim()}:${Number(t.rating).toFixed(2)}`).join('|');
+          if (bracketKey !== state.lastTrackedBracketKey) {
+            state.lastTrackedBracketKey = bracketKey;
+            trackAnalyticsEvent('bracket_graded', {
+              team_count: validTeams.length,
+              grade: grade,
+              spread: parseFloat(spread.toFixed(2)),
+              division: state.selectedDivision
+            });
+          }
         }
         if (state.activeTab === 'bracket' || state.activeTab === 'tournament') {
           syncUrlState();
@@ -5112,7 +5157,6 @@ Coach / Scheduler (${state.teamA.name})`;
 
         recalculateCosts();
         renderBracketView();
-        trackAnalyticsEvent('bracket_generated', { team_count: state.bracket.teams.length });
       });
     </script>
 
