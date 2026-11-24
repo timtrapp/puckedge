@@ -11,10 +11,24 @@ declare global {
   interface Window {
     puckedgeTrack?: (eventName: string, properties?: Record<string, any>) => void;
     __puckedgeQueue?: Array<{ name: string; props?: Record<string, any> }>;
+    umami?: {
+      track?: (eventName: string, data?: Record<string, string | number>) => void;
+    };
+    trackEvent?: (eventName: string, data?: Record<string, string | number>) => void;
   }
 }
 
 type TrackPropertyValue = string | number | boolean | null;
+
+// Safely wrapped custom event tracking for Umami Analytics
+export function trackEvent(eventName: string, data?: Record<string, string | number>) {
+  try {
+    if (!eventName) return;
+    (window as any).umami?.track(eventName, data);
+  } catch {
+    // Graceful fallback when blocked or in local preview
+  }
+}
 
 // Safely wrapped custom event tracking from @vercel/analytics
 export function safeTrack(eventName: string, properties?: Record<string, unknown>) {
@@ -44,6 +58,7 @@ export function safeTrack(eventName: string, properties?: Record<string, unknown
 }
 
 window.puckedgeTrack = safeTrack;
+window.trackEvent = trackEvent;
 
 // Flush any events that were dispatched prior to module script initialization
 try {

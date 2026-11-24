@@ -9,6 +9,7 @@
     <meta name="description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
     <meta property="og:title" content="PuckEdge.app - Youth Hockey Parity Tool" />
     <meta property="og:description" content="Independent youth hockey matchup predictor, scheduling parity calculator, and tournament bracket grader." />
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="9011b2cf-37eb-4193-a71d-8c52323f2c72"></script>
     
     <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -1423,6 +1424,18 @@
       }
 
       // ==========================================
+      // UMAMI ANALYTICS SAFE EVENT HELPER
+      // ==========================================
+      function trackEvent(eventName, data) {
+        try {
+          if (!eventName) return;
+          window.umami?.track(eventName, data);
+        } catch (err) {
+          // Safe fallback when blocked or in local preview
+        }
+      }
+
+      // ==========================================
       // MASTER TEAMS DATASET (EMBEDDED FALLBACK)
       // ==========================================
       const FALLBACK_TEAMS = [
@@ -2561,6 +2574,9 @@
           method: isTournament ? 'bracket_link' : 'matchup_link',
           division: state.selectedDivision
         });
+        trackEvent('share_clicked', {
+          type: isTournament ? 'bracket_link' : 'matchup_link'
+        });
 
         if (isTournament) {
           trackAnalyticsEvent('bracket_link_shared', {
@@ -2689,6 +2705,9 @@
           source: source,
           team1: team1Name,
           team2: team2Name
+        });
+        trackEvent('share_clicked', {
+          type: source === 'matchmaker' ? 'team_chat_matchmaker' : 'team_chat'
         });
 
         trackAnalyticsEvent('team_chat_shared', {
@@ -3214,6 +3233,9 @@
           method: 'matchmaker_link',
           division: state.matchmakerGame.selectedDivision
         });
+        trackEvent('share_clicked', {
+          type: 'matchmaker_link'
+        });
 
         const shareUrl = `${window.location.origin}${window.location.pathname}?tab=matchmaker&teamA=${encodeURIComponent(current.t1.name)}&teamB=${encodeURIComponent(current.t2.name)}&div=${encodeURIComponent(state.matchmakerGame.selectedDivision)}`;
 
@@ -3517,12 +3539,16 @@
           const matchupKey = `${nameA}|${effA.toFixed(2)}|${nameB}|${effB.toFixed(2)}`;
           if (matchupKey !== state.lastTrackedMatchupKey) {
             state.lastTrackedMatchupKey = matchupKey;
+            const trackedDivision = (divA && divB && divA !== divB)
+              ? `${divA} vs ${divB}`
+              : (divA || divB || state.selectedDivision || 'ALL');
             trackAnalyticsEvent('matchup_calculated', {
               division: state.selectedDivision,
               team1_name: nameA,
               team2_name: nameB,
               spread: spread
             });
+            trackEvent('matchup_calculated', { division: trackedDivision });
             trackAnalyticsEvent('matchup_analyzed', {
               division: state.selectedDivision,
               team1_name: nameA,
@@ -4531,6 +4557,7 @@ Coach / Scheduler (${state.teamA.name})`;
               spread: parseFloat(spread.toFixed(2)),
               division: state.selectedDivision
             });
+            trackEvent('bracket_graded', { teamCount: validTeams.length });
           }
         }
         if (state.activeTab === 'bracket' || state.activeTab === 'tournament') {
