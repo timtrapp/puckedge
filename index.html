@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden max-w-full">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool</title>
     <link rel="icon" type="image/png" href="/puckedge-logo.png?v=4" />
     <link rel="apple-touch-icon" href="/puckedge-logo.png?v=4" />
@@ -39,12 +39,35 @@
       }
     </script>
     <style>
+      html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+      }
       body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-        font-variant-numeric: normal;
+        font-variant-numeric: tabular-nums;
         background-color: #F2F2F7;
         color: #1C1C1E;
         -webkit-tap-highlight-color: transparent;
+      }
+      /* Prevent iOS Safari auto-zoom on form fields under 640px */
+      @media (max-width: 639px) {
+        input, select, textarea {
+          font-size: 16px !important;
+        }
+      }
+      /* Safe area bottom spacing for iOS Safari floating bar */
+      .pb-safe-footer {
+        padding-bottom: max(2rem, calc(1.25rem + env(safe-area-inset-bottom, 0px)));
+      }
+      @media (min-width: 640px) {
+        .pb-safe-footer {
+          padding-bottom: 1.5rem;
+        }
+      }
+      /* Smooth touch scrolling for horizontal overflow containers */
+      .scroll-touch {
+        -webkit-overflow-scrolling: touch;
       }
       /* Clean number input without native arrows */
       input[type="number"]::-webkit-inner-spin-button,
@@ -124,78 +147,81 @@
       }
     </style>
   </head>
-  <body class="bg-[#F2F2F7] text-[#1C1C1E] min-h-screen flex flex-col antialiased selection:bg-[#007AFF] selection:text-white">
+  <body class="bg-[#F2F2F7] text-[#1C1C1E] min-h-screen flex flex-col antialiased selection:bg-[#007AFF] selection:text-white overflow-x-hidden max-w-full">
 
     <!-- TOP HEADER (PURE WHITE NAVBAR) -->
-    <header class="border-b border-slate-200/80 bg-white sticky top-0 z-40 transition-colors">
-      <div class="max-w-4xl mx-auto px-4 py-3 sm:py-3.5 flex items-center justify-between gap-4">
+    <header class="border-b border-slate-200/80 bg-white sticky top-0 z-40 transition-colors w-full max-w-full">
+      <div class="max-w-4xl mx-auto px-3 sm:px-4 py-2 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
         
         <!-- Left: Brand Logo Lockup (Seamless Transparent PNG directly on #FFFFFF) -->
-        <a href="#" class="flex items-center bg-transparent border-0 shadow-none p-0 m-0 group cursor-pointer focus:outline-none shrink-0" title="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool">
+        <a href="#" class="flex items-center bg-transparent border-0 shadow-none p-0 m-0 group cursor-pointer focus:outline-none min-w-0 shrink min-h-[44px]" title="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool">
           <img 
             src="/assets/aistudio/puckedge-logo-transparent.png?v=4" 
             alt="PuckEdge.app - Independent Youth Hockey Scheduling &amp; Parity Tool"
-            class="h-10 w-auto bg-transparent border-0 shadow-none p-0 m-0 object-contain cursor-pointer transition-opacity hover:opacity-95"
+            class="h-8 sm:h-10 w-auto max-w-[205px] sm:max-w-none bg-transparent border-0 shadow-none p-0 m-0 object-contain object-left cursor-pointer transition-opacity hover:opacity-95"
             loading="eager"
             onerror="this.onerror=null;this.src='/puckedge-logo.png?v=4';"
           />
         </a>
 
-        <!-- Right: Apple Style Engine Status Pill Badge -->
+        <!-- Right: Apple Style Engine Status Pill Badge (Compact on Mobile) -->
         <div class="shrink-0 flex items-center">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-xs">
-            <span class="w-2 h-2 rounded-full bg-[#34C759] animate-pulse"></span>
-            <span class="whitespace-nowrap">Parity Engine Active</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-[#34C759] animate-pulse shrink-0"></span>
+            <span class="whitespace-nowrap sm:hidden">Active</span>
+            <span class="whitespace-nowrap hidden sm:inline">Parity Engine Active</span>
           </span>
         </div>
 
       </div>
 
       <!-- iOS SEGMENTED CONTROL TABS -->
-      <div class="max-w-xl mx-auto px-4 pb-2.5 pt-1">
-        <div class="bg-[#E5E5EA] p-1 rounded-xl flex items-center gap-1 shadow-inner">
+      <div class="max-w-xl mx-auto px-3 sm:px-4 pb-2 sm:pb-2.5 pt-0.5 sm:pt-1 w-full">
+        <div class="bg-[#E5E5EA] p-1 rounded-xl grid grid-cols-3 gap-1 shadow-inner w-full">
           <button
             id="nav-tab-predictor"
             onclick="switchMainTab('predictor')"
-            class="flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all whitespace-nowrap cursor-pointer"
+            class="min-h-[44px] sm:min-h-[38px] py-2 sm:py-1.5 px-1.5 sm:px-2 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all whitespace-nowrap cursor-pointer flex items-center justify-center min-w-0"
           >
-            Matchup Predictor
+            <span class="sm:hidden truncate">Predictor</span>
+            <span class="hidden sm:inline truncate">Matchup Predictor</span>
           </button>
           <button
             id="nav-tab-bracket"
             onclick="switchMainTab('bracket')"
-            class="flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer"
+            class="min-h-[44px] sm:min-h-[38px] py-2 sm:py-1.5 px-1.5 sm:px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer flex items-center justify-center min-w-0"
           >
-            Tournament Bracket
+            <span class="sm:hidden truncate">Bracket</span>
+            <span class="hidden sm:inline truncate">Tournament Bracket</span>
           </button>
           <button
             id="nav-tab-matchmaker"
             onclick="switchMainTab('matchmaker')"
-            class="flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5"
+            class="min-h-[44px] sm:min-h-[38px] py-2 sm:py-1.5 px-1.5 sm:px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer flex items-center justify-center gap-1 sm:gap-1.5 min-w-0"
           >
-            <span>Matchmaker</span>
-            <span class="text-xs">🎲</span>
+            <span class="truncate">Matchmaker</span>
+            <span class="text-xs shrink-0">🎲</span>
           </button>
         </div>
       </div>
     </header>
 
     <!-- MAIN VIEWPORT WRAPPER -->
-    <main class="max-w-4xl mx-auto px-4 py-5 w-full flex-1 space-y-6">
+    <main class="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-5 w-full max-w-full flex-1 space-y-4 sm:space-y-6 overflow-x-hidden">
 
       <!-- REMOTE DATA LOADING & ERROR FALLBACK BANNERS -->
-      <div id="teams-loading-banner" class="bg-blue-50/90 border border-blue-200/80 rounded-2xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs text-blue-900 shadow-2xs">
-        <div class="flex items-center gap-2.5">
+      <div id="teams-loading-banner" class="bg-blue-50/90 border border-blue-200/80 rounded-2xl px-3.5 sm:px-4 py-2.5 flex items-center justify-between gap-3 text-xs text-blue-900 shadow-2xs min-w-0">
+        <div class="flex items-center gap-2.5 min-w-0">
           <i class="fa-solid fa-circle-notch fa-spin text-[#007AFF] text-sm shrink-0"></i>
-          <span class="font-medium">Loading nationwide team directory...</span>
+          <span class="font-medium truncate">Loading nationwide team directory...</span>
         </div>
-        <span class="text-[11px] font-semibold text-[#007AFF]/80 hidden sm:inline">Syncing live rankings</span>
+        <span class="text-[11px] font-semibold text-[#007AFF]/80 hidden sm:inline shrink-0">Syncing live rankings</span>
       </div>
 
-      <div id="teams-error-banner" class="hidden bg-amber-50/95 border border-amber-200 rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-950 shadow-2xs">
-        <div class="flex items-start sm:items-center gap-2.5">
+      <div id="teams-error-banner" class="hidden bg-amber-50/95 border border-amber-200 rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-950 shadow-2xs min-w-0">
+        <div class="flex items-start sm:items-center gap-2.5 min-w-0">
           <i class="fa-solid fa-triangle-exclamation text-[#FF9500] text-sm shrink-0 mt-0.5 sm:mt-0"></i>
-          <div>
+          <div class="min-w-0">
             <span class="font-bold">Couldn't reach the live team directory.</span>
             <span class="text-amber-900/90"> Using built-in sample clubs so you can still calculate matchups.</span>
           </div>
@@ -203,7 +229,7 @@
         <button
           type="button"
           onclick="retryLoadTeamsData()"
-          class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100/70 text-amber-900 font-bold text-[11px] border border-amber-300/90 shadow-2xs transition-colors cursor-pointer shrink-0 self-start sm:self-center"
+          class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-xl bg-white hover:bg-amber-100/70 text-amber-900 font-bold text-xs sm:text-[11px] border border-amber-300/90 shadow-2xs transition-colors cursor-pointer shrink-0 self-stretch sm:self-center"
         >
           <i class="fa-solid fa-rotate-right text-[10px]"></i>
           <span>Retry</span>
@@ -213,26 +239,26 @@
       <!-- ========================================== -->
       <!-- VIEW 1: MATCHUP PREDICTOR (HERO FOCUS)     -->
       <!-- ========================================== -->
-      <div id="view-predictor" class="space-y-6">
+      <div id="view-predictor" class="space-y-4 sm:space-y-6 min-w-0">
 
         <!-- DIVISION FILTER SELECTOR -->
-        <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div class="flex items-center gap-2.5">
+        <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 min-w-0 overflow-hidden">
+          <div class="flex items-center gap-2.5 min-w-0">
             <div class="w-8 h-8 rounded-xl bg-blue-50 text-[#007AFF] flex items-center justify-center text-sm font-bold shrink-0">
               <i class="fa-solid fa-layer-group"></i>
             </div>
-            <div>
-              <span class="text-xs font-bold text-[#1C1C1E] block">Age Division Filter</span>
-              <span class="text-[11px] text-[#8E8E93] block" id="teams-dataset-count">Loading master team directory...</span>
+            <div class="min-w-0">
+              <span class="text-xs font-bold text-[#1C1C1E] block truncate">Age Division Filter</span>
+              <span class="text-[11px] text-[#8E8E93] block truncate" id="teams-dataset-count">Loading master team directory...</span>
             </div>
           </div>
           <!-- Division Filter Pills (Master Importer Categories) -->
-          <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 sm:pb-0" id="division-filter-pills">
+          <div class="flex items-center gap-2 overflow-x-auto scroll-touch pb-0.5 sm:pb-0 w-full sm:w-auto max-w-full min-w-0" id="division-filter-pills">
             <button
               type="button"
               onclick="setDivisionFilter('ALL')"
               id="div-filter-ALL"
-              class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               All Divisions
             </button>
@@ -240,7 +266,7 @@
               type="button"
               onclick="setDivisionFilter('9U')"
               id="div-filter-9U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               9U
             </button>
@@ -248,7 +274,7 @@
               type="button"
               onclick="setDivisionFilter('10U')"
               id="div-filter-10U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               10U
             </button>
@@ -256,7 +282,7 @@
               type="button"
               onclick="setDivisionFilter('11U')"
               id="div-filter-11U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               11U
             </button>
@@ -264,7 +290,7 @@
               type="button"
               onclick="setDivisionFilter('12U')"
               id="div-filter-12U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               12U
             </button>
@@ -272,7 +298,7 @@
               type="button"
               onclick="setDivisionFilter('13U')"
               id="div-filter-13U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               13U
             </button>
@@ -280,7 +306,7 @@
               type="button"
               onclick="setDivisionFilter('14U')"
               id="div-filter-14U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               14U
             </button>
@@ -288,7 +314,7 @@
               type="button"
               onclick="setDivisionFilter('16U/15U')"
               id="div-filter-16U-15U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               16U/15U
             </button>
@@ -296,7 +322,7 @@
               type="button"
               onclick="setDivisionFilter('18U')"
               id="div-filter-18U"
-              class="px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap"
+              class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               18U
             </button>
@@ -304,17 +330,17 @@
         </div>
 
         <!-- 1ST (TOP): TEAM PROFILES & INPUTS (TEAM A & TEAM B CARDS) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5 min-w-0">
 
           <!-- TEAM 1 INPUT CARD -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5 relative">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-6 shadow-sm space-y-3 sm:space-y-3.5 relative min-w-0">
             <!-- Card Header: Title & Primary Numerical Rating -->
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#007AFF]"></span>
-                <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider">TEAM 1</label>
+            <div class="flex items-center justify-between gap-2 min-w-0">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#007AFF] shrink-0"></span>
+                <label class="text-xs font-bold text-[#007AFF] uppercase tracking-wider truncate">TEAM 1</label>
               </div>
-              <div class="flex items-center gap-1.5">
+              <div class="flex items-center gap-1.5 shrink-0">
                 <span class="text-[11px] font-semibold text-slate-400">Rating</span>
                 <span id="team-a-primary-rating" class="text-xs sm:text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-blue-50 text-[#007AFF] border border-blue-200/80 min-w-[52px] text-center">
                   --
@@ -324,8 +350,8 @@
             </div>
 
             <!-- Unmistakable Search Input with Magnifying Glass Icon -->
-            <div class="relative space-y-1.5">
-              <div class="relative flex items-center">
+            <div class="relative space-y-2 min-w-0">
+              <div class="relative flex items-center min-w-0">
                 <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
                 <input
                   type="text"
@@ -336,18 +362,18 @@
                   onclick="showTeamDropdown('a')"
                   placeholder="Search team name, club, or state..."
                   autocomplete="off"
-                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-9 pr-16 py-2.5 text-xs sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all placeholder:text-slate-400 placeholder:font-normal"
+                  class="w-full min-w-0 min-h-[44px] bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-9 pr-[92px] sm:pr-16 py-2.5 text-base sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all placeholder:text-slate-400 placeholder:font-normal"
                 />
-                <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <div class="absolute right-0.5 sm:right-2 top-1/2 -translate-y-1/2 flex items-center">
                   <button
                     type="button"
                     id="btn-clear-team-a"
                     onclick="clearTeamSelection('a')"
                     aria-label="Clear team selection"
                     title="Clear team selection"
-                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6 hidden"
+                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 rounded-lg transition-colors cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-7 sm:h-7 hidden"
                   >
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
@@ -356,10 +382,10 @@
                     id="btn-toggle-dropdown-a"
                     onclick="toggleTeamDropdown('a')"
                     aria-label="Toggle team dropdown"
-                    class="text-slate-400 hover:text-slate-600 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6"
+                    class="text-slate-400 hover:text-slate-600 rounded-lg transition-colors cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-7 sm:h-7"
                     tabindex="-1"
                   >
-                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    <i class="fa-solid fa-chevron-down text-xs sm:text-[10px]"></i>
                   </button>
                 </div>
               </div>
@@ -367,19 +393,19 @@
               <!-- Floating Autocomplete Dropdown Menu -->
               <div
                 id="team-a-dropdown"
-                class="hidden absolute left-0 right-0 top-[48px] bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-56 overflow-y-auto divide-y divide-slate-100 transition-all"
+                class="hidden absolute left-0 right-0 top-full mt-1.5 bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-64 overflow-y-auto divide-y divide-slate-100 transition-all w-full"
               >
                 <!-- Populated dynamically via JS -->
               </div>
 
               <!-- Club Name, Division/State, and Record Badge -->
-              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[18px]">
-                <div id="team-a-record-badge" class="flex items-center gap-1.5 truncate">
+              <div class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[11px] px-0.5 text-slate-500 min-h-[18px] min-w-0">
+                <div id="team-a-record-badge" class="flex flex-wrap items-center gap-1.5 min-w-0 flex-1">
                   <span class="text-slate-400 text-[11px] flex items-center gap-1.5">
                     <i class="fa-solid fa-arrow-up text-[10px] text-blue-400"></i> Type to search or pick a club above
                   </span>
                 </div>
-                <span class="text-slate-400 text-[10px] shrink-0">Nationwide index</span>
+                <span class="text-slate-400 text-[10px] shrink-0 hidden sm:inline">Nationwide index</span>
               </div>
             </div>
 
@@ -390,29 +416,29 @@
                 onclick="toggleCardTray('a', 'advanced')"
                 id="tray-btn-a-advanced"
                 aria-expanded="false"
-                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
+                class="w-full min-h-[44px] sm:min-h-0 flex items-center justify-between gap-2 py-2 sm:py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none min-w-0"
               >
-                <div class="flex items-center gap-1.5">
-                  <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#007AFF]">
-                    <i class="fa-solid fa-sliders text-[#007AFF] text-[10px]"></i>
-                    <span>⚙️ Adjust Rating &amp; Situational Modifiers</span>
+                <div class="flex items-center gap-1.5 min-w-0">
+                  <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#007AFF] truncate">
+                    <i class="fa-solid fa-sliders text-[#007AFF] text-[10px] shrink-0"></i>
+                    <span class="truncate">Adjust Rating &amp; Modifiers</span>
                   </span>
                   <span
                     id="tray-mod-badge-a"
-                    class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-[#FF3B30] border border-rose-200/90"
+                    class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-[#FF3B30] border border-rose-200/90 shrink-0"
                   >
                     1 active
                   </span>
                 </div>
-                <span class="flex items-center gap-1 text-slate-400 group-hover:text-slate-600 text-xs">
-                  <span id="tray-mod-summary-a" class="text-[10px] text-slate-400 font-medium">Goalie, bench, rest</span>
+                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs shrink-0">
+                  <span id="tray-mod-summary-a" class="text-[10px] text-slate-400 font-medium hidden sm:inline">Goalie, bench, rest</span>
                   <i id="tray-chevron-a-advanced" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
                 </span>
               </button>
 
               <div
                 id="tray-content-a-advanced"
-                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-2 space-y-3.5 border-t border-slate-100"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-2.5 space-y-3.5 border-t border-slate-100"
               >
                 <!-- 1. Manual Rating Override -->
                 <div class="space-y-1.5">
@@ -427,7 +453,7 @@
                     <button
                       type="button"
                       onclick="stepRating('a', -0.25)"
-                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                      class="w-12 min-w-[44px] min-h-[44px] sm:min-h-0 sm:h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                     >
                       -0.25
                     </button>
@@ -442,12 +468,12 @@
                       onclick="this.select(); handleRatingInputTap(this)"
                       ontouchstart="this.select(); handleRatingInputTap(this)"
                       oninput="onTeamInputsChanged()"
-                      class="w-full h-10 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3 text-center text-lg font-bold text-[#1C1C1E] focus:outline-none transition-all"
+                      class="w-full min-w-0 min-h-[44px] sm:min-h-0 sm:h-10 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl px-3 text-center text-lg font-bold text-[#1C1C1E] focus:outline-none transition-all"
                     />
                     <button
                       type="button"
                       onclick="stepRating('a', 0.25)"
-                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                      class="w-12 min-w-[44px] min-h-[44px] sm:min-h-0 sm:h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                     >
                       +0.25
                     </button>
@@ -460,12 +486,12 @@
                     <i class="fa-solid fa-chart-line text-[10px] text-[#007AFF]"></i>
                     Estimate by Tier (1-Tap Benchmarks)
                   </span>
-                  <div class="flex flex-wrap gap-1.5">
-                    <button type="button" onclick="setTierRating('a', 92.50, 'AAA / Elite')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">AAA / Elite <span class="text-slate-400 font-normal">92.5</span></button>
-                    <button type="button" onclick="setTierRating('a', 85.00, 'Tier 2 AA')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 AA <span class="text-slate-400 font-normal">85.0</span></button>
-                    <button type="button" onclick="setTierRating('a', 78.50, 'Tier 2 A')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 A <span class="text-slate-400 font-normal">78.5</span></button>
-                    <button type="button" onclick="setTierRating('a', 71.00, 'Tier 3 B')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 3 B <span class="text-slate-400 font-normal">71.0</span></button>
-                    <button type="button" onclick="setTierRating('a', 64.00, 'House / Rec')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">House / Rec <span class="text-slate-400 font-normal">64.0</span></button>
+                  <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                    <button type="button" onclick="setTierRating('a', 92.50, 'AAA / Elite')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">AAA / Elite <span class="text-slate-400 font-normal">92.5</span></button>
+                    <button type="button" onclick="setTierRating('a', 85.00, 'Tier 2 AA')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">Tier 2 AA <span class="text-slate-400 font-normal">85.0</span></button>
+                    <button type="button" onclick="setTierRating('a', 78.50, 'Tier 2 A')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">Tier 2 A <span class="text-slate-400 font-normal">78.5</span></button>
+                    <button type="button" onclick="setTierRating('a', 71.00, 'Tier 3 B')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">Tier 3 B <span class="text-slate-400 font-normal">71.0</span></button>
+                    <button type="button" onclick="setTierRating('a', 64.00, 'House / Rec')" class="col-span-2 sm:col-span-1 min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">House / Rec <span class="text-slate-400 font-normal">64.0</span></button>
                   </div>
                 </div>
 
@@ -475,10 +501,10 @@
                     <i class="fa-solid fa-sliders text-[10px] text-[#007AFF]"></i>
                     Situational Modifiers
                   </span>
-                  <div class="flex flex-wrap gap-1.5">
-                    <button type="button" id="mod-a-goalie" onclick="toggleModifier('a', 'goalie')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Backup Goalie (-0.75)</button>
-                    <button type="button" id="mod-a-bench" onclick="toggleModifier('a', 'bench')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Short Bench (-0.50)</button>
-                    <button type="button" id="mod-a-fatigue" onclick="toggleModifier('a', 'fatigue')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">3rd Game in 24h (-0.50)</button>
+                  <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                    <button type="button" id="mod-a-goalie" onclick="toggleModifier('a', 'goalie')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center">Backup Goalie (-0.75)</button>
+                    <button type="button" id="mod-a-bench" onclick="toggleModifier('a', 'bench')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center">Short Bench (-0.50)</button>
+                    <button type="button" id="mod-a-fatigue" onclick="toggleModifier('a', 'fatigue')" class="col-span-2 sm:col-span-1 min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center">3rd Game in 24h (-0.50)</button>
                   </div>
                 </div>
               </div>
@@ -486,14 +512,14 @@
           </div>
 
           <!-- TEAM 2 INPUT CARD -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5 relative">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-6 shadow-sm space-y-3 sm:space-y-3.5 relative min-w-0">
             <!-- Card Header: Title & Primary Numerical Rating -->
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#FF9500]"></span>
-                <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider">TEAM 2</label>
+            <div class="flex items-center justify-between gap-2 min-w-0">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#FF9500] shrink-0"></span>
+                <label class="text-xs font-bold text-[#FF9500] uppercase tracking-wider truncate">TEAM 2</label>
               </div>
-              <div class="flex items-center gap-1.5">
+              <div class="flex items-center gap-1.5 shrink-0">
                 <span class="text-[11px] font-semibold text-slate-400">Rating</span>
                 <span id="team-b-primary-rating" class="text-xs sm:text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-amber-50 text-[#FF9500] border border-amber-200/80 min-w-[52px] text-center">
                   --
@@ -503,8 +529,8 @@
             </div>
 
             <!-- Unmistakable Search Input with Magnifying Glass Icon -->
-            <div class="relative space-y-1.5">
-              <div class="relative flex items-center">
+            <div class="relative space-y-2 min-w-0">
+              <div class="relative flex items-center min-w-0">
                 <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
                 <input
                   type="text"
@@ -515,18 +541,18 @@
                   onclick="showTeamDropdown('b')"
                   placeholder="Search team name, club, or state..."
                   autocomplete="off"
-                  class="w-full bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl pl-9 pr-16 py-2.5 text-xs sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all placeholder:text-slate-400 placeholder:font-normal"
+                  class="w-full min-w-0 min-h-[44px] bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl pl-9 pr-[92px] sm:pr-16 py-2.5 text-base sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all placeholder:text-slate-400 placeholder:font-normal"
                 />
-                <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <div class="absolute right-0.5 sm:right-2 top-1/2 -translate-y-1/2 flex items-center">
                   <button
                     type="button"
                     id="btn-clear-team-b"
                     onclick="clearTeamSelection('b')"
                     aria-label="Clear team selection"
                     title="Clear team selection"
-                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6 hidden"
+                    class="text-gray-400 hover:text-gray-600 active:text-gray-800 rounded-lg transition-colors cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-7 sm:h-7 hidden"
                   >
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
@@ -535,10 +561,10 @@
                     id="btn-toggle-dropdown-b"
                     onclick="toggleTeamDropdown('b')"
                     aria-label="Toggle team dropdown"
-                    class="text-slate-400 hover:text-slate-600 p-1 rounded-md transition-colors cursor-pointer flex items-center justify-center w-6 h-6"
+                    class="text-slate-400 hover:text-slate-600 rounded-lg transition-colors cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-7 sm:h-7"
                     tabindex="-1"
                   >
-                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    <i class="fa-solid fa-chevron-down text-xs sm:text-[10px]"></i>
                   </button>
                 </div>
               </div>
@@ -546,19 +572,19 @@
               <!-- Floating Autocomplete Dropdown Menu -->
               <div
                 id="team-b-dropdown"
-                class="hidden absolute left-0 right-0 top-[48px] bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-56 overflow-y-auto divide-y divide-slate-100 transition-all"
+                class="hidden absolute left-0 right-0 top-full mt-1.5 bg-white rounded-xl border border-slate-200 shadow-xl z-50 max-h-64 overflow-y-auto divide-y divide-slate-100 transition-all w-full"
               >
                 <!-- Populated dynamically via JS -->
               </div>
 
               <!-- Club Name, Division/State, and Record Badge -->
-              <div class="flex items-center justify-between text-[11px] px-1 text-slate-500 min-h-[18px]">
-                <div id="team-b-record-badge" class="flex items-center gap-1.5 truncate">
+              <div class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[11px] px-0.5 text-slate-500 min-h-[18px] min-w-0">
+                <div id="team-b-record-badge" class="flex flex-wrap items-center gap-1.5 min-w-0 flex-1">
                   <span class="text-slate-400 text-[11px] flex items-center gap-1.5">
                     <i class="fa-solid fa-arrow-up text-[10px] text-amber-500"></i> Type to search or pick a club above
                   </span>
                 </div>
-                <span class="text-slate-400 text-[10px] shrink-0">Nationwide index</span>
+                <span class="text-slate-400 text-[10px] shrink-0 hidden sm:inline">Nationwide index</span>
               </div>
             </div>
 
@@ -569,29 +595,29 @@
                 onclick="toggleCardTray('b', 'advanced')"
                 id="tray-btn-b-advanced"
                 aria-expanded="false"
-                class="w-full flex items-center justify-between py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none"
+                class="w-full min-h-[44px] sm:min-h-0 flex items-center justify-between gap-2 py-2 sm:py-1.5 text-xs text-slate-600 hover:text-[#1C1C1E] transition-colors cursor-pointer group focus:outline-none min-w-0"
               >
-                <div class="flex items-center gap-1.5">
-                  <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#FF9500]">
-                    <i class="fa-solid fa-sliders text-[#FF9500] text-[10px]"></i>
-                    <span>⚙️ Adjust Rating &amp; Situational Modifiers</span>
+                <div class="flex items-center gap-1.5 min-w-0">
+                  <span class="font-semibold text-slate-700 text-[11px] uppercase tracking-wider flex items-center gap-1.5 group-hover:text-[#FF9500] truncate">
+                    <i class="fa-solid fa-sliders text-[#FF9500] text-[10px] shrink-0"></i>
+                    <span class="truncate">Adjust Rating &amp; Modifiers</span>
                   </span>
                   <span
                     id="tray-mod-badge-b"
-                    class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200/90"
+                    class="hidden inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200/90 shrink-0"
                   >
                     1 active
                   </span>
                 </div>
-                <span class="flex items-center gap-1 text-slate-400 group-hover:text-slate-600 text-xs">
-                  <span id="tray-mod-summary-b" class="text-[10px] text-slate-400 font-medium">Goalie, bench, rest</span>
+                <span class="flex items-center gap-1.5 text-slate-400 group-hover:text-slate-600 text-xs shrink-0">
+                  <span id="tray-mod-summary-b" class="text-[10px] text-slate-400 font-medium hidden sm:inline">Goalie, bench, rest</span>
                   <i id="tray-chevron-b-advanced" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
                 </span>
               </button>
 
               <div
                 id="tray-content-b-advanced"
-                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-2 space-y-3.5 border-t border-slate-100"
+                class="hidden overflow-hidden transition-all duration-200 pb-2 pt-2.5 space-y-3.5 border-t border-slate-100"
               >
                 <!-- 1. Manual Rating Override -->
                 <div class="space-y-1.5">
@@ -606,7 +632,7 @@
                     <button
                       type="button"
                       onclick="stepRating('b', -0.25)"
-                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                      class="w-12 min-w-[44px] min-h-[44px] sm:min-h-0 sm:h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                     >
                       -0.25
                     </button>
@@ -621,12 +647,12 @@
                       onclick="this.select(); handleRatingInputTap(this)"
                       ontouchstart="this.select(); handleRatingInputTap(this)"
                       oninput="onTeamInputsChanged()"
-                      class="w-full h-10 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3 text-center text-lg font-bold text-[#1C1C1E] focus:outline-none transition-all"
+                      class="w-full min-w-0 min-h-[44px] sm:min-h-0 sm:h-10 bg-[#F2F2F7] focus:bg-white border border-slate-200 focus:border-[#FF9500] focus:ring-2 focus:ring-amber-100 rounded-xl px-3 text-center text-lg font-bold text-[#1C1C1E] focus:outline-none transition-all"
                     />
                     <button
                       type="button"
                       onclick="stepRating('b', 0.25)"
-                      class="w-12 h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
+                      class="w-12 min-w-[44px] min-h-[44px] sm:min-h-0 sm:h-10 bg-[#F2F2F7] hover:bg-slate-200 active:bg-slate-300 text-[#1C1C1E] rounded-xl border border-slate-200/90 flex items-center justify-center font-bold text-xs shrink-0 select-none transition-colors cursor-pointer"
                     >
                       +0.25
                     </button>
@@ -639,12 +665,12 @@
                     <i class="fa-solid fa-chart-line text-[10px] text-[#FF9500]"></i>
                     Estimate by Tier (1-Tap Benchmarks)
                   </span>
-                  <div class="flex flex-wrap gap-1.5">
-                    <button type="button" onclick="setTierRating('b', 92.50, 'AAA / Elite')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">AAA / Elite <span class="text-slate-400 font-normal">92.5</span></button>
-                    <button type="button" onclick="setTierRating('b', 85.00, 'Tier 2 AA')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 AA <span class="text-slate-400 font-normal">85.0</span></button>
-                    <button type="button" onclick="setTierRating('b', 78.50, 'Tier 2 A')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 2 A <span class="text-slate-400 font-normal">78.5</span></button>
-                    <button type="button" onclick="setTierRating('b', 71.00, 'Tier 3 B')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">Tier 3 B <span class="text-slate-400 font-normal">71.0</span></button>
-                    <button type="button" onclick="setTierRating('b', 64.00, 'House / Rec')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95">House / Rec <span class="text-slate-400 font-normal">64.0</span></button>
+                  <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                    <button type="button" onclick="setTierRating('b', 92.50, 'AAA / Elite')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">AAA / Elite <span class="text-slate-400 font-normal">92.5</span></button>
+                    <button type="button" onclick="setTierRating('b', 85.00, 'Tier 2 AA')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">Tier 2 AA <span class="text-slate-400 font-normal">85.0</span></button>
+                    <button type="button" onclick="setTierRating('b', 78.50, 'Tier 2 A')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">Tier 2 A <span class="text-slate-400 font-normal">78.5</span></button>
+                    <button type="button" onclick="setTierRating('b', 71.00, 'Tier 3 B')" class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">Tier 3 B <span class="text-slate-400 font-normal">71.0</span></button>
+                    <button type="button" onclick="setTierRating('b', 64.00, 'House / Rec')" class="col-span-2 sm:col-span-1 min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 text-slate-700 border border-slate-200/90 transition-all cursor-pointer active:scale-95 text-center">House / Rec <span class="text-slate-400 font-normal">64.0</span></button>
                   </div>
                 </div>
 
@@ -654,10 +680,10 @@
                     <i class="fa-solid fa-sliders text-[10px] text-[#FF9500]"></i>
                     Situational Modifiers
                   </span>
-                  <div class="flex flex-wrap gap-1.5">
-                    <button type="button" id="mod-b-goalie" onclick="toggleModifier('b', 'goalie')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Backup Goalie (-0.75)</button>
-                    <button type="button" id="mod-b-bench" onclick="toggleModifier('b', 'bench')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">Short Bench (-0.50)</button>
-                    <button type="button" id="mod-b-fatigue" onclick="toggleModifier('b', 'fatigue')" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer">3rd Game in 24h (-0.50)</button>
+                  <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                    <button type="button" id="mod-b-goalie" onclick="toggleModifier('b', 'goalie')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center">Backup Goalie (-0.75)</button>
+                    <button type="button" id="mod-b-bench" onclick="toggleModifier('b', 'bench')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center">Short Bench (-0.50)</button>
+                    <button type="button" id="mod-b-fatigue" onclick="toggleModifier('b', 'fatigue')" class="col-span-2 sm:col-span-1 min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center">3rd Game in 24h (-0.50)</button>
                   </div>
                 </div>
               </div>
@@ -667,10 +693,10 @@
         </div>
 
         <!-- 2ND (MIDDLE): MATCHUP PREDICTOR RESULTS CARD (HERO RESULTS CONTAINER) -->
-        <div id="hero-prediction-card" class="rounded-2xl p-6 sm:p-7 border border-slate-200/80 bg-white shadow-sm space-y-6 transition-all duration-300">
+        <div id="hero-prediction-card" class="rounded-2xl p-4 sm:p-7 border border-slate-200/80 bg-white shadow-sm space-y-4 sm:space-y-6 transition-all duration-300 min-w-0">
           
           <!-- Empty State (Shown when teams are not selected) -->
-          <div id="hero-empty-state" class="py-10 px-4 text-center space-y-4">
+          <div id="hero-empty-state" class="py-8 sm:py-10 px-2 sm:px-4 text-center space-y-4">
             <div class="w-14 h-14 rounded-2xl bg-[#F2F2F7] border border-slate-200/90 text-slate-400 flex items-center justify-center mx-auto text-xl shadow-xs">
               <i class="fa-solid fa-scale-unbalanced text-slate-400 text-lg"></i>
             </div>
@@ -687,7 +713,7 @@
                 type="button"
                 id="btn-try-sample-matchup"
                 onclick="loadSampleMatchup()"
-                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-[#007AFF] border border-blue-200/90 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer group"
+                class="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-[#007AFF] border border-blue-200/90 text-xs sm:text-sm font-bold shadow-xs active:scale-95 transition-all cursor-pointer group"
               >
                 <span class="group-hover:rotate-12 transition-transform">🎲</span>
                 <span>Try a Sample Matchup</span>
@@ -699,29 +725,29 @@
                 type="button"
                 id="empty-state-status-t1"
                 onclick="document.getElementById('team-a-name')?.focus(); showTeamDropdown('a');"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-semibold bg-blue-50/70 hover:bg-blue-100 text-[#007AFF] border border-blue-200/80 transition-all cursor-pointer shadow-2xs"
+                class="inline-flex items-center justify-center gap-1.5 min-h-[44px] sm:min-h-0 px-3.5 py-2 sm:py-1.5 rounded-full font-semibold bg-blue-50/70 hover:bg-blue-100 text-[#007AFF] border border-blue-200/80 transition-all cursor-pointer shadow-2xs"
               >
-                <i class="fa-solid fa-magnifying-glass text-[9px]"></i> Search Team 1
+                <i class="fa-solid fa-magnifying-glass text-[10px]"></i> Search Team 1
               </button>
               <button
                 type="button"
                 id="empty-state-status-t2"
                 onclick="document.getElementById('team-b-name')?.focus(); showTeamDropdown('b');"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-semibold bg-amber-50/70 hover:bg-amber-100 text-[#FF9500] border border-amber-200/80 transition-all cursor-pointer shadow-2xs"
+                class="inline-flex items-center justify-center gap-1.5 min-h-[44px] sm:min-h-0 px-3.5 py-2 sm:py-1.5 rounded-full font-semibold bg-amber-50/70 hover:bg-amber-100 text-[#FF9500] border border-amber-200/80 transition-all cursor-pointer shadow-2xs"
               >
-                <i class="fa-solid fa-magnifying-glass text-[9px]"></i> Search Team 2
+                <i class="fa-solid fa-magnifying-glass text-[10px]"></i> Search Team 2
               </button>
             </div>
           </div>
 
           <!-- Active Calculation Content (Hidden until both teams are selected) -->
-          <div id="hero-active-content" class="hidden space-y-6">
+          <div id="hero-active-content" class="hidden space-y-4 sm:space-y-6 min-w-0">
             <!-- Featured Close Matchup Banner & Shuffle Button -->
-            <div id="matchup-featured-bar" class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100/80">
-              <div class="flex items-center gap-2 flex-wrap">
+            <div id="matchup-featured-bar" class="flex flex-wrap items-center justify-between gap-2 pb-2.5 sm:pb-3 border-b border-slate-100/80 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap min-w-0">
                 <span
                   id="featured-matchup-badge"
-                  class="hidden inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200/80 shadow-2xs"
+                  class="hidden inline-flex items-center gap-1.5 px-2.5 py-1 sm:py-0.5 rounded-full text-[11px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200/80 shadow-2xs"
                 >
                   <i class="fa-solid fa-bolt text-[10px] text-indigo-500"></i>
                   <span>Featured Close Matchup</span>
@@ -734,18 +760,18 @@
                 type="button"
                 id="btn-shuffle-matchup"
                 onclick="shuffleCloseMatchup()"
-                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F2F2F7] hover:bg-slate-200/80 text-[#1C1C1E] border border-slate-200/90 transition-all cursor-pointer active:scale-95 ml-auto"
+                class="inline-flex items-center justify-center gap-1.5 min-h-[44px] sm:min-h-0 px-3.5 sm:px-3 py-2 sm:py-1 rounded-full text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] hover:bg-slate-200/80 text-[#1C1C1E] border border-slate-200/90 transition-all cursor-pointer active:scale-95 ml-auto shrink-0"
                 title="Cycle through other random close matchups from teams.json"
               >
-                <i class="fa-solid fa-shuffle text-[10px] text-[#007AFF]"></i>
+                <i class="fa-solid fa-shuffle text-[11px] sm:text-[10px] text-[#007AFF]"></i>
                 <span>Shuffle Matchup</span>
               </button>
             </div>
 
             <!-- Spread & Dynamic Verdict -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-              <div>
-                <div class="flex items-center gap-2.5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 pb-4 sm:pb-5 min-w-0">
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
                   <span class="text-xs uppercase tracking-wider font-semibold text-[#8E8E93]">
                     Projected Spread
                   </span>
@@ -753,50 +779,50 @@
                     type="button"
                     id="btn-share-matchup"
                     onclick="handleShareAction('matchup')"
-                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
+                    class="inline-flex items-center justify-center gap-1.5 min-h-[44px] sm:min-h-0 px-3 sm:px-2.5 py-2 sm:py-0.5 rounded-full text-xs sm:text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95 shrink-0"
                     title="Share this matchup deep-link"
                   >
                     <i class="fa-solid fa-share-nodes text-[10px]"></i>
                     <span id="btn-share-matchup-label">Share Matchup</span>
                   </button>
                 </div>
-                <div class="flex items-baseline gap-2.5 mt-1">
-                  <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF]" id="hero-spread-val">
+                <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1 mt-1 min-w-0">
+                  <span class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#007AFF] shrink-0" id="hero-spread-val">
                     +0.00
                   </span>
-                  <span class="text-xs font-medium text-[#8E8E93]" id="hero-favored-label">Even parity matchup</span>
+                  <span class="text-xs font-medium text-[#8E8E93] break-words min-w-0" id="hero-favored-label">Even parity matchup</span>
                 </div>
               </div>
 
               <!-- Dynamic Verdict Badge (iOS Pill) -->
-              <div id="hero-verdict-badge" class="px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center shadow-xs">
-                <span class="w-2 h-2 rounded-full bg-current"></span>
+              <div id="hero-verdict-badge" class="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border flex items-center gap-2 self-start sm:self-center shadow-xs shrink-0">
+                <span class="w-2 h-2 rounded-full bg-current shrink-0"></span>
                 <span id="hero-verdict-text">Even Battle</span>
               </div>
             </div>
 
             <!-- Score & Win Probability Bar (iOS Battery Style) -->
-            <div class="space-y-4">
-              <div class="grid grid-cols-3 items-center text-center">
-                <div class="text-left sm:text-center space-y-1">
-                  <div class="flex items-center justify-start sm:justify-center gap-1.5 flex-wrap">
-                    <span id="label-team-a" class="text-xs sm:text-sm font-bold text-[#007AFF] truncate max-w-[130px] sm:max-w-[180px]">Team 1</span>
-                    <span id="label-badge-a" class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-blue-100 text-[#007AFF] border border-blue-200 shrink-0">12U AA</span>
+            <div class="space-y-4 min-w-0">
+              <div class="grid grid-cols-3 gap-2 items-center text-center min-w-0">
+                <div class="text-left sm:text-center space-y-1 min-w-0">
+                  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-center gap-1 sm:gap-1.5 min-w-0">
+                    <span id="label-team-a" class="text-xs sm:text-sm font-bold text-[#007AFF] line-clamp-2 sm:truncate max-w-full sm:max-w-[180px] break-words leading-tight">Team 1</span>
+                    <span id="label-badge-a" class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-[#007AFF] border border-blue-200 shrink-0">12U AA</span>
                   </div>
                   <div id="score-team-a" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.2</div>
                   <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
                 </div>
 
-                <div class="space-y-1">
-                  <span class="text-[10px] uppercase font-bold tracking-widest text-[#8E8E93]">PROJECTION</span>
-                  <div class="text-lg sm:text-xl font-bold text-slate-400">VS</div>
-                  <span id="total-goals-label" class="text-xs text-[#8E8E93] font-medium">6.3 Tot Goals</span>
+                <div class="space-y-0.5 sm:space-y-1 min-w-0 px-1">
+                  <span class="text-[10px] uppercase font-bold tracking-wider sm:tracking-widest text-[#8E8E93] block">PROJECTION</span>
+                  <div class="text-base sm:text-xl font-bold text-slate-400">VS</div>
+                  <span id="total-goals-label" class="text-[11px] sm:text-xs text-[#8E8E93] font-medium block truncate">6.3 Tot Goals</span>
                 </div>
 
-                <div class="text-right sm:text-center space-y-1">
-                  <div class="flex items-center justify-end sm:justify-center gap-1.5 flex-wrap">
-                    <span id="label-badge-b" class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200 shrink-0">12U AA</span>
-                    <span id="label-team-b" class="text-xs sm:text-sm font-bold text-[#FF9500] truncate max-w-[130px] sm:max-w-[180px]">Team 2</span>
+                <div class="text-right sm:text-center space-y-1 min-w-0">
+                  <div class="flex flex-col-reverse sm:flex-row items-end sm:items-center justify-end sm:justify-center gap-1 sm:gap-1.5 min-w-0">
+                    <span id="label-badge-b" class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-[#FF9500] border border-amber-200 shrink-0">12U AA</span>
+                    <span id="label-team-b" class="text-xs sm:text-sm font-bold text-[#FF9500] line-clamp-2 sm:truncate max-w-full sm:max-w-[180px] break-words leading-tight">Team 2</span>
                   </div>
                   <div id="score-team-b" class="text-3xl sm:text-4xl font-extrabold text-[#1C1C1E]">3.1</div>
                   <span class="text-[11px] text-[#8E8E93] block">Expected Goals</span>
@@ -804,11 +830,11 @@
               </div>
 
               <!-- Win Probability Meter (Apple iOS Segmented Bar) -->
-              <div class="space-y-1.5 pt-1">
-                <div class="flex justify-between text-xs font-semibold px-0.5">
-                  <span class="text-[#007AFF]" id="prob-a-label">Team 1 48%</span>
-                  <span class="text-[#8E8E93]" id="prob-tie-label">OT/Tie 18%</span>
-                  <span class="text-[#FF9500]" id="prob-b-label">Team 2 34%</span>
+              <div class="space-y-1.5 pt-1 min-w-0">
+                <div class="grid grid-cols-3 gap-1 text-[11px] sm:text-xs font-semibold px-0.5 min-w-0">
+                  <span class="text-[#007AFF] text-left truncate min-w-0" id="prob-a-label">Team 1 48%</span>
+                  <span class="text-[#8E8E93] text-center truncate min-w-0" id="prob-tie-label">OT/Tie 18%</span>
+                  <span class="text-[#FF9500] text-right truncate min-w-0" id="prob-b-label">Team 2 34%</span>
                 </div>
                 <div class="h-3.5 w-full bg-[#E5E5EA] rounded-full overflow-hidden flex p-0.5 shadow-inner">
                   <div id="prob-bar-a" class="h-full bg-[#007AFF] rounded-l-full transition-all duration-300" style="width: 48%"></div>
@@ -819,14 +845,14 @@
             </div>
 
             <!-- Cross-Division Game Contextual Notice (Shown when age divisions differ) -->
-            <div id="cross-division-alert" class="hidden p-3.5 rounded-xl bg-amber-50/90 border border-amber-200/90 flex items-start gap-2.5 text-xs text-amber-950 shadow-2xs">
+            <div id="cross-division-alert" class="hidden p-3.5 rounded-xl bg-amber-50/90 border border-amber-200/90 flex items-start gap-2.5 text-xs text-amber-950 shadow-2xs min-w-0">
               <div class="w-5 h-5 rounded-full bg-amber-200/70 text-[#FF9500] flex items-center justify-center shrink-0 mt-0.5">
                 <i class="fa-solid fa-arrows-split-up-and-left text-[11px]"></i>
               </div>
-              <div class="space-y-0.5">
-                <div class="font-bold flex items-center gap-2">
+              <div class="space-y-0.5 min-w-0">
+                <div class="font-bold flex flex-wrap items-center gap-2">
                   <span class="text-[#FF9500] uppercase tracking-wider text-[10px] font-black">Cross-Division Matchup</span>
-                  <span id="cross-div-badge" class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-200/80 text-amber-900">16U vs 18U</span>
+                  <span id="cross-div-badge" class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-200/80 text-amber-900">16U vs 18U</span>
                 </div>
                 <p class="text-amber-900/90 leading-relaxed text-[11px]">
                   Cross-Division Game: Physical maturity, checking intensity, and game speed differences between age classifications may impact on-ice play beyond standard ratings.
@@ -835,13 +861,13 @@
             </div>
 
             <!-- Tactical Coaching Summary Card (iOS Clean Alert Container) -->
-            <div id="tactical-summary-box" class="p-4 rounded-xl bg-blue-50/70 border border-blue-100 space-y-1.5 text-xs">
-              <div class="flex items-center justify-between font-semibold">
-                <span class="flex items-center gap-1.5 text-[#007AFF]">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  Tactical Coaching &amp; Developmental Assessment
+            <div id="tactical-summary-box" class="p-3.5 sm:p-4 rounded-xl bg-blue-50/70 border border-blue-100 space-y-1.5 text-xs min-w-0">
+              <div class="flex flex-wrap items-center justify-between gap-2 font-semibold min-w-0">
+                <span class="flex items-center gap-1.5 text-[#007AFF] min-w-0">
+                  <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span class="truncate">Tactical Coaching &amp; Assessment</span>
                 </span>
-                <span id="tactical-verdict-tag" class="text-[11px] font-bold text-emerald-700">Peak Parity</span>
+                <span id="tactical-verdict-tag" class="text-[11px] font-bold text-emerald-700 shrink-0">Peak Parity</span>
               </div>
               <p id="tactical-summary-text" class="text-slate-700 leading-relaxed text-xs">
                 This matchup represents ideal competitive balance. Both teams can execute neutral-zone forechecks and test special teams without blowout demoralization.
@@ -857,52 +883,52 @@
             type="button"
             id="btn-share-team-chat-predictor"
             onclick="shareToTeamChat('predictor')"
-            class="w-full py-3.5 px-5 rounded-2xl bg-[#007AFF] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-sm hover:shadow transition-all cursor-pointer group"
+            class="w-full min-h-[48px] py-3.5 px-4 sm:px-5 rounded-2xl bg-[#007AFF] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-sm hover:shadow transition-all cursor-pointer group"
           >
-            <i class="fa-solid fa-comment-dots text-base group-hover:scale-110 transition-transform"></i>
-            <span id="btn-share-team-chat-predictor-label">Share to Team Chat</span>
-            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white/95">
+            <i class="fa-solid fa-comment-dots text-base group-hover:scale-110 transition-transform shrink-0"></i>
+            <span id="btn-share-team-chat-predictor-label" class="whitespace-nowrap">Share to Team Chat</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white/95 shrink-0">
               TeamSnap • Group Text
             </span>
           </button>
         </div>
 
         <!-- MATCHUP SUGGESTIONS (1-TAP QUICK SCENARIOS ROW) - POSITIONED DIRECTLY BELOW SPREAD RESULTS -->
-        <div id="matchup-suggestions-container" class="hidden space-y-2">
-          <div class="flex items-center justify-between text-xs text-[#8E8E93] px-1">
-            <span class="font-semibold uppercase tracking-wider text-[#1C1C1E] flex items-center gap-1.5">
-              <span>Matchup Suggestions</span>
-              <span id="suggestions-team-label" class="font-normal text-[#8E8E93] text-[11px] truncate max-w-[200px] sm:max-w-[340px]"></span>
+        <div id="matchup-suggestions-container" class="hidden space-y-2 min-w-0">
+          <div class="flex flex-wrap items-center justify-between gap-1 text-xs text-[#8E8E93] px-1 min-w-0">
+            <span class="font-semibold uppercase tracking-wider text-[#1C1C1E] flex items-center gap-1.5 min-w-0">
+              <span class="shrink-0">Matchup Suggestions</span>
+              <span id="suggestions-team-label" class="font-normal text-[#8E8E93] text-[11px] truncate max-w-[160px] sm:max-w-[340px]"></span>
             </span>
-            <span class="text-[11px]">1-Tap Quick Scenarios</span>
+            <span class="text-[11px] shrink-0">1-Tap Quick Scenarios</span>
           </div>
-          <div id="matchup-suggestions-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div id="matchup-suggestions-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 min-w-0">
             <!-- Populated dynamically via renderMatchupSuggestions() driven by Team 1 -->
           </div>
         </div>
 
         <!-- 5TH: COLLAPSIBLE ACCORDION DRAWERS (iOS DISCLOSURE GROUPS) -->
-        <div class="space-y-3">
+        <div class="space-y-3 min-w-0">
 
           <!-- ACCORDION 1: COST CALCULATOR -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all">
+          <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all min-w-0">
             <button
               type="button"
               onclick="toggleAccordion('cost')"
-              class="w-full px-5 py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#1C1C1E] hover:bg-slate-50 transition-colors group cursor-pointer"
+              class="w-full min-h-[48px] px-4 sm:px-5 py-3.5 sm:py-4 flex items-center justify-between gap-2 text-left text-xs font-bold uppercase tracking-wider text-[#1C1C1E] hover:bg-slate-50 transition-colors group cursor-pointer min-w-0"
             >
-              <span class="flex items-center gap-2.5">
-                <i class="fa-solid fa-calculator text-[#007AFF] text-sm"></i>
-                <span>Cost Calculator &amp; Financial Parity</span>
+              <span class="flex items-center gap-2 min-w-0">
+                <i class="fa-solid fa-calculator text-[#007AFF] text-sm shrink-0"></i>
+                <span class="truncate">Cost Calculator &amp; Parity</span>
               </span>
-              <div class="flex items-center gap-3">
-                <span id="accordion-cost-summary" class="text-[#007AFF] font-bold text-xs">$235.00 / team</span>
+              <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <span id="accordion-cost-summary" class="text-[#007AFF] font-bold text-xs whitespace-nowrap">$235.00 / team</span>
                 <i id="accordion-cost-chevron" class="fa-solid fa-chevron-down text-[#8E8E93] text-xs inline-block transition-transform duration-200 ease-in-out transform"></i>
               </div>
             </button>
 
             <div id="accordion-cost-content" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-5 pb-5 pt-3 border-t border-slate-100 space-y-4">
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5 pt-3 border-t border-slate-100 space-y-4">
                 <!-- Drive Time Chips -->
                 <div class="space-y-1.5">
                   <label class="text-xs font-semibold text-[#1C1C1E] block">Drive Time / Distance Bracket</label>
@@ -911,7 +937,7 @@
                       type="button"
                       onclick="setDriveTime('<30m')"
                       id="drive-opt-1"
-                      class="py-2.5 px-3 text-xs font-semibold rounded-xl bg-[#007AFF] text-white text-center shadow-xs cursor-pointer"
+                      class="min-h-[44px] py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-semibold rounded-xl bg-[#007AFF] text-white text-center shadow-xs cursor-pointer leading-tight"
                     >
                       &lt; 30m (Local)
                     </button>
@@ -919,7 +945,7 @@
                       type="button"
                       onclick="setDriveTime('30-90m')"
                       id="drive-opt-2"
-                      class="py-2.5 px-3 text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors"
+                      class="min-h-[44px] py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors leading-tight"
                     >
                       30–90m (Regional)
                     </button>
@@ -927,9 +953,9 @@
                       type="button"
                       onclick="setDriveTime('2-4h')"
                       id="drive-opt-3"
-                      class="py-2.5 px-3 text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors"
+                      class="min-h-[44px] py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors leading-tight"
                     >
-                      2–4h (Travel Hub)
+                      2–4h (Travel)
                     </button>
                   </div>
                 </div>
@@ -946,7 +972,7 @@
                       onclick="this.select(); handleRatingInputTap(this)"
                       ontouchstart="this.select(); handleRatingInputTap(this)"
                       oninput="recalculateCosts()"
-                      class="w-full bg-[#F2F2F7] border border-slate-200 focus:bg-white focus:border-[#007AFF] rounded-xl px-3.5 py-2 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                      class="w-full min-h-[44px] sm:min-h-0 bg-[#F2F2F7] border border-slate-200 focus:bg-white focus:border-[#007AFF] rounded-xl px-3.5 py-2 text-base sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
                     />
                   </div>
                   <div class="space-y-1">
@@ -959,7 +985,7 @@
                       onclick="this.select(); handleRatingInputTap(this)"
                       ontouchstart="this.select(); handleRatingInputTap(this)"
                       oninput="recalculateCosts()"
-                      class="w-full bg-[#F2F2F7] border border-slate-200 focus:bg-white focus:border-[#007AFF] rounded-xl px-3.5 py-2 text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
+                      class="w-full min-h-[44px] sm:min-h-0 bg-[#F2F2F7] border border-slate-200 focus:bg-white focus:border-[#007AFF] rounded-xl px-3.5 py-2 text-base sm:text-sm font-semibold text-[#1C1C1E] focus:outline-none transition-all"
                     />
                   </div>
                   <div class="space-y-1">
@@ -968,7 +994,7 @@
                       type="button"
                       id="cost-split-btn"
                       onclick="toggleCostSplit()"
-                      class="w-full h-[40px] bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 rounded-xl px-3 text-xs font-semibold text-[#1C1C1E] text-center flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                      class="w-full min-h-[44px] sm:h-[40px] sm:min-h-0 bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 rounded-xl px-3 text-xs font-semibold text-[#1C1C1E] text-center flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
                     >
                       <span id="cost-split-label">50/50 Split</span>
                     </button>
@@ -976,7 +1002,7 @@
                 </div>
 
                 <!-- Cost Summary Results (iOS Inset Card) -->
-                <div class="p-3.5 bg-[#F2F2F7] rounded-xl border border-slate-200/80 flex items-center justify-between text-xs">
+                <div class="p-3.5 bg-[#F2F2F7] rounded-xl border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs">
                   <div>
                     <span class="text-[#8E8E93]">Total Fixture Cost: </span>
                     <strong id="cost-total-display" class="text-[#1C1C1E] font-bold">$470.00</strong>
@@ -991,24 +1017,24 @@
           </div>
 
           <!-- ACCORDION 2: DRAFT COACH PITCH EMAIL / TEXT -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all">
+          <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all min-w-0">
             <button
               type="button"
               onclick="toggleAccordion('pitch')"
-              class="w-full px-5 py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#1C1C1E] hover:bg-slate-50 transition-colors group cursor-pointer"
+              class="w-full min-h-[48px] px-4 sm:px-5 py-3.5 sm:py-4 flex items-center justify-between gap-2 text-left text-xs font-bold uppercase tracking-wider text-[#1C1C1E] hover:bg-slate-50 transition-colors group cursor-pointer min-w-0"
             >
-              <span class="flex items-center gap-2.5">
-                <i class="fa-solid fa-envelope text-[#007AFF] text-sm"></i>
-                <span>Draft Coach Pitch Email / Text</span>
+              <span class="flex items-center gap-2 min-w-0">
+                <i class="fa-solid fa-envelope text-[#007AFF] text-sm shrink-0"></i>
+                <span class="truncate">Draft Coach Pitch Email / Text</span>
               </span>
-              <div class="flex items-center gap-3">
-                <span class="text-[#007AFF] font-semibold text-xs">Pre-filled Proposal</span>
+              <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <span class="text-[#007AFF] font-semibold text-xs hidden sm:inline">Pre-filled Proposal</span>
                 <i id="accordion-pitch-chevron" class="fa-solid fa-chevron-down text-[#8E8E93] text-xs inline-block transition-transform duration-200 ease-in-out transform"></i>
               </div>
             </button>
 
             <div id="accordion-pitch-content" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-5 pb-5 pt-3 border-t border-slate-100 space-y-3.5">
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5 pt-3 border-t border-slate-100 space-y-3.5">
                 <p class="text-xs text-[#8E8E93]">
                   Pre-formatted booking proposal ready to send to the opposing coach or scheduler via text or email.
                 </p>
@@ -1017,23 +1043,23 @@
                 <textarea
                   id="pitch-textarea"
                   rows="7"
-                  class="w-full bg-[#F2F2F7] border border-slate-200 rounded-xl p-3.5 text-xs text-[#1C1C1E] leading-relaxed focus:bg-white focus:border-[#007AFF] focus:outline-none transition-all"
+                  class="w-full bg-[#F2F2F7] border border-slate-200 rounded-xl p-3.5 text-base sm:text-xs text-[#1C1C1E] leading-relaxed focus:bg-white focus:border-[#007AFF] focus:outline-none transition-all"
                 ></textarea>
 
                 <!-- Action Buttons (iOS Blue Filled Primary) -->
-                <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
-                  <div class="flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pt-1">
+                  <div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
                     <a
                       id="btn-sms-pitch"
                       href="#"
-                      class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F2F2F7] hover:bg-slate-200 text-[#1C1C1E] border border-slate-200 transition-colors"
+                      class="min-h-[44px] sm:min-h-0 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F2F2F7] hover:bg-slate-200 text-[#1C1C1E] border border-slate-200 transition-colors flex items-center justify-center text-center"
                     >
                       Open in Messages
                     </a>
                     <a
                       id="btn-email-pitch"
                       href="#"
-                      class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F2F2F7] hover:bg-slate-200 text-[#1C1C1E] border border-slate-200 transition-colors"
+                      class="min-h-[44px] sm:min-h-0 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F2F2F7] hover:bg-slate-200 text-[#1C1C1E] border border-slate-200 transition-colors flex items-center justify-center text-center"
                     >
                       Open in Mail
                     </a>
@@ -1043,7 +1069,7 @@
                     type="button"
                     id="btn-copy-pitch"
                     onclick="copyPitchToClipboard()"
-                    class="px-5 py-2 text-xs font-bold text-white bg-[#007AFF] hover:bg-blue-600 active:scale-98 rounded-xl transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
+                    class="w-full sm:w-auto min-h-[44px] sm:min-h-0 px-5 py-2.5 sm:py-2 text-xs font-bold text-white bg-[#007AFF] hover:bg-blue-600 active:scale-98 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
                   >
                     <i class="fa-regular fa-copy text-xs"></i>
                     <span id="copy-btn-text">Copy Pitch</span>
@@ -1061,82 +1087,103 @@
       <!-- ========================================== -->
       <!-- VIEW 2: TOURNAMENT BRACKET PARITY GRADER   -->
       <!-- ========================================== -->
-      <div id="view-bracket" class="hidden space-y-6">
+      <div id="view-bracket" class="hidden space-y-4 sm:space-y-6 min-w-0">
 
         <!-- Division Setup & Presets (iOS Grouped Container) -->
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <div class="flex items-center gap-2.5 flex-wrap">
-                <h2 class="text-base font-bold text-[#1C1C1E]">Tournament Bracket Parity Grader</h2>
-                <button
-                  type="button"
-                  id="btn-share-bracket"
-                  onclick="handleShareAction('tournament')"
-                  class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
-                  title="Share this tournament bracket deep-link"
-                >
-                  <i class="fa-solid fa-share-nodes text-[10px]"></i>
-                  <span id="btn-share-bracket-label">Share Bracket</span>
-                </button>
-              </div>
-              <p class="text-xs text-[#8E8E93] mt-0.5">
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4 min-w-0">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 min-w-0">
+            <div class="min-w-0">
+              <h2 class="text-base font-bold text-[#1C1C1E]">Tournament Bracket Parity Grader</h2>
+              <p class="text-xs text-[#8E8E93] mt-0.5 leading-relaxed">
                 Evaluate 4-to-8 team single-elimination brackets and round-robin divisions for competitive equity.
               </p>
             </div>
 
-            <!-- Team Count Selector (iOS Segmented Style - Standardized) -->
-            <div class="flex items-center gap-2">
-              <span class="text-xs text-[#8E8E93] font-medium">Format:</span>
-              <div class="inline-flex rounded-xl bg-[#E5E5EA] p-1 gap-1">
-                <button type="button" onclick="setBracketTeamCount(4)" id="btn-count-4" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">4 Teams</button>
-                <button type="button" onclick="setBracketTeamCount(5)" id="btn-count-5" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">5 Teams</button>
-                <button type="button" onclick="setBracketTeamCount(6)" id="btn-count-6" class="h-8 px-3 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-xs cursor-default flex items-center justify-center transition-all whitespace-nowrap">6 Teams</button>
-                <button type="button" onclick="setBracketTeamCount(7)" id="btn-count-7" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">7 Teams</button>
-                <button type="button" onclick="setBracketTeamCount(8)" id="btn-count-8" class="h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap">8 Teams</button>
-              </div>
+            <!-- Primary & Utility Actions (Full-width primary emphasis on mobile) -->
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full sm:w-auto shrink-0">
+              <button
+                type="button"
+                id="btn-grade-bracket"
+                onclick="gradeBracketNow()"
+                class="col-span-2 sm:col-span-1 w-full sm:w-auto min-h-[44px] sm:min-h-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-1.5 rounded-xl sm:rounded-full text-xs font-bold bg-[#007AFF] text-white hover:bg-blue-600 transition-all cursor-pointer shadow-xs active:scale-95"
+              >
+                <i class="fa-solid fa-chart-simple text-[11px]"></i>
+                <span>Grade Bracket</span>
+              </button>
+              <button
+                type="button"
+                id="btn-reset-bracket"
+                onclick="resetBracketTeams()"
+                class="w-full sm:w-auto min-h-[44px] sm:min-h-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 rounded-xl sm:rounded-full text-xs sm:text-[11px] font-semibold bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer active:scale-95"
+                title="Reset all tournament bracket slots"
+              >
+                <i class="fa-solid fa-rotate-left text-[10px]"></i>
+                <span>Reset</span>
+              </button>
+              <button
+                type="button"
+                id="btn-share-bracket"
+                onclick="handleShareAction('tournament')"
+                class="w-full sm:w-auto min-h-[44px] sm:min-h-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 rounded-xl sm:rounded-full text-xs sm:text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95"
+                title="Share this tournament bracket deep-link"
+              >
+                <i class="fa-solid fa-share-nodes text-[10px]"></i>
+                <span id="btn-share-bracket-label">Share Bracket</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Team Count Selector (iOS Segmented Style - Responsive Grid on Mobile) -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 min-w-0">
+            <span class="text-xs text-[#8E8E93] font-medium shrink-0">Format:</span>
+            <div class="grid grid-cols-5 sm:inline-flex rounded-xl bg-[#E5E5EA] p-1 gap-1 w-full sm:w-auto">
+              <button type="button" onclick="setBracketTeamCount(4)" id="btn-count-4" class="min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap"><span class="sm:hidden">4T</span><span class="hidden sm:inline">4 Teams</span></button>
+              <button type="button" onclick="setBracketTeamCount(5)" id="btn-count-5" class="min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap"><span class="sm:hidden">5T</span><span class="hidden sm:inline">5 Teams</span></button>
+              <button type="button" onclick="setBracketTeamCount(6)" id="btn-count-6" class="min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-xs cursor-default flex items-center justify-center transition-all whitespace-nowrap"><span class="sm:hidden">6T</span><span class="hidden sm:inline">6 Teams</span></button>
+              <button type="button" onclick="setBracketTeamCount(7)" id="btn-count-7" class="min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap"><span class="sm:hidden">7T</span><span class="hidden sm:inline">7 Teams</span></button>
+              <button type="button" onclick="setBracketTeamCount(8)" id="btn-count-8" class="min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap"><span class="sm:hidden">8T</span><span class="hidden sm:inline">8 Teams</span></button>
             </div>
           </div>
 
           <!-- Presets & Division Directory Filter -->
-          <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100 text-xs">
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="text-[#8E8E93] font-medium">Presets:</span>
-              <button onclick="loadBracketPreset('balanced')" class="px-3 py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#1C1C1E] text-xs font-medium cursor-pointer transition-colors">
+          <div class="flex flex-col gap-3 pt-2 border-t border-slate-100 text-xs min-w-0">
+            <div class="flex flex-wrap items-center gap-2 min-w-0">
+              <span class="text-[#8E8E93] font-medium shrink-0">Presets:</span>
+              <button type="button" onclick="loadBracketPreset('balanced')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#1C1C1E] text-xs font-medium cursor-pointer transition-colors text-left">
                 WNY 12U Peewee AA (Balanced)
               </button>
-              <button onclick="loadBracketPreset('elite')" class="px-3 py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#007AFF] text-xs font-medium cursor-pointer transition-colors">
+              <button type="button" onclick="loadBracketPreset('elite')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#007AFF] text-xs font-medium cursor-pointer transition-colors text-left">
                 Tier 1 AAA Invitational
               </button>
-              <button onclick="loadBracketPreset('unbalanced')" class="px-3 py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#FF3B30] text-xs font-medium cursor-pointer transition-colors">
+              <button type="button" onclick="loadBracketPreset('unbalanced')" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200 text-[#FF3B30] text-xs font-medium cursor-pointer transition-colors text-left">
                 Unbalanced Mix (Blowout Hazard)
               </button>
             </div>
             
             <!-- Division quick filter -->
-            <div class="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
-              <span class="text-[#8E8E93] font-medium text-[11px] mr-1">Filter Div:</span>
-              <button onclick="setBracketDivisionFilter('ALL')" id="bracket-div-ALL" class="px-2 py-1 rounded-lg text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer">ALL</button>
-              <button onclick="setBracketDivisionFilter('9U')" id="bracket-div-9U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">9U</button>
-              <button onclick="setBracketDivisionFilter('10U')" id="bracket-div-10U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">10U</button>
-              <button onclick="setBracketDivisionFilter('11U')" id="bracket-div-11U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">11U</button>
-              <button onclick="setBracketDivisionFilter('12U')" id="bracket-div-12U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">12U</button>
-              <button onclick="setBracketDivisionFilter('13U')" id="bracket-div-13U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">13U</button>
-              <button onclick="setBracketDivisionFilter('14U')" id="bracket-div-14U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">14U</button>
-              <button onclick="setBracketDivisionFilter('16U/15U')" id="bracket-div-16U-15U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">16U/15U</button>
-              <button onclick="setBracketDivisionFilter('18U')" id="bracket-div-18U" class="px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer">18U</button>
+            <div class="flex items-center gap-2 overflow-x-auto scroll-touch pb-1 sm:pb-0 w-full max-w-full min-w-0">
+              <span class="text-[#8E8E93] font-medium text-[11px] shrink-0">Filter Div:</span>
+              <button type="button" onclick="setBracketDivisionFilter('ALL')" id="bracket-div-ALL" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer shrink-0">ALL</button>
+              <button type="button" onclick="setBracketDivisionFilter('9U')" id="bracket-div-9U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">9U</button>
+              <button type="button" onclick="setBracketDivisionFilter('10U')" id="bracket-div-10U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">10U</button>
+              <button type="button" onclick="setBracketDivisionFilter('11U')" id="bracket-div-11U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">11U</button>
+              <button type="button" onclick="setBracketDivisionFilter('12U')" id="bracket-div-12U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">12U</button>
+              <button type="button" onclick="setBracketDivisionFilter('13U')" id="bracket-div-13U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">13U</button>
+              <button type="button" onclick="setBracketDivisionFilter('14U')" id="bracket-div-14U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">14U</button>
+              <button type="button" onclick="setBracketDivisionFilter('16U/15U')" id="bracket-div-16U-15U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0 whitespace-nowrap">16U/15U</button>
+              <button type="button" onclick="setBracketDivisionFilter('18U')" id="bracket-div-18U" class="min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0">18U</button>
             </div>
           </div>
         </div>
 
         <!-- Division Parity Metric Header & Export Action Button -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-          <div>
+        <div id="bracket-metrics-section" class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 min-w-0">
+          <div class="min-w-0">
             <h3 class="text-sm font-bold text-[#1C1C1E] flex items-center gap-2">
               <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">
                 <i class="fa-solid fa-award"></i>
               </span>
-              <span>Round-Robin Parity Grade &amp; Metrics</span>
+              <span class="truncate">Round-Robin Parity Grade &amp; Metrics</span>
             </h3>
             <p class="text-xs text-[#8E8E93] mt-0.5">
               Composite competitive balance score across all division matchup pairings
@@ -1147,7 +1194,7 @@
             type="button"
             id="btn-export-division-report"
             onclick="exportDivisionReport()"
-            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#007AFF] hover:bg-blue-600 active:scale-98 text-white shadow-xs transition-all cursor-pointer shrink-0 self-start sm:self-center"
+            class="w-full sm:w-auto min-h-[44px] sm:min-h-0 inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#007AFF] hover:bg-blue-600 active:scale-98 text-white shadow-xs transition-all cursor-pointer shrink-0"
             title="Export or print division parity report"
           >
             <i class="fa-solid fa-file-pdf text-xs"></i>
@@ -1156,85 +1203,91 @@
         </div>
 
         <!-- Division Parity Metric Cards (Apple iOS Cards) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 min-w-0">
           <!-- Grade Card -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
-            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Round-Robin Grade</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 text-center space-y-1 shadow-sm min-w-0">
+            <span class="text-[10px] sm:text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block leading-tight">Overall Grade</span>
             <div id="bracket-grade-val" class="text-3xl sm:text-4xl font-extrabold text-[#34C759]">A</div>
-            <span id="bracket-grade-label" class="text-xs text-[#8E8E93] font-medium block">Competitive Division</span>
+            <span id="bracket-grade-label" class="text-[11px] sm:text-xs text-[#8E8E93] font-medium block truncate">Competitive Division</span>
           </div>
 
           <!-- Division Mean -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
-            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Division Mean (x̄)</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 text-center space-y-1 shadow-sm min-w-0">
+            <span class="text-[10px] sm:text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block leading-tight">Mean Rating (x̄)</span>
             <div id="bracket-mean-val" class="text-2xl sm:text-3xl font-extrabold text-[#1C1C1E]">84.15</div>
-            <span class="text-xs text-[#8E8E93] font-medium block">Average Rating</span>
+            <span class="text-[11px] sm:text-xs text-[#8E8E93] font-medium block truncate">Average Rating</span>
           </div>
 
           <!-- Rating Spread -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
-            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Rating Spread</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 text-center space-y-1 shadow-sm min-w-0">
+            <span class="text-[10px] sm:text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block leading-tight">Rating Spread (Δ)</span>
             <div id="bracket-spread-val" class="text-2xl sm:text-3xl font-extrabold text-[#007AFF]">Δ 3.40</div>
-            <span class="text-xs text-[#8E8E93] font-medium block">Max – Min Rating</span>
+            <span class="text-[11px] sm:text-xs text-[#8E8E93] font-medium block truncate">Max – Min Rating</span>
           </div>
 
           <!-- Std Dev -->
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 text-center space-y-1 shadow-sm">
-            <span class="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block">Standard Deviation (σ)</span>
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 text-center space-y-1 shadow-sm min-w-0">
+            <span class="text-[10px] sm:text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wider block leading-tight">Std Dev (σ)</span>
             <div id="bracket-stddev-val" class="text-2xl sm:text-3xl font-extrabold text-[#1C1C1E]">1.24</div>
-            <span class="text-xs text-[#8E8E93] font-medium block">Dispersion Index</span>
+            <span class="text-[11px] sm:text-xs text-[#8E8E93] font-medium block truncate">Dispersion Index</span>
           </div>
         </div>
 
         <!-- Editable Team List Table with Search & Autocomplete -->
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-100 pb-3">
-            <div>
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm min-w-0">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 min-w-0">
+            <div class="min-w-0">
               <h3 class="text-sm font-bold text-[#1C1C1E]">Division Teams &amp; Seed Slots</h3>
-              <p class="text-xs text-[#8E8E93] mt-0.5">
-                Search to autocomplete official teams and ratings from directory, or enter custom teams. Click (X) to reset.
+              <p class="text-xs text-[#8E8E93] mt-0.5 leading-relaxed">
+                Search to autocomplete official teams and ratings from directory, or enter custom teams. Tap (X) to clear.
               </p>
             </div>
-            <span class="text-xs text-[#007AFF] font-bold bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200 self-start sm:self-center" id="bracket-team-count-text">6 Teams</span>
+            <span class="text-xs text-[#007AFF] font-bold bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200 self-start sm:self-center shrink-0" id="bracket-team-count-text">6 Teams</span>
           </div>
 
-          <div id="bracket-teams-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div id="bracket-teams-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 min-w-0">
             <!-- Populated via JavaScript with Search Autocomplete & Clear (X) -->
           </div>
         </div>
 
         <!-- SINGLE-ELIMINATION PLAYOFF BRACKET & PROBABILITY TREE -->
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-            <div>
-              <div class="flex items-center gap-2">
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 space-y-3 sm:space-y-4 shadow-sm min-w-0 max-w-full">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-slate-100 pb-3 min-w-0">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 min-w-0">
                 <span class="w-6 h-6 rounded-lg bg-blue-50 text-[#007AFF] flex items-center justify-center text-xs font-bold shrink-0">
                   <i class="fa-solid fa-sitemap"></i>
                 </span>
-                <h3 class="text-sm font-bold text-[#1C1C1E]">Single-Elimination Playoff Bracket &amp; Win Probabilities</h3>
+                <h3 class="text-sm font-bold text-[#1C1C1E] leading-snug">Single-Elimination Playoff Bracket &amp; Win Probabilities</h3>
               </div>
-              <p class="text-xs text-[#8E8E93] mt-0.5">
+              <p class="text-xs text-[#8E8E93] mt-0.5 leading-relaxed">
                 Automated round win probabilities, projected goal spreads, and elimination advance paths based on MYHockey ratings
               </p>
             </div>
-            <div class="flex items-center gap-2 self-start sm:self-center">
-              <span id="bracket-format-badge" class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200">
+            <div class="flex items-center gap-2 self-start sm:self-center shrink-0">
+              <span id="bracket-format-badge" class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200 whitespace-nowrap">
                 6-Team Bracket
               </span>
             </div>
           </div>
 
-          <!-- Bracket Tree Layout (Horizontally Scrollable) -->
-          <div id="bracket-tree-container" class="overflow-x-auto pb-3 pt-1">
+          <!-- Mobile Horizontal Pan Helper -->
+          <div class="sm:hidden flex items-center justify-end gap-1.5 text-[11px] font-semibold text-[#007AFF] px-0.5">
+            <span>Swipe to view full bracket</span>
+            <span aria-hidden="true">→</span>
+          </div>
+
+          <!-- Bracket Tree Layout (Dedicated Horizontally Scrollable Container) -->
+          <div id="bracket-tree-container" class="w-full overflow-x-auto scroll-touch pb-2 pt-1">
             <!-- Dynamically populated by renderSingleEliminationBracket() -->
           </div>
         </div>
 
         <!-- Pairwise Round-Robin Matchup Parity Grid -->
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2.5 flex-wrap">
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm min-w-0 max-w-full">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5 min-w-0">
+            <div class="space-y-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
                 <h3 class="text-sm font-bold text-[#1C1C1E]">Round-Robin Matchup Parity Breakdown</h3>
                 <span id="bracket-blowout-pill" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-emerald-200 bg-emerald-50 text-emerald-700">
                   Blowout Hazard: 0% (0 of 15 games)
@@ -1244,7 +1297,7 @@
                 15 total matchups simulated across all teams.
               </p>
             </div>
-            <div class="flex items-center gap-2 sm:gap-2.5 text-[11px] flex-wrap">
+            <div class="flex items-center gap-2 text-[11px] flex-wrap">
               <span class="text-emerald-700 font-semibold px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-200" id="bracket-count-even">Even (0)</span>
               <span class="text-[#007AFF] font-semibold px-2 py-0.5 rounded-md bg-blue-50 border border-blue-200" id="bracket-count-comp">Comp (0)</span>
               <span class="text-[#FF9500] font-semibold px-2 py-0.5 rounded-md bg-amber-50 border border-amber-200" id="bracket-count-skewed">Skew (0)</span>
@@ -1252,8 +1305,10 @@
             </div>
           </div>
 
-          <div id="bracket-matchups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <!-- Populated via JavaScript -->
+          <div class="w-full overflow-x-auto scroll-touch pb-2">
+            <div id="bracket-matchups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 min-w-0">
+              <!-- Populated via JavaScript -->
+            </div>
           </div>
         </div>
 
@@ -1262,19 +1317,19 @@
       <!-- ========================================== -->
       <!-- VIEW 3: MATCHMAKER (RINK PARITY CHALLENGE) -->
       <!-- ========================================== -->
-      <div id="view-matchmaker" class="hidden space-y-6">
+      <div id="view-matchmaker" class="hidden space-y-4 sm:space-y-6 min-w-0">
 
         <!-- GAME CONTROL BAR: DIVISION & PARITY MODE -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
-            <div class="flex items-center gap-2.5">
+        <div class="bg-white rounded-2xl p-3.5 sm:p-5 border border-slate-200/80 shadow-sm space-y-3 sm:space-y-4 min-w-0 overflow-hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-slate-100 pb-3 sm:pb-3.5 min-w-0">
+            <div class="flex items-center gap-2.5 min-w-0">
               <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-cyan-500 text-white flex items-center justify-center text-base shadow-sm shrink-0">
                 🎲
               </div>
-              <div>
-                <div class="flex items-center gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
                   <h2 class="text-sm sm:text-base font-bold text-[#1C1C1E]">Schedule It?</h2>
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#007AFF] border border-blue-200">
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#007AFF] border border-blue-200 shrink-0">
                     Matchmaker 🎲
                   </span>
                 </div>
@@ -1285,43 +1340,43 @@
             </div>
 
             <!-- Running Session Counter -->
-            <div id="matchmaker-session-stats" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F2F2F7] border border-slate-200/80 text-xs font-semibold text-slate-700 self-start sm:self-center shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-[#007AFF] animate-pulse"></span>
-              <span id="matchmaker-stats-text">0 Matchups Rated (👍 0 / 👎 0)</span>
+            <div id="matchmaker-session-stats" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F2F2F7] border border-slate-200/80 text-xs font-semibold text-slate-700 self-start sm:self-center shadow-xs max-w-full">
+              <span class="w-2 h-2 rounded-full bg-[#007AFF] animate-pulse shrink-0"></span>
+              <span id="matchmaker-stats-text" class="truncate">0 Matchups Rated (👍 0 / 👎 0)</span>
             </div>
           </div>
 
           <!-- Controls Grid: Division Selector & Parity Toggle -->
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-3 pt-0.5 min-w-0">
             <!-- Age Division Selector -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
-              <span class="text-xs font-bold text-slate-600 shrink-0">Age Division:</span>
-              <div class="flex items-center gap-1.5 shrink-0" id="mm-div-pills">
+            <div class="flex items-center gap-2 overflow-x-auto scroll-touch pb-1 md:pb-0 w-full md:w-auto max-w-full min-w-0">
+              <span class="text-xs font-bold text-slate-600 shrink-0">Age:</span>
+              <div class="flex items-center gap-2 sm:gap-1.5 shrink-0" id="mm-div-pills">
                 <!-- Dynamically populated/styled: 9U, 10U, 11U, 12U, 13U, 14U, 16U/15U, 18U -->
               </div>
             </div>
 
             <!-- Parity Filter Toggle -->
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs font-bold text-slate-600 shrink-0">Filter:</span>
-              <div class="inline-flex rounded-xl bg-[#E5E5EA] p-1 gap-1 shadow-inner text-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 shrink-0 w-full md:w-auto">
+              <span class="text-xs font-bold text-slate-600 shrink-0 hidden sm:inline">Filter:</span>
+              <div class="grid grid-cols-2 sm:inline-flex rounded-xl bg-[#E5E5EA] p-1 gap-1 shadow-inner text-xs w-full sm:w-auto">
                 <button
                   type="button"
                   id="mm-mode-tight"
                   onclick="setMatchmakerParityFilter('tight')"
-                  class="h-8 px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap"
+                  class="min-h-[44px] sm:min-h-0 sm:h-8 px-2.5 sm:px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center justify-center gap-1.5 transition-all whitespace-nowrap"
                 >
-                  <i class="fa-solid fa-bullseye text-[#007AFF] text-xs"></i>
-                  <span>Tight Parity (±2.5)</span>
+                  <i class="fa-solid fa-bullseye text-[#007AFF] text-xs shrink-0"></i>
+                  <span class="truncate">Tight Parity (±2.5)</span>
                 </button>
                 <button
                   type="button"
                   id="mm-mode-wildcard"
                   onclick="setMatchmakerParityFilter('wildcard')"
-                  class="h-8 px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap"
+                  class="min-h-[44px] sm:min-h-0 sm:h-8 px-2.5 sm:px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center justify-center gap-1.5 transition-all whitespace-nowrap"
                 >
-                  <i class="fa-solid fa-bolt text-amber-500 text-xs"></i>
-                  <span>David vs Goliath</span>
+                  <i class="fa-solid fa-bolt text-amber-500 text-xs shrink-0"></i>
+                  <span class="truncate">David vs Goliath</span>
                 </button>
               </div>
             </div>
@@ -1329,25 +1384,26 @@
         </div>
 
         <!-- MATCH CARD CONTAINER -->
-        <div class="relative w-full max-w-2xl mx-auto min-h-[360px] flex flex-col justify-center">
-          <div id="matchmaker-card-wrapper" class="relative overflow-visible">
-            <div id="matchmaker-card" class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-md space-y-6 transition-all animate-card-in">
+        <div class="relative w-full max-w-2xl mx-auto flex flex-col justify-center min-w-0">
+          <div id="matchmaker-card-wrapper" class="relative overflow-hidden rounded-2xl sm:rounded-3xl min-w-0">
+            <div id="matchmaker-card" class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-md space-y-3.5 sm:space-y-6 transition-all animate-card-in min-w-0">
               <!-- Populated via renderMatchmakerCard() -->
             </div>
           </div>
         </div>
 
-        <!-- VOTING ACTIONS -->
-        <div class="max-w-2xl mx-auto flex items-center gap-3.5 sm:gap-5">
+        <!-- VOTING ACTIONS (SIDE-BY-SIDE 2-COLUMN GRID WITH ZERO OVERFLOW) -->
+        <div class="max-w-2xl mx-auto grid grid-cols-2 gap-2.5 sm:gap-5 w-full">
           <!-- Red Button: No Way (Ice the Puck) -->
           <button
             type="button"
             id="btn-matchmaker-down"
             onclick="voteMatchmaker('thumbs_down')"
-            class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 border-2 border-rose-200/90 text-[#FF3B30] font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
+            class="w-full min-h-[48px] px-3 sm:px-6 py-3 sm:py-4 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 border-2 border-rose-200/90 text-[#FF3B30] font-bold text-sm sm:text-base whitespace-normal leading-tight text-center flex items-center justify-center gap-1.5 sm:gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
           >
-            <span class="text-xl group-hover:scale-125 transition-transform">👎</span>
-            <span class="whitespace-nowrap">No Way (Ice the Puck)</span>
+            <span class="text-lg sm:text-xl group-hover:scale-125 transition-transform shrink-0">👎</span>
+            <span class="sm:hidden">Ice the Puck</span>
+            <span class="hidden sm:inline">No Way (Ice the Puck)</span>
           </button>
 
           <!-- Green Button: Good Game (I'd Schedule It) -->
@@ -1355,37 +1411,38 @@
             type="button"
             id="btn-matchmaker-up"
             onclick="voteMatchmaker('thumbs_up')"
-            class="flex-1 py-4 px-4 sm:px-6 rounded-2xl bg-emerald-50 hover:bg-emerald-100 active:scale-95 border-2 border-emerald-300/90 text-emerald-800 font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
+            class="w-full min-h-[48px] px-3 sm:px-6 py-3 sm:py-4 rounded-2xl bg-emerald-50 hover:bg-emerald-100 active:scale-95 border-2 border-emerald-300/90 text-emerald-800 font-bold text-sm sm:text-base whitespace-normal leading-tight text-center flex items-center justify-center gap-1.5 sm:gap-2.5 shadow-sm transition-all cursor-pointer group select-none"
           >
-            <span class="text-xl group-hover:scale-125 transition-transform">👍</span>
-            <span class="whitespace-nowrap">Good Game (I'd Schedule It)</span>
+            <span class="text-lg sm:text-xl group-hover:scale-125 transition-transform shrink-0">👍</span>
+            <span class="sm:hidden">Good Game</span>
+            <span class="hidden sm:inline">Good Game (I'd Schedule It)</span>
           </button>
         </div>
 
-        <!-- SECONDARY ACTIONS -->
-        <div class="max-w-md mx-auto flex items-center justify-center gap-4 sm:gap-6 pt-1 text-xs text-slate-500 flex-wrap">
+        <!-- SECONDARY ACTIONS (CLEAN 2-LINE WRAP ON NARROW SCREENS) -->
+        <div class="max-w-md mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-x-5 pt-1 text-xs sm:text-sm text-slate-500">
           <button
             type="button"
             onclick="loadMatchmakerInPredictor()"
-            class="hover:text-[#007AFF] font-medium flex items-center gap-1.5 transition-colors cursor-pointer group"
+            class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl hover:bg-white/70 hover:text-[#007AFF] font-medium flex items-center gap-1.5 transition-colors cursor-pointer group"
           >
             <i class="fa-solid fa-arrow-up-right-from-square text-[11px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
             <span>Load in Matchup Predictor</span>
           </button>
-          <span class="text-slate-300">•</span>
+          <span class="text-slate-300 hidden sm:inline">•</span>
           <button
             type="button"
             onclick="shareMatchmakerMatchup()"
-            class="hover:text-[#007AFF] font-medium flex items-center gap-1.5 transition-colors cursor-pointer group"
+            class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl hover:bg-white/70 hover:text-[#007AFF] font-medium flex items-center gap-1.5 transition-colors cursor-pointer group"
           >
             <i class="fa-solid fa-share-nodes text-[11px] group-hover:scale-110 transition-transform"></i>
             <span>Share Matchup</span>
           </button>
-          <span class="text-slate-300">•</span>
+          <span class="text-slate-300 hidden sm:inline">•</span>
           <button
             type="button"
             onclick="generateMatchmakerMatchup()"
-            class="hover:text-slate-800 font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+            class="min-h-[44px] sm:min-h-0 px-2.5 py-2 sm:py-1 rounded-xl hover:bg-white/70 hover:text-slate-800 font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
             title="Skip without voting"
           >
             <i class="fa-solid fa-rotate text-[11px]"></i>
@@ -1398,7 +1455,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="mt-auto border-t border-slate-200/60 bg-white px-4 py-5 text-center">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white px-4 pt-5 pb-8 sm:pb-6 pb-safe-footer text-center w-full max-w-full">
       <p class="text-xs text-slate-400 max-w-xl mx-auto leading-relaxed">
         © 2026 PuckEdge.app • Independent youth hockey parity and scheduling analytics.
       </p>
@@ -1727,16 +1784,16 @@
           const btn = document.getElementById(`div-filter-${safeId}`);
           if (btn) {
             if (d === div) {
-              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap';
+              btn.className = 'min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-semibold bg-[#007AFF] text-white shadow-xs transition-all cursor-pointer whitespace-nowrap shrink-0';
             } else {
-              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap';
+              btn.className = 'min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer whitespace-nowrap shrink-0';
             }
           }
           const bracketBtn = document.getElementById(`bracket-div-${safeId}`);
           if (bracketBtn) {
             bracketBtn.className = (d === div)
-              ? 'px-2 py-1 rounded-lg text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer'
-              : 'px-2 py-1 rounded-lg text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer';
+              ? 'min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-semibold bg-[#007AFF] text-white transition-all cursor-pointer shrink-0 whitespace-nowrap'
+              : 'min-h-[44px] sm:min-h-0 px-3 sm:px-2 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs sm:text-[11px] font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 transition-all cursor-pointer shrink-0 whitespace-nowrap';
           }
         });
 
@@ -1776,7 +1833,7 @@
 
           if (!name) {
             badge.innerHTML = `<span class="text-slate-400 text-[11px] flex items-center gap-1.5"><i class="fa-solid fa-arrow-up text-[10px] ${k === 'a' ? 'text-blue-400' : 'text-amber-400'}"></i> Type to search or pick a club above</span>`;
-            badge.className = 'flex items-center gap-1.5 truncate';
+            badge.className = 'flex flex-wrap items-center gap-1.5 min-w-0 flex-1';
             return;
           }
 
@@ -1792,9 +1849,9 @@
                 <i class="fa-solid fa-circle-check text-[9px] text-emerald-500"></i>
                 ${badgeText}
               </span>
-              <span class="font-medium text-slate-600 truncate">${matched.record ? `${matched.record} • ` : ''}${ageTag} (${matched.state || 'USA'})</span>
+              <span class="font-medium text-slate-600 truncate min-w-0">${matched.record ? `${matched.record} • ` : ''}${ageTag} (${matched.state || 'USA'})</span>
             `;
-            badge.className = 'flex items-center gap-1.5 truncate';
+            badge.className = 'flex flex-wrap items-center gap-1.5 min-w-0 flex-1';
             state[`team${k.toUpperCase()}`].division = ageTag;
             state[`team${k.toUpperCase()}`].record = matched.record;
             state[`team${k.toUpperCase()}`].state = matched.state;
@@ -1803,16 +1860,16 @@
             const storedRec = state[`team${k.toUpperCase()}`].record;
             const storedState = state[`team${k.toUpperCase()}`].state || '';
             if (storedRec) {
-              badge.innerHTML = `<span class="font-medium text-slate-600 truncate">Record: ${storedRec} • ${state[`team${k.toUpperCase()}`].division || 'Custom'}${storedState ? ` (${storedState})` : ''}</span>`;
+              badge.innerHTML = `<span class="font-medium text-slate-600 truncate min-w-0">Record: ${storedRec} • ${state[`team${k.toUpperCase()}`].division || 'Custom'}${storedState ? ` (${storedState})` : ''}</span>`;
             } else {
               badge.innerHTML = `
                 <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200 shrink-0">
                   Custom / Unranked
                 </span>
-                <span class="text-slate-400 text-[10px] truncate">Rating index active</span>
+                <span class="text-slate-400 text-[10px] truncate min-w-0">Rating index active</span>
               `;
             }
-            badge.className = 'flex items-center gap-1.5 truncate';
+            badge.className = 'flex flex-wrap items-center gap-1.5 min-w-0 flex-1';
           }
         });
       }
@@ -2166,19 +2223,19 @@
           return `
             <div
               onmousedown="selectTeamFromDropdown('${teamKey}', ${rawIdx})"
-              class="px-3.5 py-2.5 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-3 group"
+              class="min-h-[48px] px-3.5 py-2.5 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-2.5 group min-w-0"
             >
               <div class="min-w-0 flex-1">
-                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate flex items-center gap-1.5">
-                  <span class="truncate">${team.name}</span>
+                <div class="text-xs sm:text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] flex items-center gap-1.5 min-w-0">
+                  <span class="truncate min-w-0">${escapeHtml(team.name)}</span>
                   <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70 shrink-0">${stateTag}</span>
                 </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-1.5 mt-0.5">
-                  <span class="font-medium text-slate-600">Rec: ${team.record || '--'}</span>
+                <div class="text-[11px] text-slate-500 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-0.5 min-w-0">
+                  <span class="font-medium text-slate-600 shrink-0">Rec: ${team.record || '--'}</span>
                   <span class="text-slate-300">•</span>
-                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-[10px] font-semibold text-slate-700">${displayBracket}</span>
-                  <span class="text-slate-300">•</span>
-                  <span class="text-emerald-700 font-semibold text-[10px]">${rankedBadge}</span>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-[10px] font-semibold text-slate-700 shrink-0">${displayBracket}</span>
+                  <span class="text-slate-300 hidden sm:inline">•</span>
+                  <span class="text-emerald-700 font-semibold text-[10px] truncate">${rankedBadge}</span>
                 </div>
               </div>
               <div class="shrink-0 flex items-center gap-1 text-right">
@@ -2358,13 +2415,13 @@
             <button
               type="button"
               onclick="selectSuggestedOpponentByIndex(${idx})"
-              class="p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
+              class="min-w-0 w-full min-h-[56px] p-3 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-2xl text-left transition-all active:scale-98 shadow-sm group cursor-pointer"
               title="vs ${safeName} (${safeState}) • Rating: ${opp.rating.toFixed(2)}"
             >
               <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate">
                 vs ${safeName} (${safeState})
               </div>
-              <div class="text-[11px] font-bold mt-0.5 ${cfg.badgeClass}">
+              <div class="text-[11px] font-bold mt-0.5 truncate ${cfg.badgeClass}">
                 ${badgeText}
               </div>
             </button>
@@ -2597,16 +2654,19 @@
         function showCopySuccess() {
           const btn = document.getElementById(btnId);
           const label = document.getElementById(labelId);
+          const sharedSizing = isTournament
+            ? 'w-full sm:w-auto min-h-[44px] sm:min-h-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 rounded-xl sm:rounded-full text-xs sm:text-[11px]'
+            : 'inline-flex items-center justify-center gap-1.5 min-h-[44px] sm:min-h-0 px-3 sm:px-2.5 py-2 sm:py-0.5 rounded-full text-xs sm:text-[11px] shrink-0';
           if (label) label.textContent = 'Link Copied! ✓';
           if (btn) {
-            btn.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-300 transition-all cursor-pointer shadow-xs';
+            btn.className = `${sharedSizing} font-bold bg-emerald-50 text-emerald-700 border border-emerald-300 transition-all cursor-pointer shadow-xs`;
           }
           showToast(isTournament ? 'Tournament bracket link copied to clipboard!' : 'Matchup link copied to clipboard!');
 
           setTimeout(() => {
             if (label) label.textContent = defaultText;
             if (btn) {
-              btn.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95';
+              btn.className = `${sharedSizing} font-semibold bg-blue-50 text-[#007AFF] hover:bg-blue-100 border border-blue-200/90 transition-all cursor-pointer shadow-xs active:scale-95`;
             }
           }, 2500);
         }
@@ -2828,8 +2888,8 @@
         const navBracket = document.getElementById('nav-tab-bracket');
         const navMatchmaker = document.getElementById('nav-tab-matchmaker');
 
-        const activeClass = 'flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all whitespace-nowrap cursor-pointer';
-        const inactiveClass = 'flex-1 py-1.5 px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer';
+        const activeClass = 'min-h-[44px] sm:min-h-[38px] py-2 sm:py-1.5 px-1.5 sm:px-2 text-center text-xs sm:text-sm font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-sm transition-all whitespace-nowrap cursor-pointer flex items-center justify-center min-w-0';
+        const inactiveClass = 'min-h-[44px] sm:min-h-[38px] py-2 sm:py-1.5 px-1.5 sm:px-2 text-center text-xs sm:text-sm font-medium rounded-lg text-[#8E8E93] hover:text-[#1C1C1E] transition-all whitespace-nowrap cursor-pointer flex items-center justify-center min-w-0';
 
         viewPredictor?.classList.add('hidden');
         viewBracket?.classList.add('hidden');
@@ -2837,7 +2897,7 @@
 
         if (navPredictor) navPredictor.className = inactiveClass;
         if (navBracket) navBracket.className = inactiveClass;
-        if (navMatchmaker) navMatchmaker.className = inactiveClass + ' flex items-center justify-center gap-1.5';
+        if (navMatchmaker) navMatchmaker.className = inactiveClass + ' gap-1 sm:gap-1.5';
 
         if (tab === 'predictor') {
           viewPredictor?.classList.remove('hidden');
@@ -2848,7 +2908,7 @@
           calculateBracketParity();
         } else if (tab === 'matchmaker') {
           viewMatchmaker?.classList.remove('hidden');
-          if (navMatchmaker) navMatchmaker.className = activeClass + ' flex items-center justify-center gap-1.5';
+          if (navMatchmaker) navMatchmaker.className = activeClass + ' gap-1 sm:gap-1.5';
           initMatchmakerGame();
         }
         syncUrlState();
@@ -2882,8 +2942,8 @@
         container.innerHTML = MATCHMAKER_DIVISIONS.map(div => {
           const isActive = div === currentDiv;
           const cls = isActive
-            ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-[#007AFF] text-white shadow-xs cursor-default whitespace-nowrap'
-            : 'px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 cursor-pointer transition-all whitespace-nowrap';
+            ? 'min-h-[44px] sm:min-h-0 px-3 sm:px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs font-bold bg-[#007AFF] text-white shadow-xs cursor-default whitespace-nowrap shrink-0'
+            : 'min-h-[44px] sm:min-h-0 px-3 sm:px-2.5 py-2 sm:py-1 rounded-xl sm:rounded-lg text-xs font-medium bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 border border-slate-200/90 cursor-pointer transition-all whitespace-nowrap shrink-0';
           return `<button type="button" onclick="setMatchmakerDivision('${div}')" class="${cls}">${div}</button>`;
         }).join('');
       }
@@ -2907,13 +2967,13 @@
 
         if (btnTight) {
           btnTight.className = isTight
-            ? 'h-8 px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap'
-            : 'h-8 px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap';
+            ? 'min-h-[44px] sm:min-h-0 sm:h-8 px-2.5 sm:px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center justify-center gap-1.5 transition-all whitespace-nowrap'
+            : 'min-h-[44px] sm:min-h-0 sm:h-8 px-2.5 sm:px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center justify-center gap-1.5 transition-all whitespace-nowrap';
         }
         if (btnWild) {
           btnWild.className = !isTight
-            ? 'h-8 px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap'
-            : 'h-8 px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center gap-1.5 transition-all whitespace-nowrap';
+            ? 'min-h-[44px] sm:min-h-0 sm:h-8 px-2.5 sm:px-3 rounded-lg font-semibold bg-white text-[#1C1C1E] shadow-xs cursor-pointer flex items-center justify-center gap-1.5 transition-all whitespace-nowrap'
+            : 'min-h-[44px] sm:min-h-0 sm:h-8 px-2.5 sm:px-3 rounded-lg font-medium text-slate-600 hover:text-[#1C1C1E] cursor-pointer flex items-center justify-center gap-1.5 transition-all whitespace-nowrap';
         }
       }
 
@@ -3018,47 +3078,47 @@
         const spreadColor = favoredTeam === 1 ? 'text-[#007AFF]' : (favoredTeam === 2 ? 'text-[#FF9500]' : 'text-[#34C759]');
         const favoredText = favoredTeam === 1 ? `${t1.name} favored` : (favoredTeam === 2 ? `${t2.name} favored` : 'Even baseline contest');
 
-        container.className = 'bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-md space-y-5 sm:space-y-6 transition-all animate-card-in select-none';
+        container.className = 'bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-md space-y-3.5 sm:space-y-6 transition-all animate-card-in select-none min-w-0';
 
         container.innerHTML = `
           <!-- Card Header / Meta Badges -->
-          <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
-            <div class="flex items-center gap-2">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5 sm:pb-3.5 min-w-0">
+            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 min-w-0">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold bg-blue-50 text-[#007AFF] border border-blue-200/70 shrink-0">
                 <i class="fa-solid fa-calendar-check text-[10px]"></i>
                 Schedule It?
               </span>
-              <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700 shrink-0">
                 ${state.matchmakerGame.selectedDivision}
               </span>
-              <span class="text-xs font-semibold text-slate-500">
+              <span class="text-xs font-semibold text-slate-500 shrink-0">
                 ${t1State} vs ${t2State}
               </span>
             </div>
 
             <!-- Dynamic Parity Badge -->
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${verdictClass} shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-current"></span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider border ${verdictClass} shadow-xs shrink-0">
+              <span class="w-2 h-2 rounded-full bg-current shrink-0"></span>
               <span>${verdict}</span>
             </span>
           </div>
 
-          <!-- Head-to-Head Arena Layout -->
-          <div class="grid grid-cols-1 md:grid-cols-11 gap-4 sm:gap-6 items-center">
+          <!-- Head-to-Head Arena Layout (Compact Vertical Rhythm on Mobile) -->
+          <div class="grid grid-cols-1 md:grid-cols-11 gap-2.5 sm:gap-6 items-center min-w-0">
             
             <!-- TEAM 1 (BLUE) -->
-            <div class="md:col-span-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-blue-50/50 to-slate-50/70 border border-blue-100/80 space-y-2.5 relative">
-              <div class="flex items-center justify-between">
+            <div class="md:col-span-4 p-3 sm:p-5 rounded-2xl bg-gradient-to-br from-blue-50/50 to-slate-50/70 border border-blue-100/80 space-y-1.5 sm:space-y-2.5 relative min-w-0">
+              <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] font-black uppercase tracking-widest text-[#007AFF]">TEAM 1</span>
-                <span class="text-xs font-extrabold px-2 py-0.5 rounded-lg bg-blue-100/70 text-[#007AFF]">
+                <span class="text-xs font-extrabold px-2 py-0.5 rounded-lg bg-blue-100/70 text-[#007AFF] shrink-0">
                   ${t1.rating.toFixed(2)}
                 </span>
               </div>
-              <div>
-                <h3 class="text-base sm:text-lg font-black text-[#1C1C1E] leading-snug line-clamp-2" title="${escapeHtml(t1.name)}">
+              <div class="min-w-0">
+                <h3 class="text-sm sm:text-lg font-black text-[#1C1C1E] leading-snug line-clamp-2 break-words" title="${escapeHtml(t1.name)}">
                   ${escapeHtml(t1.name)}
                 </h3>
-                <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                <div class="flex items-center gap-1.5 mt-1 sm:mt-1.5 flex-wrap">
                   <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-white text-emerald-700 border border-emerald-200/90 shadow-2xs">
                     Ranked • ${t1Tier} (${t1State})
                   </span>
@@ -3071,17 +3131,21 @@
               </div>
             </div>
 
-            <!-- CENTER PARITY SUMMARY -->
-            <div class="md:col-span-3 flex flex-col items-center justify-center text-center space-y-2 py-1">
-              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">PROJECTED SPREAD</span>
-              <div class="text-3xl sm:text-4xl font-black tracking-tight ${spreadColor}">
-                +${spread.toFixed(2)}
+            <!-- CENTER PARITY SUMMARY (Compact Horizontal Strip on Mobile, Vertical on Desktop) -->
+            <div class="md:col-span-3 flex flex-row md:flex-col items-center justify-between md:justify-center text-left md:text-center gap-2 px-3 py-2 md:p-1 bg-[#F2F2F7]/70 md:bg-transparent rounded-xl md:rounded-none min-w-0">
+              <div class="min-w-0">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">PROJECTED SPREAD</span>
+                <div class="flex items-baseline md:flex-col md:items-center gap-2 md:gap-0.5">
+                  <div class="text-2xl sm:text-4xl font-black tracking-tight ${spreadColor} shrink-0">
+                    +${spread.toFixed(2)}
+                  </div>
+                  <span class="text-[11px] font-medium text-slate-500 max-w-[140px] md:max-w-[170px] truncate" title="${escapeHtml(favoredText)}">
+                    ${escapeHtml(favoredText)}
+                  </span>
+                </div>
               </div>
-              <span class="text-[11px] font-medium text-slate-500 max-w-[170px] truncate" title="${favoredText}">
-                ${favoredText}
-              </span>
               <!-- Score Preview Pill -->
-              <div class="px-3 py-1 rounded-xl bg-[#F2F2F7] border border-slate-200/80 text-xs font-extrabold text-[#1C1C1E]">
+              <div class="px-3 py-1.5 md:py-1 rounded-xl bg-white md:bg-[#F2F2F7] border border-slate-200/80 text-xs font-extrabold text-[#1C1C1E] shrink-0">
                 <span>${exp1}</span>
                 <span class="text-slate-400 font-medium mx-1.5">vs</span>
                 <span>${exp2}</span>
@@ -3089,18 +3153,18 @@
             </div>
 
             <!-- TEAM 2 (AMBER) -->
-            <div class="md:col-span-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-50/50 to-slate-50/70 border border-amber-100/80 space-y-2.5 relative">
-              <div class="flex items-center justify-between">
+            <div class="md:col-span-4 p-3 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-50/50 to-slate-50/70 border border-amber-100/80 space-y-1.5 sm:space-y-2.5 relative min-w-0">
+              <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] font-black uppercase tracking-widest text-[#FF9500]">TEAM 2</span>
-                <span class="text-xs font-extrabold px-2 py-0.5 rounded-lg bg-amber-100/70 text-[#FF9500]">
+                <span class="text-xs font-extrabold px-2 py-0.5 rounded-lg bg-amber-100/70 text-[#FF9500] shrink-0">
                   ${t2.rating.toFixed(2)}
                 </span>
               </div>
-              <div>
-                <h3 class="text-base sm:text-lg font-black text-[#1C1C1E] leading-snug line-clamp-2" title="${escapeHtml(t2.name)}">
+              <div class="min-w-0">
+                <h3 class="text-sm sm:text-lg font-black text-[#1C1C1E] leading-snug line-clamp-2 break-words" title="${escapeHtml(t2.name)}">
                   ${escapeHtml(t2.name)}
                 </h3>
-                <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                <div class="flex items-center gap-1.5 mt-1 sm:mt-1.5 flex-wrap">
                   <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-white text-emerald-700 border border-emerald-200/90 shadow-2xs">
                     Ranked • ${t2Tier} (${t2State})
                   </span>
@@ -3116,7 +3180,7 @@
           </div>
 
           <!-- Win Probability Meter Bar -->
-          <div class="space-y-1.5 pt-1">
+          <div class="space-y-1.5 pt-0.5">
             <div class="flex justify-between text-xs font-semibold px-0.5">
               <span class="text-[#007AFF]">${winProb1}%</span>
               <span class="text-slate-400 text-[11px]">Win Probability Meter</span>
@@ -3130,16 +3194,16 @@
           </div>
 
           <!-- 1-Tap Share to Team Chat Button on Schedule It? Card -->
-          <div class="pt-3 border-t border-slate-100">
+          <div class="pt-2.5 sm:pt-3 border-t border-slate-100">
             <button
               type="button"
               id="btn-share-team-chat-matchmaker"
               onclick="shareToTeamChat('matchmaker')"
-              class="w-full py-3 px-4 rounded-2xl bg-[#007AFF] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer group"
+              class="w-full min-h-[44px] sm:min-h-[48px] py-2.5 sm:py-3 px-4 rounded-2xl bg-[#007AFF] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer group"
             >
-              <i class="fa-solid fa-comment-dots text-sm group-hover:scale-110 transition-transform"></i>
+              <i class="fa-solid fa-comment-dots text-sm group-hover:scale-110 transition-transform shrink-0"></i>
               <span id="btn-share-team-chat-matchmaker-label">Share to Team Chat</span>
-              <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white/95">
+              <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white/95 shrink-0">
                 TeamSnap • Group Text
               </span>
             </button>
@@ -3344,14 +3408,15 @@
             const btn = document.getElementById(`mod-${teamKey}-${modKey}`);
             if (!btn) return;
             const isActive = !!team.modifiers[modKey];
+            const spanClass = modKey === 'fatigue' ? 'col-span-2 sm:col-span-1 ' : '';
             if (isActive) {
               activeCount++;
               if (modKey === 'goalie') totalPenalty += 0.75;
               if (modKey === 'bench') totalPenalty += 0.50;
               if (modKey === 'fatigue') totalPenalty += 0.50;
-              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold border border-rose-300 bg-rose-50 text-[#FF3B30] shadow-xs transition-colors cursor-pointer ring-1 ring-rose-200';
+              btn.className = `${spanClass}min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-semibold border border-rose-300 bg-rose-50 text-[#FF3B30] shadow-xs transition-colors cursor-pointer ring-1 ring-rose-200 text-center`;
             } else {
-              btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer';
+              btn.className = `${spanClass}min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-xl text-xs font-medium border border-slate-200/90 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer text-center`;
             }
           });
 
@@ -3459,21 +3524,21 @@
           if (statusT1) {
             if (nameA && effA > 0) {
               const divA = state.teamA.division || getTeamAgeBracket(state.teamA);
-              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-blue-50 text-[#007AFF] border border-blue-200 cursor-pointer';
-              statusT1.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#007AFF]"></i> Team 1: ${escapeHtml(nameA)} (${divA})`;
+              statusT1.className = 'inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1 min-h-[44px] sm:min-h-0 max-w-full rounded-full font-bold bg-blue-50 text-[#007AFF] border border-blue-200 cursor-pointer';
+              statusT1.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#007AFF] shrink-0"></i> <span class="truncate">Team 1: ${escapeHtml(nameA)} (${divA})</span>`;
             } else {
-              statusT1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200 cursor-pointer hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 transition-colors';
-              statusT1.innerHTML = `<i class="fa-solid fa-magnifying-glass text-[10px]"></i> Team 1: Click to search`;
+              statusT1.className = 'inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1 min-h-[44px] sm:min-h-0 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200 cursor-pointer hover:bg-blue-50 hover:text-[#007AFF] hover:border-blue-200 transition-colors';
+              statusT1.innerHTML = `<i class="fa-solid fa-magnifying-glass text-[10px] shrink-0"></i> Team 1: Click to search`;
             }
           }
           if (statusT2) {
             if (nameB && effB > 0) {
               const divB = state.teamB.division || getTeamAgeBracket(state.teamB);
-              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-amber-50 text-[#FF9500] border border-amber-200 cursor-pointer';
-              statusT2.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#FF9500]"></i> Team 2: ${escapeHtml(nameB)} (${divB})`;
+              statusT2.className = 'inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1 min-h-[44px] sm:min-h-0 max-w-full rounded-full font-bold bg-amber-50 text-[#FF9500] border border-amber-200 cursor-pointer';
+              statusT2.innerHTML = `<i class="fa-solid fa-circle-check text-[9px] text-[#FF9500] shrink-0"></i> <span class="truncate">Team 2: ${escapeHtml(nameB)} (${divB})</span>`;
             } else {
-              statusT2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200 cursor-pointer hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 transition-colors';
-              statusT2.innerHTML = `<i class="fa-solid fa-magnifying-glass text-[10px]"></i> Team 2: Click to search`;
+              statusT2.className = 'inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1 min-h-[44px] sm:min-h-0 rounded-full font-medium bg-slate-100 text-slate-500 border border-slate-200 cursor-pointer hover:bg-amber-50 hover:text-[#FF9500] hover:border-amber-200 transition-colors';
+              statusT2.innerHTML = `<i class="fa-solid fa-magnifying-glass text-[10px] shrink-0"></i> Team 2: Click to search`;
             }
           }
 
@@ -3700,9 +3765,9 @@
         opts.forEach((opt, idx) => {
           const btn = document.getElementById(`drive-opt-${idx + 1}`);
           if (opt === timeStr) {
-            btn.className = 'py-2.5 px-3 text-xs font-semibold rounded-xl bg-[#007AFF] text-white text-center shadow-xs cursor-pointer';
+            btn.className = 'min-h-[44px] py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-semibold rounded-xl bg-[#007AFF] text-white text-center shadow-xs cursor-pointer leading-tight';
           } else {
-            btn.className = 'py-2.5 px-3 text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors';
+            btn.className = 'min-h-[44px] py-2 px-2 sm:px-3 text-[11px] sm:text-xs font-medium rounded-xl border border-slate-200 bg-[#F2F2F7] text-slate-700 hover:bg-slate-200 text-center cursor-pointer transition-colors leading-tight';
           }
         });
         recalculateCosts();
@@ -3860,9 +3925,9 @@ Coach / Scheduler (${state.teamA.name})`;
           const btn = document.getElementById(`btn-count-${c}`);
           if (btn) {
             if (c === count) {
-              btn.className = 'h-8 px-3 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-xs cursor-default flex items-center justify-center transition-all whitespace-nowrap';
+              btn.className = 'min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg bg-white text-[#1C1C1E] shadow-xs cursor-default flex items-center justify-center transition-all whitespace-nowrap';
             } else {
-              btn.className = 'h-8 px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap';
+              btn.className = 'min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap';
             }
           }
         });
@@ -3875,6 +3940,39 @@ Coach / Scheduler (${state.teamA.name})`;
         renderBracketView({ userInitiated: true });
         saveBracketToStorage();
         syncUrlState();
+      }
+
+      function gradeBracketNow() {
+        const validTeams = (state.bracket?.teams || []).filter(t => t && t.name && t.name.trim() && t.rating > 0);
+        if (validTeams.length < 2) {
+          showToast('Add at least 2 teams with ratings to grade the bracket.');
+          return;
+        }
+        state.lastTrackedBracketKey = '';
+        calculateBracketParity({ userInitiated: true });
+        renderSingleEliminationBracket();
+        const metricsEl = document.getElementById('bracket-metrics-section');
+        if (metricsEl) {
+          metricsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        showToast(`Bracket graded (${validTeams.length} teams)!`);
+      }
+
+      function resetBracketTeams() {
+        state.bracket.teams = [];
+        state.bracket.teamCount = 0;
+        state.bracket.advances = {};
+        state.lastTrackedBracketKey = '';
+        [4, 5, 6, 7, 8].forEach(c => {
+          const btn = document.getElementById(`btn-count-${c}`);
+          if (btn) {
+            btn.className = 'min-h-[44px] sm:min-h-0 sm:h-8 px-1.5 sm:px-3 text-xs font-semibold rounded-lg text-slate-600 hover:text-[#1C1C1E] hover:bg-white/50 cursor-pointer flex items-center justify-center transition-all whitespace-nowrap';
+          }
+        });
+        saveBracketToStorage();
+        renderBracketView();
+        syncUrlState();
+        showToast('Tournament bracket reset.');
       }
 
       function addBlankBracketSlot() {
@@ -3947,7 +4045,7 @@ Coach / Scheduler (${state.teamA.name})`;
 
         if (count < 2) {
           container.innerHTML = `
-            <div class="col-span-full p-8 rounded-2xl bg-white border border-dashed border-slate-300 text-center space-y-3.5 shadow-sm">
+            <div class="col-span-full p-5 sm:p-8 rounded-2xl bg-white border border-dashed border-slate-300 text-center space-y-3.5 shadow-sm">
               <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#007AFF] flex items-center justify-center mx-auto text-xl">
                 <i class="fa-solid fa-sitemap"></i>
               </div>
@@ -3957,11 +4055,11 @@ Coach / Scheduler (${state.teamA.name})`;
                   Add at least 2 teams to calculate tournament parity, tier variance, and competitive balance.
                 </p>
               </div>
-              <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
-                <button type="button" onclick="loadBracketPreset('balanced')" class="px-3.5 py-2 rounded-xl bg-[#007AFF] text-white text-xs font-semibold shadow-xs hover:bg-blue-600 active:scale-98 cursor-pointer transition-all">
+              <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+                <button type="button" onclick="loadBracketPreset('balanced')" class="min-h-[44px] sm:min-h-[38px] px-4 py-2 rounded-xl bg-[#007AFF] text-white text-xs font-semibold shadow-xs hover:bg-blue-600 active:scale-98 cursor-pointer transition-all">
                   Load WNY 12U Peewee AA Preset
                 </button>
-                <button type="button" onclick="addBlankBracketSlot()" class="px-3.5 py-2 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200/90 text-[#1C1C1E] text-xs font-semibold shadow-xs active:scale-98 cursor-pointer transition-all">
+                <button type="button" onclick="addBlankBracketSlot()" class="min-h-[44px] sm:min-h-[38px] px-4 py-2 rounded-xl bg-[#F2F2F7] hover:bg-slate-200 border border-slate-200/90 text-[#1C1C1E] text-xs font-semibold shadow-xs active:scale-98 cursor-pointer transition-all">
                   + Add Seed Slot
                 </button>
               </div>
@@ -3981,27 +4079,61 @@ Coach / Scheduler (${state.teamA.name})`;
             : 'text-slate-400 bg-slate-100 border-slate-200';
 
           return `
-            <div class="p-3 bg-[#F2F2F7] rounded-xl border border-slate-200/80 space-y-2 relative transition-all">
-              <div class="flex items-center justify-between gap-2">
-                <div class="flex items-center gap-2">
-                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-white border border-slate-200/90 text-xs font-bold text-[#1C1C1E] shadow-xs shrink-0">
-                    ${idx + 1}
+            <div class="p-3 bg-[#F2F2F7] rounded-xl border border-slate-200/80 space-y-2.5 relative transition-all min-w-0">
+              <!-- Row 1: Seed Badge + Full-Flex Search Input + Clear Button -->
+              <div class="relative min-w-0">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="inline-flex items-center justify-center w-8 h-8 sm:w-6 sm:h-6 rounded-lg bg-white border border-slate-200/90 text-xs font-bold text-[#1C1C1E] shadow-xs shrink-0" title="Seed ${idx + 1}">
+                    #${idx + 1}
                   </span>
-                  <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Seed ${idx + 1}
-                  </span>
-                  <span id="bracket-slot-rating-badge-${idx}" class="text-[11px] font-bold ${badgeClass} px-2 py-0.5 rounded-md border shrink-0">
-                    Rating: ${ratingDisplay}
-                  </span>
+                  <div class="relative flex items-center flex-1 min-w-0">
+                    <input
+                      type="text"
+                      id="bracket-slot-name-${idx}"
+                      value="${escapeHtml(team.name || '')}"
+                      placeholder="Search team or custom name..."
+                      autocomplete="off"
+                      oninput="handleBracketSearchInput(${idx})"
+                      onfocus="showBracketDropdown(${idx})"
+                      onclick="showBracketDropdown(${idx})"
+                      class="w-full min-w-0 min-h-[44px] sm:min-h-0 bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-3 pr-11 sm:pr-8 py-2 text-base sm:text-xs font-bold text-[#1C1C1E] focus:outline-none transition-all placeholder:font-normal placeholder:text-slate-400"
+                    />
+                    <!-- One-Click Clear X Button -->
+                    <button
+                      type="button"
+                      id="btn-bracket-clear-${idx}"
+                      onclick="clearBracketSlot(${idx})"
+                      aria-label="Clear seed ${idx + 1}"
+                      title="Clear team selection"
+                      class="${hasName ? '' : 'hidden '}absolute right-0.5 sm:right-1.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 active:text-gray-800 rounded-lg transition-colors cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-6 sm:h-6"
+                    >
+                      <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
+                <!-- Dropdown Menu -->
+                <div
+                  id="bracket-dropdown-${idx}"
+                  class="hidden absolute left-0 right-0 top-full mt-1.5 bg-white rounded-xl shadow-xl border border-slate-200/90 max-h-60 overflow-y-auto divide-y divide-slate-100 z-50 w-full"
+                ></div>
+              </div>
+
+              <!-- Row 2: Rating Pill & Compact Rating Stepper -->
+              <div class="flex flex-wrap items-center justify-between gap-2 min-w-0">
+                <span id="bracket-slot-rating-badge-${idx}" class="text-[11px] font-bold ${badgeClass} px-2 py-1 sm:py-0.5 rounded-md border shrink-0">
+                  Rating: ${ratingDisplay}
+                </span>
+
                 <!-- Rating Tweaker Stepper -->
-                <div class="flex items-center gap-1 shrink-0">
+                <div class="flex items-center gap-1.5 sm:gap-1 shrink-0">
                   <button
                     type="button"
                     onclick="stepBracketTeamRating(${idx}, -0.25)"
                     title="Decrease rating by 0.25"
-                    class="w-7 h-7 rounded-lg bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-200 shadow-xs cursor-pointer select-none transition-colors"
+                    class="min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-9 sm:h-7 px-2 sm:px-1 rounded-lg bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-200 shadow-xs cursor-pointer select-none transition-colors flex items-center justify-center"
                   >-0.25</button>
                   <input
                     type="number"
@@ -4014,55 +4146,19 @@ Coach / Scheduler (${state.teamA.name})`;
                     onclick="this.select(); handleRatingInputTap(this)"
                     ontouchstart="this.select(); handleRatingInputTap(this)"
                     oninput="onBracketTeamRatingInput(${idx}, this.value)"
-                    class="w-16 h-7 bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-1 focus:ring-blue-100 rounded-lg text-center text-xs font-bold text-[#1C1C1E] focus:outline-none"
+                    class="w-[72px] sm:w-16 min-h-[44px] sm:min-h-0 sm:h-7 bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-1 focus:ring-blue-100 rounded-lg text-center text-base sm:text-xs font-bold text-[#1C1C1E] focus:outline-none"
                   />
                   <button
                     type="button"
                     onclick="stepBracketTeamRating(${idx}, 0.25)"
                     title="Increase rating by 0.25"
-                    class="w-7 h-7 rounded-lg bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-200 shadow-xs cursor-pointer select-none transition-colors"
+                    class="min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 sm:w-9 sm:h-7 px-2 sm:px-1 rounded-lg bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-200 shadow-xs cursor-pointer select-none transition-colors flex items-center justify-center"
                   >+0.25</button>
                 </div>
               </div>
 
-              <!-- Search Input with Clear X Button and Dropdown -->
-              <div class="relative">
-                <div class="relative flex items-center">
-                  <input
-                    type="text"
-                    id="bracket-slot-name-${idx}"
-                    value="${escapeHtml(team.name || '')}"
-                    placeholder="Search team or type custom name..."
-                    autocomplete="off"
-                    oninput="handleBracketSearchInput(${idx})"
-                    onfocus="showBracketDropdown(${idx})"
-                    onclick="showBracketDropdown(${idx})"
-                    class="w-full bg-white border border-slate-200 focus:border-[#007AFF] focus:ring-2 focus:ring-blue-100 rounded-xl pl-3 pr-8 py-2 text-xs font-bold text-[#1C1C1E] focus:outline-none transition-all placeholder:font-normal placeholder:text-slate-400"
-                  />
-                  <!-- One-Click Clear X Button -->
-                  <button
-                    type="button"
-                    id="btn-bracket-clear-${idx}"
-                    onclick="clearBracketSlot(${idx})"
-                    aria-label="Clear seed ${idx + 1}"
-                    title="Clear team selection"
-                    class="${hasName ? '' : 'hidden '}absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 active:text-gray-800 p-0.5 rounded-md transition-colors cursor-pointer flex items-center justify-center w-5 h-5"
-                  >
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-
-                <!-- Dropdown Menu -->
-                <div
-                  id="bracket-dropdown-${idx}"
-                  class="hidden absolute left-0 right-0 top-full mt-1 bg-white rounded-xl shadow-xl border border-slate-200/90 max-h-56 overflow-y-auto divide-y divide-slate-100 z-50"
-                ></div>
-              </div>
-
               <!-- Subtext / Record Badge -->
-              <div id="bracket-slot-subtext-${idx}" class="text-[11px] text-slate-500 truncate flex items-center gap-1.5 min-h-[18px]">
+              <div id="bracket-slot-subtext-${idx}" class="text-[11px] text-slate-500 flex flex-wrap items-center gap-1.5 min-h-[18px] min-w-0">
                 ${renderBracketSlotBadge(team)}
               </div>
             </div>
@@ -4214,19 +4310,19 @@ Coach / Scheduler (${state.teamA.name})`;
           return `
             <div
               onmousedown="selectBracketTeamFromDropdown(${idx}, ${rawIdx})"
-              class="px-3.5 py-2 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-3 group"
+              class="min-h-[48px] px-3.5 py-2.5 hover:bg-slate-50 active:bg-blue-50/70 transition-colors cursor-pointer flex items-center justify-between gap-2.5 group min-w-0"
             >
               <div class="min-w-0 flex-1">
-                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] truncate flex items-center gap-1.5">
-                  <span class="truncate">${escapeHtml(team.name)}</span>
+                <div class="text-xs font-bold text-[#1C1C1E] group-hover:text-[#007AFF] flex items-center gap-1.5 min-w-0">
+                  <span class="truncate min-w-0">${escapeHtml(team.name)}</span>
                   <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-[#007AFF] border border-blue-200/60 shrink-0">${stateTag}</span>
                 </div>
-                <div class="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5">
-                  <span class="font-medium text-slate-600">Rec: ${team.record || '--'}</span>
+                <div class="text-[10px] text-slate-500 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-0.5 min-w-0">
+                  <span class="font-medium text-slate-600 shrink-0">Rec: ${team.record || '--'}</span>
                   <span class="text-slate-300">•</span>
-                  <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700">${displayBracket}</span>
-                  <span class="text-slate-300">•</span>
-                  <span class="text-emerald-700 font-semibold text-[10px]">${rankedBadge}</span>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 font-semibold text-slate-700 shrink-0">${displayBracket}</span>
+                  <span class="text-slate-300 hidden sm:inline">•</span>
+                  <span class="text-emerald-700 font-semibold text-[10px] truncate">${rankedBadge}</span>
                 </div>
               </div>
               <div class="shrink-0 flex items-center gap-1 text-right">
@@ -4664,7 +4760,7 @@ Coach / Scheduler (${state.teamA.name})`;
           : `<span class="bg-slate-100 text-slate-400 font-medium px-2 py-0.5 rounded-full text-xs min-w-[38px] text-center shrink-0">--</span>`;
 
         return `
-          <div class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden w-68 sm:w-76 transition-all hover:border-slate-300">
+          <div class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden w-[264px] sm:w-[296px] transition-all hover:border-slate-300">
             <!-- Header -->
             <div class="px-3.5 py-2 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider">
               <span>${match.roundLabel}</span>
@@ -4675,7 +4771,7 @@ Coach / Scheduler (${state.teamA.name})`;
             <div
               onclick="toggleBracketAdvance('${match.id}', 1)"
               title="Click to advance as winner"
-              class="px-3 py-2.5 flex items-center justify-between gap-2.5 border-b border-slate-100 cursor-pointer transition-colors ${isT1Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
+              class="min-h-[44px] px-3 py-2.5 flex items-center justify-between gap-2 border-b border-slate-100 cursor-pointer transition-colors ${isT1Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
             >
               <div class="flex items-center gap-1.5 min-w-0 flex-1">
                 <span class="text-[11px] font-bold text-slate-400 shrink-0">${t1Seed}</span>
@@ -4692,7 +4788,7 @@ Coach / Scheduler (${state.teamA.name})`;
             <div
               onclick="toggleBracketAdvance('${match.id}', 2)"
               title="Click to advance as winner"
-              class="px-3 py-2.5 flex items-center justify-between gap-2.5 cursor-pointer transition-colors ${isT2Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
+              class="min-h-[44px] px-3 py-2.5 flex items-center justify-between gap-2 cursor-pointer transition-colors ${isT2Winner ? 'bg-blue-50/70 text-[#007AFF]' : 'hover:bg-slate-50 text-slate-800'}"
             >
               <div class="flex items-center gap-1.5 min-w-0 flex-1">
                 <span class="text-[11px] font-bold text-slate-400 shrink-0">${t2Seed}</span>
@@ -4708,7 +4804,7 @@ Coach / Scheduler (${state.teamA.name})`;
             <!-- Footer -->
             <div class="px-3.5 py-1.5 bg-slate-50/80 border-t border-slate-100 text-[10px] text-slate-500 flex items-center justify-between">
               <span class="truncate font-medium">${match.verdictText}</span>
-              <span class="text-[9px] text-slate-400 shrink-0 ml-1">Click team to advance</span>
+              <span class="text-[9px] text-slate-400 shrink-0 ml-1">Tap team to advance</span>
             </div>
           </div>
         `;
@@ -5187,9 +5283,9 @@ Coach / Scheduler (${state.teamA.name})`;
     </script>
 
     <!-- Toast Notification -->
-    <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#1C1C1E] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2 max-w-[92vw] text-center">
+    <div id="toast-notification" class="fixed bottom-8 sm:bottom-6 left-1/2 -translate-x-1/2 bg-[#1C1C1E] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2 max-w-[calc(100vw-2rem)] text-center">
       <i class="fa-solid fa-circle-check text-emerald-400 shrink-0"></i>
-      <span id="toast-message">Notification</span>
+      <span id="toast-message" class="truncate">Notification</span>
     </div>
 
     <!-- Vercel Web Analytics Root Container & React Module Entry -->
